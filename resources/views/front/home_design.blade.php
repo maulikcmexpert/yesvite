@@ -130,59 +130,59 @@
                 $processedImageIds = [];
 
                 // dd($textdatatss);
-                foreach ($textdatatss as $category) {
-                            $randomIds[] = $category['imageId'];
+                // foreach ($textdatatss as $category) {
+                //             $randomIds[] = $category['imageId'];
 
-                    $allImages->push([
-                                'imageId' => $category['imageId'],
-                                'subcategory_name' =>$category['subcategory_name'],
+                //     $allImages->push([
+                //                 'imageId' => $category['imageId'],
+                //                 'subcategory_name' =>$category['subcategory_name'],
+                //                 // 'subcategory_name' =>$subcategory->subcategory_name,
+                //                 'static_information' => json_encode($category['static_information']),
+                //                 'shape_image' =>
+                //                     $category['shape_image'] != '' ? asset('storage/canvas/' . $category['shape_image']) : '',
+                //                 'image' => asset('storage/canvas/' . $category['image']),
+                //                 'tags' => $category['tags'],
+                //                 'is_visible' => $category['is_visible'],
+                //                 'category_id' => $category['category_id'],
+                //                 // 'subcategory_id' => $subcategory->id,
+                //                 // 'subcategory_id' => $relatedSubcategoryIds,
+                //                 // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
+                //                 'subcategory_id' => $category['subcategory_id'], // Get all subcategory IDs from pivot
+                //                 'category_name' => $category['category_name'],
+                //                 'image_path' => asset('storage/canvas/' . $category['image_path']),
+                //             ]);
+                    foreach ($category->subcategory as $subcategory) {
+                        foreach ($subcategory->textdatas as $image) {
+                            if (in_array($image->id, $processedImageIds)) {
+                                continue;
+                            }
+
+                            $processedImageIds[] = $image->id;
+                            $randomIds[] = $image->id;
+                            $relatedSubcategoryNames = $image->subcategories->pluck('subcategory_name')->implode(', ');
+                            $relatedSubcategoryIds = $image->subcategories->pluck('id')->implode(','); // Get comma-separated IDs
+
+                            $allImages->push([
+                                'imageId' => $image->id,
+                                'subcategory_name' =>$relatedSubcategoryNames,
                                 // 'subcategory_name' =>$subcategory->subcategory_name,
-                                'static_information' => json_encode($category['static_information']),
+                                'static_information' => json_encode($image->static_information),
                                 'shape_image' =>
-                                    $category['shape_image'] != '' ? asset('storage/canvas/' . $category['shape_image']) : '',
-                                'image' => asset('storage/canvas/' . $category['image']),
-                                'tags' => $category['tags'],
-                                'is_visible' => $category['is_visible'],
-                                'category_id' => $category['category_id'],
+                                    $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
+                                'image' => asset('storage/canvas/' . $image->image),
+                                'tags' => $image->tags,
+                                'is_visible' => $image->is_visible,
+                                'category_id' => $category->id,
                                 // 'subcategory_id' => $subcategory->id,
                                 // 'subcategory_id' => $relatedSubcategoryIds,
                                 // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
-                                'subcategory_id' => $category['subcategory_id'], // Get all subcategory IDs from pivot
-                                'category_name' => $category['category_name'],
-                                'image_path' => asset('storage/canvas/' . $category['image_path']),
+                                'subcategory_id' => $relatedSubcategoryIds, // Get all subcategory IDs from pivot
+                                'category_name' => $category->category_name,
+                                'image_path' => asset('storage/canvas/' . $image->filled_image),
                             ]);
-                    // foreach ($category->subcategory as $subcategory) {
-                    //     foreach ($subcategory->textdatas as $image) {
-                    //         if (in_array($image->id, $processedImageIds)) {
-                    //             continue;
-                    //         }
-
-                    //         $processedImageIds[] = $image->id;
-                    //         $randomIds[] = $image->id;
-                    //         $relatedSubcategoryNames = $image->subcategories->pluck('subcategory_name')->implode(', ');
-                    //         $relatedSubcategoryIds = $image->subcategories->pluck('id')->implode(','); // Get comma-separated IDs
-
-                    //         $allImages->push([
-                    //             'imageId' => $image->id,
-                    //             'subcategory_name' =>$relatedSubcategoryNames,
-                    //             // 'subcategory_name' =>$subcategory->subcategory_name,
-                    //             'static_information' => json_encode($image->static_information),
-                    //             'shape_image' =>
-                    //                 $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
-                    //             'image' => asset('storage/canvas/' . $image->image),
-                    //             'tags' => $image->tags,
-                    //             'is_visible' => $image->is_visible,
-                    //             'category_id' => $category->id,
-                    //             // 'subcategory_id' => $subcategory->id,
-                    //             // 'subcategory_id' => $relatedSubcategoryIds,
-                    //             // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
-                    //             'subcategory_id' => $relatedSubcategoryIds, // Get all subcategory IDs from pivot
-                    //             'category_name' => $category->category_name,
-                    //             'image_path' => asset('storage/canvas/' . $image->filled_image),
-                    //         ]);
-                    //     }
-                    // }
-                }
+                        }
+                    }
+                // }
 
                 shuffle($randomIds);
                 $randomIds = array_slice($randomIds, 0, 30);
@@ -285,7 +285,7 @@
 </section>
 
 @push('scripts')
-{{-- <script>
+<script>
 var designData = [];
 var is_random = @php
 echo json_encode($randomIds);
@@ -319,45 +319,45 @@ designData.push(categoryData);
 @endforeach
 
 console.log(designData); // Check output in browser console
-</script> --}}
-
-<script>
-var designData = [];
-
-// Correcting the PHP to JavaScript variable conversion
-var is_random = {!! json_encode($randomIds) !!};
-
-@foreach ($categories as $category)
-var categoryData = {
-id: {{ $category->id }},
-name: "{{ $category->category_name }}",
-subcategories: []
-};
-
-@foreach ($category->subcategory as $subcategory)
-var subcategoryData = {
-id: {{ $subcategory->id }},
-name: "{{ $subcategory->subcategory_name }}",
-images: []
-};
-
-@foreach ($subcategory->textdatas as $image)
-subcategoryData.images.push({
-id: {{ $image->id }},
-image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
-tags: "{{ $image->tags ?? '' }}"
-
-});
-@endforeach
-
-categoryData.subcategories.push(subcategoryData);
-@endforeach
-
-designData.push(categoryData);
-@endforeach
-
-console.log(designData); // Check output in browser console
 </script>
+
+{{-- <script>
+    var designData = [];
+
+    // Correcting the PHP to JavaScript variable conversion
+    var is_random = {!! json_encode($randomIds) !!};
+
+    @foreach ($categories as $category)
+    var categoryData = {
+    id: {{ $category->id }},
+    name: "{{ $category->category_name }}",
+    subcategories: []
+    };
+
+    @foreach ($category->subcategory as $subcategory)
+    var subcategoryData = {
+    id: {{ $subcategory->id }},
+    name: "{{ $subcategory->subcategory_name }}",
+    images: []
+    };
+
+    @foreach ($subcategory->textdatas as $image)
+    subcategoryData.images.push({
+    id: {{ $image->id }},
+    image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
+    tags: "{{ $image->tags ?? '' }}"
+
+    });
+    @endforeach
+
+    categoryData.subcategories.push(subcategoryData);
+    @endforeach
+
+    designData.push(categoryData);
+    @endforeach
+
+    console.log(designData); // Check output in browser console
+</script> --}}
 
 {{-- <script>
 var designData = [];

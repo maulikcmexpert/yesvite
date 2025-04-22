@@ -170,42 +170,42 @@ $(document).ready(function () {
         );
     });
     $("#filtered_results").hide();
-    // $('#search_design_category').on('keyup', function () {
-    //     let query = $(this).val().toLowerCase();
-    //     $('#filtered_results').show();
-    //     let results = '';
+    $('#search_design_category').on('keyup', function () {
+        let query = $(this).val().toLowerCase();
+        $('#filtered_results').show();
+        let results = '';
 
-    //     if (query.length > 0) {
-    //         designData.forEach(category => {
-    //             if (category.name.toLowerCase().includes(query)) {
-    //                 results +=
-    //                     `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
-    //             }
-    //             // Check if no subcategory matched and add "No Data Found"
+        if (query.length > 0) {
+            designData.forEach(category => {
+                if (category.name.toLowerCase().includes(query)) {
+                    results +=
+                        `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
+                }
+                // Check if no subcategory matched and add "No Data Found"
 
-    //             category.subcategories.forEach(subcategory => {
-    //                 if (subcategory.name.toLowerCase().includes(query)) {
-    //                     results +=
-    //                         `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
-    //                 }
-    //                 // Check if no subcategory matched and add "No Data Found"
+                category.subcategories.forEach(subcategory => {
+                    if (subcategory.name.toLowerCase().includes(query)) {
+                        results +=
+                            `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
+                    }
+                    // Check if no subcategory matched and add "No Data Found"
 
-    //             });
-    //         });
-    //         if (results === '') {
-    //             results +=
-    //                 `<div class="search-item no-data">No Data Found</div>`;
-    //         }
-    //         $('#filtered_results').html(results);
-    //     } else {
-    //         // When search is cleared, restore the default 30 images
-    //         $('#filtered_results').html('');
-    //         $('#filtered_results').hide();
-    //         $('input[name="design_subcategory"]').prop('checked', false);
+                });
+            });
+            if (results === '') {
+                results +=
+                    `<div class="search-item no-data">No Data Found</div>`;
+            }
+            $('#filtered_results').html(results);
+        } else {
+            // When search is cleared, restore the default 30 images
+            $('#filtered_results').html('');
+            $('#filtered_results').hide();
+            $('input[name="design_subcategory"]').prop('checked', false);
 
-    //         $('.total_design_count').text($('.default_show:visible').length + ' Items');
-    //     }
-    // });
+            $('.total_design_count').text($('.default_show:visible').length + ' Items');
+        }
+    });
 
     // Click event for search results
 
@@ -296,72 +296,72 @@ $(document).ready(function () {
 
 
     //today old code...........
-        $("#search_design_category").on("keyup", function () {
-            let query = $(this).val().toLowerCase().trim();
-            let results = "";
-            if (query.length > 0) {
-                let visibleCount = 0;
+        // $("#search_design_category").on("keyup", function () {
+        //     let query = $(this).val().toLowerCase().trim();
+        //     let results = "";
+        //     if (query.length > 0) {
+        //         let visibleCount = 0;
         
-                $(".image-item").each(function () {
-                    let tags = $(this).data("tags")
-                        ? $(this).data("tags").toLowerCase().split(",")
-                        : [];
-                    let subcategories = $(this).data("subcategory_name")
-                        ? $(this).data("subcategory_name").toLowerCase().split(",") // Split subcategories by comma
-                        : [];
-                    let category = $(this).data("category_name")
-                        ? $(this).data("category_name").toLowerCase()
-                        : "";
+        //         $(".image-item").each(function () {
+        //             let tags = $(this).data("tags")
+        //                 ? $(this).data("tags").toLowerCase().split(",")
+        //                 : [];
+        //             let subcategories = $(this).data("subcategory_name")
+        //                 ? $(this).data("subcategory_name").toLowerCase().split(",") // Split subcategories by comma
+        //                 : [];
+        //             let category = $(this).data("category_name")
+        //                 ? $(this).data("category_name").toLowerCase()
+        //                 : "";
         
-                    // Check if any of the search criteria match
-                    let matches = tags.some((tag) => tag.includes(query)) ||
-                        subcategories.some((subcategory) => subcategory.includes(query)) || // Check each subcategory
-                        category.includes(query);
+        //             // Check if any of the search criteria match
+        //             let matches = tags.some((tag) => tag.includes(query)) ||
+        //                 subcategories.some((subcategory) => subcategory.includes(query)) || // Check each subcategory
+        //                 category.includes(query);
         
-                    if (matches) {
-                        $(this).show();
-                        $(this).removeClass("d-none");
-                        $(this).removeClass("fadeInDown");
-                        $(this).css("visibility", "visible");
-                        $(this).removeClass("wow");
-                        $(this).removeClass("d-none").fadeIn();
-                        visibleCount++;
-                    } else {
-                        $(this).hide();
-                        $(this).fadeOut().addClass("d-none");
-                    }
-                });
+        //             if (matches) {
+        //                 $(this).show();
+        //                 $(this).removeClass("d-none");
+        //                 $(this).removeClass("fadeInDown");
+        //                 $(this).css("visibility", "visible");
+        //                 $(this).removeClass("wow");
+        //                 $(this).removeClass("d-none").fadeIn();
+        //                 visibleCount++;
+        //             } else {
+        //                 $(this).hide();
+        //                 $(this).fadeOut().addClass("d-none");
+        //             }
+        //         });
         
-                console.log("Total Visible Items:", visibleCount);
-                $(".total_design_count").text(visibleCount + " Items");
+        //         console.log("Total Visible Items:", visibleCount);
+        //         $(".total_design_count").text(visibleCount + " Items");
         
-                if (visibleCount > 0) {
-                    $("#filtered_results").hide();
-                } else {
-                    $("#filtered_results").show();
-                }
+        //         if (visibleCount > 0) {
+        //             $("#filtered_results").hide();
+        //         } else {
+        //             $("#filtered_results").show();
+        //         }
         
-                if ($(".image-item:visible").length === 0) {
-                    $(".total_design_count").text(
-                        $(".image-item:visible").length + " Items"
-                    );
+        //         if ($(".image-item:visible").length === 0) {
+        //             $(".total_design_count").text(
+        //                 $(".image-item:visible").length + " Items"
+        //             );
         
-                    results += `<div class="search-item no-data">No Data Found</div>`;
-                    $("#filtered_results").show();
-                    $("#filtered_results").html(results);
-                }
-            } else {
-                $(".image-item").removeClass("d-none fadeInDown wow").show();
-                let allItems = $(".image-item");
-                if (allItems.length > 30) {
-                    allItems.slice(30).addClass("d-none").hide();
-                }
-                $(".total_design_count").text(
-                    $(".image-item:visible").length + " Items"
-                );
-                $("#filtered_results").hide();
-            }
-        });
+        //             results += `<div class="search-item no-data">No Data Found</div>`;
+        //             $("#filtered_results").show();
+        //             $("#filtered_results").html(results);
+        //         }
+        //     } else {
+        //         $(".image-item").removeClass("d-none fadeInDown wow").show();
+        //         let allItems = $(".image-item");
+        //         if (allItems.length > 30) {
+        //             allItems.slice(30).addClass("d-none").hide();
+        //         }
+        //         $(".total_design_count").text(
+        //             $(".image-item:visible").length + " Items"
+        //         );
+        //         $("#filtered_results").hide();
+        //     }
+        // });
  
         $(document).on("click", ".search-item", function () {
             let selectedText = $(this).data("name");
