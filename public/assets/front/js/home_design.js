@@ -298,7 +298,6 @@ $(document).ready(function () {
     //today old code...........
         $("#search_design_category").on("keyup", function () {
             let query = $(this).val().toLowerCase().trim();
-            $('#filtered_results').show();
 
             let results = "";
             if (query.length > 0) {
@@ -317,6 +316,10 @@ $(document).ready(function () {
                         // Check if no subcategory matched and add "No Data Found"
                     });
                 });
+                $('#filtered_results').show();
+
+                $('#filtered_results').html(results);
+
                 let visibleCount = 0;
         
                 $(".image-item").each(function () {
