@@ -226,7 +226,7 @@ class HomeFrontController extends BaseController
             'count',
             // 'images',
             // 'getDesignData',
-            'textdatatss',
+            // 'textdatatss',
             'categories',
             'js'
         ));
