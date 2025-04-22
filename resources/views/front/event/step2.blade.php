@@ -565,6 +565,8 @@
             $("#search_design_category").on("keyup", function() {
                 let query = $(this).val().toLowerCase().trim();
                 let results = "";
+                $('.selected-items').html('');
+
                 if (query.length > 0) {
                     $('.selected-items').html('');
                     designData.forEach(category => {

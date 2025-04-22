@@ -298,6 +298,7 @@ $(document).ready(function () {
     //today old code...........
         $("#search_design_category").on("keyup", function () {
             let query = $(this).val().toLowerCase().trim();
+            $('.selected-items').html('');
 
             let results = "";
             if (query.length > 0) {
