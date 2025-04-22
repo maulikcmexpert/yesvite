@@ -49,7 +49,7 @@ class SendUnFinishDraftsReminder extends Command
                     $minutesSince = $sendAfter->diffInMinutes($now);
 
                     // Check if it's exactly 5 minutes (or multiples of 5 minutes)
-                    if ($minutesSince % 5 == 0 && $now->greaterThanOrEqualTo($sendAfter)) {
+                    if ($minutesSince % 5 == 0 ) {
                 // if ($hoursSince % 96 == 0) {
 
                     $event_time = "";
