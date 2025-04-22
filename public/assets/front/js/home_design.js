@@ -190,6 +190,7 @@ $(document).ready(function () {
                     }
                     // Check if no subcategory matched and add "No Data Found"
 
+
                 });
             });
             if (results === '') {
