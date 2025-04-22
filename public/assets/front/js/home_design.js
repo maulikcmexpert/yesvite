@@ -313,8 +313,6 @@ $(document).ready(function () {
                                 `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
                         }
                         // Check if no subcategory matched and add "No Data Found"
-    
-    
                     });
                 });
                 let visibleCount = 0;
