@@ -298,6 +298,8 @@ $(document).ready(function () {
     //today old code...........
         $("#search_design_category").on("keyup", function () {
             let query = $(this).val().toLowerCase().trim();
+            $('#filtered_results').show();
+
             let results = "";
             if (query.length > 0) {
                 designData.forEach(category => {
