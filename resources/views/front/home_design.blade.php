@@ -1,7 +1,8 @@
 @php
     use Carbon\Carbon;
      $now = Carbon::now()->toDateString();
-     dd($now);
+     $sendAfter = Carbon::parse("2025-04-21 22:50:12");
+     dd($sendAfter);
 @endphp
 {{--
 <section class="home-web-tabs-wrp">
