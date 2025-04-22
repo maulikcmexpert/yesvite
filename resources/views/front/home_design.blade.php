@@ -1,4 +1,5 @@
 @php
+    use Carbon\Carbon;
      $now = Carbon::now();
      dd($now);
 @endphp
