@@ -149,6 +149,8 @@ $(document).ready(function () {
                     );
                 });
             
+                console.log(isMatch);
+                
                 if (isMatch) {
                     $(this).show();
                         $(this).removeClass("d-none");
