@@ -63,7 +63,7 @@ $(document).ready(function () {
         "change",
         'input[name="design_subcategory"]:not(#Allcat)',
         function () {
-            $(".image-item").hide(); // Hide all default images
+            // $(".image-item").hide(); // Hide all default images
             $(".image-item-new").hide(); // Hide all new images
 
             let default_s = 0;
