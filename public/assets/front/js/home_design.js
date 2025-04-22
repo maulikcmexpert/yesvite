@@ -397,18 +397,48 @@ $(document).ready(function () {
             $("#filtered_results").hide();
             $(".image-item").hide();
 
-            if (categoryId && subcategoryId) {
-                // Show only images that match category and subcategory
-                $(
-                    `.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
-                ).show();
-            } else if (categoryId) {
-                $(`.image-item[data-category-id="${categoryId}"]`).show();
-            }
+            // if (categoryId && subcategoryId) {
+            //     // Show only images that match category and subcategory
+            //     $(
+            //         `.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
+            //     ).show();
+            // } else if (categoryId) {
+            //     $(`.image-item[data-category-id="${categoryId}"]`).show();
+            // }
 
-            $(
-                `input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
-            ).prop("checked", true);
+
+            $(this).each(function () {
+                let tags = $(this).data("tags")
+                    ? $(this).data("tags").toLowerCase().split(",")
+                    : [];
+                let subcategories = $(this).data("subcategory_name")
+                    ? $(this).data("subcategory_name").toLowerCase().split(",") // Split subcategories by comma
+                    : [];
+                let category = $(this).data("category_name")
+                    ? $(this).data("category_name").toLowerCase()
+                    : "";
+    
+                // Check if any of the search criteria match
+                let matches = tags.some((tag) => tag.includes(query)) ||
+                    subcategories.some((subcategory) => subcategory.includes(query)) || // Check each subcategory
+                    category.includes(query);
+    
+                if (matches) {
+                    $(this).show();
+                    $(this).removeClass("d-none");
+                    $(this).removeClass("fadeInDown");
+                    $(this).css("visibility", "visible");
+                    $(this).removeClass("wow");
+                    $(this).removeClass("d-none").fadeIn();
+                    visibleCount++;
+                } else {
+                    $(this).hide();
+                    $(this).fadeOut().addClass("d-none");
+                }
+            });
+            // $(
+            //     `input[name="design_subcategory"][data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`
+            // ).prop("checked", true);
             // if ($(this).hasClass('subcategory')) {
 
             //     let images = designData.find(c => c.id == categoryId)
