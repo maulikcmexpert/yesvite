@@ -316,9 +316,11 @@ $(document).ready(function () {
                         // Check if no subcategory matched and add "No Data Found"
                     });
                 });
-                $('#filtered_results').show();
-
-                $('#filtered_results').html(results);
+                if (results == '') {
+                    $('#filtered_results').hide();
+                } else {
+                    $('#filtered_results').html(results).show();
+                }
 
                 let visibleCount = 0;
         
@@ -371,6 +373,7 @@ $(document).ready(function () {
                     $("#filtered_results").html(results);
                 }
             } else {
+                
                 $(".image-item").removeClass("d-none fadeInDown wow").show();
                 let allItems = $(".image-item");
                 if (allItems.length > 30) {
@@ -379,6 +382,7 @@ $(document).ready(function () {
                 $(".total_design_count").text(
                     $(".image-item:visible").length + " Items"
                 );
+
                 $("#filtered_results").hide();
             }
         });
