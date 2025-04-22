@@ -184,7 +184,9 @@ $(document).ready(function () {
             }
     
             // Step 4: Update count
-            $(".total_design_count").text(`${visibleCount} Items`);
+            // $(".total_design_count").text(`${visibleCount} Items`);
+                        updateTotalCount();
+
         }
     );
     
