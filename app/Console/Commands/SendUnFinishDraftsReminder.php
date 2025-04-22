@@ -45,7 +45,11 @@ class SendUnFinishDraftsReminder extends Command
                 $createdAt = Carbon::parse($value->created_at);
                 $hoursSince = $createdAt->diffInHours($now);
 
-                if ($now->greaterThanOrEqualTo($sendAfter)) {
+                // if ($now->greaterThanOrEqualTo($sendAfter)) {
+                    $minutesSince = $sendAfter->diffInMinutes($now);
+
+                    // Check if it's exactly 5 minutes (or multiples of 5 minutes)
+                    if ($minutesSince % 5 == 0 && $now->greaterThanOrEqualTo($sendAfter)) {
                 // if ($hoursSince % 96 == 0) {
 
                     $event_time = "";
