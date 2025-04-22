@@ -3248,7 +3248,7 @@
 #nav-profile-home .step_2 {
     height: 100vh;
     overflow: hidden;
-    padding-bottom: 20px;
+    padding-bottom: 20px !important;
 }
 
 #nav-profile-home .step_2 .collection-wrapper {
