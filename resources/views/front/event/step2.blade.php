@@ -693,7 +693,8 @@
         let selectedText = $(this).data("name");
         let categoryId = $(this).data("category-id");
         let subcategoryId = $(this).data("id");
-    
+        $('.selected-items').html('');
+
         $("#search_design_category").val(selectedText);
         $("#filtered_results").html("").hide();
         $(".image-item").hide();
