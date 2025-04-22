@@ -38,7 +38,7 @@ class SendUnFinishDraftsReminder extends Command
                 // $dateAfterSevenDays = Carbon::parse($value->created_at)->addDays(7)->toDateString();
                 $dateAfterSevenDays = Carbon::parse($value->created_at)->toDateString();
 
-                if ($dateAfterSevenDays > $currentDate) {
+                if ($dateAfterSevenDays == $currentDate) {
                     $event_time = "";
                     if ($value->event_schedule->isNotEmpty()) {
 
