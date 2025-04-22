@@ -119,22 +119,22 @@ class HomeFrontController extends BaseController
         //     ->orderBy('id', 'ASC')
         //     ->get();
 
-        // $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
-        //     $query->whereHas('textdatas', function ($q) {
-        //         $q->where('is_visible', '1'); // Filter only textdatas where isvisible is '1'
-        //     });
-        // })
-        // ->with([
-        //     'subcategory' => function ($query) {
-        //         $query->whereHas('textdatas', function ($q) {
-        //             $q->where('is_visible', '1'); // Ensure only subcategories with visible textdatas are retrieved
-        //         })->with(['textdatas' => function ($q) {
-        //             $q->where('is_visible', '1'); // Load only visible textdatas
-        //         }]);
-        //     }
-        // ])
-        // ->orderBy('id', 'ASC')
-        // ->get();
+        $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
+            $query->whereHas('textdatas', function ($q) {
+                $q->where('is_visible', '1'); // Filter only textdatas where isvisible is '1'
+            });
+        })
+        ->with([
+            'subcategory' => function ($query) {
+                $query->whereHas('textdatas', function ($q) {
+                    $q->where('is_visible', '1'); // Ensure only subcategories with visible textdatas are retrieved
+                })->with(['textdatas' => function ($q) {
+                    $q->where('is_visible', '1'); // Load only visible textdatas
+                }]);
+            }
+        ])
+        ->orderBy('id', 'ASC')
+        ->get();
         
         // $categories = EventDesignCategory::whereHas('subcategory', function ($query) {
         //     $query->whereHas('textdatas', function ($q) {
@@ -156,53 +156,53 @@ class HomeFrontController extends BaseController
         // ->orderBy('id', 'ASC')
         // ->get();
 
-        $categories = EventDesignCategory::with([
-            'subcategory' => function ($query) {
-                $query->with([
-                    'textdatas' => function ($q) {
-                        $q->where('is_visible', '1');
-                    },
-                    'textdatas.subcategories'
-                ]);
-            }
-        ])
-        ->whereHas('subcategory', function ($query) {
-            $query->whereHas('textdatas', function ($q) {
-                $q->where('is_visible', '1');
-            })->orWhereDoesntHave('textdatas'); // Include subcategories without direct textdatas
-        })
-        ->orderBy('id', 'ASC')
-        ->get();
+        // $categories = EventDesignCategory::with([
+        //     'subcategory' => function ($query) {
+        //         $query->with([
+        //             'textdatas' => function ($q) {
+        //                 $q->where('is_visible', '1');
+        //             },
+        //             'textdatas.subcategories'
+        //         ]);
+        //     }
+        // ])
+        // ->whereHas('subcategory', function ($query) {
+        //     $query->whereHas('textdatas', function ($q) {
+        //         $q->where('is_visible', '1');
+        //     })->orWhereDoesntHave('textdatas'); // Include subcategories without direct textdatas
+        // })
+        // ->orderBy('id', 'ASC')
+        // ->get();
 
-        $textdatatss = TextData::where('is_visible', 1)
-                        ->with('categories')
-                        ->with('subcategories')
-                        ->get()
-                        ->groupBy('id')
-                        ->map(function ($grouped) {
-                            $textdata = $grouped->first(); // Since grouped by ID
-                            return [
-                                'imageId' => $textdata->id,
-                                'tags' => $textdata->tags,
-                                'is_visible' => $textdata->is_visible,
-                                'image' => $textdata->image,
-                                'image_path' => $textdata->filled_image,
-                                'shape_image' => $textdata->image,
-                                'static_information' => $textdata->static_information,
-                                'category_name' => optional($textdata->categories)->category_name,
-                                'category_id' => optional($textdata->categories)->id,
-                                'subcategory_name' => $textdata->subcategories
-                                    ->pluck('subcategory_name')
-                                    ->unique()
-                                    ->implode(','),
+        // $textdatatss = TextData::where('is_visible', 1)
+        //                 ->with('categories')
+        //                 ->with('subcategories')
+        //                 ->get()
+        //                 ->groupBy('id')
+        //                 ->map(function ($grouped) {
+        //                     $textdata = $grouped->first(); // Since grouped by ID
+        //                     return [
+        //                         'imageId' => $textdata->id,
+        //                         'tags' => $textdata->tags,
+        //                         'is_visible' => $textdata->is_visible,
+        //                         'image' => $textdata->image,
+        //                         'image_path' => $textdata->filled_image,
+        //                         'shape_image' => $textdata->image,
+        //                         'static_information' => $textdata->static_information,
+        //                         'category_name' => optional($textdata->categories)->category_name,
+        //                         'category_id' => optional($textdata->categories)->id,
+        //                         'subcategory_name' => $textdata->subcategories
+        //                             ->pluck('subcategory_name')
+        //                             ->unique()
+        //                             ->implode(','),
                                     
-                                'subcategory_id' => $textdata->subcategories
-                                    ->pluck('id')
-                                    ->unique()
-                                    ->implode(','),
-                            ];
-                        })
-                        ->values();
+        //                         'subcategory_id' => $textdata->subcategories
+        //                             ->pluck('id')
+        //                             ->unique()
+        //                             ->implode(','),
+        //                     ];
+        //                 })
+        //                 ->values();
 
         // dd($textdatas);
         
