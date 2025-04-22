@@ -132,6 +132,8 @@ $(document).ready(function () {
                 selectedFilters.push({ categoryId, subcategoryId });
             });
             
+            console.log(selectedFilters);
+            
             // Step 2: Filter images based on those selected filters
             let visibleCount = 0;
             
