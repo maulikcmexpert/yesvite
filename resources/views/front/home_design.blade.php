@@ -333,7 +333,7 @@
     var is_random = @php
     echo json_encode($randomIds);
     @endphp
-    alert(is_random)
+    // alert(is_random)
         @foreach ($categories as $category)
         var categoryData = {
             id: {{ $category->id }},
