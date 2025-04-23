@@ -1544,8 +1544,8 @@ class EventController extends BaseController
                     // $invitation_email = new NotifyPendingInvitation($eventData);
                     // Mail::to('biren.b.cmexpertise@gmail.com')->send($invitation_email);
 
-                    // $invitation_email = new NotifyPendingInvitation($eventData);
-                    // Mail::to('allen@yopmail.com')->send($invitation_email);
+                    $invitation_email = new NotifyPendingInvitation($eventData);
+                    Mail::to('allen@yopmail.com')->send($invitation_email);
                     sendNotification('invite', $notificationParam);
                     sendNotificationGuest('invite', $notificationParam);
                 }
