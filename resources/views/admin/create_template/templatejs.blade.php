@@ -11,6 +11,7 @@
 
 
         $('.ckkBox').change(function() {
+            alert(11);
             toggleCheckedAll(this);
             setCheckboxSelectLabels();
         });
