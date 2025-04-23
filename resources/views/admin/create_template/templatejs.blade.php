@@ -226,6 +226,7 @@
                         //         '<label><input type="checkbox" value="" class="ckkBox val" /><span>No SubCategory Found</span> </label><br>'
 
                         //     );
+                        $('.select-subcat-btn').text('Select Subcategory');
                         output.forEach(function(subcategory) {
                             // $('#event_design_sub_category_id').append(
                             //     '<option value="' + subcategory.sub_category_id + '">' + subcategory.sub_category_name + '</option>'
@@ -240,7 +241,7 @@
 
                             );
                         });
-                        $('.select-subcat-btn').text('');
+                       
                     },
                     error: function() {
                         reject("Error occurred");
