@@ -107,10 +107,12 @@
                     <td height="10" style="font-size:0px">&nbsp;</td>
                 </tr>
                 <tr>
+                    <td height="10" style="font-size:0px">
                     <p style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A; max-width:500px">
                         Reminders go out every 96 hours.To remove these reminders please finalize the templates or
                         delete the draft templates you have.
                     </p>
+                </td>
                 </tr>
                 <!-- -------------- -->
                 <tr>
