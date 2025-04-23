@@ -42,7 +42,7 @@
                     var text = $(checkbox).next().html();
                     var btnText = prevText + text;
                     var numberOfChecked = $(wrapper).find('input.val:checkbox:checked').length;
-                    if (numberOfChecked >= 4) {
+                    if (numberOfChecked >= 1) {
                         btnText = numberOfChecked + ' ' + label + ' selected';
                     }
                     $(button).text(btnText);
