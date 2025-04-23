@@ -240,7 +240,7 @@
 
                             );
                         });
-                        $('.select-subcat-btn').val('');
+                        $('.select-subcat-btn').text('');
                     },
                     error: function() {
                         reject("Error occurred");
