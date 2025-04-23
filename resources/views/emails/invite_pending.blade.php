@@ -10,12 +10,12 @@
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
-        @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+    @import url('https://fonts.cdnfonts.com/css/sf-pro-display');
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
-        a {
-            text-decoration: none;
-        }
+    a {
+        text-decoration: none;
+    }
     </style>
 </head>
 
@@ -30,7 +30,7 @@
                 <tr>
                     <td>
                         <div style="width: 100%;max-width: 150px;height:65px">
-                            <img src="{{ asset('public/storage/yesvitelogo.png') }}"
+                            <img src="{{ asset('public/storage/yesvitelogo.png')}}"
                                 style="width: 100%;max-width: 150px;height:65px" alt="logo">
                         </div>
                     </td>
@@ -56,7 +56,7 @@
                         <h5 style="font-size: 32px;line-height: 44px;font-weight: 400;color: #0A090B;margin: 0px 0px;">
                             Complete your invitation:</h5>
                         <h2 style="font-size: 32px;line-height: 44px;font-weight: 700;color: #0A090B;margin: 0px 0px;">
-                            {{ !empty($eventData['event_name']) ? $eventData['event_name'] : 'No Name' }}</h2>
+                            {{ !empty($eventData['event_name']) ? $eventData['event_name'] : "No Name" }}</h2>
                         {{-- <p style="font-size: 18px;line-height: 27px;font-weight: 400;color: #0F172A;margin: 10px 0px;">{{$eventData['date']}}
                         {{(isset($eventData['time']) && $eventData['time']!='')?'@ '.$eventData['time']:''}}</p> --}}
                     </td>
@@ -84,8 +84,7 @@
                     <td>
                         <p
                             style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">
-                            Please add <a href=""
-                                style=" color: #0F172A;font-size: 12px;line-height: 20px;font-weight:
+                            Please add <a href="" style=" color: #0F172A;font-size: 12px;line-height: 20px;font-weight:
                                 700;">notifications@yesvite.com</a>
                             to your contacts so the email does not go to your SPAM folder.</p>
                         <p
@@ -97,11 +96,10 @@
                             style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">
                             You have received this email from <a href=""
                                 style="color: #F73C71;font-weight: 700;">notifications@yesvite.com</a> on behalf of <a
-                                href=""
-                                style="color: #F73C71;font-weight: 700;">{{ @$eventData['host_email'] }}</a>.</p>
+                                href="" style="color: #F73C71;font-weight: 700;">{{ @$eventData['host_email']}}</a>.</p>
                         <p
                             style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">
-                            © Yesvitesss {{ date('Y') }}</p>
+                            © Yesvite {{date('Y')}}</p>
                     </td>
                 </tr>
                 <!-- -------------- -->
@@ -114,18 +112,18 @@
                         delete the draft templates you have.
                     </p>
                 </tr>
-
+                <!-- -------------- -->
                 <tr>
                     <td>
                         <div class="download-form-img" style="display: flex;align-items: center;gap: 10px;">
                             <a href="#"
                                 style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;"><img
-                                    src="{{ asset('public/storage/google-play.png') }}" width="120" height="40"
-                                    alt="" style="width: max-content;height: max-conten;"></a>
+                                    src="{{ asset('public/storage/google-play.png')}}" width="120" height="40" alt=""
+                                    style="width: max-content;height: max-conten;"></a>
                             <a href="#"
                                 style="width: 100%;max-width: 120px;height: 40px;border-radius: 5px;display: block;margin-left: 10px"><img
-                                    src="{{ asset('public/storage/app-store.png') }}" width="120" height="40"
-                                    alt="" style=" width: max-conten;height: max-conten;margin-left: 10px"></a>
+                                    src="{{ asset('public/storage/app-store.png')}}" width="120" height="40" alt=""
+                                    style=" width: max-conten;height: max-conten;margin-left: 10px"></a>
                         </div>
                     </td>
                 </tr>
@@ -140,7 +138,7 @@
                         <div class="social-icons"
                             style="display: flex;align-items: center;justify-content: space-between;">
                             <div style="width: 100%;max-width: 95px;height: 50px;"><img
-                                    src="{{ asset('public/storage/yesvitelogo.png') }}" alt=""
+                                    src="{{ asset('public/storage/yesvitelogo.png')}}" alt=""
                                     style="width: 100%;height: 100%;"></div>
                             <ul style="display: flex;align-items: center;gap: 10px;margin: 0px 0px;">
                                 <li style="list-style-type: none;"><a href=""
@@ -166,7 +164,7 @@
                         <p
                             style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 700;color: #0F172A;margin: 0px;">
                             Invite Email: <span
-                                style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">{{ @$eventData['host_email'] }}</span>
+                                style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">{{@$eventData['host_email']}}</span>
                         </p>
                     </td>
                 </tr>
