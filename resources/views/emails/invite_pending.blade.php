@@ -101,7 +101,7 @@
                                 style="color: #F73C71;font-weight: 700;">{{ @$eventData['host_email'] }}</a>.</p>
                         <p
                             style="font-family:'Manrope';font-size: 12px;line-height: 20px;font-weight: 500;color: #0F172A;">
-                            © Yesvite {{ date('Y') }}</p>
+                            © Yesvitesss {{ date('Y') }}</p>
                     </td>
                 </tr>
                 <!-- -------------- -->
