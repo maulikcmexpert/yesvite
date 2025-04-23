@@ -10,7 +10,7 @@
         });
 
 
-        $('.ckkBox').change(function() {
+        $(document).on('change','.ckkBox',function() {
             alert(11);
             toggleCheckedAll(this);
             setCheckboxSelectLabels();
