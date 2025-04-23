@@ -1222,9 +1222,6 @@ class EventController extends BaseController
                             'address' => $event_detail->event_location_name . ' ' . $event_detail->address_1 . ' ' . $event_detail->state . ' ' . $event_detail->city . ' - ' . $event_detail->zip_code,
                         ];
                     }
-
-
-
                     // if(isset($request->isdraft) && $request->isdraft == '0'){
                     //     $user = User::find($value['id']);
                     //     if ($user) {
@@ -1531,21 +1528,17 @@ class EventController extends BaseController
                         'event_id' => $eventId,
                         'post_id' => ""
                     ];
-                    $eventData = [
-                        'id'=>$eventId,
-                        'host_email' => 'vllen@yopmail.com',
-                        'event_name' => 'ddnfdjkbjdbffddf',
-                        'event_image' =>  "no_image.png",
-                        'date' =>   "2025-02-4001",
-                        'time' => "55:14 am",
-                    ];
-
+                    // $eventData = [
+                    //     'id'=>$eventId,
+                    //     'host_email' => 'vllen@yopmail.com',
+                    //     'event_name' => 'ddnfdjkbjdbffddf',
+                    //     'event_image' =>  "no_image.png",
+                    //     'date' =>   "2025-02-4001",
+                    //     'time' => "55:14 am",
+                    // ];
 
                     // $invitation_email = new NotifyPendingInvitation($eventData);
                     // Mail::to('biren.b.cmexpertise@gmail.com')->send($invitation_email);
-
-                    $invitation_email = new NotifyPendingInvitation($eventData);
-                    Mail::to('allen@yopmail.com')->send($invitation_email);
                     sendNotification('invite', $notificationParam);
                     sendNotificationGuest('invite', $notificationParam);
                 }
