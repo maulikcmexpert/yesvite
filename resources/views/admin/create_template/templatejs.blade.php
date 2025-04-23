@@ -240,6 +240,7 @@
 
                             );
                         });
+                        $('.select-subcat-btn').val('');
                     },
                     error: function() {
                         reject("Error occurred");
