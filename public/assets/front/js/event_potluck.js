@@ -47,6 +47,7 @@ $(document).ready(function () {
     $("#addCategoryModal").on("click", function () {
         // $("#categoryForm")[0].reset(); // Reset the form
         $('.sub-con').text('0/30')
+
         $(".error_message_category").text('');
         $(".error_message_quantity").text('');
            // Set the values in the modal form
@@ -56,11 +57,11 @@ $(document).ready(function () {
     });
     $(".close_item").on("click", function () {
         // $("#categoryForm")[0].reset(); // Reset the form
-        $('#charCount.cat_count').text('0')
+        $('.sub-con').text('0/30')
         $("#description-error").val('');
         $("#text1").val('');
 
-
+        $('#sub_quantity').val('1')
     });
     $("#deletemodal").on("show.bs.modal", function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
