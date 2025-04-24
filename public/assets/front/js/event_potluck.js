@@ -46,7 +46,7 @@ $(document).ready(function () {
     });
     $("#addCategoryModal").on("click", function () {
         // $("#categoryForm")[0].reset(); // Reset the form
-        $("#charCount").text("0");
+        $(".cat_count").val("0");
         $(".error_message_category").text('');
         $(".error_message_quantity").text('');
            // Set the values in the modal form
