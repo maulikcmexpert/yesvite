@@ -60,6 +60,7 @@ $(document).ready(function () {
         $('.sub-con').text('0/30')
         $("#description-error").val('');
         $("#text1").val('');
+        $('#self_bring_qty').val('1')
 
         $('#sub_quantity').val('1')
     });
@@ -69,6 +70,7 @@ $(document).ready(function () {
         $("#text1").val('');
 
         $('#sub_quantity').val('1')
+        $('#self_bring_qty').val('1')
 
         $(".error_message_category").text('');
         $(".error_message_quantity").text('');
