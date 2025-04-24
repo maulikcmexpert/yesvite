@@ -994,7 +994,7 @@
                         <h6>Total Quantity Desired </h6>
                         <div class="qty-container ms-auto">
                             <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                            <input type="number" id="quantity" name="category_quantity" value="0"
+                            <input type="number" id="quantity" class="cat_quan" name="category_quantity" value="0"
                                 class="input-qty" />
                             <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                         </div>
