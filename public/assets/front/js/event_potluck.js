@@ -126,6 +126,14 @@ $(document).ready(function () {
     }
 
 
+    $("#category").on("input", function () {
+        $(".error_message_category").text("");
+    });
+
+    $(".cat_quan").on("input", function () {
+        $(".error_message_quantity").text("");
+    });
+
         $("#add_categoryForm").on("submit", function (e) {
             let isValid = true;
 
