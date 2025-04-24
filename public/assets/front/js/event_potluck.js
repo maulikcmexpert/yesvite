@@ -146,7 +146,7 @@ $(document).ready(function () {
             if (categoryQuantity === "") {
                 $(".error_message_quantity").text("Quantity is required.");
                 isValid = false;
-            } else if (isNaN(categoryQuantity) || parseInt(categoryQuantity) < 0) {
+            } else if (isNaN(categoryQuantity) || (categoryQuantity) < 0) {
                 $(".error_message_quantity").text("Enter a valid non-negative number.");
                 isValid = false;
             }
