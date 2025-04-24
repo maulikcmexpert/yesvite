@@ -10,7 +10,8 @@
         });
 
 
-        $('.ckkBox').change(function() {
+        $(document).on('change','.ckkBox',function() {
+            
             toggleCheckedAll(this);
             setCheckboxSelectLabels();
         });
@@ -21,36 +22,61 @@
         });
 
     });
+    function setCheckboxSelectLabels() {
+    $('.wrapper').each(function() {
+        const wrapper = $(this);
+        const checkboxes = wrapper.find('.ckkBox:checked');
+        const button = wrapper.find('button');
+        const label = wrapper.find('.checkboxes').attr('id'); // e.g., "Sub Category"
 
-    function setCheckboxSelectLabels(elem) {
-        var wrappers = $('.wrapper');
+        let selectedLabels = [];
 
-        $.each(wrappers, function(key, wrapper) {
-            var checkboxes = $(wrapper).find('.ckkBox');
-            var label = $(wrapper).find('.checkboxes').attr('id');
-            var prevText = '';
-
-            var anyChecked = false;
-
-
-            $.each(checkboxes, function(i, checkbox) {
-                var button = $(wrapper).find('button');
-
-                if ($(checkbox).prop('checked') == true) {
-                    anyChecked = true;
-
-                    var text = $(checkbox).next().html();
-                    var btnText = prevText + text;
-                    var numberOfChecked = $(wrapper).find('input.val:checkbox:checked').length;
-                    if (numberOfChecked >= 4) {
-                        btnText = numberOfChecked + ' ' + label + ' selected';
-                    }
-                    $(button).text(btnText);
-                    prevText = btnText + ', ';
-                }
-            });
+        checkboxes.each(function(i, checkbox) {
+            if (i < 3) {
+                selectedLabels.push($(checkbox).next().text().trim());
+            }
         });
-    }
+
+        console.log(selectedLabels);
+        if (checkboxes.length > 3) {
+            button.text(`${checkboxes.length} ${label} selected`);
+        } else if (selectedLabels.length > 0) {
+            button.text(selectedLabels.join(', '));
+        } else {
+            button.text(`Select subcategory`);
+        }
+    });
+}
+
+    // function setCheckboxSelectLabels(elem) {
+    //     var wrappers = $('.wrapper');
+
+    //     $.each(wrappers, function(key, wrapper) {
+    //         var checkboxes = $(wrapper).find('.ckkBox');
+    //         var label = $(wrapper).find('.checkboxes').attr('id');
+    //         var prevText = '';
+
+    //         var anyChecked = false;
+
+
+    //         $.each(checkboxes, function(i, checkbox) {
+    //             var button = $(wrapper).find('button');
+
+    //             if ($(checkbox).prop('checked') == true) {
+    //                 anyChecked = true;
+
+    //                 var text = $(checkbox).next().html();
+    //                 var btnText = prevText + text;
+    //                 var numberOfChecked = $(wrapper).find('input.val:checkbox:checked').length;
+    //                 if (numberOfChecked >= 4) {
+    //                     btnText = numberOfChecked + ' ' + label + ' selected';
+    //                 }
+    //                 $(button).text(btnText);
+    //                 prevText = btnText + ', ';
+    //             }
+    //         });
+    //     });
+    // }
 
     function toggleCheckedAll(checkbox) {
         var apply = $(checkbox).closest('.wrapper').find('.apply-selection');
@@ -226,6 +252,7 @@
                         //         '<label><input type="checkbox" value="" class="ckkBox val" /><span>No SubCategory Found</span> </label><br>'
 
                         //     );
+                        $('.select-subcat-btn').text('Select Subcategory');
                         output.forEach(function(subcategory) {
                             // $('#event_design_sub_category_id').append(
                             //     '<option value="' + subcategory.sub_category_id + '">' + subcategory.sub_category_name + '</option>'
@@ -240,6 +267,7 @@
 
                             );
                         });
+                       
                     },
                     error: function() {
                         reject("Error occurred");
