@@ -68927,3 +68927,7 @@ a.text-muted:hover {
     max-height: 150px !important;
     overflow-y: scroll !important;
 }
+
+.bootstrap-tagsinput input{
+    width:100% !important;
+}
