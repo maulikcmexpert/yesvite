@@ -1710,7 +1710,9 @@ div:where(.swal2-icon) .swal2-icon-content{
 #button-1 .layer {
     transition: 0.3s ease all;
 }
-
+.bootstrap-tagsinput input{
+    width:100% !important;
+}
 
 @media only screen and (min-width: 2000px) and (max-width: 6000px) {
     .image-edit-inner-img {
