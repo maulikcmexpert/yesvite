@@ -55,7 +55,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3">
-                <div class="home-banner-img--main">
+                <div class="home-banner-img-main">
                     <div class="home-banner-img-1">
                         <img src="{{ asset('assets/front/image/home-banner-img-1.png') }}" alt="">
                     </div>

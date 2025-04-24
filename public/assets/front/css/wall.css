@@ -805,7 +805,7 @@
 
 /* ============= Home Banner CSS Start ============= */
 
-.home-banner-img--main{
+.home-banner-img-main{
     display: flex;
     align-items: flex-end;
     justify-content: center;
