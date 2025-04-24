@@ -56,7 +56,7 @@ $(document).ready(function () {
     });
     $(".close_item").on("click", function () {
         // $("#categoryForm")[0].reset(); // Reset the form
-        $('#charCount.cat_count').text('0')
+        $('.sub-con').text('0/30')
         $("#description-error").val('');
         $("#text1").val('');
 
