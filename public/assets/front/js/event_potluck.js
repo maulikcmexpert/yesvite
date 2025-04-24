@@ -77,32 +77,12 @@ $(document).ready(function () {
         }
     );
 
-    $("#categoryForms_submit").on("click", function (e) {
-
-        const categoryName = $("#categorys").val();
-        const categoryQuantity = $("#quantitys").val();
-
-        // Clear previous error messages
-        $(".error_message_category").text('');
-        $(".error_message_quantity").text('');
-
-        // Validate category name
-        if (categoryName === "") {
-            $(".error_message_category").text("Category name is required.");
-
+    $("#categoryForms_submit").on("click", function () {
+        if ($("#categoryForms").valid()) {
+            $("#categoryForms").submit();
         }
-
-        // Validate quantity
-        if (categoryQuantity === "") {
-            $(".error_message_quantity").text("Quantity is required.");
-
-        } else if (isNaN(categoryQuantity) || parseInt(categoryQuantity) < 0) {
-            $(".error_message_quantity").text("Enter a valid non-negative number.");
-
-        }
-
-
     });
+
 
     // Optional: clear error when input is being changed
     function clearError(el) {
