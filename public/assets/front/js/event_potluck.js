@@ -115,6 +115,54 @@ $(document).ready(function () {
         }
     });
 
+
+    function clearError(el) {
+        const id = $(el).attr("id");
+        if (id === "category") {
+            $(".error_message_category").text("");
+        } else if (id === "quantity") {
+            $(".error_message_quantity").text("");
+        }
+    }
+
+
+        $("#add_categoryForm").on("submit", function (e) {
+            let isValid = true;
+
+            const categoryName = $("#category").val().trim();
+            const categoryQuantity = $(".cat_quan").val();
+alert(categoryQuantity);
+            // Clear previous errors
+            $(".error_message_category").text('');
+            $(".error_message_quantity").text('');
+
+            // Category name validation
+            if (categoryName === "") {
+                $(".error_message_category").text("Category name is required.");
+                isValid = false;
+            }
+
+            // Quantity validation
+            if (categoryQuantity === 0) {
+                $(".error_message_quantity").text("Quantity is required.");
+                isValid = false;
+            } else if (isNaN(categoryQuantity) || (categoryQuantity) < 0) {
+                $(".error_message_quantity").text("Enter a valid non-negative number.");
+                isValid = false;
+            }
+
+            if (!isValid) {
+                e.preventDefault(); // Stop submission if invalid
+            }
+        });
+
+        // Optional: live character count
+        $("#category").on("input", function () {
+            $("#charCount").text($(this).val().length);
+        });
+
+
+
     $("#saveCategoryBtn").on("click", function () {
         const categoryId = $("#hiddenCategoryId").val();
         const categoryName = $("#categoryName").val();
