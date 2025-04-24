@@ -76,6 +76,47 @@ $(document).ready(function () {
             $("#categoryForms").attr("action", formAction);
         }
     );
+
+    $("#categoryForms").on("submit", function (e) {
+        let isValid = true;
+
+        const categoryName = $("#categorys").val().trim();
+        const categoryQuantity = $("#quantitys").val().trim();
+
+        // Clear previous error messages
+        $(".error_message_category").text('');
+        $(".error_message_quantity").text('');
+
+        // Validate category name
+        if (categoryName === "") {
+            $(".error_message_category").text("Category name is required.");
+            isValid = false;
+        }
+
+        // Validate quantity
+        if (categoryQuantity === "") {
+            $(".error_message_quantity").text("Quantity is required.");
+            isValid = false;
+        } else if (isNaN(categoryQuantity) || parseInt(categoryQuantity) < 0) {
+            $(".error_message_quantity").text("Enter a valid non-negative number.");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            e.preventDefault(); // Stop form submission if invalid
+        }
+    });
+
+    // Optional: clear error when input is being changed
+    function clearError(el) {
+        const id = $(el).attr("id");
+        if (id === "categorys") {
+            $(".error_message_category").text("");
+        } else if (id === "quantitys") {
+            $(".error_message_quantity").text("");
+        }
+    }
+
     // Debugging to check if the modal is shown and values are set
     $("#confirmDeleteCategory").on("click", function () {
         var categoryId = $(this).data("category-id");
