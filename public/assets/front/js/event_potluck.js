@@ -143,13 +143,13 @@ $(document).ready(function () {
             }
 
             // Quantity validation
-            if (categoryQuantity === "") {
-                $(".error_message_quantity").text("Quantity is required.");
-                isValid = false;
-            } else if ((categoryQuantity) <= 0) {
-                $(".error_message_quantity").text("Enter a number greater than 0.");
-                isValid = false;
-            }
+            // if (categoryQuantity === "") {
+            //     $(".error_message_quantity").text("Quantity is required.");
+            //     isValid = false;
+            // } else if ((categoryQuantity) <= 0) {
+            //     $(".error_message_quantity").text("Enter a number greater than 0.");
+            //     isValid = false;
+            // }
 
             if (!isValid) {
                 e.preventDefault(); // Stop submission if invalid
