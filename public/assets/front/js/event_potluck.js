@@ -130,7 +130,7 @@ $(document).ready(function () {
             let isValid = true;
 
             const categoryName = $("#category").val().trim();
-            const categoryQuantity = $("#quantity").val().trim();
+            const categoryQuantity = $("#quantity").val();
 
             // Clear previous errors
             $(".error_message_category").text('');
