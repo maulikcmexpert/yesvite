@@ -61,7 +61,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 col-xl-6">
+            <div class="col-md-7  col-xl-6">
                 <h2 class="home-banner-title">
                     Online Invites Simplified <span class="light-text">Up to 70% cheaper than competitors.</span> <span
                         class="green-text"> All designs and features included. Always.</span>
@@ -70,7 +70,7 @@
                 <p class="home-banner-textTwo">Start today for free - your first 30 invites on us! <span>No Credit Card
                         Required.</span></p>
             </div>
-            <div class="col-md-4 col-xl-3">
+            <div class="col-md-5 col-xl-3">
                 <div class="app-store d-flex justify-content-center gap-2 home-banner-app-store">
                     <a href="https://play.google.com/store/apps/details?id=com.yesvite.android" class="google-app">
                         <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/play_store.svg"
