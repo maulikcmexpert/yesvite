@@ -897,7 +897,7 @@
 }
 
 
-@media screen and (min-width:991px) and (max-width:769px) {
+@media screen and (min-width:991px) and (max-width:768px) {
     .banner-wrapper .home-banner-title{
         font-size: 33px !important;
         line-height: 55px !important;
@@ -910,7 +910,7 @@
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .modal-close {
         top: 15px;
         right: 15px;
