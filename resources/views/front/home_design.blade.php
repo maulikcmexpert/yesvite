@@ -65,6 +65,14 @@
                 </h2>
             </div>
             <div class="col-lg-3">
+                <div class="app-store d-flex justify-content-center gap-2">
+                    <a href="https://play.google.com/store/apps/details?id=com.yesvite.android" class="google-app">
+                        <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/play_store.svg" alt="google-app">
+                    </a>
+                    <a href="https://apps.apple.com/app/6736650042" class="mobile-app">
+                        <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/app_store.svg" alt="mobile-app">
+                    </a>
+                </div>
                 <div class="home-banner-img-2">
                     <img src="{{ asset('assets/front/image/home-banner-img-2.png') }}" alt="">
                 </div>
