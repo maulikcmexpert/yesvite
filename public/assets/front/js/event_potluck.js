@@ -54,6 +54,14 @@ $(document).ready(function () {
            $(".cat_quan").val(0);
 
     });
+    $("#close_item").on("click", function () {
+        // $("#categoryForm")[0].reset(); // Reset the form
+        $("#charCount").text("0");
+        $("#description-error").val('');
+        $("#categoryName").val('');
+
+
+    });
     $("#deletemodal").on("show.bs.modal", function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         var categoryId = button.data("category-id");

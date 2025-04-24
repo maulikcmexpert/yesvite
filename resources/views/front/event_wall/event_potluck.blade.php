@@ -1016,7 +1016,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="maindishesLabel">Main Dishes</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close close_item" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form class="category-form" id="categoryItemForm">
                 <div class="modal-body">
