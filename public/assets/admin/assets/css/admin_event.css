@@ -2,11 +2,14 @@
     border: none;
     box-shadow: none;
     outline: none;
-    background-color: red;
+    background-color: red !important;
     padding: 0 6px;
     margin: 0;
     width: 100%;
     max-width: 100%;
+
+    -webkit-appearance: none; /* Add this */
+    appearance: none;
 }
 .toggle-wrp h5 {
     color: var(--secondryColor);
