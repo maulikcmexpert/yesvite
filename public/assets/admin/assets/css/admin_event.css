@@ -375,9 +375,11 @@
 #templateEditForm .bootstrap-tagsinput{
     padding: .375rem .75rem;
     display: block;
+    /* width:100% !important; */
+}
+#templateEditForm .bootstrap-tagsinput input{
     width:100% !important;
 }
-
 #templateEditForm .bootstrap-tagsinput .label-info {
     display: inline-flex;
     align-items: center;
