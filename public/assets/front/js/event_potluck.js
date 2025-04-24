@@ -116,7 +116,24 @@ $(document).ready(function () {
             $(".error_message_quantity").text("");
         }
     }
-
+    $("#categoryForms").validate({
+        rules: {
+            category_name: "required",
+            category_quantity: {
+                required: true,
+                number: true,
+                min: 0
+            }
+        },
+        messages: {
+            category_name: "Please enter a category name",
+            category_quantity: {
+                required: "Please enter a quantity",
+                number: "Enter a valid number",
+                min: "Quantity cannot be negative"
+            }
+        }
+    });
     // Debugging to check if the modal is shown and values are set
     $("#confirmDeleteCategory").on("click", function () {
         var categoryId = $(this).data("category-id");
