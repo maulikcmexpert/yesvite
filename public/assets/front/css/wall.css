@@ -867,6 +867,19 @@
 
 
 /* For mobile responsiveness, adjust button position */
+
+@media screen and (min-width:1200px) and (max-width:1399px) {
+    .banner-wrapper .home-banner-title{
+        font-size: 45px !important;
+        line-height: 58px !important;
+    }
+}
+
+@media screen and (min-width:1025px) and (max-width:1199px) {
+
+}
+
+
 @media (max-width: 768px) {
     .modal-close {
         top: 15px;
@@ -877,6 +890,8 @@
         height: 300px !important;
     }
 }
+
+
 
 @media only screen and (max-width: 575px) {
     .story_seen_modal .modal-content {
