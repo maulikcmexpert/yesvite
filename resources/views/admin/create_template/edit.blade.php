@@ -139,8 +139,10 @@ $pivotSubcategoryIds = $getTemData->subcategories->pluck('id')->toArray();
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tags</label>
-                            <input type="text" id="tags" name="tags" class="form-control" data-role="tagsinput"
-                                value="{{$getTemData->tags}}" />
+                            {{-- <input type="text" id="tags" name="tags" class="form-control" data-role="tagsinput"
+                                value="{{$getTemData->tags}}" /> --}}
+                                <textarea id="tags" name="tags" class="form-control" data-role="tagsinput"
+                                >{{$getTemData->tags}}</textarea>
                             <span class="text-danger">{{ $errors->first('tags.*') }}</span>
                         </div>
 
