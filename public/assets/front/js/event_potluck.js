@@ -45,7 +45,7 @@ $(document).ready(function () {
         $("#charCount").text(currentLength);
     });
     $("#addCategoryModal").on("click", function () {
-        $("#categoryForm")[0].reset(); // Reset the form
+        // $("#categoryForm")[0].reset(); // Reset the form
         $("#charCount").text("0");
         $(".error_message_category").text('');
         $(".error_message_quantity").text('');
