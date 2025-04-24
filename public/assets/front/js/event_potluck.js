@@ -130,8 +130,10 @@ $(document).ready(function () {
         $(".error_message_category").text("");
     });
 
-    $(".cat_quan").on("change", function () {
-        $(".error_message_quantity").text("");
+    $(".cat_quan").on("input", function () {
+        if ($(this).val().trim() !== "") {
+            $(".error_message_quantity").text("");
+        }
     });
 
         $("#add_categoryForm").on("submit", function (e) {
