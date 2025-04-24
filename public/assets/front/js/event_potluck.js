@@ -45,8 +45,14 @@ $(document).ready(function () {
         $("#charCount").text(currentLength);
     });
     $("#addCategoryModal").on("click", function () {
-        $("#categoryForm")[0].reset(); // Reset the form
-        $("#charCount").text("0"); // Reset the character count display
+        // $("#categoryForm")[0].reset(); // Reset the form
+        $("#charCount").text("0");
+        $(".error_message_category").text('');
+        $(".error_message_quantity").text('');
+           // Set the values in the modal form
+           $("#category").text("");
+           $("#quantity").text(0);
+
     });
     $("#deletemodal").on("show.bs.modal", function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
