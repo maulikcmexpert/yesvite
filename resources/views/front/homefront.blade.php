@@ -61,6 +61,19 @@
                         <span>Event Activity Scheduler</span>
                         <span>Event Activity Scheduler</span>
                     </div>
+                    <div class="owl-carousel owl-theme events-tab  simple">
+                        <div class="item"><span>500 Invite Limit</span></div>
+                        <div class="item"><span>Potluck</span></div>
+                        <div class="item"><span>Guest Polls</span></div>
+                        <div class="item"><span>Photo Invite Designs</span></div>
+                        <div class="item"><span>3 Photo Slides w/invite</span></div>
+                        <div class="item"><span>Co-Host to Events</span></div>
+                        <div class="item"><span>Direct Messages To Guests</span></div>
+                        <div class="item"><span>Unlimited events</span></div>
+                        <div class="item"><span>Video RSVP’s</span></div>
+                        <div class="item"><span>Thank You Messages to Guests</span></div>
+                        <div class="item"><span>Event Activity Scheduler</span></div>
+                    </div>
                 </div>
             </div>  
         </section>
