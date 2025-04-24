@@ -130,8 +130,8 @@ $(document).ready(function () {
             let isValid = true;
 
             const categoryName = $("#category").val().trim();
-            const categoryQuantity = $(".cat_quan").val();
-alert(categoryQuantity);
+            const categoryQuantity = $(".cat_quan").val().trim();
+
             // Clear previous errors
             $(".error_message_category").text('');
             $(".error_message_quantity").text('');
@@ -143,13 +143,13 @@ alert(categoryQuantity);
             }
 
             // Quantity validation
-            if (categoryQuantity === 0) {
-                $(".error_message_quantity").text("Quantity is required.");
-                isValid = false;
-            } else if (isNaN(categoryQuantity) || (categoryQuantity) < 0) {
-                $(".error_message_quantity").text("Enter a valid non-negative number.");
-                isValid = false;
-            }
+            // if (categoryQuantity === "") {
+            //     $(".error_message_quantity").text("Quantity is required.");
+            //     isValid = false;
+            // } else if ((categoryQuantity) <= 0) {
+            //     $(".error_message_quantity").text("Enter a number greater than 0.");
+            //     isValid = false;
+            // }
 
             if (!isValid) {
                 e.preventDefault(); // Stop submission if invalid
