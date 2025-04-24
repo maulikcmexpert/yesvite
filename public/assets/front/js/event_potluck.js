@@ -137,6 +137,13 @@ $(document).ready(function () {
         }
 
     });
+    $(".qty-btn-minus").on("click", function () {
+        const categoryQuantity = $(".cat_quan").val().trim();
+        if(categoryQuantity <= 0 ){
+            $(".error_message_quantity").text('Enter a number greater than 0');
+        }
+
+    });
 
         $("#add_categoryForm").on("submit", function (e) {
             let isValid = true;
