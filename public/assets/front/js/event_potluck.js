@@ -130,7 +130,7 @@ $(document).ready(function () {
         $(".error_message_category").text("");
     });
 
-    $(".cat_quan").on("input", function () {
+    $(".cat_quan").on("change", function () {
         $(".error_message_quantity").text("");
     });
 
