@@ -22,7 +22,7 @@
         </div>
     </div>
 </section> --}}
-<section class="banner-wrapper">
+{{-- <section class="banner-wrapper">
     <img src="{{ asset('assets/front/image/left-banner.png') }}" alt="left-banner" class="left-img wow fadeInLeft"
         data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
     <img src="{{ asset('assets/front/image/right-banner.png') }}" alt="right-banner" class="right-img wow fadeInRight"
@@ -49,7 +49,30 @@
             <img src="{{ asset('assets/front/image/birthday-card.png') }}" alt="birthday-card">
         </div>
     </div>
+</section> --}}
+
+<section class="banner-wrapper">
+    <div class="container-fuild">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="home-banner-img-1">
+                    <img src="{{ asset('assets/front/image/home-banner-img-1.png') }}" alt="">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h2 class="home-banner-text">
+                    Online Invites Simplified <span class="light-text">Up to 70% cheaper than competitors.</span> <span class="green-text"> All designs and features included. Always.</span>
+                </h2>
+            </div>
+            <div class="col-lg-3">
+                <div class="home-banner-img-2">
+                    <img src="{{ asset('assets/front/image/home-banner-img-2.png') }}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
+
 <section class="collection-wrapper">
     <div class="container">
         <div class="content">
