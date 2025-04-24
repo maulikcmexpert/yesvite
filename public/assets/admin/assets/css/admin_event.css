@@ -10,6 +10,7 @@
 
     -webkit-appearance: none; /* Add this */
     appearance: none;
+    word-break: break-all;
 }
 .toggle-wrp h5 {
     color: var(--secondryColor);
