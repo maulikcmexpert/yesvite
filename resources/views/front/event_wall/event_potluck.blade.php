@@ -1100,7 +1100,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-secondary" 
+            <button type="submit" class="btn btn-secondary"
                 id="saveCategoryBtn">Save</button>
         </div>
         </form>
@@ -1144,7 +1144,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Apply</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Apply</button>
                 </div>
             </form>
         </div>
