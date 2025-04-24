@@ -78,10 +78,7 @@ $(document).ready(function () {
     );
 
     $("#categoryForms_submit").on("click", function (e) {
-        if (!$(this).valid()) {
-            e.preventDefault();
-            return;
-        }
+
         const categoryName = $("#categorys").val();
         const categoryQuantity = $("#quantitys").val();
 
