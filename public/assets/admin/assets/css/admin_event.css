@@ -377,10 +377,20 @@
     display: block;
     /* width:100% !important; */
 }
-#templateEditForm .bootstrap-tagsinput input{
-    width:100% !important;
+#templateEditForm .bootstrap-tagsinput input {
+    width: 100% !important;
     min-width: 150px;
     text-align: center;
+
+    /* iOS Safari specific tweaks */
+    -webkit-appearance: none; /* remove iOS native input styling */
+    appearance: none;
+    
+    /* Fixes potential zoom issues on focus in iOS */
+    font-size: 16px;
+
+    /* Ensure padding/box model doesn't break layout */
+    box-sizing: border-box;
 }
 #templateEditForm .bootstrap-tagsinput .label-info {
     display: inline-flex;
