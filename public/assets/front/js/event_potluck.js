@@ -131,7 +131,8 @@ $(document).ready(function () {
     });
 
     $(".cat_quan").on("input", function () {
-        if ($(this).val().trim() !== "") {
+        var val = parseInt($(this).val()) || 0;
+        if (val > 0) {
             $(".error_message_quantity").text("");
         }
     });

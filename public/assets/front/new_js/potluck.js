@@ -1,30 +1,39 @@
 // ======= increement/deecrement rsvp ======
-var buttonPlus  = $(".qty-btn-plus");
+var buttonPlus = $(".qty-btn-plus");
 var buttonMinus = $(".qty-btn-minus");
 
-var incrementPlus = buttonPlus.click(function(e) {
-  e.preventDefault();
-  e.stopPropagation();
-var $n = $(this)
-.parent(".qty-container")
-.find(".input-qty");
-$n.val(Number($n.val())+1 );
-$(".error_message_quantity").text("");
+buttonPlus.click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    var $n = $(this).closest(".qty-container").find(".input-qty");
+    var currentValue = Number($n.val()) || 0;
+    var newValue = currentValue + 1;
+
+    $n.val(newValue);
+
+    if (newValue > 0) {
+        $(".error_message_quantity").text("");
+    }
 });
 
-var incrementMinus = buttonMinus.click(function(e) {
-  e.preventDefault();
-  e.stopPropagation();
-var $n = $(this)
-.parent(".qty-container")
-.find(".input-qty");
-var amount = Number($n.val());
-if (amount > 0) {
-  $n.val(amount-1);
-  $(".error_message_quantity").text("");
-}
+buttonMinus.click(function (e) {
+    e.preventDefault();
+    e.stopPropagation();
 
+    var $n = $(this).closest(".qty-container").find(".input-qty");
+    var currentValue = Number($n.val()) || 0;
+
+    if (currentValue > 0) {
+        var newValue = currentValue - 1;
+        $n.val(newValue);
+
+        if (newValue > 0) {
+            $(".error_message_quantity").text("");
+        }
+    }
 });
+
 // ==================================================
 
 
