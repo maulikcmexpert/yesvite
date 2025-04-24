@@ -130,11 +130,12 @@ $(document).ready(function () {
         $(".error_message_category").text("");
     });
 
-    $(".cat_quan").on("input", function () {
-        var val = parseInt($(this).val()) || 0;
-        if (val > 0) {
-            $(".error_message_quantity").text("");
+    $(".qty-btn-plus").on("click", function () {
+        const categoryQuantity = $(".cat_quan").val().trim();
+        if(categoryQuantity > 0){
+            $(".error_message_quantity").text('');
         }
+
     });
 
         $("#add_categoryForm").on("submit", function (e) {
