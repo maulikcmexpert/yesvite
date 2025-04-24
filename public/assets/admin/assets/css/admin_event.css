@@ -380,7 +380,7 @@
 #templateEditForm .bootstrap-tagsinput input{
     width:100% !important;
     min-width: 150px;
-    text-align: left;
+    text-align: center;
 }
 #templateEditForm .bootstrap-tagsinput .label-info {
     display: inline-flex;
