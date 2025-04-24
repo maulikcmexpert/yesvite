@@ -50,8 +50,8 @@ $(document).ready(function () {
         $(".error_message_category").text('');
         $(".error_message_quantity").text('');
            // Set the values in the modal form
-           $("#category").val("");
-           $("#quantity").val(0);
+           $("#category").text("");
+           $("#quantity").text(0);
 
     });
     $("#deletemodal").on("show.bs.modal", function (event) {
