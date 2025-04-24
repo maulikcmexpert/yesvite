@@ -82,8 +82,8 @@ $(document).ready(function () {
             e.preventDefault();
             return;
         }
-        const categoryName = $("#categorys").val().trim();
-        const categoryQuantity = $("#quantitys").val().trim();
+        const categoryName = $("#categorys").val();
+        const categoryQuantity = $("#quantitys").val();
 
         // Clear previous error messages
         $(".error_message_category").text('');
