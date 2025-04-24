@@ -9,6 +9,7 @@ var $n = $(this)
 .parent(".qty-container")
 .find(".input-qty");
 $n.val(Number($n.val())+1 );
+$(".error_message_quantity").text("");
 });
 
 var incrementMinus = buttonMinus.click(function(e) {
@@ -20,7 +21,9 @@ var $n = $(this)
 var amount = Number($n.val());
 if (amount > 0) {
   $n.val(amount-1);
+  $(".error_message_quantity").text("");
 }
+
 });
 // ==================================================
 
@@ -77,7 +80,7 @@ var options = {
     fontFamily: 'SFProDisplay-Regular',
     fontWeight: '500',
     formatter: function(seriesName, opts) {
-   
+
       return seriesName + '<span style="margin-left: 10px; color: #000;">' + opts.w.globals.series[opts.seriesIndex] + '</span>';
     }
   }
