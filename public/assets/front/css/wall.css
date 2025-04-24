@@ -877,15 +877,15 @@
 
 @media screen and (min-width:1025px) and (max-width:1199px) {
     .banner-wrapper .home-banner-title{
-        font-size: 50px;
-        line-height: 65px;
+        font-size: 50px !important;
+        line-height: 65px !important;
     }
 }
 
 @media screen and (min-width:1025px) and (max-width:1199px) {
     .banner-wrapper .home-banner-title{
-        font-size: 50px;
-        line-height: 65px;
+        font-size: 50px !important;
+        line-height: 65px !important;
     }
 }
 
@@ -901,12 +901,12 @@
     }
 
     .banner-wrapper .home-banner-title{
-        font-size: 38px;
-        line-height: 55px;
+        font-size: 38px !important;
+        line-height: 55px !important;
     }
     .banner-wrapper .home-banner-textOne,
     .banner-wrapper .home-banner-textTwo{
-        font-size: 18px;
+        font-size: 18px !important;
     }
 
 }
@@ -952,8 +952,8 @@
     }
 
     .banner-wrapper .home-banner-title{
-        font-size: 32px;
-        line-height: 48px;
+        font-size: 32px !important;
+        line-height: 48px !important;
     }
 
 }
@@ -965,14 +965,14 @@
     }
     .banner-wrapper .home-banner-textOne,
     .banner-wrapper .home-banner-textTwo{
-        font-size: 16px;
+        font-size: 16px !important;
     }
 }
 
 @media only screen and (max-width:375px) {
     .banner-wrapper .home-banner-title{
-        font-size: 24px;
-        line-height: 38px;
+        font-size: 24px !important;
+        line-height: 38px !important;
     }
 }
 
