@@ -78,8 +78,10 @@ $(document).ready(function () {
     );
 
     $("#categoryForms").on("submit", function (e) {
-        let isValid = true;
-
+        if (!$(this).valid()) {
+            e.preventDefault();
+            return;
+        }
         const categoryName = $("#categorys").val().trim();
         const categoryQuantity = $("#quantitys").val().trim();
 
