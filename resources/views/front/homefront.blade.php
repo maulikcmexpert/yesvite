@@ -38,7 +38,7 @@
                 <div class="content">
                     <h2 class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
                         Enhance Your Event Experience with These <span>Pro Features</span></h2>
-                    <p class="wow fadeInDown" data-wow-duration="3s" data-wow-delay="0" data-wow-offset="0">NStress-free event planning starts here! Our user-friendly and beautiful UI allows for easy planning and managing of your events</p>
+                    <p class="wow fadeInDown" data-wow-duration="3s" data-wow-delay="0" data-wow-offset="0">Stress-free event planning starts here! Our user-friendly and beautiful UI allows for easy planning and managing of your events</p>
                 </div>
                 <div class="events-tab">
                     <span>500 Guest Limit</span>
