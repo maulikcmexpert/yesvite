@@ -37,7 +37,7 @@
             <div class="event-content">
                 <div class="content">
                     <h2 class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
-                        Straightforward transparent prices <span>All features included.</span></h2>
+                        Enhance Your Event Experience with These <span>Pro Features</span></h2>
                     <p class="wow fadeInDown" data-wow-duration="3s" data-wow-delay="0" data-wow-offset="0">No hidden
                         fees or features to unlock. All invites include all the features below:</p>
                 </div>
