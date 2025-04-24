@@ -32,37 +32,41 @@
             </div>
         </div>
     </section>
-    <section class="event-wrapper pro-event-wrapper">
-        <div class="container">
-            <div class="event-content">
-                <div class="content">
-                    <h2 class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
-                        Enhance Your Event Experience with These <span>Pro Features</span></h2>
-                    <p class="wow fadeInDown" data-wow-duration="3s" data-wow-delay="0" data-wow-offset="0">Stress-free event planning starts here! Our user-friendly and beautiful UI allows for easy planning and managing of your events</p>
+
+    <!-- ============ category-feature-lists ============ -->
+        <section class="event-wrapper pro-event-wrapper">
+            <div class="container">
+                <div class="event-content">
+                    <div class="content">
+                        <h2 class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                            Enhance Your Event Experience with These <span>Pro Features</span></h2>
+                        <p class="wow fadeInDown" data-wow-duration="3s" data-wow-delay="0" data-wow-offset="0">Stress-free event planning starts here! Our user-friendly and beautiful UI allows for easy planning and managing of your events</p>
+                    </div>
+                    <div class="events-tab">
+                        <span>500 Guest Limit</span>
+                        <span>Schedule for Event activities</span>
+                        <span>Potluck</span>
+                        <span>Guest Polls</span>
+                        <span>Photo Invite Designs</span>
+                        <span>3 Photo Slides w/invite</span>
+                        <span>Co-Host to Events</span>
+                        <span>No Ads</span>
+                        <span>No Monthly /Yearly Subscriptions</span>
+                        <span>Direct Messages To Guests</span>
+                        <span>Unlimited events</span>
+                        <span>No Gimmicky extra fees here</span>
+                        <span>Video RSVP’s</span>
+                        <span>Thank You Messages to Guests</span>
+                        <span>Event Analytics</span>
+                        <span>Event Activity Scheduler</span>
+                        <span>Event Activity Scheduler</span>
+                    </div>
                 </div>
-                <div class="events-tab">
-                    <span>500 Guest Limit</span>
-                    <span>Schedule for Event activities</span>
-                    <span>Potluck</span>
-                    <span>Guest Polls</span>
-                    <span>Photo Invite Designs</span>
-                    <span>3 Photo Slides w/invite</span>
-                    <span>Co-Host to Events</span>
-                    <span>No Ads</span>
-                    <span>No Monthly /Yearly Subscriptions</span>
-                    <span>Direct Messages To Guests</span>
-                    <span>Unlimited events</span>
-                    <span>No Gimmicky extra fees here</span>
-                    <span>Video RSVP’s</span>
-                    <span>Thank You Messages to Guests</span>
-                    <span>Event Analytics</span>
-                    <span>Event Activity Scheduler</span>
-                    <span>Event Activity Scheduler</span>
-                </div>
-            </div>
-        </div>  
-    </section>
-    <!-- ============ category-wrapper ============ -->
+            </div>  
+        </section>
+   <!-- ============  category-feature-lists ============ -->
+
+        <!-- ============ category-wrapper ============ -->
     <section class="category-wrappper">
         <div class="container">
             <div class="category-content">
