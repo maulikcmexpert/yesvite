@@ -1144,7 +1144,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" >Apply</button>
+                    <button type="submit" class="btn btn-secondary" >Apply</button>
                 </div>
             </form>
         </div>
