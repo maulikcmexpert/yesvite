@@ -131,7 +131,7 @@ $(document).ready(function () {
 
             const categoryName = $("#category").val().trim();
             const categoryQuantity = $(".cat_quan").val();
-
+alert(categoryQuantity);
             // Clear previous errors
             $(".error_message_category").text('');
             $(".error_message_quantity").text('');
@@ -143,7 +143,7 @@ $(document).ready(function () {
             }
 
             // Quantity validation
-            if (categoryQuantity === "") {
+            if (categoryQuantity === 0) {
                 $(".error_message_quantity").text("Quantity is required.");
                 isValid = false;
             } else if (isNaN(categoryQuantity) || (categoryQuantity) < 0) {
