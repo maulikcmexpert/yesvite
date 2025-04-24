@@ -33,8 +33,54 @@
         </div>
     </section>
 
-    <!-- ============ category-wrapper ============ -->
-    <section class="category-wrappper">
+    <!-- ============ category-feature-lists ============ -->
+        <section class="event-wrapper pro-event-wrapper">
+            <div class="container">
+                <div class="event-content">
+                    <div class="content">
+                        <h2 class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">
+                            Enhance Your Event Experience with These <span>Pro Features</span></h2>
+                        <p class="wow fadeInDown" data-wow-duration="3s" data-wow-delay="0" data-wow-offset="0">Stress-free event planning starts here! Our user-friendly and beautiful UI allows for easy planning and managing of your events</p>
+                    </div>
+                    <div class="events-tab">
+                        <span>500 Guest Limit</span>
+                        <span>Schedule for Event activities</span>
+                        <span>Potluck</span>
+                        <span>Guest Polls</span>
+                        <span>Photo Invite Designs</span>
+                        <span>3 Photo Slides w/invite</span>
+                        <span>Co-Host to Events</span>
+                        <span>No Ads</span>
+                        <span>No Monthly /Yearly Subscriptions</span>
+                        <span>Direct Messages To Guests</span>
+                        <span>Unlimited events</span>
+                        <span>No Gimmicky extra fees here</span>
+                        <span>Video RSVP’s</span>
+                        <span>Thank You Messages to Guests</span>
+                        <span>Event Analytics</span>
+                        <span>Event Activity Scheduler</span>
+                        <span>Event Activity Scheduler</span>
+                    </div>
+                    <div class="owl-carousel owl-theme events-tab  simple">
+                        <div class="item"><span>500 Invite Limit</span></div>
+                        <div class="item"><span>Potluck</span></div>
+                        <div class="item"><span>Guest Polls</span></div>
+                        <div class="item"><span>Photo Invite Designs</span></div>
+                        <div class="item"><span>3 Photo Slides w/invite</span></div>
+                        <div class="item"><span>Co-Host to Events</span></div>
+                        <div class="item"><span>Direct Messages To Guests</span></div>
+                        <div class="item"><span>Unlimited events</span></div>
+                        <div class="item"><span>Video RSVP’s</span></div>
+                        <div class="item"><span>Thank You Messages to Guests</span></div>
+                        <div class="item"><span>Event Activity Scheduler</span></div>
+                    </div>
+                </div>
+            </div>  
+        </section>
+   <!-- ============  category-feature-lists ============ -->
+
+        <!-- ============ category-wrapper ============ -->
+    {{-- <section class="category-wrappper">
         <div class="container">
             <div class="category-content">
                 <h6>A card for every <br /> occasion!</h6>
@@ -47,7 +93,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section class="features-wrapper">
         <div class="container">

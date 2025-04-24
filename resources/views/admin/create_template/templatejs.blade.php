@@ -37,7 +37,7 @@
             }
         });
 
-        console.log(selectedLabels);
+        // console.log(selectedLabels);
         if (checkboxes.length > 3) {
             button.text(`${checkboxes.length} ${label} selected`);
         } else if (selectedLabels.length > 0) {
