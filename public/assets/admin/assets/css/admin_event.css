@@ -428,6 +428,7 @@
     cursor: pointer;
     display: inline-block;
     width: 15px;
+    min-width: 15px;
     height: 15px;
     border-radius: 50%;
     background: var(--ButtonColor);
@@ -443,6 +444,7 @@
     transform: translate(-50%, -50%);
     color: var(--white);
     font-size: 12px;
+    line-height: 12px;
     text-align: center;
 }
 
