@@ -1081,36 +1081,6 @@
 }
 
 
-/* ============= Home Banner CSS Start ============= */
-.banner-wrapper .home-banner-img-1 {
-    align-items: self-end;
-    height: 100%;
-}
- .home-banner-text{
-    font-size: 55px !important;
-    font-weight: 700 !important;
-    text-align: center;
-    line-height: 76px !important;
-    margin-bottom: 0px !important;
-}
-
-.banner-wrapper .home-banner-text .light-text{
-    font-weight: 400;
-}
-
-.banner-wrapper .home-banner-text .green-text{
-    font-weight: 400;
-    color: #1C8B5C;
-}
-
-.banner-wrapper .home-banner-img-2{
-    width: 100%;
-    max-width: 289px;
-    height: auto;
-    margin: auto;
-}
-
-
 
 
 /* ============ responsive ============ */

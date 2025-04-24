@@ -749,7 +749,7 @@
     min-width: 35px;
     height: 35px;
     border-radius: 50%;
-} 
+}
 
 #event-slider-rsvp-modal .modal-body .pending-rsvp-slider-main-section{
     border: 1px solid var(--border);
@@ -784,7 +784,7 @@
     margin-right: 10px;
 }
 
-.hosted-by-template-slider .swiper-button-next, 
+.hosted-by-template-slider .swiper-button-next,
 .hosted-by-template-slider .swiper-button-prev{
     width: 100%;
     max-width: 45px;
@@ -795,11 +795,45 @@
     display: none !important;
 }
 
-.hosted-by-template-slider .swiper-button-next:after, 
+.hosted-by-template-slider .swiper-button-next:after,
 .hosted-by-template-slider .swiper-button-prev:after{
     font-size: 20px;
     color: #000;
 }
+
+
+
+/* ============= Home Banner CSS Start ============= */
+.banner-wrapper .home-banner-img-1 {
+    align-items: self-end;
+    height: 100%;
+}
+
+.banner-wrapper .home-banner-text{
+    font-size: 55px !important;
+    font-weight: 700 !important;
+    text-align: center;
+    line-height: 76px !important;
+    margin-bottom: 0px !important;
+}
+
+.banner-wrapper .home-banner-text .light-text{
+    font-weight: 400;
+}
+
+.banner-wrapper .home-banner-text .green-text{
+    font-weight: 400;
+    color: #1C8B5C;
+}
+
+.banner-wrapper .home-banner-img-2{
+    width: 100%;
+    max-width: 289px;
+    height: auto;
+    margin: auto;
+}
+
+
 
 
 /* For mobile responsiveness, adjust button position */
