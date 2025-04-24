@@ -804,9 +804,16 @@
 
 
 /* ============= Home Banner CSS Start ============= */
+
+.home-banner-img-1-main{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
 .banner-wrapper .home-banner-img-1 {
-    align-items: self-end;
-    height: 100%;
+    width: 100%;
+    height: auto;
 }
 
 .banner-wrapper .home-banner-title {
