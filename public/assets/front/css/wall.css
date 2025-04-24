@@ -805,10 +805,11 @@
 
 /* ============= Home Banner CSS Start ============= */
 
-.home-banner-img-1-main{
+.home-banner-img--main{
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    height: 100%;
 }
 
 .banner-wrapper .home-banner-img-1 {

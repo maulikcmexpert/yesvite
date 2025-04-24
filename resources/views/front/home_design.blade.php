@@ -55,7 +55,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3">
-                <div class="home-banner-img-1-main">
+                <div class="home-banner-img--main">
                     <div class="home-banner-img-1">
                         <img src="{{ asset('assets/front/image/home-banner-img-1.png') }}" alt="">
                     </div>
@@ -81,8 +81,10 @@
                             alt="mobile-app">
                     </a>
                 </div>
-                <div class="home-banner-img-2">
-                    <img src="{{ asset('assets/front/image/home-banner-img-2.png') }}" alt="">
+                <div class="home-banner-img--main">
+                    <div class="home-banner-img-2">
+                        <img src="{{ asset('assets/front/image/home-banner-img-2.png') }}" alt="">
+                    </div>
                 </div>
             </div>
         </div>
