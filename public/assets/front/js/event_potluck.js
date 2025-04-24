@@ -161,7 +161,7 @@ $(document).ready(function () {
                 $(".error_message_quantity").text("Enter a number greater than 0.");
                 isValid = false;
             }
-            if(categoryQuantity >= 0){
+            if(categoryQuantity > 0){
                 $(".error_message_quantity").text('');
             }
 
