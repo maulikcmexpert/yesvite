@@ -876,7 +876,17 @@
 }
 
 @media screen and (min-width:1025px) and (max-width:1199px) {
+    .banner-wrapper .home-banner-title{
+        font-size: 50px;
+        line-height: 65px;
+    }
+}
 
+@media screen and (min-width:1025px) and (max-width:1199px) {
+    .banner-wrapper .home-banner-title{
+        font-size: 50px;
+        line-height: 65px;
+    }
 }
 
 
@@ -889,6 +899,16 @@
     #directionmap {
         height: 300px !important;
     }
+
+    .banner-wrapper .home-banner-title{
+        font-size: 38px;
+        line-height: 55px;
+    }
+    .banner-wrapper .home-banner-textOne,
+    .banner-wrapper .home-banner-textTwo{
+        font-size: 18px;
+    }
+
 }
 
 
@@ -930,12 +950,29 @@
     #directionmap {
         height: 250px !important;
     }
+
+    .banner-wrapper .home-banner-title{
+        font-size: 32px;
+        line-height: 48px;
+    }
+
 }
 
 @media only screen and (max-width: 424px) {
     .story-content {
         width: 100%;
         height: calc(100% - 10%);
+    }
+    .banner-wrapper .home-banner-textOne,
+    .banner-wrapper .home-banner-textTwo{
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width:375px) {
+    .banner-wrapper .home-banner-title{
+        font-size: 24px;
+        line-height: 38px;
     }
 }
 

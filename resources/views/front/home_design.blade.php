@@ -53,7 +53,7 @@
 
 <section class="banner-wrapper">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row gy-4">
             <div class="col-xl-3 d-none d-xl-block">
                 <div class="home-banner-img-main">
                     <div class="home-banner-img-1">
