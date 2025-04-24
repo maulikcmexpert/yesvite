@@ -118,16 +118,16 @@ $(document).ready(function () {
     }
     $("#categoryForms").validate({
         rules: {
-            category_name: "required",
-            category_quantity: {
+            category: "required",
+            quantity: {
                 required: true,
                 number: true,
                 min: 0
             }
         },
         messages: {
-            category_name: "Please enter a category name",
-            category_quantity: {
+            category: "Please enter a category name",
+            quantity: {
                 required: "Please enter a quantity",
                 number: "Enter a valid number",
                 min: "Quantity cannot be negative"
