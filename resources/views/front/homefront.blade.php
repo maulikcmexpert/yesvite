@@ -67,7 +67,7 @@
    <!-- ============  category-feature-lists ============ -->
 
         <!-- ============ category-wrapper ============ -->
-    <section class="category-wrappper">
+    {{-- <section class="category-wrappper">
         <div class="container">
             <div class="category-content">
                 <h6>A card for every <br /> occasion!</h6>
@@ -80,7 +80,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section class="features-wrapper">
         <div class="container">
