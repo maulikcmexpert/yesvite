@@ -77,7 +77,7 @@ $(document).ready(function () {
         }
     );
 
-    $("#categoryForms").on("submit", function (e) {
+    $("#categoryForms_submit").on("click", function (e) {
         if (!$(this).valid()) {
             e.preventDefault();
             return;
