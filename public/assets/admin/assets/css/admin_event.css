@@ -379,6 +379,7 @@
 }
 #templateEditForm .bootstrap-tagsinput input{
     width:100% !important;
+    min-width: max-content;
     text-align: left;
 }
 #templateEditForm .bootstrap-tagsinput .label-info {
