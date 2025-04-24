@@ -76,41 +76,6 @@ $(document).ready(function () {
             $("#categoryForms").attr("action", formAction);
         }
     );
-
-    $("#categoryForms_submit").on("click", function () {
-        if ($("#categoryForms").valid()) {
-            $("#categoryForms").submit();
-        }
-    });
-
-
-    // Optional: clear error when input is being changed
-    function clearError(el) {
-        const id = $(el).attr("id");
-        if (id === "categorys") {
-            $(".error_message_category").text("");
-        } else if (id === "quantitys") {
-            $(".error_message_quantity").text("");
-        }
-    }
-    $("#categoryForms").validate({
-        rules: {
-            category: "required",
-            quantity: {
-                required: true,
-                number: true,
-                min: 0
-            }
-        },
-        messages: {
-            category: "Please enter a category name",
-            quantity: {
-                required: "Please enter a quantity",
-                number: "Enter a valid number",
-                min: "Quantity cannot be negative"
-            }
-        }
-    });
     // Debugging to check if the modal is shown and values are set
     $("#confirmDeleteCategory").on("click", function () {
         var categoryId = $(this).data("category-id");
@@ -149,6 +114,54 @@ $(document).ready(function () {
             errorDiv.innerText = "";
         }
     });
+
+
+    function clearError(el) {
+        const id = $(el).attr("id");
+        if (id === "category") {
+            $(".error_message_category").text("");
+        } else if (id === "quantity") {
+            $(".error_message_quantity").text("");
+        }
+    }
+
+
+        $("#add_categoryForm").on("submit", function (e) {
+            let isValid = true;
+
+            const categoryName = $("#category").val().trim();
+            const categoryQuantity = $("#quantity").val().trim();
+
+            // Clear previous errors
+            $(".error_message_category").text('');
+            $(".error_message_quantity").text('');
+
+            // Category name validation
+            if (categoryName === "") {
+                $(".error_message_category").text("Category name is required.");
+                isValid = false;
+            }
+
+            // Quantity validation
+            if (categoryQuantity === "") {
+                $(".error_message_quantity").text("Quantity is required.");
+                isValid = false;
+            } else if (isNaN(categoryQuantity) || parseInt(categoryQuantity) < 0) {
+                $(".error_message_quantity").text("Enter a valid non-negative number.");
+                isValid = false;
+            }
+
+            if (!isValid) {
+                e.preventDefault(); // Stop submission if invalid
+            }
+        });
+
+        // Optional: live character count
+        $("#category").on("input", function () {
+            $("#charCount").text($(this).val().length);
+        });
+
+
 
     $("#saveCategoryBtn").on("click", function () {
         const categoryId = $("#hiddenCategoryId").val();

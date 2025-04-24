@@ -978,7 +978,7 @@
                     aria-label="Close"></button>
             </div>
             <form action="{{ route('event_potluck.addCategory') }}" method="POST" class="category-form"
-                id="categoryForm">
+                id="add_categoryForm">
                 <div class="modal-body">
 
                     @csrf
@@ -1003,7 +1003,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Apply</button>
+                    <button type="submit" class="btn btn-secondary">Apply</button>
                 </div>
             </form>
         </div>
@@ -1144,7 +1144,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-secondary"  id="categoryForms_submit">Apply</button>
+                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Apply</button>
                 </div>
             </form>
         </div>
