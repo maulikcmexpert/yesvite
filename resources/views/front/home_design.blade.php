@@ -69,7 +69,7 @@
                         Required.</span></p>
             </div>
             <div class="col-lg-3">
-                <div class="app-store d-flex justify-content-center gap-2">
+                <div class="app-store d-flex justify-content-center gap-2 home-banner-app-store">
                     <a href="https://play.google.com/store/apps/details?id=com.yesvite.android" class="google-app">
                         <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/play_store.svg"
                             alt="google-app">

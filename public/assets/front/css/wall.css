@@ -834,6 +834,7 @@
 }
 
 .banner-wrapper .home-banner-textOne {
+    text-align: center;
     font-weight: 400;
     font-size: 20px;
     line-height: 1.5;
@@ -841,6 +842,7 @@
 }
 
 .banner-wrapper .home-banner-textTwo {
+    text-align: center;
     font-weight: 700;
     font-size: 20px;
     line-height: 1.5;
@@ -851,6 +853,9 @@
     font-weight: 400;
 }
 
+.banner-wrapper  .home-banner-app-store{
+    margin-bottom: 47px;
+}
 
 
 /* For mobile responsiveness, adjust button position */
