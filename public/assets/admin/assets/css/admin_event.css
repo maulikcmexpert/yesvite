@@ -379,8 +379,11 @@
 }
 #templateEditForm .bootstrap-tagsinput input {
     width: 100% !important;
+    max-width: 100% !important;
     min-width: 150px;
     text-align: center;
+    padding-left: 50px !important;
+    background-color: red !important;
 
     /* iOS Safari specific tweaks */
     -webkit-appearance: none; /* remove iOS native input styling */
