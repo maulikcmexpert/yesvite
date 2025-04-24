@@ -1086,8 +1086,7 @@
     align-items: self-end;
     height: 100%;
 }
-
-.banner-wrapper .home-banner-text{
+ .home-banner-text{
     font-size: 55px !important;
     font-weight: 700 !important;
     text-align: center;
