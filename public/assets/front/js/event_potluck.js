@@ -46,7 +46,7 @@ $(document).ready(function () {
     });
     $("#addCategoryModal").on("click", function () {
         // $("#categoryForm")[0].reset(); // Reset the form
-        $(".cat_count").val("0");
+        $('#charCount.cat_count').text('0')
         $(".error_message_category").text('');
         $(".error_message_quantity").text('');
            // Set the values in the modal form
@@ -54,9 +54,9 @@ $(document).ready(function () {
            $(".cat_quan").val(0);
 
     });
-    $("#close_item").on("click", function () {
+    $(".close_item").on("click", function () {
         // $("#categoryForm")[0].reset(); // Reset the form
-        $("#charCount").text("0");
+        $('#charCount.cat_count').text('0')
         $("#description-error").val('');
         $("#categoryName").val('');
 
