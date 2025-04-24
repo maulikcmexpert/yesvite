@@ -11,7 +11,7 @@
             data-wow-duration="5s" data-wow-delay="0" data-wow-offset="0">
         <div class="container">
             <div class="banner-content">
-                <h1 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0" data-wow-offset="0">Celebrate Every
+                <h1 class="wow fadeInDown" data-wow-duration="1s" data-wow-delay="0" data-wow-offset="0">Celessssbrate Every
                     Moment with Ease!</h1>
                 <p class="wow fadeInDown" data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0">Stress-free
                     event planning starts here! Our user-friendly app handles everything from invites to
