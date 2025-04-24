@@ -63,6 +63,22 @@ $(document).ready(function () {
 
         $('#sub_quantity').val('1')
     });
+    $(".modal").on("hidden.bs.modal", function () {
+        $('.sub-con').text('0/30')
+        $("#description-error").val('');
+        $("#text1").val('');
+
+        $('#sub_quantity').val('1')
+
+        $(".error_message_category").text('');
+        $(".error_message_quantity").text('');
+           // Set the values in the modal form
+           $(".close_cat").val("");
+           $(".cat_quan").val(0);
+
+
+
+});
     $("#deletemodal").on("show.bs.modal", function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
         var categoryId = button.data("category-id");
