@@ -89,21 +89,19 @@ $(document).ready(function () {
         // Validate category name
         if (categoryName === "") {
             $(".error_message_category").text("Category name is required.");
-            isValid = false;
+
         }
 
         // Validate quantity
         if (categoryQuantity === "") {
             $(".error_message_quantity").text("Quantity is required.");
-            isValid = false;
+
         } else if (isNaN(categoryQuantity) || parseInt(categoryQuantity) < 0) {
             $(".error_message_quantity").text("Enter a valid non-negative number.");
-            isValid = false;
+
         }
 
-        if (!isValid) {
-            e.preventDefault(); // Stop form submission if invalid
-        }
+
     });
 
     // Optional: clear error when input is being changed
