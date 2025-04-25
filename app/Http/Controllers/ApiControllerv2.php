@@ -14738,36 +14738,47 @@ class ApiControllerv2 extends Controller
                 'coins' => 15,
                 'price' => '$12.99',
                 'sub_title' => '$0.87 per credit',
+                'best_deal'=>''
             ],
             [
                 'title' => '30 Credits',
                 'coins' => 30,
                 'price' => '$24.99',
                 'sub_title' => '$0.83 per credit',
+                'best_deal'=>''
+
             ],
             [
                 'title' => '50 Credits',
                 'coins' => 50,
                 'price' => '$34.99',
                 'sub_title' => '$0.70 per credit',
+                'best_deal'=>''
+
             ],
             [
                 'title' => '100 Credits',
                 'coins' => 100,
                 'price' => '$49.99',
                 'sub_title' => '$0.50 per credit',
+                'best_deal'=>''
+
             ],
             [
                 'title' => '250 Credits',
                 'coins' => 250,
                 'price' => '$87.99',
                 'sub_title' => '$0.35 per credit',
+                'best_deal'=>''
+
             ],
             [
                 'title' => '500 Credits',
                 'coins' => 500,
                 'price' => '$125.00',
                 'sub_title' => '$0.25 per credit',
+                'best_deal'=>'80% Saving over the 15 pack'
+
             ],
         ];
 
