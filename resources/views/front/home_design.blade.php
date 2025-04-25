@@ -52,29 +52,39 @@
 </section> --}}
 
 <section class="banner-wrapper">
-    <div class="container-fuild">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="home-banner-img-1">
-                    <img src="{{ asset('assets/front/image/home-banner-img-1.png') }}" alt="">
+    <div class="container-fluid">
+        <div class="row gy-4">
+            <div class="col-xl-3 d-none d-xl-block">
+                <div class="home-banner-img-main">
+                    <div class="home-banner-img-1">
+                        <img src="{{ asset('assets/front/image/home-banner-img-1.png') }}" alt="">
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <h2 class="home-banner-text">
-                    Online Invites Simplified <span class="light-text">Up to 70% cheaper than competitors.</span> <span class="green-text"> All designs and features included. Always.</span>
+            <div class="col-md-7  col-xl-6">
+                <h2 class="home-banner-title">
+                    Online Invites Simplified <span class="light-text">Up to 70% cheaper than competitors.</span> <span
+                        class="green-text"> All designs and features included. Always.</span>
                 </h2>
+                <p class="home-banner-textOne">Simple pricing. All features. No nonsense.</p>
+                <p class="home-banner-textTwo">Start today for free - your first 30 invites on us! <span>No Credit Card
+                        Required.</span></p>
             </div>
-            <div class="col-lg-3">
-                <div class="app-store d-flex justify-content-center gap-2">
+            <div class="col-md-5 col-xl-3">
+                <div class="app-store d-flex justify-content-center gap-2 home-banner-app-store">
                     <a href="https://play.google.com/store/apps/details?id=com.yesvite.android" class="google-app">
-                        <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/play_store.svg" alt="google-app">
+                        <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/play_store.svg"
+                            alt="google-app">
                     </a>
                     <a href="https://apps.apple.com/app/6736650042" class="mobile-app">
-                        <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/app_store.svg" alt="mobile-app">
+                        <img src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/app_store.svg"
+                            alt="mobile-app">
                     </a>
                 </div>
-                <div class="home-banner-img-2">
-                    <img src="{{ asset('assets/front/image/home-banner-img-2.png') }}" alt="">
+                <div class="home-banner-img-main">
+                    <div class="home-banner-img-2">
+                        <img src="{{ asset('assets/front/image/home-banner-img-2.png') }}" alt="">
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,8 +98,8 @@
             <p>Customizable Designs to Reflect Your Unique Event</p>
             <div class="position-relative search-wrapper">
                 <div class="position-relative">
-                    <input type="search" id="search_design_category" placeholder="Search design categories" class=""
-                        autocomplete="off">
+                    <input type="search" id="search_design_category" placeholder="Search design categories"
+                        class="" autocomplete="off">
                     <span class="">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -155,7 +165,7 @@
                                                                     <input
                                                                         class="form-check-input categoryChecked_{{ $category->id }}"
                                                                         name="design_subcategory" type="checkbox"
-                                                                         value="{{ $subcategory->subcategory_name }}"
+                                                                        value="{{ $subcategory->subcategory_name }}"
                                                                         id="subcategory{{ $subcategory->id }}"
                                                                         data-category-id="{{ $category->id }}"
                                                                         data-subcategory-id="{{ $subcategory->id }}">
@@ -188,26 +198,26 @@
 
                 // dd($textdatatss);
                 foreach ($textdatatss as $category) {
-                            $randomIds[] = $category['imageId'];
+                    $randomIds[] = $category['imageId'];
 
                     $allImages->push([
-                                'imageId' => $category['imageId'],
-                                'subcategory_name' =>$category['subcategory_name'],
-                                // 'subcategory_name' =>$subcategory->subcategory_name,
-                                'static_information' => json_encode($category['static_information']),
-                                'shape_image' =>
-                                    $category['shape_image'] != '' ? asset('storage/canvas/' . $category['shape_image']) : '',
-                                'image' => asset('storage/canvas/' . $category['image']),
-                                'tags' => $category['tags'],
-                                'is_visible' => $category['is_visible'],
-                                'category_id' => $category['category_id'],
-                                // 'subcategory_id' => $subcategory->id,
-                                // 'subcategory_id' => $relatedSubcategoryIds,
-                                // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
-                                'subcategory_id' => $category['subcategory_id'], // Get all subcategory IDs from pivot
-                                'category_name' => $category['category_name'],
-                                'image_path' => asset('storage/canvas/' . $category['image_path']),
-                            ]);
+                        'imageId' => $category['imageId'],
+                        'subcategory_name' => $category['subcategory_name'],
+                        // 'subcategory_name' =>$subcategory->subcategory_name,
+                        'static_information' => json_encode($category['static_information']),
+                        'shape_image' =>
+                            $category['shape_image'] != '' ? asset('storage/canvas/' . $category['shape_image']) : '',
+                        'image' => asset('storage/canvas/' . $category['image']),
+                        'tags' => $category['tags'],
+                        'is_visible' => $category['is_visible'],
+                        'category_id' => $category['category_id'],
+                        // 'subcategory_id' => $subcategory->id,
+                        // 'subcategory_id' => $relatedSubcategoryIds,
+                        // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
+                        'subcategory_id' => $category['subcategory_id'], // Get all subcategory IDs from pivot
+                        'category_name' => $category['category_name'],
+                        'image_path' => asset('storage/canvas/' . $category['image_path']),
+                    ]);
                     // foreach ($category->subcategory as $subcategory) {
                     //     foreach ($subcategory->textdatas as $image) {
                     //         if (in_array($image->id, $processedImageIds)) {
@@ -250,24 +260,24 @@
 
 
             @foreach ($allImages as $image)
-            @if($image['is_visible']=='1')
-                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs
+                @if ($image['is_visible'] == '1')
+                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs
                  {{ in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none' }}"
-                    data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-                    data-category-id="{{ $image['category_id'] }}"
-                    data-subcategory-id="{{ $image['subcategory_id'] }}"
+                        data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
+                        data-category-id="{{ $image['category_id'] }}"
+                        data-subcategory-id="{{ $image['subcategory_id'] }}"
+                        data-subcategory_name="{{ $image['subcategory_name'] }}"
+                        data-category_name="{{ $image['category_name'] }}" data-tags="{{ $image['tags'] }}">
 
-                    data-subcategory_name="{{ $image['subcategory_name'] }}"
-                    data-category_name="{{ $image['category_name'] }}" data-tags="{{$image['tags']}}">
+                        <div class="card-img collection-card card-blue edit_design_tem design-card"
+                            data-image="{{ $image['image'] }}" data-shape_image="{{ $image['shape_image'] }}"
+                            data-json="{{ $image['static_information'] }}" data-id="{{ $image['imageId'] }}"
+                            data-subcategory_name="{{ $image['subcategory_name'] }}">
+                            <img src="{{ $image['image_path'] }}" alt="shower-card">
+                        </div>
 
-                    <div class="card-img collection-card card-blue edit_design_tem design-card"
-                    data-image="{{ $image['image'] }}" data-shape_image="{{ $image['shape_image'] }}"
-                    data-json="{{ $image['static_information'] }}" data-id="{{ $image['imageId'] }}"  data-subcategory_name="{{ $image['subcategory_name'] }}">
-                        <img src="{{ $image['image_path'] }}" alt="shower-card">
                     </div>
-
-                </div>
-            @endif
+                @endif
             @endforeach
         </div>
 
@@ -342,7 +352,7 @@
 </section>
 
 @push('scripts')
-{{-- <script>
+    {{-- <script>
 var designData = [];
 var is_random = @php
 echo json_encode($randomIds);
@@ -378,45 +388,45 @@ designData.push(categoryData);
 console.log(designData); // Check output in browser console
 </script> --}}
 
-<script>
-var designData = [];
+    <script>
+        var designData = [];
 
-// Correcting the PHP to JavaScript variable conversion
-var is_random = {!! json_encode($randomIds) !!};
+        // Correcting the PHP to JavaScript variable conversion
+        var is_random = {!! json_encode($randomIds) !!};
 
-@foreach ($categories as $category)
-var categoryData = {
-id: {{ $category->id }},
-name: "{{ $category->category_name }}",
-subcategories: []
-};
+        @foreach ($categories as $category)
+            var categoryData = {
+                id: {{ $category->id }},
+                name: "{{ $category->category_name }}",
+                subcategories: []
+            };
 
-@foreach ($category->subcategory as $subcategory)
-var subcategoryData = {
-id: {{ $subcategory->id }},
-name: "{{ $subcategory->subcategory_name }}",
-images: []
-};
+            @foreach ($category->subcategory as $subcategory)
+                var subcategoryData = {
+                    id: {{ $subcategory->id }},
+                    name: "{{ $subcategory->subcategory_name }}",
+                    images: []
+                };
 
-@foreach ($subcategory->textdatas as $image)
-subcategoryData.images.push({
-id: {{ $image->id }},
-image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
-// tags: "{{ $image->tags ?? '' }}"
+                @foreach ($subcategory->textdatas as $image)
+                    subcategoryData.images.push({
+                        id: {{ $image->id }},
+                        image_path: "{{ asset('storage/canvas/' . $image->filled_image) }}",
+                        // tags: "{{ $image->tags ?? '' }}"
 
-});
-@endforeach
+                    });
+                @endforeach
 
-categoryData.subcategories.push(subcategoryData);
-@endforeach
+                categoryData.subcategories.push(subcategoryData);
+            @endforeach
 
-designData.push(categoryData);
-@endforeach
+            designData.push(categoryData);
+        @endforeach
 
-console.log(designData); // Check output in browser console
-</script>
+        console.log(designData); // Check output in browser console
+    </script>
 
-{{-- <script>
+    {{-- <script>
 var designData = [];
 
 var is_random = {!! json_encode($randomIds) !!};
@@ -470,8 +480,4 @@ designData.push(categoryData);
 console.log(designData); // Check the final structure
 </script>
 --}}
-
 @endpush
-
-
-
