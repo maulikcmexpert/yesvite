@@ -67,8 +67,8 @@
                         class="green-text"> All designs and features included. Always.</span>
                 </h2>
                 <p class="home-banner-textOne">Simple pricing. All features. No nonsense.</p>
-                <p class="home-banner-textTwo">Start today for free - your first 30 invites on us! <span>No Credit Card
-                        Required.</span></p>
+                <p class="home-banner-textTwo">Free to try.  Free to love. 30 invites on us to test the platform. <span>No Card
+                    Needed.</span></p>
             </div>
             <div class="col-md-5 col-xl-3">
                 <div class="app-store d-flex justify-content-center gap-2 home-banner-app-store">
