@@ -838,7 +838,6 @@
     width: 100%;
     max-width: 230px;
     height: auto;
-    margin: auto;
 }
 
 .banner-wrapper .home-banner-textOne {
@@ -869,6 +868,11 @@
 /* For mobile responsiveness, adjust button position */
 
 
+@media screen and (min-width:1440px) {
+    .banner-wrapper .home-banner-img-2{
+        max-width: 300px;
+    }
+}
 
 @media screen and (min-width:1200px) and (max-width:1399px) {
     .banner-wrapper .home-banner-title{
