@@ -14775,7 +14775,7 @@ class ApiControllerv2 extends Controller
             [
                 'title' => '500 Credits',
                 'coins' => 500,
-                'price' => '$125.00',
+                'price' => '$125.99',
                 'sub_title' => '$0.25 per credit',
                 'best_deal'=>'80% Saving over the 15 pack'
 
