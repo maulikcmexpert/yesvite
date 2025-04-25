@@ -14731,7 +14731,7 @@ class ApiControllerv2 extends Controller
         }
     }
 
-    public function pricing_list(){
+    public function pricing_list(Request $request){
         $creditPacks = [
             [
                 'title' => '15 Credits',
