@@ -14730,4 +14730,49 @@ class ApiControllerv2 extends Controller
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
         }
     }
+
+    public function pricing_list(){
+        $creditPacks = [
+            [
+                'title' => '15 Credits',
+                'coins' => 15,
+                'price' => '$12.99',
+                'sub_title' => '$0.87 per credit',
+            ],
+            [
+                'title' => '30 Credits',
+                'coins' => 30,
+                'price' => '$24.99',
+                'sub_title' => '$0.83 per credit',
+            ],
+            [
+                'title' => '50 Credits',
+                'coins' => 50,
+                'price' => '$34.99',
+                'sub_title' => '$0.70 per credit',
+            ],
+            [
+                'title' => '100 Credits',
+                'coins' => 100,
+                'price' => '$49.99',
+                'sub_title' => '$0.50 per credit',
+            ],
+            [
+                'title' => '250 Credits',
+                'coins' => 250,
+                'price' => '$87.99',
+                'sub_title' => '$0.35 per credit',
+            ],
+            [
+                'title' => '500 Credits',
+                'coins' => 500,
+                'price' => '$125.00',
+                'sub_title' => '$0.25 per credit',
+            ],
+        ];
+
+        return response()->json(['status' => 1, 'message' => "Credit Pack List", 'creditPacks' => $creditPacks]);
+
+        
+    }
 }
