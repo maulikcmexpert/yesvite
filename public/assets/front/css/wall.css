@@ -865,6 +865,10 @@
 
 
 @media screen and (min-width:1440px) {
+
+    .banner-wrapper .home-banner-img-1{
+        max-width: 480px;
+    }
     .banner-wrapper .home-banner-img-2{
         max-width: 300px;
     }
