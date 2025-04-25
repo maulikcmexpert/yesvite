@@ -868,6 +868,8 @@
 
 /* For mobile responsiveness, adjust button position */
 
+
+
 @media screen and (min-width:1200px) and (max-width:1399px) {
     .banner-wrapper .home-banner-title{
         font-size: 45px !important;

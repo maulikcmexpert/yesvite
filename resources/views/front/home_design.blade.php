@@ -81,7 +81,7 @@
                             alt="mobile-app">
                     </a>
                 </div>
-                <div class="home-banner-img--main">
+                <div class="home-banner-img-main">
                     <div class="home-banner-img-2">
                         <img src="{{ asset('assets/front/image/home-banner-img-2.png') }}" alt="">
                     </div>
