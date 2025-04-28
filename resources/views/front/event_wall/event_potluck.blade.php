@@ -562,7 +562,7 @@
                                                         </span>
                                                         <p>Nobody has added anything yet</h5>
                                                     </div>
-                                                    {{-- {{ dd($category['items'])}} --}}
+                                                    {{ dd($category['items'])}}
                                                     <div class="list-slide">
                                                         <div class="accordion accordion-flush" id="accordioncatList">
                                                             @foreach ($category['items'] as $indexkey => $item)
