@@ -265,7 +265,7 @@ $(document).ready(function () {
                     $("#maindishes").modal("hide");
 
                     console.log(response.data);
-                    //window.location.href = "";
+                    window.location.href = "";
                     // Append the new accordion item into the correct container
                     const categoryList = $(
                         'div[data-category-id="' + categoryId + '"] .accordion'
