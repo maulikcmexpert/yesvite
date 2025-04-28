@@ -621,10 +621,7 @@ $(document).on("click", ".plus_icon_user", function () {
 });
 
 
-$(document).on("click", ".plus_icon_user", function () {
-    // Get the target accordion item using the data-bs-target attribute
 
-});
 $(document).on("click", ".according_toggel", function () {
     // Get the data attributes of the clicked element
     const categoryId = $(this).data("category-id");
