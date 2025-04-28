@@ -661,7 +661,7 @@
                                                                                     type="button"
                                                                                     {{-- data-bs-toggle="collapse" --}}
                                                                                     data-bs-target="#sprite-collapseOne-{{ $item['id'] }}"
-                                                                                    aria-expanded="false"
+                                                                                    aria-expanded="{{ $item['self_bring_item'] == '1' ? 'true' : 'false' }}"
                                                                                     aria-controls="sprite-collapseOne-{{ $item['id'] }}">
                                                                                     <i
                                                                                         class="fa-solid fa-plus"></i></span>
@@ -687,7 +687,7 @@
                                                                     @foreach ($item['item_carry_users'] as $users)
 
                                                                             <div id="sprite-collapseOne-{{ $item['id'] }}"
-                                                                                class="accordion-collapse collapse {{ $item['self_bring_item'] == '1' ? 'show' : '' }}"
+                                                                                class="accordion-collapse collapse {{ $item['self_bring_item'] == '1' || $item['quantity'] > 0 ? 'show' : '' }}"
                                                                                 aria-labelledby="sprite-{{ $item['id'] }}"
                                                                                 data-bs-parent="#accordionFlushExample">
                                                                                 @if ($login_user_id === $users['user_id'])
