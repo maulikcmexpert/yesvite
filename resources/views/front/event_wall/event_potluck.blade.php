@@ -223,9 +223,9 @@
                                                         fill="#F73C71" />
                                                 </svg>
                                             </button> --}}
-                                            <button type="button" class="add_potluck_cat_btn ms-auto border-0" data-bs-toggle="modal"
-                                                data-bs-target="#editmodal"
-                                            ><i class="fa-solid fa-plus"></i> Category</button>
+                                            <button type="button" class="add_potluck_cat_btn ms-auto border-0"
+                                                data-bs-toggle="modal" data-bs-target="#editmodal"><i
+                                                    class="fa-solid fa-plus"></i> Category</button>
                                         </div>
                                         {{-- {{  dd($potluckDetail['podluck_category_list'])}} --}}
                                         @foreach ($potluckDetail['podluck_category_list_new'] as $key => $category)
@@ -328,7 +328,8 @@
                                                                 <span
                                                                     class="me-1 missing-category-h6-{{ $key }} missing-category-svg-{{ $key }}"
                                                                     style="color: rgb(192, 52, 52);">
-                                                                    <svg width="14" height="14" style="width: 15px;height:15px;"
+                                                                    <svg width="14" height="14"
+                                                                        style="width: 15px;height:15px;"
                                                                         viewBox="0 0 14 14" fill="none"
                                                                         xmlns="http://www.w3.org/2000/svg">
                                                                         <path
@@ -442,9 +443,10 @@
                                                             </button> --}}
 
                                                             <button type="button" class="add_potluck_cat_btn me-3 "
-                                                                data-bs-toggle="modal" data-bs-target="#maindishes"  data-category-id="{{ $category['id'] }}"
-                                                                data-category-name="{{ $category['category'] }}"
-                                                        ><i class="fa-solid fa-plus"></i> Item</button>
+                                                                data-bs-toggle="modal" data-bs-target="#maindishes"
+                                                                data-category-id="{{ $category['id'] }}"
+                                                                data-category-name="{{ $category['category'] }}"><i
+                                                                    class="fa-solid fa-plus"></i> Item</button>
                                                             <div class="dropdown">
                                                                 <a href="#" class="dropdown-toggle"
                                                                     type="button" id="dropdownMenuButton1"
@@ -591,14 +593,16 @@
                                                                                         //     ) >=
                                                                                         // intval($item['quantity'])
 
-                                                                                        intval($item['spoken_quantity']) >= intval($item['quantity'])
+                                                                                        intval(
+                                                                                            $item['spoken_quantity'],
+                                                                                        ) >= intval($item['quantity'])
                                                                                     ) {
                                                                                         $icons = '';
                                                                                         $missing = 'color:green';
                                                                                     }
                                                                                 @endphp
                                                                                 <span
-                                                                                    id ="success_{{ $indexkey }}_{{$key}}"
+                                                                                    id ="success_{{ $indexkey }}_{{ $key }}"
                                                                                     class="me-2 d-flex align-items-center justify-content-center {{ $icons }}">
                                                                                     <svg width="20" height="20"
                                                                                         viewBox="0 0 18 18"
@@ -610,7 +614,8 @@
                                                                                     </svg>
                                                                                 </span>
 
-                                                                                <span id ="danger_{{ $indexkey }}_{{$key}}"
+                                                                                <span
+                                                                                    id ="danger_{{ $indexkey }}_{{ $key }}"
                                                                                     class="me-2 d-flex align-items-center justify-content-center {{ $icons == 'd-none' ? '' : 'd-none' }}">
                                                                                     <svg width="20" height="20"
                                                                                         viewBox="0 0 14 14"
@@ -636,7 +641,8 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="ms-auto d-flex toggle-collapse">
+                                                                            <div
+                                                                                class="ms-auto d-flex toggle-collapse">
                                                                                 <h6 class="devide-count"
                                                                                     id="quantity-display">
                                                                                     {{ $item['spoken_quantity'] }}/{{ $item['quantity'] }}
@@ -663,7 +669,7 @@
                                                                         </button>
                                                                     </h2>
 
-                                                                        @if (empty($item['item_carry_users']))
+                                                                    @if (empty($item['item_carry_users']))
                                                                         {{-- <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
                                                                                 aria-labelledby="lumpia"
@@ -679,255 +685,257 @@
                                                                     @endif
 
                                                                     @foreach ($item['item_carry_users'] as $users)
-                                                                        <div id="sprite-collapseOne-{{ $item['id'] }}"
-                                                                            class="accordion-collapse collapse {{ $item['self_bring_item'] == '1' ? 'show' : 'show' }}"
-                                                                            aria-labelledby="sprite-{{ $item['id'] }}"
-                                                                            data-bs-parent="#accordionFlushExample">
-                                                                            @if ($login_user_id === $users['user_id'])
-                                                                                {{-- <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                        @if ($users['quantity'] >= 1)
+                                                                            <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                                class="accordion-collapse collapse {{ $item['self_bring_item'] == '1' ? 'show' : '' }}"
+                                                                                aria-labelledby="sprite-{{ $item['id'] }}"
+                                                                                data-bs-parent="#accordionFlushExample">
+                                                                                @if ($login_user_id === $users['user_id'])
+                                                                                    {{-- <div id="sprite-collapseOne-{{ $item['id'] }}"
                                                                                 class="accordion-collapse collapse @if (collect($item['item_carry_users'])->contains('user_id', $login_user_id)) show @endif"
                                                                                 aria-labelledby="sprite-{{ $item['id'] }}"
                                                                                 data-bs-parent="#accordionFlushExample"> --}}
-                                                                                <div class="accordion-body">
-                                                                                    {{-- {{ dd($item['item_carry_users'])}} --}}
+                                                                                    <div class="accordion-body">
+                                                                                        {{-- {{ dd($item['item_carry_users'])}} --}}
 
-                                                                                    <div
-                                                                                        class="accordion-body-content limits-count">
-                                                                                        @if ($users['profile'] != '')
-                                                                                            <img src="{{ $users['profile'] }}"
-                                                                                                alt="profile">
-                                                                                        @else
-                                                                                            @php
-                                                                                                $name =
-                                                                                                    $users[
-                                                                                                        'first_name'
-                                                                                                    ];
-                                                                                                // $parts = explode(" ", $name);
-                                                                                                $firstInitial = isset(
-                                                                                                    $users[
-                                                                                                        'first_name'
-                                                                                                    ][0],
-                                                                                                )
-                                                                                                    ? strtoupper(
+                                                                                        <div
+                                                                                            class="accordion-body-content limits-count">
+                                                                                            @if ($users['profile'] != '')
+                                                                                                <img src="{{ $users['profile'] }}"
+                                                                                                    alt="profile">
+                                                                                            @else
+                                                                                                @php
+                                                                                                    $name =
                                                                                                         $users[
                                                                                                             'first_name'
-                                                                                                        ][0][0],
+                                                                                                        ];
+                                                                                                    // $parts = explode(" ", $name);
+                                                                                                    $firstInitial = isset(
+                                                                                                        $users[
+                                                                                                            'first_name'
+                                                                                                        ][0],
                                                                                                     )
-                                                                                                    : '';
-                                                                                                $secondInitial = isset(
-                                                                                                    $users[
-                                                                                                        'last_name'
-                                                                                                    ][0],
-                                                                                                )
-                                                                                                    ? strtoupper(
+                                                                                                        ? strtoupper(
+                                                                                                            $users[
+                                                                                                                'first_name'
+                                                                                                            ][0][0],
+                                                                                                        )
+                                                                                                        : '';
+                                                                                                    $secondInitial = isset(
                                                                                                         $users[
                                                                                                             'last_name'
-                                                                                                        ][0][0],
+                                                                                                        ][0],
                                                                                                     )
-                                                                                                    : '';
-                                                                                                $initials =
-                                                                                                    strtoupper(
-                                                                                                        $firstInitial,
-                                                                                                    ) .
-                                                                                                    strtoupper(
-                                                                                                        $secondInitial,
-                                                                                                    );
-                                                                                                $fontColor =
-                                                                                                    'fontcolor' .
-                                                                                                    strtoupper(
-                                                                                                        $firstInitial,
-                                                                                                    );
-                                                                                            @endphp
-                                                                                            <h5
-                                                                                                class="{{ $fontColor }} slide-user-img">
-                                                                                                {{ $initials }}
-                                                                                            </h5>
-                                                                                        @endif
+                                                                                                        ? strtoupper(
+                                                                                                            $users[
+                                                                                                                'last_name'
+                                                                                                            ][0][0],
+                                                                                                        )
+                                                                                                        : '';
+                                                                                                    $initials =
+                                                                                                        strtoupper(
+                                                                                                            $firstInitial,
+                                                                                                        ) .
+                                                                                                        strtoupper(
+                                                                                                            $secondInitial,
+                                                                                                        );
+                                                                                                    $fontColor =
+                                                                                                        'fontcolor' .
+                                                                                                        strtoupper(
+                                                                                                            $firstInitial,
+                                                                                                        );
+                                                                                                @endphp
+                                                                                                <h5
+                                                                                                    class="{{ $fontColor }} slide-user-img">
+                                                                                                    {{ $initials }}
+                                                                                                </h5>
+                                                                                            @endif
 
-                                                                                        <h4>{{ $users['first_name'] }}
-                                                                                            {{ $users['last_name'] }}
-                                                                                        </h4>
-                                                                                        <div
-                                                                                            class="qty-container qty-custom ms-auto">
-                                                                                            <button
-                                                                                                class="minus m-0"data-category-id="{{ $category['id'] }}"
-                                                                                                data-itemkey="{{ $indexkey }}"
-                                                                                                data-categorykey="{{ $key }}"
-                                                                                                data-item-id="{{ $item['id'] }}"
-                                                                                                type="button"><i
-                                                                                                    class="fa fa-minus "></i></button>
-                                                                                            {{-- <input type="hidden"
+                                                                                            <h4>{{ $users['first_name'] }}
+                                                                                                {{ $users['last_name'] }}
+                                                                                            </h4>
+                                                                                            <div
+                                                                                                class="qty-container qty-custom ms-auto">
+                                                                                                <button
+                                                                                                    class="minus m-0"data-category-id="{{ $category['id'] }}"
+                                                                                                    data-itemkey="{{ $indexkey }}"
+                                                                                                    data-categorykey="{{ $key }}"
+                                                                                                    data-item-id="{{ $item['id'] }}"
+                                                                                                    type="button"><i
+                                                                                                        class="fa fa-minus "></i></button>
+                                                                                                {{-- <input type="hidden"
 
                                                                                                 value="{{ $item['quantity'] }}" /> --}}
-                                                                                            <input type="number"
-                                                                                                id="newQuantity_{{ $item['id'] }}"
-                                                                                                name="qty"
-                                                                                                value="{{ $users['quantity'] }}"
-                                                                                                class="input-qty itemQty"
-                                                                                                data-max="{{ $item['quantity'] }}"
-                                                                                                data-item-id="{{ $item['id'] }}"
-                                                                                                data-spoken-quantity="{{ $item['spoken_quantity'] }}"
-                                                                                                readonly />
-                                                                                            {{-- <button class="qty-btn-plus plus-potluck-item"
+                                                                                                <input type="number"
+                                                                                                    id="newQuantity_{{ $item['id'] }}"
+                                                                                                    name="qty"
+                                                                                                    value="{{ $users['quantity'] }}"
+                                                                                                    class="input-qty itemQty"
+                                                                                                    data-max="{{ $item['quantity'] }}"
+                                                                                                    data-item-id="{{ $item['id'] }}"
+                                                                                                    data-spoken-quantity="{{ $item['spoken_quantity'] }}"
+                                                                                                    readonly />
+                                                                                                {{-- <button class="qty-btn-plus plus-potluck-item"
                                                                                             type="button"><i
                                                                                                 class="fa fa-plus"></i></button> --}}
-                                                                                            <button class="plus"
-                                                                                                data-category-id="{{ $category['id'] }}"
-                                                                                                data-categorykey="{{ $key }}"
-                                                                                                data-itemkey="{{ $indexkey }}"
-                                                                                                data-item-id="{{ $item['id'] }}"
-                                                                                                type="button"><i
-                                                                                                    class="fa fa-plus"></i></button>
+                                                                                                <button class="plus"
+                                                                                                    data-category-id="{{ $category['id'] }}"
+                                                                                                    data-categorykey="{{ $key }}"
+                                                                                                    data-itemkey="{{ $indexkey }}"
+                                                                                                    data-item-id="{{ $item['id'] }}"
+                                                                                                    type="button"><i
+                                                                                                        class="fa fa-plus"></i></button>
+                                                                                            </div>
+                                                                                            <div class="d-flex">
+                                                                                                <button type="button"
+                                                                                                    data-category-id="{{ $category['id'] }}"
+                                                                                                    data-item-id="{{ $item['id'] }}"
+                                                                                                    class="saveItemBtn me-3 d-flex align-items-center justify-content-center edit-modal-btn">
+                                                                                                    <svg width="16"
+                                                                                                        height="16"
+                                                                                                        viewBox="0 0 16 16"
+                                                                                                        fill="none"
+                                                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                                                        <path
+                                                                                                            d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z"
+                                                                                                            stroke="#94A3B8"
+                                                                                                            stroke-width="1.5"
+                                                                                                            stroke-miterlimit="10"
+                                                                                                            stroke-linecap="round"
+                                                                                                            stroke-linejoin="round" />
+                                                                                                        <path
+                                                                                                            d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255"
+                                                                                                            stroke="#94A3B8"
+                                                                                                            stroke-width="1.5"
+                                                                                                            stroke-miterlimit="10"
+                                                                                                            stroke-linecap="round"
+                                                                                                            stroke-linejoin="round" />
+                                                                                                    </svg>
+                                                                                                </button>
+                                                                                                <button type="button"
+                                                                                                    data-category-id="{{ $category['id'] }}"
+                                                                                                    data-item-id="{{ $item['id'] }}"
+                                                                                                    data-event-id="{{ $event }}"
+                                                                                                    class="delete-modal-btn deleteBtn">
+                                                                                                    <svg width="16"
+                                                                                                        height="16"
+                                                                                                        viewBox="0 0 16 16"
+                                                                                                        fill="none"
+                                                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                                                        <path
+                                                                                                            d="M14 3.98763C11.78 3.76763 9.54667 3.6543 7.32 3.6543C6 3.6543 4.68 3.72096 3.36 3.8543L2 3.98763"
+                                                                                                            stroke="#F73C71"
+                                                                                                            stroke-width="1.5"
+                                                                                                            stroke-linecap="round"
+                                                                                                            stroke-linejoin="round" />
+                                                                                                        <path
+                                                                                                            d="M5.66669 3.31398L5.81335 2.44065C5.92002 1.80732 6.00002 1.33398 7.12669 1.33398H8.87335C10 1.33398 10.0867 1.83398 10.1867 2.44732L10.3334 3.31398"
+                                                                                                            stroke="#F73C71"
+                                                                                                            stroke-width="1.5"
+                                                                                                            stroke-linecap="round"
+                                                                                                            stroke-linejoin="round" />
+                                                                                                        <path
+                                                                                                            d="M12.5667 6.09375L12.1334 12.8071C12.06 13.8537 12 14.6671 10.14 14.6671H5.86002C4.00002 14.6671 3.94002 13.8537 3.86668 12.8071L3.43335 6.09375"
+                                                                                                            stroke="#F73C71"
+                                                                                                            stroke-width="1.5"
+                                                                                                            stroke-linecap="round"
+                                                                                                            stroke-linejoin="round" />
+                                                                                                        <path
+                                                                                                            d="M6.88666 11H9.10666"
+                                                                                                            stroke="#F73C71"
+                                                                                                            stroke-width="1.5"
+                                                                                                            stroke-linecap="round"
+                                                                                                            stroke-linejoin="round" />
+                                                                                                        <path
+                                                                                                            d="M6.33331 8.33398H9.66665"
+                                                                                                            stroke="#F73C71"
+                                                                                                            stroke-width="1.5"
+                                                                                                            stroke-linecap="round"
+                                                                                                            stroke-linejoin="round" />
+                                                                                                    </svg>
+                                                                                                </button>
+                                                                                            </div>
                                                                                         </div>
-                                                                                        <div class="d-flex">
-                                                                                            <button type="button"
-                                                                                                data-category-id="{{ $category['id'] }}"
-                                                                                                data-item-id="{{ $item['id'] }}"
-                                                                                                class="saveItemBtn me-3 d-flex align-items-center justify-content-center edit-modal-btn">
-                                                                                                <svg width="16"
-                                                                                                    height="16"
-                                                                                                    viewBox="0 0 16 16"
-                                                                                                    fill="none"
-                                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                                    <path
-                                                                                                        d="M8.84006 3.73283L3.36673 9.52616C3.16006 9.74616 2.96006 10.1795 2.92006 10.4795L2.6734 12.6395C2.58673 13.4195 3.14673 13.9528 3.92006 13.8195L6.06673 13.4528C6.36673 13.3995 6.78673 13.1795 6.9934 12.9528L12.4667 7.15949C13.4134 6.15949 13.8401 5.01949 12.3667 3.62616C10.9001 2.24616 9.78673 2.73283 8.84006 3.73283Z"
-                                                                                                        stroke="#94A3B8"
-                                                                                                        stroke-width="1.5"
-                                                                                                        stroke-miterlimit="10"
-                                                                                                        stroke-linecap="round"
-                                                                                                        stroke-linejoin="round" />
-                                                                                                    <path
-                                                                                                        d="M7.92657 4.69922C8.21324 6.53922 9.70657 7.94588 11.5599 8.13255"
-                                                                                                        stroke="#94A3B8"
-                                                                                                        stroke-width="1.5"
-                                                                                                        stroke-miterlimit="10"
-                                                                                                        stroke-linecap="round"
-                                                                                                        stroke-linejoin="round" />
-                                                                                                </svg>
-                                                                                            </button>
-                                                                                            <button type="button"
-                                                                                                data-category-id="{{ $category['id'] }}"
-                                                                                                data-item-id="{{ $item['id'] }}"
-                                                                                                data-event-id="{{ $event }}"
-                                                                                                class="delete-modal-btn deleteBtn">
-                                                                                                <svg width="16"
-                                                                                                    height="16"
-                                                                                                    viewBox="0 0 16 16"
-                                                                                                    fill="none"
-                                                                                                    xmlns="http://www.w3.org/2000/svg">
-                                                                                                    <path
-                                                                                                        d="M14 3.98763C11.78 3.76763 9.54667 3.6543 7.32 3.6543C6 3.6543 4.68 3.72096 3.36 3.8543L2 3.98763"
-                                                                                                        stroke="#F73C71"
-                                                                                                        stroke-width="1.5"
-                                                                                                        stroke-linecap="round"
-                                                                                                        stroke-linejoin="round" />
-                                                                                                    <path
-                                                                                                        d="M5.66669 3.31398L5.81335 2.44065C5.92002 1.80732 6.00002 1.33398 7.12669 1.33398H8.87335C10 1.33398 10.0867 1.83398 10.1867 2.44732L10.3334 3.31398"
-                                                                                                        stroke="#F73C71"
-                                                                                                        stroke-width="1.5"
-                                                                                                        stroke-linecap="round"
-                                                                                                        stroke-linejoin="round" />
-                                                                                                    <path
-                                                                                                        d="M12.5667 6.09375L12.1334 12.8071C12.06 13.8537 12 14.6671 10.14 14.6671H5.86002C4.00002 14.6671 3.94002 13.8537 3.86668 12.8071L3.43335 6.09375"
-                                                                                                        stroke="#F73C71"
-                                                                                                        stroke-width="1.5"
-                                                                                                        stroke-linecap="round"
-                                                                                                        stroke-linejoin="round" />
-                                                                                                    <path
-                                                                                                        d="M6.88666 11H9.10666"
-                                                                                                        stroke="#F73C71"
-                                                                                                        stroke-width="1.5"
-                                                                                                        stroke-linecap="round"
-                                                                                                        stroke-linejoin="round" />
-                                                                                                    <path
-                                                                                                        d="M6.33331 8.33398H9.66665"
-                                                                                                        stroke="#F73C71"
-                                                                                                        stroke-width="1.5"
-                                                                                                        stroke-linecap="round"
-                                                                                                        stroke-linejoin="round" />
-                                                                                                </svg>
-                                                                                            </button>
-                                                                                        </div>
-                                                                                    </div>
 
-                                                                                </div>
-                                                                                {{-- </div> --}}
-                                                                            @else
-                                                                                {{-- <div id="lumpia-collapseOne"
+                                                                                    </div>
+                                                                                    {{-- </div> --}}
+                                                                                @else
+                                                                                    {{-- <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
                                                                                 aria-labelledby="lumpia"
                                                                                 data-bs-parent="#accordionFlushExample"> --}}
 
-                                                                                {{-- <div id="sprite-collapseOne-{{ $item['id'] }}"
+                                                                                    {{-- <div id="sprite-collapseOne-{{ $item['id'] }}"
                                                                                 class="accordion-collapse collapse "
                                                                                 aria-labelledby="sprite-{{ $item['id'] }}"
                                                                                 data-bs-parent="#accordionFlushExample"> --}}
-                                                                                <div class="accordion-body"
-                                                                                    id="user-container-{{ $item['id'] }}">
-                                                                                    <div
-                                                                                        class="accordion-body-content">
-                                                                                        @if ($users['profile'] != '')
-                                                                                            <img class="slide-user-img"
-                                                                                                src="{{ $users['profile'] }}"
-                                                                                                alt="pofile">
-                                                                                        @else
-                                                                                            @php
-                                                                                                $name =
-                                                                                                    $users[
-                                                                                                        'first_name'
-                                                                                                    ];
-                                                                                                // $parts = explode(" ", $name);
-                                                                                                $firstInitial = isset(
-                                                                                                    $users[
-                                                                                                        'first_name'
-                                                                                                    ][0],
-                                                                                                )
-                                                                                                    ? strtoupper(
+                                                                                    <div class="accordion-body"
+                                                                                        id="user-container-{{ $item['id'] }}">
+                                                                                        <div
+                                                                                            class="accordion-body-content">
+                                                                                            @if ($users['profile'] != '')
+                                                                                                <img class="slide-user-img"
+                                                                                                    src="{{ $users['profile'] }}"
+                                                                                                    alt="pofile">
+                                                                                            @else
+                                                                                                @php
+                                                                                                    $name =
                                                                                                         $users[
                                                                                                             'first_name'
-                                                                                                        ][0][0],
+                                                                                                        ];
+                                                                                                    // $parts = explode(" ", $name);
+                                                                                                    $firstInitial = isset(
+                                                                                                        $users[
+                                                                                                            'first_name'
+                                                                                                        ][0],
                                                                                                     )
-                                                                                                    : '';
-                                                                                                $secondInitial = isset(
-                                                                                                    $users[
-                                                                                                        'last_name'
-                                                                                                    ][0],
-                                                                                                )
-                                                                                                    ? strtoupper(
+                                                                                                        ? strtoupper(
+                                                                                                            $users[
+                                                                                                                'first_name'
+                                                                                                            ][0][0],
+                                                                                                        )
+                                                                                                        : '';
+                                                                                                    $secondInitial = isset(
                                                                                                         $users[
                                                                                                             'last_name'
-                                                                                                        ][0][0],
+                                                                                                        ][0],
                                                                                                     )
-                                                                                                    : '';
-                                                                                                $initials =
-                                                                                                    strtoupper(
-                                                                                                        $firstInitial,
-                                                                                                    ) .
-                                                                                                    strtoupper(
-                                                                                                        $secondInitial,
-                                                                                                    );
-                                                                                                $fontColor =
-                                                                                                    'fontcolor' .
-                                                                                                    strtoupper(
-                                                                                                        $firstInitial,
-                                                                                                    );
-                                                                                            @endphp
-                                                                                            <h5
-                                                                                                class="fontColor {{ $fontColor }}">
-                                                                                                {{ $initials }}
+                                                                                                        ? strtoupper(
+                                                                                                            $users[
+                                                                                                                'last_name'
+                                                                                                            ][0][0],
+                                                                                                        )
+                                                                                                        : '';
+                                                                                                    $initials =
+                                                                                                        strtoupper(
+                                                                                                            $firstInitial,
+                                                                                                        ) .
+                                                                                                        strtoupper(
+                                                                                                            $secondInitial,
+                                                                                                        );
+                                                                                                    $fontColor =
+                                                                                                        'fontcolor' .
+                                                                                                        strtoupper(
+                                                                                                            $firstInitial,
+                                                                                                        );
+                                                                                                @endphp
+                                                                                                <h5
+                                                                                                    class="fontColor {{ $fontColor }}">
+                                                                                                    {{ $initials }}
+                                                                                                </h5>
+                                                                                            @endif
+                                                                                            <h5 class="slide-sub">
+                                                                                                {{ $users['first_name'] }}
+                                                                                                {{ $users['last_name'] }}
                                                                                             </h5>
-                                                                                        @endif
-                                                                                        <h5 class="slide-sub">
-                                                                                            {{ $users['first_name'] }}
-                                                                                            {{ $users['last_name'] }}
-                                                                                        </h5>
-                                                                                        <span
-                                                                                            class="ms-auto slide-round">{{ $users['quantity'] }}</span>
+                                                                                            <span
+                                                                                                class="ms-auto slide-round">{{ $users['quantity'] }}</span>
+                                                                                        </div>
                                                                                     </div>
-                                                                                </div>
-                                                                                {{-- </div> --}}
-                                                                            @endif
-                                                                        </div>
+                                                                                    {{-- </div> --}}
+                                                                                @endif
+                                                                            </div>
+                                                                        @endif
                                                                     @endforeach
 
                                                                 </div>
@@ -952,7 +960,8 @@
                 </div>
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-0 event-info-right">
-                <x-event_wall.wall_right_menu :eventInfo="$eventInfo" :event="$event" :login_user_id="$login_user_id" :rsvpSent="$rsvpSent" />
+                <x-event_wall.wall_right_menu :eventInfo="$eventInfo" :event="$event" :login_user_id="$login_user_id"
+                    :rsvpSent="$rsvpSent" />
             </div>
         </div>
     </div>
@@ -987,7 +996,8 @@
                         <input class="form-control close_cat" oninput="clearError(this)" maxlength="30"
                             type="text"id="category" name="category"
                             placeholder="ie, Appetizers, Salads, Main Dishes">
-                        <span id="category-sub-con" class="sub-con"><span id="charCount" class="cat_count">0</span>/30</span>
+                        <span id="category-sub-con" class="sub-con"><span id="charCount"
+                                class="cat_count">0</span>/30</span>
                         <span class="error_message_category" style="color: red; font-size: 12px;"></span>
                     </div>
                     <input type="hidden" id="event_id" name="event_id" value="{{ $event }}">
@@ -995,7 +1005,7 @@
                         <h6>Total Quantity Desired </h6>
                         <div class="qty-container ms-auto">
                             <button class="qty-btn-minus" type="button"><i class="fa fa-minus"></i></button>
-                            <input type="number" id="quantity"  name="category_quantity" value="0"
+                            <input type="number" id="quantity" name="category_quantity" value="0"
                                 class="input-qty cat_quan" />
                             <button class="qty-btn-plus" type="button"><i class="fa fa-plus"></i></button>
                         </div>
@@ -1017,7 +1027,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="maindishesLabel">Main Dishes</h4>
-                <button type="button" class="btn-close close_item" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close close_item" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
             <form class="category-form" id="categoryItemForm">
                 <div class="modal-body">
@@ -1027,7 +1038,8 @@
                     <input type="hidden" id="hiddenCategoryId" name="event_potluck_category_id" value="">
                     <div class="input-form">
                         <input class="form-control" oninput="clearError(this)" maxlength="30" type="text"
-                            id="text1" name="description" placeholder="ie, brand or name of item under this category…">
+                            id="text1" name="description"
+                            placeholder="ie, brand or name of item under this category…">
                         <span id="text-sub-con" class="sub-con">0/30</span>
                         <div id="description-error" class="text-danger mt-1" style="font-size: 14px;"></div>
                     </div>
@@ -1095,14 +1107,14 @@
 
                     <button class="qty-btn-min itemTotalQnts" type="button"><i class="fa fa-minus"></i></button>
 
-                    <input type="number" id="sub_quantity" name="sub_quantity" value="1" class="input-qty" readonly />
+                    <input type="number" id="sub_quantity" name="sub_quantity" value="1" class="input-qty"
+                        readonly />
                     <button class="qty-btn-plu itemTotalQnts" type="button"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="submit" class="btn btn-secondary"
-                id="saveCategoryBtn">Save</button>
+            <button type="submit" class="btn btn-secondary" id="saveCategoryBtn">Save</button>
         </div>
         </form>
     </div>
@@ -1128,7 +1140,8 @@
                         <input class="form-control" type="text" oninput="clearError(this)" maxlength="30"
                             id="categorys" name="category" placeholder="ie, Appetizers, Salads, Main Dishes"
                             val="">
-                        <span id="categorys-sub-con" class="sub-con"><span class="char_count_{{$event}}" id="charCount">0</span>/30</span>
+                        <span id="categorys-sub-con" class="sub-con"><span class="char_count_{{ $event }}"
+                                id="charCount">0</span>/30</span>
                         <span class="error_message_category" style="color: red; font-size: 12px;"></span>
                     </div>
                     <input type="hidden" id="event_id" name="event_id" value="{{ $event }}">
