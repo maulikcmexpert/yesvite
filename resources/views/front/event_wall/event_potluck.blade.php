@@ -661,7 +661,7 @@
                                                                                     type="button"
                                                                                     {{-- data-bs-toggle="collapse" --}}
                                                                                     data-bs-target="#sprite-collapseOne-{{ $item['id'] }}"
-                                                                                    aria-expanded="false"
+                                                                                   aria-expanded="{{ $item['self_bring_item'] == '1' ? 'true' : 'false' }}"
                                                                                     aria-controls="sprite-collapseOne-{{ $item['id'] }}">
                                                                                     <i
                                                                                         class="fa-solid fa-plus"></i></span>
