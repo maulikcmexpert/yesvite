@@ -677,7 +677,7 @@
                                                                             </div>
                                                                         </div>
                                                                     @endif
-{{-- {{dd($item['item_carry_users'])}} --}}
+
                                                                     @foreach ($item['item_carry_users'] as $users)
                                                                         <div id="sprite-collapseOne-{{ $item['id'] }}"
                                                                             class="accordion-collapse collapse show"
