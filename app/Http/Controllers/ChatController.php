@@ -6,6 +6,7 @@ use App\Models\contact_sync;
 use App\Models\User;
 use App\Models\UserReportChat;
 use Carbon\Carbon;
+use Hamcrest\Arrays\IsArray;
 use Illuminate\Http\Request;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 // use DB;
@@ -127,8 +128,12 @@ class ChatController extends BaseController
         $updatedMessages = $reference->getValue();
         // dd($messages);
         $messages = [];
-        dd($updatedMessages);
+
         foreach ($updatedMessages as $conversationId => $messageData) {
+            if (!is_array($messageData)) {
+                unset($updatedMessages[$conversationId]);
+                continue;
+            }
             // dd($messageData);
             $contactId = $messageData['contactId'] ?? null;
 
