@@ -573,7 +573,7 @@ $(document).on("click", ".plus_icon_user", function () {
     var expanded = $(target).hasClass('show');
     $(this).attr('aria-expanded', expanded);
 
-    $(".accordion-collapse").addClass('show')
+    // $(".accordion-collapse").addClass('show')
     const categoryId = $(this).data("category-id");
     const itemId = $(this).data("item-id");
     const eventId = $(this).data("event-id");
