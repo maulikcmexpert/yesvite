@@ -685,7 +685,7 @@
                                                                     @endif
 
                                                                     @foreach ($item['item_carry_users'] as $users)
-                                                                        @if ($users['quantity'] >= 1)
+
                                                                             <div id="sprite-collapseOne-{{ $item['id'] }}"
                                                                                 class="accordion-collapse collapse {{ $item['self_bring_item'] == '1' ? 'show' : '' }}"
                                                                                 aria-labelledby="sprite-{{ $item['id'] }}"
@@ -935,7 +935,7 @@
                                                                                     {{-- </div> --}}
                                                                                 @endif
                                                                             </div>
-                                                                        @endif
+
                                                                     @endforeach
 
                                                                 </div>
