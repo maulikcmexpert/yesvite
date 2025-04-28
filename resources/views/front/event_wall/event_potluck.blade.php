@@ -677,7 +677,7 @@
                                                                             </div>
                                                                         </div>
                                                                     @endif
-
+                                                                    @if($item['self_bring_item'] == "1")
                                                                     @foreach ($item['item_carry_users'] as $users)
                                                                         <div id="sprite-collapseOne-{{ $item['id'] }}"
                                                                             class="accordion-collapse collapse show"
@@ -929,6 +929,7 @@
                                                                             @endif
                                                                         </div>
                                                                     @endforeach
+                                                                    @endif
                                                                 </div>
                                                             @endforeach
                                                         </div>
