@@ -621,6 +621,12 @@ $(document).on("click", ".plus_icon_user", function () {
     // Toggle the aria-expanded attribute to reflect the state
     var expanded = $(target).hasClass('show');
     $(this).attr('aria-expanded', expanded);
+
+    if (expanded) {
+        $(this).addClass('green');  // Add 'green' class to change the color to green when expanded
+    } else {
+        $(this).removeClass('green');  // Remove 'green' class when collapsed
+    }
 });
 $(document).on("click", ".according_toggel", function () {
     // Get the data attributes of the clicked element
