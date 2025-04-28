@@ -614,7 +614,6 @@ $(document).on("click", ".according_toggel", function () {
     const categoryId = $(this).data("category-id");
     const itemId = $(this).data("item-id");
 
-    // Find the target accordion panel using the data attributes
     const targetPanel = $(
         `.accordion-collapse[data-category-id="${categoryId}"][data-item-id="${itemId}"]`
     );
@@ -630,7 +629,12 @@ $(document).on("click", ".according_toggel", function () {
         console.error("Subcategory panel not found for the selected item.");
     }
 });
+$('.toggle-collapse').on('click', function(){
+    var target = $(this).data('target');
+    var $collapseDiv = $(target);
 
+    $collapseDiv.toggleClass('show');
+});
 // $(document).on('click', '.deleteBtn', function () {
 
 //     var categoryId = $(this).data('category-id');

@@ -26,7 +26,7 @@
                     <span class="host">Host</span>
                 </div>
             </div>
-            <div class="ms-auto d-flex">
+            <div class="ms-auto d-flex  toggle-collapse">
                 <h6 class="devide-count itemQty" id="quantity-display">0/{{ $quantity }}</h6>
                 <span class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#root-collapseTwo" aria-expanded="false" aria-controls="root-collapseTwo"><i
