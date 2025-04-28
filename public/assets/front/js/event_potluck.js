@@ -568,7 +568,7 @@ $(document).on("click", ".plus_icon_user", function () {
         var expanded = $(target).hasClass('show');
 
         // Toggle collapse and show class
-        $(target).toggleClass('show', !expanded);
+        $(target).addClass('show', !expanded);
 
         // Update aria-expanded attribute based on state
         $(this).attr('aria-expanded', !expanded);
