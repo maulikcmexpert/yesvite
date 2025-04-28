@@ -677,10 +677,10 @@
                                                                             </div>
                                                                         </div>
                                                                     @endif
-                                                                    @if($item['self_bring_item'] == "1")
+
                                                                     @foreach ($item['item_carry_users'] as $users)
                                                                         <div id="sprite-collapseOne-{{ $item['id'] }}"
-                                                                            class="accordion-collapse collapse show"
+                                                                            class="accordion-collapse collapse {{ $item['self_bring_item'] == '1' ? 'show' : '' }}"
                                                                             aria-labelledby="sprite-{{ $item['id'] }}"
                                                                             data-bs-parent="#accordionFlushExample">
                                                                             @if ($login_user_id === $users['user_id'])
@@ -929,7 +929,7 @@
                                                                             @endif
                                                                         </div>
                                                                     @endforeach
-                                                                    @endif
+
                                                                 </div>
                                                             @endforeach
                                                         </div>
