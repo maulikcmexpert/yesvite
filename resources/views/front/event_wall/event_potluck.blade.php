@@ -636,7 +636,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="ms-auto d-flex">
+                                                                            <div class="ms-auto d-flex toggle-collapse">
                                                                                 <h6 class="devide-count"
                                                                                     id="quantity-display">
                                                                                     {{ $item['spoken_quantity'] }}/{{ $item['quantity'] }}
@@ -663,7 +663,7 @@
                                                                         </button>
                                                                     </h2>
 
-                                                                    @if (empty($item['item_carry_users']))
+                                                                        @if (empty($item['item_carry_users']))
                                                                         {{-- <div id="lumpia-collapseOne"
                                                                                 class="accordion-collapse collapse show"
                                                                                 aria-labelledby="lumpia"

@@ -34,7 +34,7 @@
             </div>
         </button>
     </h2>
-    <div id="root-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="root"
+    <div id="root-collapseTwo" class="accordion-collapse collapse " aria-labelledby="root"
         data-bs-parent="#accordioncatList">
         <div class="accordion-body">
             @if ($login_user_id === $user['user_id'])
