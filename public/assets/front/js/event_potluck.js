@@ -565,13 +565,13 @@ $(document).on("change", ".itemQty", function () {
 $(document).on("click", ".plus_icon_user", function () {
 
     var target = $(this).data('bs-target');
+        var expanded = $(target).hasClass('show');
 
-    // Toggle the collapse class (to show or hide the item)
-    $(target).toggleClass('show');
+        // Toggle collapse and show class
+        $(target).toggleClass('show', !expanded);
 
-    // Toggle the aria-expanded attribute to reflect the state
-    var expanded = $(target).hasClass('show');
-    $(this).attr('aria-expanded', expanded);
+        // Update aria-expanded attribute based on state
+        $(this).attr('aria-expanded', !expanded);
 
     // $(".accordion-collapse").addClass('show')
     const categoryId = $(this).data("category-id");
