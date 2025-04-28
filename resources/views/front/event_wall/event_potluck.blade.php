@@ -679,7 +679,6 @@
                                                                     @endif
 
                                                                     @foreach ($item['item_carry_users'] as $users)
-
                                                                         <div id="sprite-collapseOne-{{ $item['id'] }}"
                                                                             class="accordion-collapse collapse show"
                                                                             aria-labelledby="sprite-{{ $item['id'] }}"
