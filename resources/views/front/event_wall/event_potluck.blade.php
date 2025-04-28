@@ -564,7 +564,7 @@
                                                         </span>
                                                         <p>Nobody has added anything yet</h5>
                                                     </div>
-                                                    {{-- {{ dd($category['items'])}} --}}
+                                                    {{ dd($category['items'])}}
                                                     <div class="list-slide">
                                                         <div class="accordion accordion-flush" id="accordioncatList">
                                                             @foreach ($category['items'] as $indexkey => $item)
@@ -661,7 +661,7 @@
                                                                                     type="button"
                                                                                     {{-- data-bs-toggle="collapse" --}}
                                                                                     data-bs-target="#sprite-collapseOne-{{ $item['id'] }}"
-                                                                                   aria-expanded="{{ $item['self_bring_item'] == '1' ? 'true' : 'false' }}"
+                                                                                    aria-expanded="false"
                                                                                     aria-controls="sprite-collapseOne-{{ $item['id'] }}">
                                                                                     <i
                                                                                         class="fa-solid fa-plus"></i></span>
