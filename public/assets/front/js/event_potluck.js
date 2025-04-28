@@ -562,52 +562,65 @@ $(document).on("change", ".itemQty", function () {
     }
 });
 
+// $(document).on("click", ".plus_icon_user", function () {
+//     $(".accordion-collapse").addClass('show')
+//     const categoryId = $(this).data("category-id");
+//     const itemId = $(this).data("item-id");
+//     const eventId = $(this).data("event-id");
+//     const categorykey = $(this).data("categorykey");
+//     const itemkey = $(this).data("itemkey");
+//     const quantity = $(this).data("max");
+//     const userProfile = $(this).data("user-profile");
+//     const loginUserId = $(this).data("login-user-id");
+
+//     // Perform an AJAX call to fetch user details based on itemId and categoryId
+//     $.ajax({
+//         url: base_url + "event_potluck/fetch-user", // Your endpoint to fetch the user data
+//         type: "POST",
+//         headers: {
+//             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+//         },
+//         data: {
+//             category_id: categoryId,
+//             item_id: itemId,
+//             user_profile: userProfile,
+//             login_user_id: loginUserId,
+//             quantity: quantity,
+//             event_id: eventId,
+//             categorykey:categorykey,
+//             itemkey:itemkey
+//         },
+//         success: function (response) {
+//             // On successful response, append the user data to the container
+//             const userContainer = $("#user-container-" + itemId);
+//             const userName = response.userName; // Assuming the response contains a 'userName'
+//             const maxQuantity = response.maxQuantity; // Assuming the response contains a 'maxQuantity'
+
+//             // const container = $(this).closest('.qty-container');
+//             // const input = container.find('.itemQty');
+//             //             const devideCount = container.closest('.accordion-item').find('#quantity-display');
+//             // devideCount.text(`${response.spoken_for}/${ item_quantity}`);
+//             if (response.status == "success") {
+//                 userContainer.append(response.data);
+//             }
+//         },
+//         error: function (xhr, status, error) {
+//             console.log("Error: " + error);
+//         },
+//     });
+// });
+
+
 $(document).on("click", ".plus_icon_user", function () {
-    $(".accordion-collapse").addClass('show')
-    const categoryId = $(this).data("category-id");
-    const itemId = $(this).data("item-id");
-    const eventId = $(this).data("event-id");
-    const categorykey = $(this).data("categorykey");
-    const itemkey = $(this).data("itemkey");
-    const quantity = $(this).data("max");
-    const userProfile = $(this).data("user-profile");
-    const loginUserId = $(this).data("login-user-id");
+    // Get the target accordion item using the data-bs-target attribute
+    var target = $(this).data('bs-target');
 
-    // Perform an AJAX call to fetch user details based on itemId and categoryId
-    $.ajax({
-        url: base_url + "event_potluck/fetch-user", // Your endpoint to fetch the user data
-        type: "POST",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
-        },
-        data: {
-            category_id: categoryId,
-            item_id: itemId,
-            user_profile: userProfile,
-            login_user_id: loginUserId,
-            quantity: quantity,
-            event_id: eventId,
-            categorykey:categorykey,
-            itemkey:itemkey
-        },
-        success: function (response) {
-            // On successful response, append the user data to the container
-            const userContainer = $("#user-container-" + itemId);
-            const userName = response.userName; // Assuming the response contains a 'userName'
-            const maxQuantity = response.maxQuantity; // Assuming the response contains a 'maxQuantity'
+    // Toggle the collapse class (to show or hide the item)
+    $(target).toggleClass('show');
 
-            // const container = $(this).closest('.qty-container');
-            // const input = container.find('.itemQty');
-            //             const devideCount = container.closest('.accordion-item').find('#quantity-display');
-            // devideCount.text(`${response.spoken_for}/${ item_quantity}`);
-            if (response.status == "success") {
-                userContainer.append(response.data);
-            }
-        },
-        error: function (xhr, status, error) {
-            console.log("Error: " + error);
-        },
-    });
+    // Toggle the aria-expanded attribute to reflect the state
+    var expanded = $(target).hasClass('show');
+    $(this).attr('aria-expanded', expanded);
 });
 $(document).on("click", ".according_toggel", function () {
     // Get the data attributes of the clicked element
@@ -635,6 +648,8 @@ $('.toggle-collapse').on('click', function(){
 
     $collapseDiv.toggleClass('show');
 });
+
+
 // $(document).on('click', '.deleteBtn', function () {
 
 //     var categoryId = $(this).data('category-id');
