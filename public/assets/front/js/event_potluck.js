@@ -564,6 +564,7 @@ $(document).on("change", ".itemQty", function () {
 
 $(document).on("click", ".plus_icon_user", function () {
 
+
     var target = $(this).data('bs-target');
         var expanded = $(target).hasClass('show');
 
