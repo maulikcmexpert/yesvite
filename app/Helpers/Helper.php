@@ -221,7 +221,6 @@ function sendNotification($notificationType, $postData)
                     ->get();
             }
 
-            dd($invitedusers);
             foreach ($invitedusers as $value) {
 
                 // Notification::where(['user_id' => $value->user_id, 'sender_id' => $postData['sender_id'], 'event_id' => $postData['event_id']])->delete();
@@ -323,7 +322,7 @@ function sendNotification($notificationType, $postData)
                             // $event_time = $value->event->rsvp_start_time;
                             // }
                             // dd($checkNotificationSetting);
-                            if ($checkNotificationSetting['invitations']['email'] == '1') {
+                            if (!empty($checkNotificationSetting)&&$checkNotificationSetting['invitations']['email'] == '1') {
                                 $eventData = [
                                     'event_invited_user_id' => (int)$value->id,
                                     'event_id' => (int)$postData['event_id'],
