@@ -563,7 +563,18 @@ $(document).on("change", ".itemQty", function () {
 });
 
 $(document).on("click", ".plus_icon_user", function () {
-    $(".accordion-collapse").addClass('show')
+
+
+    var target = $(this).data('bs-target');
+        var expanded = $(target).hasClass('show');
+
+        // Toggle collapse and show class
+        $(target).addClass('show', !expanded);
+
+        // Update aria-expanded attribute based on state
+        $(this).attr('aria-expanded', !expanded);
+
+    // $(".accordion-collapse").addClass('show')
     const categoryId = $(this).data("category-id");
     const itemId = $(this).data("item-id");
     const eventId = $(this).data("event-id");
@@ -609,12 +620,14 @@ $(document).on("click", ".plus_icon_user", function () {
         },
     });
 });
+
+
+
 $(document).on("click", ".according_toggel", function () {
     // Get the data attributes of the clicked element
     const categoryId = $(this).data("category-id");
     const itemId = $(this).data("item-id");
 
-    // Find the target accordion panel using the data attributes
     const targetPanel = $(
         `.accordion-collapse[data-category-id="${categoryId}"][data-item-id="${itemId}"]`
     );
@@ -630,6 +643,13 @@ $(document).on("click", ".according_toggel", function () {
         console.error("Subcategory panel not found for the selected item.");
     }
 });
+$('.toggle-collapse').on('click', function(){
+    var target = $(this).data('target');
+    var $collapseDiv = $(target);
+
+    $collapseDiv.toggleClass('show');
+});
+
 
 // $(document).on('click', '.deleteBtn', function () {
 

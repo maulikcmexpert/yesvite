@@ -26,7 +26,7 @@
                     <span class="host">Host</span>
                 </div>
             </div>
-            <div class="ms-auto d-flex">
+            <div class="ms-auto d-flex  toggle-collapse">
                 <h6 class="devide-count itemQty" id="quantity-display">0/{{ $quantity }}</h6>
                 <span class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#root-collapseTwo" aria-expanded="false" aria-controls="root-collapseTwo"><i
@@ -34,7 +34,7 @@
             </div>
         </button>
     </h2>
-    <div id="root-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="root"
+    <div id="root-collapseTwo" class="accordion-collapse collapse " aria-labelledby="root"
         data-bs-parent="#accordioncatList">
         <div class="accordion-body">
             @if ($login_user_id === $user['user_id'])
@@ -59,7 +59,7 @@
                     <h5>{{ $user['first_name'] }} {{ $user['last_name'] }}</h5>
                     <div class="qty-container qty-custom ms-auto">
                         <button class="qty-btn-minus minus m-0" type="button"><i class="fa fa-minus"></i></button>
-                        <input type="number" name="qty" value="0" class="input-qty itemQty"
+                        <input type="number" name="qty" value="1" class="input-qty itemQty"
                             data-max="{{ $quantity }}" data-item-id="{{ $item_id }}" />
                         <button class="qty-btn-plus plus" type="button"><i class="fa fa-plus"></i></button>
                     </div>

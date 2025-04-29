@@ -6,6 +6,7 @@ use App\Models\contact_sync;
 use App\Models\User;
 use App\Models\UserReportChat;
 use Carbon\Carbon;
+use Hamcrest\Arrays\IsArray;
 use Illuminate\Http\Request;
 use Kreait\Laravel\Firebase\Facades\Firebase;
 // use DB;
@@ -110,9 +111,9 @@ class ChatController extends BaseController
 
         if ($userSnapshot) {
             // if(isset($userSnapshot['userName'])){
-                if ($userSnapshot['userName'] != $userData->firstname . ' ' . $userData->lastname || $userSnapshot['userProfile'] != url('/public/storage/profile/' . $userData->profile)) {
-                    $updateFirebase = true;
-                }
+            if ($userSnapshot['userName'] != $userData->firstname . ' ' . $userData->lastname || $userSnapshot['userProfile'] != url('/public/storage/profile/' . $userData->profile)) {
+                $updateFirebase = true;
+            }
             // }
             // User exists, update the existing data
             $userRef->update($updateData);
@@ -129,6 +130,10 @@ class ChatController extends BaseController
         $messages = [];
 
         foreach ($updatedMessages as $conversationId => $messageData) {
+            if (!is_array($messageData)) {
+                unset($updatedMessages[$conversationId]);
+                continue;
+            }
             // dd($messageData);
             $contactId = $messageData['contactId'] ?? null;
 
@@ -149,7 +154,7 @@ class ChatController extends BaseController
             'name' => $userName,
             'image' => url('/public/storage/profile/' . $userData->profile)
         ];
-     
+
         // dd($blockByMe);
         if ($updateFirebase == true) {
             if (!empty($messages)) {
@@ -511,7 +516,7 @@ class ChatController extends BaseController
             'report_type' => 'required|string',
             'report_description' => 'nullable|string',
         ]);
-        
+
         try {
             DB::beginTransaction();
 
@@ -547,7 +552,7 @@ class ChatController extends BaseController
             // ✅ Send Email
             Mail::send('emails.reportEmail', ['userdata' => $data], function ($messages) {
                 $messages->to(env('SUPPORT_MAIL'))
-                  ->subject('User has been reported');
+                    ->subject('User has been reported');
             });
 
             // dd(1);
@@ -563,29 +568,29 @@ class ChatController extends BaseController
         }
     }
 
-    public function sendAppLink(Request $request){
+    public function sendAppLink(Request $request)
+    {
         $user_data = Auth::guard('web')->user();
-        $reciever_name=$user_data->firstname.' '.$user_data->lastname;
+        $reciever_name = $user_data->firstname . ' ' . $user_data->lastname;
         $userdata = ['send_by' => $reciever_name];
         // dd($user_data,$request->userId);
         // $email=$request->email;
 
-        $send_by=$request->send_by;
-    
+        $send_by = $request->send_by;
+
 
         $user = User::where('id', $request->userId)->first();
-        $email=$user->email;
+        $email = $user->email;
         if (isset($user->id)) {
             $user_id = $user->id;
 
             try {
                 $checkNotificationSetting = checkNotificationSetting($user_id);
                 if (count($checkNotificationSetting) != 0 && $checkNotificationSetting['private_message']['email'] == '1') {
-                    Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($email,$reciever_name) {
+                    Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($email, $reciever_name) {
                         $message->to($email);
                         // $message->subject('Yesvite Invite');
-                       $message->subject('Yesvite: You have a new message by ' . $reciever_name);
-
+                        $message->subject('Yesvite: You have a new message by ' . $reciever_name);
                     });
                     return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
                 } elseif (count($checkNotificationSetting) == 0) {
@@ -594,11 +599,10 @@ class ChatController extends BaseController
                     add_user_firebase($user_id);    // Add User in Firebase
 
 
-                    Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($email,$reciever_name) {
+                    Mail::send('emails.app_inivite_link', ['userdata' => $userdata], function ($message) use ($email, $reciever_name) {
                         $message->to($email);
                         // $message->subject('Yesvite Invite');
                         $message->subject('Yesvite: You have a new message by ' . $reciever_name);
-
                     });
                     return response()->json(['status' => 1, 'message' => 'Mail sent successfully']);
                 }
