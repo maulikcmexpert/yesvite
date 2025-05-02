@@ -1234,7 +1234,7 @@ $(document).ready(function () {
 //     });
 // }
 
-//only rsvp_date by prakash
+//only rsvp_date by 
 function rsvp_by_date(start_time) {
     var adjustedStartTime = moment(start_time, "MM-DD-YYYY")
         .subtract(1, "days")
@@ -1261,7 +1261,7 @@ function rsvp_by_date(start_time) {
     });
 }
 
-//only rsvp_date by prakash
+//only rsvp_date by 
 $(function () {
     var current_event_date = $("#event-date").val();
 
@@ -1492,7 +1492,7 @@ $(function () {
 // });
 //old data logic
 
-//new date logic prakash
+//new date logic 
 function initializeDatePicker(selector, options, callback) {
     $(selector).daterangepicker(
         {
@@ -1579,7 +1579,7 @@ initializeDatePicker(
     }
 );
 
-//new date logic prakash
+//new date logic 
 $(document).on("change", "#schedule", function () {
     var eventDate = $("#event-date").val();
     var startDate = $("#start-event-date").val();
