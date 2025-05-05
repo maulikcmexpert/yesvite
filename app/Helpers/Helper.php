@@ -321,7 +321,8 @@ function sendNotification($notificationType, $postData)
                             // $event_time = $value->event->event_schedule->first()->start_time;
                             // $event_time = $value->event->rsvp_start_time;
                             // }
-                            if ($checkNotificationSetting['invitations']['email'] == '1') {
+                            // dd($checkNotificationSetting);
+                            if (!empty($checkNotificationSetting)&&$checkNotificationSetting['invitations']['email'] == '1') {
                                 $eventData = [
                                     'event_invited_user_id' => (int)$value->id,
                                     'event_id' => (int)$postData['event_id'],

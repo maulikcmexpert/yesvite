@@ -9571,7 +9571,7 @@ class ApiControllerv2 extends Controller
             DB::commit();
             $message = "Reported to admin for this media";
 
-            $support_email = 'prakash.m.cmexpertise@gmail.com';
+            $support_email = 'notifications@yesvite.com';
 
             $getName = UserReportToPost::with(['users', 'events'])->where('id', $savedReportId)->first();
             $data = [

@@ -297,7 +297,7 @@ $(document).ready(function () {
       
 
 
-//by prakash
+//by 
 document.getElementById("openGoogle").addEventListener("click", function () {
     addToGoogleCalendar();
 });
@@ -500,7 +500,7 @@ function getEventDetails() {
 }
 
 
-//by prakash
+//by 
 
     
     function toggleGuestCount() {

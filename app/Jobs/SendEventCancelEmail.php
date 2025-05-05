@@ -86,7 +86,6 @@ class SendEventCancelEmail implements ShouldQueue
     //                 Mail::to($emails)->send(new CancelEventMail($this->templateData));
     //             }
 
-    //             // Mail::to('prakashmanat24@gmail.com')
     //             // ->bcc($emails) // Send to each batch of 30 via BCC
     //             // ->send(new BulkEmail($this->message));
     //         } catch (\Exception $e) {
