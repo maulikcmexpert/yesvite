@@ -81,6 +81,14 @@ $page != 'front.event_wall.event_guest' && $page != 'front.event_wall.event_phot
           window.addEventListener('load', addSmartBanner);
     </script> --}}
 
+    <ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-5026585488683408"
+     data-ad-slot="9450400407"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
 </body>
 
 </html>
