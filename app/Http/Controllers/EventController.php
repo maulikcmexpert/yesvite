@@ -4091,8 +4091,6 @@ class EventController extends BaseController
         if ($newstart_date !== $oldstart_date || $newend_date !== $oldend_date) {
             $isupdatedate = 1;
         }
-
-
         // $event_creation->user_id = $user_id;
         $event_creation->event_name = (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "";
         $event_creation->template_id = (isset($request->temp_id) && $request->temp_id) ? $request->temp_id : $event_creation->template_id;
