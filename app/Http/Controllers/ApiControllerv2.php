@@ -7179,7 +7179,7 @@ class ApiControllerv2 extends Controller
 
             $getCategory=TextData::where('id',$checkEvent->template_id)->select('event_design_category_id')->first();
 
-            if($getCategory->template_id==0){
+            if($checkEvent->template_id==0){
                 $display_ad=true;
                 return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
             }
