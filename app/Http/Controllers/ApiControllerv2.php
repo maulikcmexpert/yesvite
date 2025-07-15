@@ -3694,7 +3694,6 @@ class ApiControllerv2 extends Controller
         $rawData = $request->getContent();
         $eventData = json_decode($rawData, true);
 
-        dd($eventData);
         if ($eventData == null) {
             return response()->json(['status' => 0, 'message' => "Json invalid"]);
         }
@@ -3811,7 +3810,7 @@ class ApiControllerv2 extends Controller
         $eventCreation =  Event::create([
             'event_type_id' => (!empty($eventData['event_type_id'])) ? (int)$eventData['event_type_id'] : NULL,
             'event_name' => (!empty($eventData['event_name'])) ? $eventData['event_name'] : "",
-            'template_id' => (!empty($eventData['template_id'])||$eventData['template_id']!=null) ? (int)$eventData['template_id'] : 0,
+            // 'template_id' => (!empty($eventData['template_id'])||$eventData['template_id']!=null) ? (int)$eventData['template_id'] : 0,
             'user_id' => $user->id,
             'hosted_by' => (!empty($eventData['hosted_by'])) ? $eventData['hosted_by'] : $user->firstname . ' ' . $user->lastname,
             'latitude' => (!empty($eventData['latitude'])) ? $eventData['latitude'] : "",
@@ -3850,6 +3849,7 @@ class ApiControllerv2 extends Controller
             $eventId = $eventCreation->id;
             $eventCreation->isRsvpEvent = $isRsvpEvent;
             $eventCreation->static_information = $staticInformation;
+            $eventCreation->template_id = (!empty($eventData['template_id'])||$eventData['template_id']!=null) ? (int)$eventData['template_id'] : 0;
             $eventCreation->proplan_variant = (isset($eventData['proplan_variant']) && !empty($eventData['proplan_variant'])) ? (int)$eventData['proplan_variant'] : 0;
             $eventCreation->is_template_image = (isset($eventData['is_template_image']) && !empty($eventData['is_template_image'])) ? (int)$eventData['is_template_image'] : 0;
             if (!empty($eventData['invited_user_id'])) {
@@ -14745,7 +14745,7 @@ class ApiControllerv2 extends Controller
             $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
             if($getCategory){
                 $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
-                $display_ad=($getAd->display_ad==1?true:false);
+                $display_ad=$getAd->display_ad==1?true:false;
                 return response()->json(data: ['status' => 1, 'message' => "Display ad", 'display_ad' => $display_ad]);
             }else{
                 $display_ad=false;
