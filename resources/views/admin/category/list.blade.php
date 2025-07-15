@@ -35,7 +35,7 @@
 
                 <th>Category Name</th>
 
-
+                <th>Display Ad</th>
 
                 <th width="100px">Action</th>
 

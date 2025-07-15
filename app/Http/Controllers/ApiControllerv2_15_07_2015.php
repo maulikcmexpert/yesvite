@@ -443,7 +443,6 @@ class ApiControllerv2 extends Controller
             $paginatedEvents = $allEvents->slice($offset)->take($this->perPage);
             $eventList = [];
 
-            $isAd="";
             if (count($paginatedEvents) != 0) {
 
                 foreach ($paginatedEvents as $value) {
@@ -452,16 +451,8 @@ class ApiControllerv2 extends Controller
 
                     $eventDetail['event_name'] = $value->event_name;
                     $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
-                    $eventDetail['display_ad'] = '0';
 
-                    if($value->template_id!=0){
-                        $getCategory=TextData::where('id',$value->template_id)->select('event_design_category_id')->first();
-                            if($getCategory){
-                                $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
-                                $eventDetail['display_ad'] = $getAd->display_ad;
 
-                            }
-                    }
 
                     $isCoHost =     EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
                     $eventDetail['is_notification_on_off']  = "";
@@ -3817,7 +3808,6 @@ class ApiControllerv2 extends Controller
         $eventCreation =  Event::create([
             'event_type_id' => (!empty($eventData['event_type_id'])) ? (int)$eventData['event_type_id'] : NULL,
             'event_name' => (!empty($eventData['event_name'])) ? $eventData['event_name'] : "",
-            'template_id' => (!empty($eventData['template_id'])||$eventData['template_id']!=null) ? $eventData['template_id'] : 0,
             'user_id' => $user->id,
             'hosted_by' => (!empty($eventData['hosted_by'])) ? $eventData['hosted_by'] : $user->firstname . ' ' . $user->lastname,
             'latitude' => (!empty($eventData['latitude'])) ? $eventData['latitude'] : "",

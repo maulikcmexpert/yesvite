@@ -103,6 +103,7 @@ Route::group(['middleware' => adminAuth::Class], function () {
 
     Route::get('template/view/{id}', [TemplateController::class, 'View_template'])->name('template.view');
     Route::get('show_template', [TemplateController::class, 'show_template'])->name('show_template');
+    Route::get('show_ad', [CategoryController::class, 'showAd'])->name('show_ad');
 
     Route::get('/sendNotification', [sendNotificationController::class, 'index']);
     Route::post('/sendNotification/send', [sendNotificationController::class, 'send'])->name('send.notification');

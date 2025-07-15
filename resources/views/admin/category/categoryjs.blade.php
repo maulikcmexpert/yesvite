@@ -16,6 +16,10 @@
                     name: "category_name"
                 },
                 {
+                    data: "display_ad",
+                    name: "display_ad"
+                },
+                {
                     data: "action",
                     name: "action",
                     orderable: false,
@@ -191,4 +195,28 @@
             }
         });
     })
+
+
+    $(document).on("change", "#adToggle", function() {
+        let isVisible = $(this).is(":checked") ? 1 : 0;
+        let category_id = $(this).attr('data-id');
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+            },
+            type: "GET",
+            url: "{{ route('show_ad') }}",
+            data: {
+                isVisible: isVisible,
+                category_id: category_id
+            },
+            success: function(response) {
+                console.log("Success:", response);
+                toastr.success('Ad display Updated Successfully');
+            },
+            error: function(xhr) {
+                console.error("Error updating visibility:", xhr.responseText);
+            }
+        });
+    });
 </script>

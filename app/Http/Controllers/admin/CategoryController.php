@@ -63,7 +63,25 @@ class CategoryController extends Controller
                     return $count++;
                 })
 
-
+                ->addColumn('display_ad', function ($row) {
+                    $checked = "";
+                    if ($row->display_ad == '1') {
+                        $checked = "checked";
+                    }
+                    $Togglebtn = '
+                    <div class="toggle-button-cover ">
+                                <div class="button-cover">
+                                    <div class="button r" id="button-1">
+                                        <input type="checkbox" name="adToggle
+                                        " value="1" id="adToggle" class="checkbox" data-id="' . $row->id . '" ' . $checked . ' />
+                                        <div class="knobs"></div>
+                                        <div class="layer"></div>
+                                    </div>
+                                </div>
+                            </div>
+                    ';
+                    return $Togglebtn;
+                })
 
                 ->addColumn('action', function ($row) {
 
@@ -75,18 +93,19 @@ class CategoryController extends Controller
 
                     $delete_url = route('category.destroy', $cryptId);
 
+
                     $actionBtn = '<div class="action-icon">
                         <a class="" href="' . $edit_url . '" title="Edit"><i class="fa fa-edit"></i></a>
-                        <form id="delete_category_from'.$category_id.'" action="' . $delete_url . '" method="POST">' .
+                        <form id="delete_category_from' . $category_id . '" action="' . $delete_url . '" method="POST">' .
                         csrf_field() . // Changed from @csrf to csrf_field()
                         method_field("DELETE") . // Changed from @method to method_field()
-                        '<button type="button" data-id="'.$category_id.'" class="btn bg-transparen delete_category"><i class="fas fa-trash"></i></button></form>
+                        '<button type="button" data-id="' . $category_id . '" class="btn bg-transparen delete_category"><i class="fas fa-trash"></i></button></form>
                         </div>';
 
                     return $actionBtn;
                 })
 
-                ->rawColumns(['number', 'action'])
+                ->rawColumns(['number', 'display_ad', 'action'])
 
 
 
@@ -387,5 +406,20 @@ class CategoryController extends Controller
 
             return response()->json(false);
         }
+    }
+
+    public function showAd(Request $request){
+            try {
+                $updateAd= EventDesignCategory::where('id',$request->category_id)->first();
+                if($updateAd){
+                    $updateAd->display_ad=$request->isVisible;
+                    $updateAd->save();
+                    return true;
+                }
+                return false;
+                
+            } catch (\Throwable $th) {
+                
+            }
     }
 }
