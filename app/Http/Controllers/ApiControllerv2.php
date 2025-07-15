@@ -14747,7 +14747,7 @@ class ApiControllerv2 extends Controller
             if($getCategory){
                 $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
                 $display_ad=$getAd->display_ad=="1"?true:false;
-                return response()->json(data: ['status' => 1, 'message' => "Display ad", 'display_ad' => $display_ad]);
+                return response()->json(data: ['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
             }else{
                 $display_ad=false;
 
