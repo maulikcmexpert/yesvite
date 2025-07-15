@@ -4453,7 +4453,7 @@ class ApiControllerv2 extends Controller
             if ($getEventData != null) {
                 $eventDetail['id'] = (!empty($getEventData->id) && $getEventData->id != NULL) ? $getEventData->id : "";
                 $eventDetail['event_type_id'] = (!empty($getEventData->event_type_id) && $getEventData->event_type_id != NULL) ? $getEventData->event_type_id : "";
-                $eventDetail['template_id'] = (!empty($getEventData->template_id) && $getEventData->template_id != NULL) ? $getEventData->template_id : 0;
+                $eventDetail['template_id'] = (!empty($getEventData->template_id) && $getEventData->template_id != NULL) ? (string)$getEventData->template_id : (string)0;
                 $eventDetail['event_name'] = (!empty($getEventData->event_name) && $getEventData->event_name != NULL) ? $getEventData->event_name : "";
                 $eventDetail['hosted_by'] = (!empty($getEventData->hosted_by) && $getEventData->hosted_by != NULL) ? $getEventData->hosted_by : "";
                 $eventDetail['host_id'] = (!empty($getEventData->user_id) && $getEventData->user_id != NULL) ? $getEventData->user_id : "";
