@@ -7179,6 +7179,12 @@ class ApiControllerv2 extends Controller
             $checkEvent = Event::where(['id' => $request->event_id])->first();
 
             $getCategory=TextData::where('id',$checkEvent->template_id)->select('event_design_category_id')->first();
+
+            if($getTemplateId->template_id==0){
+                $display_ad=true;
+                return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
+            }
+            
             if($getCategory){
                 $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
                 $display_ad=$getAd->display_ad=="1"?true:false;
@@ -14753,6 +14759,10 @@ class ApiControllerv2 extends Controller
 
             $getTemplateId=Event::where('id',$request->event_id)->select('template_id')->first();
 
+            if($getTemplateId->template_id==0){
+                $display_ad=true;
+                return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
+            }
             $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
             if($getCategory){
                 $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
@@ -14760,9 +14770,10 @@ class ApiControllerv2 extends Controller
                 return response()->json(data: ['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
             }else{
                 $display_ad=false;
-
                 return response()->json(data: ['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
             }
+
+            
 
         } catch (Exception  $e) {
             return response()->json(['status' => 0, 'message' => 'something went wrong']);
