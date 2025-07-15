@@ -7177,6 +7177,15 @@ class ApiControllerv2 extends Controller
         try {
             $checkEvent = Event::where(['id' => $request->event_id])->first();
 
+            $getCategory=TextData::where('id',$checkEvent->template_id)->select('event_design_category_id')->first();
+            if($getCategory){
+                $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
+                $display_ad=$getAd->display_ad=="1"?true:false;
+            }else{
+                $display_ad=false;
+
+            }
+
             if ($checkEvent->end_date < date('Y-m-d')) {
                 return response()->json(['status' => 0, 'message' => "Event is past , you can't attempt RSVP"]);
             }
@@ -7277,9 +7286,9 @@ class ApiControllerv2 extends Controller
 
                 DB::commit();
 
-                return response()->json(['status' => 1, 'message' => "Rsvp sent Successfully"]);
+                return response()->json(['status' => 1, 'message' => "Rsvp sent Successfully",'show_adv'=>$display_ad]);
             }
-            return response()->json(['status' => 0, 'message' => "Rsvp not sent"]);
+            return response()->json(['status' => 0, 'message' => "Rsvp not sent",'show_adv'=>$display_ad]);
         } catch (QueryException $e) {
 
             DB::rollBack();
