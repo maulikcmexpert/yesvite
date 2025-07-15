@@ -7180,11 +7180,11 @@ class ApiControllerv2 extends Controller
 
             $getCategory=TextData::where('id',$checkEvent->template_id)->select('event_design_category_id')->first();
 
-            if($getTemplateId->template_id==0){
+            if($getCategory->template_id==0){
                 $display_ad=true;
                 return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
             }
-            
+
             if($getCategory){
                 $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
                 $display_ad=$getAd->display_ad=="1"?true:false;
@@ -7293,9 +7293,9 @@ class ApiControllerv2 extends Controller
 
                 DB::commit();
 
-                return response()->json(['status' => 1, 'message' => "Rsvp sent Successfully",'show_adv'=>$display_ad]);
+                return response()->json(['status' => 1, 'message' => "Rsvp sent Successfully","show_adv"=>$display_ad]);
             }
-            return response()->json(['status' => 0, 'message' => "Rsvp not sent",'show_adv'=>$display_ad]);
+            return response()->json(['status' => 0, 'message' => "Rsvp not sent","show_adv"=>$display_ad]);
         } catch (QueryException $e) {
 
             DB::rollBack();
