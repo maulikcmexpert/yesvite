@@ -7146,7 +7146,6 @@ class ApiControllerv2 extends Controller
     }
 
     public function sentRsvp(Request $request)
-
     {
         $user  = Auth::guard('api')->user();
         $input = $request->all();
