@@ -4095,7 +4095,7 @@ class EventController extends BaseController
 
         // $event_creation->user_id = $user_id;
         $event_creation->event_name = (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "";
-        $event_creation->template_id = (isset($request->temp_id) && $request->temp_id) ? $request->temp_id : 0;
+        $event_creation->template_id = (isset($request->temp_id) && $request->temp_id) ? $request->temp_id : $event_creation->template_id;
         $event_creation->hosted_by = (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "";
         $event_creation->start_date = (isset($startDate) && $startDate != "" && $startDateObj != false) ? $startDateFormat : $startDate;
         $event_creation->end_date = (isset($endDate) && $endDate != "" && $endDateObj != false) ? $endDateFormat : $endDate;
