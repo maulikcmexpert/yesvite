@@ -454,14 +454,7 @@ class ApiControllerv2 extends Controller
                     $eventDetail['is_event_owner'] = ($value->user->id == $user->id) ? 1 : 0;
                     $eventDetail['display_ad'] = '0';
 
-                    if($value->template_id!=0){
-                        $getCategory=TextData::where('id',$value->template_id)->select('event_design_category_id')->first();
-                            if($getCategory){
-                                $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
-                                $eventDetail['display_ad'] = $getAd->display_ad;
-
-                            }
-                    }
+              
 
                     $isCoHost =     EventInvitedUser::where(['event_id' => $value->id, 'user_id' => $user->id, 'is_co_host' => '1'])->first();
                     $eventDetail['is_notification_on_off']  = "";
@@ -14741,6 +14734,31 @@ class ApiControllerv2 extends Controller
         }
     }
 
+    public function check_category_adv(Request $request){
+        try {
+          
+            dd($request);
+
+            $getTemplateId=Event::where('id',$request->event_id)->select('template_id')->first();
+
+            $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
+            if($getCategory){
+                $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
+                $templates = [
+                    'display_ad' => $getAd->display_ad
+                ];
+                return response()->json(data: ['status' => 1, 'message' => "Display ad", 'data' => $templates]);
+            }else{
+                $templates = [
+                    'display_ad' => '0'
+                ];
+                return response()->json(data: ['status' => 1, 'message' => "Display ad", 'data' => $templates]);
+            }
+
+        } catch (Exception  $e) {
+            return response()->json(['status' => 0, 'message' => 'something went wrong']);
+        }
+    }
     public function pricing_list(Request $request){
         $creditPacks = [
             [

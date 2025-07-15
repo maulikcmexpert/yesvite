@@ -223,6 +223,7 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::post('coin_graph', [ApiControllerv2::class, 'coin_graph']);
     Route::post('search_tags', [ApiControllerv2::class, 'searchTags']);
     Route::get('pricing_list', [ApiControllerv2::class, 'pricing_list']);
+    Route::get('check_category_adv', [ApiControllerv2::class, 'check_category_adv']);
 });
 
 
