@@ -4838,6 +4838,7 @@ class ApiControllerv2 extends Controller
                     }
                 }
                 $updateEvent->event_type_id = (!empty($eventData['event_type_id'])) ? (int)$eventData['event_type_id'] : NULL;
+                $updateEvent->template_id = (!empty($eventData['template_id'])||$eventData['template_id']!=null) ? (int)$eventData['template_id'] : 0;
                 $updateEvent->event_name = (!empty($eventData['event_name'])) ? $eventData['event_name'] : "";
                 $updateEvent->hosted_by = (!empty($eventData['hosted_by'])) ? $eventData['hosted_by'] : $user->firstname . ' ' . $user->lastname;
                 $updateEvent->start_date = (!empty($eventData['start_date'])) ? $eventData['start_date'] : NULL;
@@ -14750,7 +14751,7 @@ class ApiControllerv2 extends Controller
             }else{
                 $display_ad=false;
 
-                return response()->json(data: ['status' => 1, 'message' => "Display ad", 'display_ad' => $display_ad]);
+                return response()->json(data: ['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
             }
 
         } catch (Exception  $e) {
