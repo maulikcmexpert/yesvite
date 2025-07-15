@@ -14737,7 +14737,7 @@ class ApiControllerv2 extends Controller
     public function check_category_adv(Request $request){
         try {
           
-            dd($request);
+            // dd($request);
 
             $getTemplateId=Event::where('id',$request->event_id)->select('template_id')->first();
 
