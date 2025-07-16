@@ -4842,7 +4842,6 @@ class ApiControllerv2 extends Controller
                 if($eventData['rsvp_by_date_set']=="0" &&(!empty($eventData['start_date']))){
                     $start_date = $eventData['start_date'];
                     $yesterday = date('Y-m-d', strtotime($start_date . ' -1 day'));
-                    dd($start_date,  $yesterday);
                 }
                 $updateEvent->event_type_id = (!empty($eventData['event_type_id'])) ? (int)$eventData['event_type_id'] : NULL;
                 $updateEvent->template_id = (!empty($eventData['template_id'])||$eventData['template_id']!=null) ? (int)$eventData['template_id'] : 0;
@@ -4854,6 +4853,10 @@ class ApiControllerv2 extends Controller
                 $updateEvent->rsvp_by_date = NULL;
                 if (!empty($eventData['rsvp_by_date'])) {
                     $updateEvent->rsvp_by_date = $eventData['rsvp_by_date'];
+                }
+                if ($eventData['rsvp_by_date_set']=="0"&&!empty($eventData['rsvp_by_date'])) {
+                    dd($yesterday);
+                    $updateEvent->rsvp_by_date = $yesterday;
                 }
                 $updateEvent->latitude = (!empty($eventData['latitude'])) ? $eventData['latitude'] : NULL;
                 $updateEvent->longitude = (!empty($eventData['longitude'])) ? $eventData['longitude'] : NULL;
