@@ -13,7 +13,9 @@ use App\Models\{
     PostControl,
     EventImage,
     EventGiftRegistry,
-    EventPostImage
+    EventPostImage,
+    TextData,
+    EventDesignCategory
 };
 
 use Carbon\Carbon;
@@ -54,6 +56,21 @@ class EventAboutController extends BaseController
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event)->first();
 
+
+
+            $getTemplateId=Event::where('id',$eventDetail->id)->select('template_id')->first();
+
+            if($getTemplateId->template_id==0){
+                $display_ad=true;
+            }
+            $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
+            if($getCategory){
+                $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
+                $display_ad=$getAd->display_ad=="1"?true:false;
+            }else{
+                $display_ad=false;
+            }
+    
 
             $eventUserscheck = EventInvitedUser::where('event_id', $event)->pluck('user_id');
 
@@ -392,7 +409,7 @@ class EventAboutController extends BaseController
             // //
             $eventLink = url('/rsvp/' . encrypt("") . '/' . encrypt($event) . '/' . encrypt(1));
             $shortLink = createShortUrl($eventLink);
-            return view('layout', compact('page', 'title', 'shortLink', 'js', 'login_user_id', 'eventInfo', 'event', 'rsvpSent', 'selectedFilters', 'eventDetails', 'current_page', 'eventInfo'));
+            return view('layout', compact('page', 'title','display_ad','shortLink', 'js', 'login_user_id', 'eventInfo', 'event', 'rsvpSent', 'selectedFilters', 'eventDetails', 'current_page', 'eventInfo'));
             // return compact('event','eventDetails') ;// return compact('eventInfo');
             // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
         } catch (QueryException $e) {
@@ -402,7 +419,7 @@ class EventAboutController extends BaseController
             // return response()->json(['status' => 0, 'message' => "db error"]);
         } catch (\Exception $e) {
             // dd($e);
-            return view('layout', compact('page', 'title', 'js', 'login_user_id', 'current_page'));
+            return view('layout', compact('page', 'title', 'js', 'login_user_id', 'current_page','display_ad'));
         }
     }
 

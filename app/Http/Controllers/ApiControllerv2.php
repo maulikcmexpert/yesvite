@@ -4729,6 +4729,7 @@ class ApiControllerv2 extends Controller
 
     public function editEvent(Request $request)
     {
+        dd($request);
         $user  = Auth::guard('api')->user();
 
         $rawData = $request->getContent();
@@ -4837,6 +4838,9 @@ class ApiControllerv2 extends Controller
                     if (!empty($eventData['gift_registry_list']) && is_int($eventData['gift_registry_list'][0])) {
                         $gift_registry_id =  implode(',', $eventData['gift_registry_list']);
                     }
+                }
+                if($eventData['rsvp_end_time_set']=="0" &&(!empty($eventData['start_date']))){
+                    dd(1);
                 }
                 $updateEvent->event_type_id = (!empty($eventData['event_type_id'])) ? (int)$eventData['event_type_id'] : NULL;
                 $updateEvent->template_id = (!empty($eventData['template_id'])||$eventData['template_id']!=null) ? (int)$eventData['template_id'] : 0;

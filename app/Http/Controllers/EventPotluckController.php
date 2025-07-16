@@ -15,7 +15,9 @@ use App\Models\{
     EventPotluckCategory,
     EventPotluckCategoryItem,
     UserPotluckItem,
-    User
+    User,
+    TextData,
+    EventDesignCategory
 };
 
 use Carbon\Carbon;
@@ -250,6 +252,21 @@ class EventPotluckController extends BaseController
 
                     $query->where('is_co_host', '1')->with('user');
                 }])->where('id', $event)->first();
+
+
+            $getTemplateId=Event::where('id',$eventDetail->id)->select('template_id')->first();
+
+            if($getTemplateId->template_id==0){
+                $display_ad=true;
+            }
+            $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
+            if($getCategory){
+                $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
+                $display_ad=$getAd->display_ad=="1"?true:false;
+            }else{
+                $display_ad=false;
+            }
+
                 $guestView = [];
                 $eventDetails['id'] = $eventDetail->id;
                 $eventDetails['event_images'] = [];
@@ -565,7 +582,7 @@ class EventPotluckController extends BaseController
                     $query->where('app_user', '1');
                 })->where(['user_id' => $user->id, 'event_id' => $eventDetail->id])->first();
 
-                return view('layout', compact('page', 'title', 'event', 'js', 'login_user_id', 'eventDetails', 'eventInfo', 'selectedFilters', 'potluckDetail', 'current_page','rsvpSent')); // return compact('eventInfo');
+                return view('layout', compact('page', 'title', 'event', 'js','display_ad','login_user_id', 'eventDetails', 'eventInfo', 'selectedFilters', 'potluckDetail', 'current_page','rsvpSent')); // return compact('eventInfo');
                 // return compact('potluckDetail');
                 // return response()->json(['status' => 1, 'data' => $potluckDetail, 'message' => " Potluck data"]);
             } else {

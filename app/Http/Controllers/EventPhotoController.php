@@ -16,7 +16,9 @@ use App\Models\{
     EventPostPoll,
     UserPotluckItem,
     PostControl,
-    EventPostReaction
+    EventPostReaction,
+    TextData,
+    EventDesignCategory
 };
 
 use Carbon\Carbon;
@@ -163,6 +165,19 @@ class EventPhotoController extends BaseController
             },  'event_invited_user' => function ($query) {
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event)->first();
+
+            $getTemplateId=Event::where('id',$eventDetail->id)->select('template_id')->first();
+
+            if($getTemplateId->template_id==0){
+                $display_ad=true;
+            }
+            $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
+            if($getCategory){
+                $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
+                $display_ad=$getAd->display_ad=="1"?true:false;
+            }else{
+                $display_ad=false;
+            }
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
             $eventDetails['event_images'] = [];
@@ -690,7 +705,7 @@ class EventPhotoController extends BaseController
             })->where(['user_id' => $user->id, 'event_id' => $event])->first();
             $current_page = "photos";
             $login_user_id  = $user->id;
-            return view('layout', compact('page', 'js','rsvpSent', 'postList', 'selectedFilters', 'title', 'event', 'login_user_id', 'photos', 'firstname', 'lastname', 'eventDetails', 'postPhotoList', 'current_page')); // return compact('eventInfo');
+            return view('layout', compact('page', 'js','rsvpSent','display_ad', 'postList', 'selectedFilters', 'title', 'event', 'login_user_id', 'photos', 'firstname', 'lastname', 'eventDetails', 'postPhotoList', 'current_page')); // return compact('eventInfo');
         } catch (QueryException $e) {
             DB::rollBack();
             dd($e);

@@ -27,7 +27,10 @@ use App\Models\{
     contact_sync,
     User,
     UserEventStory,
-    UserEventPollData
+    UserEventPollData,
+    TextData,
+    EventDesignCategory
+
 };
 use Spatie\Image\Image;
 use Carbon\Carbon;
@@ -1151,6 +1154,20 @@ class EventWallController extends BaseController
         }
         $event_comments = EventPostComment::where(['event_id' => $eventDetail->id])->count();
 
+
+        $getTemplateId=Event::where('id',$eventDetail->id)->select('template_id')->first();
+
+        if($getTemplateId->template_id==0){
+            $display_ad=true;
+        }
+        $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
+        if($getCategory){
+            $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
+            $display_ad=$getAd->display_ad=="1"?true:false;
+        }else{
+            $display_ad=false;
+        }
+
         $eventDetails['user_profile'] = empty($eventDetail->user->profile) ? "" : asset('storage/profile/' . $eventDetail->user->profile);
         $eventDetails['event_name'] = $eventDetail->event_name;
         $eventDetails['hosted_by'] = $eventDetail->hosted_by;
@@ -1461,6 +1478,7 @@ class EventWallController extends BaseController
             'users',
             'event',
             'eventInfo',
+            'display_ad',
             'eventDetails',
             'storiesList',
             'wallData',

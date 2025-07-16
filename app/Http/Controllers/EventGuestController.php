@@ -16,7 +16,10 @@ use App\Models\{
     EventPotluckCategoryItem,
     UserPotluckItem,
     PostControl,
-    EventPostReaction
+    EventPostReaction,
+    TextData,
+    EventDesignCategory,
+    EventPostPoll
 };
 
 use App\Models\contact_sync;
@@ -53,6 +56,20 @@ class EventGuestController extends BaseController
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event)->first();
             //   {{  dd($eventDetail);}}
+
+            $getTemplateId=Event::where('id',$eventDetail->id)->select('template_id')->first();
+
+            if($getTemplateId->template_id==0){
+                $display_ad=true;
+            }
+            $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
+            if($getCategory){
+                $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
+                $display_ad=$getAd->display_ad=="1"?true:false;
+            }else{
+                $display_ad=false;
+            }
+
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
             $eventDetails['event_images'] = [];
@@ -739,7 +756,7 @@ class EventGuestController extends BaseController
             $login_user_id  = $user->id;
             $current_page = "guest";
 
-            return view('layout', compact('page', 'title', 'event', 'postList', 'js', 'selectedFilters', 'eventDetails', 'postList','rsvpSent', 'eventInfo', 'current_page', 'login_user_id')); // return compact('eventInfo');
+            return view('layout', compact('page', 'title', 'event','display_ad', 'postList', 'js', 'selectedFilters', 'eventDetails', 'postList','rsvpSent', 'eventInfo', 'current_page', 'login_user_id')); // return compact('eventInfo');
 
         } catch (QueryException $e) {
 
