@@ -4843,7 +4843,7 @@ class ApiControllerv2 extends Controller
                     $start_date = $eventData['start_date'];
                     $yesterday = date('Y-m-d', strtotime($start_date . ' -1 day'));
 
-                    // dd($start_date,$yesterday);
+                    dd($start_date,$yesterday);
                 }
                 $updateEvent->event_type_id = (!empty($eventData['event_type_id'])) ? (int)$eventData['event_type_id'] : NULL;
                 $updateEvent->template_id = (!empty($eventData['template_id'])||$eventData['template_id']!=null) ? (int)$eventData['template_id'] : 0;
