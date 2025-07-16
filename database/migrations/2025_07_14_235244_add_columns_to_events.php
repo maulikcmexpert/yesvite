@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('events', function (Blueprint $table) {
-            $table->unsignedBigInteger('template_id')->default(0);
+            $table->unsignedBigInteger('template_id')->default(null);
             $table->foreign('template_id')->references('id')->on('event_design_categories')->onDelete('cascade');
         });
     }
@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('events', function (Blueprint $table) {
             //
-            $table->unsignedBigInteger('template_id')->default(0);
+            $table->unsignedBigInteger('template_id')->default(null);
             $table->foreign('template_id')->references('id')->on('text_data')->onDelete('cascade');
         });
     }
