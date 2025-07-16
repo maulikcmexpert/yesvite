@@ -89,9 +89,9 @@ $page != 'front.event_wall.event_guest' && $page != 'front.event_wall.event_phot
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 
-{{-- @if((isset($display_ad)&& $display_ad==true) || in_array(request()->segment(1), ['home', 'event_lists', 'messages']))
+@if((isset($display_ad)&& $display_ad==true) || in_array(request()->segment(1), ['home', 'event_lists', 'messages']))
     <img src="{{asset('assets/Your first design - Larg-970x90-px.jpg')}}" />
-@endif --}}
+@endif
 </body>
 
 </html>
