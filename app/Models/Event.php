@@ -74,6 +74,11 @@ class Event extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function template()
+    {
+        return $this->belongsTo(TextData::class);
+    }
+
     public function event_post()
     {
         return $this->hasMany(EventPost::class);
