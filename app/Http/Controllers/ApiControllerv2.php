@@ -3849,7 +3849,7 @@ class ApiControllerv2 extends Controller
             $eventId = $eventCreation->id;
             $eventCreation->isRsvpEvent = $isRsvpEvent;
             $eventCreation->static_information = $staticInformation;
-            $eventCreation->template_id = (!empty($eventData['template_id'])||$eventData['template_id']!=null) ? (int)$eventData['template_id'] : null;
+            $eventCreation->template_id = (isset($eventData['template_id']) &&!empty($eventData['template_id'])||$eventData['template_id']!=null) ? (int)$eventData['template_id'] : null;
             $eventCreation->proplan_variant = (isset($eventData['proplan_variant']) && !empty($eventData['proplan_variant'])) ? (int)$eventData['proplan_variant'] : 0;
             $eventCreation->is_template_image = (isset($eventData['is_template_image']) && !empty($eventData['is_template_image'])) ? (int)$eventData['is_template_image'] : 0;
             if (!empty($eventData['invited_user_id'])) {
@@ -4846,7 +4846,7 @@ class ApiControllerv2 extends Controller
                     // dd($start_date,$yesterday);
                 }
                 $updateEvent->event_type_id = (!empty($eventData['event_type_id'])) ? (int)$eventData['event_type_id'] : NULL;
-                $updateEvent->template_id = (!empty($eventData['template_id'])||$eventData['template_id']!=null) ? (int)$eventData['template_id'] : null;
+                $updateEvent->template_id = (isset($eventData['template_id']) &&!empty($eventData['template_id'])||$eventData['template_id']!=null) ? (int)$eventData['template_id'] : null;
                 $updateEvent->event_name = (!empty($eventData['event_name'])) ? $eventData['event_name'] : "";
                 $updateEvent->hosted_by = (!empty($eventData['hosted_by'])) ? $eventData['hosted_by'] : $user->firstname . ' ' . $user->lastname;
                 $updateEvent->start_date = (!empty($eventData['start_date'])) ? $eventData['start_date'] : NULL;
@@ -7189,7 +7189,7 @@ class ApiControllerv2 extends Controller
 
             $getCategory=TextData::where('id',$checkEvent->template_id)->select('event_design_category_id')->first();
 
-            if($checkEvent->template_id==0){
+            if($checkEvent->template_id==null){
                 $display_ad=true;
                 return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
             }
@@ -14825,7 +14825,7 @@ class ApiControllerv2 extends Controller
 
             $getTemplateId=Event::where('id',$request->event_id)->select('template_id')->first();
 
-            if($getTemplateId->template_id==0){
+            if($getTemplateId->template_id==null){
                 $display_ad=true;
                 return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
             }

@@ -256,7 +256,7 @@ class EventPotluckController extends BaseController
 
             $getTemplateId=Event::where('id',$eventDetail->id)->select('template_id')->first();
 
-            if($getTemplateId->template_id==0){
+            if($getTemplateId->template_id==null){
                 $display_ad=true;
             }
             $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
