@@ -4855,7 +4855,6 @@ class ApiControllerv2 extends Controller
                     $updateEvent->rsvp_by_date = $eventData['rsvp_by_date'];
                 }
                 if ($eventData['rsvp_by_date_set']=="0"&&!empty($eventData['rsvp_by_date'])) {
-                    dd($yesterday);
                     $updateEvent->rsvp_by_date = $yesterday;
                 }
                 $updateEvent->latitude = (!empty($eventData['latitude'])) ? $eventData['latitude'] : NULL;
