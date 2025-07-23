@@ -88,7 +88,7 @@ $page != 'front.event_wall.event_guest' && $page != 'front.event_wall.event_phot
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script> --}}
-<ins class="adsbygoogle"
+{{-- <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-7818976609984635"
      data-ad-slot="7204833835"
@@ -96,7 +96,7 @@ $page != 'front.event_wall.event_guest' && $page != 'front.event_wall.event_phot
      data-full-width-responsive="true"></ins>
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
+</script> --}}
 
 {{-- @if((isset($display_ad)&& $display_ad==true) || in_array(request()->segment(1), ['home', 'event_lists', 'messages']))
     <img src="{{asset('assets/Your first design - Larg-970x90-px.jpg')}}" />
