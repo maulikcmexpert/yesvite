@@ -10,12 +10,13 @@
             </svg>
           </span>
         </div>
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
+        data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
       </form>
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
-      data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+   
       <button class="mobile-search-filter-icon" type="button" data-bs-toggle="modal" data-bs-target="#all-event-filter-modal">
         <svg  viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M22 7H16" stroke="black" stroke-opacity="0.8" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"></path>
