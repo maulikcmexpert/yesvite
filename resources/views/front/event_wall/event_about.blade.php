@@ -62,6 +62,11 @@
                                 <div class="tab-pane fade {{ $about_active }} {{ $about_show }}" id="nav-about"
                                     role="tabpanel" aria-labelledby="nav-about-tab">
                                     <div class="about-main-wrp">
+                                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
+                                        data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                                        <script>
+                                            (adsbygoogle = window.adsbygoogle || []).push({});
+                                        </script>
                                         <div class="about-details cmn-card">
                                             <div class="hosted-by-template-slider about-slider">
                                                 <div class="swiper mySwiper">
