@@ -25,12 +25,7 @@
                 aria-labelledby="explore-designs-tab">
 
                 <!-- ============= contact-details ============ -->
-                {{-- <ins class="adsbygoogle" style="display:block"
-                data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
-                data-ad-format="auto" data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script> --}}
+      
                 <section class="contact-details profile-details supportive-home-wrp">
                     <div class="container">
                         <div class="row">
@@ -71,10 +66,7 @@
                                                     data-ad-client="ca-pub-7818976609984635"
                                                     data-ad-slot="8721273091"></ins>
                                                 </div> --}}
-                                                <script>
-                                                    (adsbygoogle = window.adsbygoogle || []).push({});
-                                                  
-                                                </script>
+                                            
                                                 <x-main_menu.home.event_upcoming :eventList="$eventList" />
                                             </div>
 
