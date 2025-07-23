@@ -50,7 +50,7 @@
                                                 // }
                                                 setTimeout(function () {
 
-                                                    if(adElement.attr('data-ad-status')=="unfilled"){
+                                                    if(adElement.getAttribute('data-ad-status')=="unfilled"){
                                                         document.getElementById('ad-container').style.display = 'none';
 
                                                     }
