@@ -56,10 +56,19 @@
                                     <div class="event-center-wall-main">
                                         <!-- ================story================= -->
                                        @if((isset($display_ad)&& $display_ad==true))
-                                            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
+                                            <ins id="my-ad" class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
                                             data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
                                         <script>
-                                            (adsbygoogle = window.adsbygoogle || []).push({});
+                                                const adElement = document.getElementById('my-ad');
+
+(adsbygoogle = window.adsbygoogle || []).push({});
+setTimeout(function () {
+
+if(adElement.getAttribute('data-ad-status')=="unfilled"){
+document.getElementById('ad-container').style.display = 'none';
+
+}
+}, 2000); 
                                         </script>
                                        @endif
                                         <x-event_wall.wall_story :users="$users" :event="$event" :storiesList="$storiesList"
