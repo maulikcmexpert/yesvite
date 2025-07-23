@@ -3,6 +3,11 @@
 @endphp
 <x-front.advertise />
 <!-- ============= contact-details ============ -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
+data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
 <section class="contact-details profile-details supportive-event-wrp">
     <div class="container mb-5">
         <div class="row">
@@ -72,11 +77,7 @@
                                     </div>
                                 </nav>
 
-                                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
-                                data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
+                           
                                 <!-- ===tab-content-start=== -->
                                 <div class="tab-content" id="nav-tabContent">
                                             @php
