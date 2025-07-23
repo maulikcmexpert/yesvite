@@ -48,12 +48,20 @@
                                                 <script>
                                                     (adsbygoogle = window.adsbygoogle || []).push({});
                                                 </script> --}}
+                                                <div id="ad-container">
                                                 <ins class="adsbygoogle"
                                                     style="display:inline-block;width:690px;height:100px"
                                                     data-ad-client="ca-pub-7818976609984635"
                                                     data-ad-slot="8721273091"></ins>
+                                                </div>
                                                 <script>
                                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                                    setTimeout(function () {
+                                                        const ad = document.querySelector('#ad-container ins');
+                                                        if (ad && ad.innerHTML.trim() === '') {
+                                                        document.getElementById('ad-container').style.display = 'none';
+                                                        }
+                                                    }, 2000);
                                                 </script>
                                                 <x-main_menu.home.event_upcoming :eventList="$eventList" />
                                             </div>
