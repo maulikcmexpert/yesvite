@@ -1116,6 +1116,11 @@
                 {{-- <button type="button" class="btn continue-btn">See Invite</button> --}}
                 <a href="#" id="final_see_invite_btn" class="btn continue-btn">Go to event</a>
             </div>
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
+            data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </div>
 </div>
