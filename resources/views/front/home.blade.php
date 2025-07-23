@@ -25,12 +25,12 @@
                 aria-labelledby="explore-designs-tab">
 
                 <!-- ============= contact-details ============ -->
-                <ins class="adsbygoogle" style="display:block"
+                {{-- <ins class="adsbygoogle" style="display:block"
                 data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
                 data-ad-format="auto" data-full-width-responsive="true"></ins>
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+                </script> --}}
                 <section class="contact-details profile-details supportive-home-wrp">
                     <div class="container">
                         <div class="row">
@@ -48,7 +48,13 @@
                                                 <script>
                                                     (adsbygoogle = window.adsbygoogle || []).push({});
                                                 </script> --}}
-                                                
+                                                <ins class="adsbygoogle"
+                                                    style="display:inline-block;width:690px;height:100px"
+                                                    data-ad-client="ca-pub-7818976609984635"
+                                                    data-ad-slot="8721273091"></ins>
+                                                <script>
+                                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                                </script>
                                                 <x-main_menu.home.event_upcoming :eventList="$eventList" />
                                             </div>
 
