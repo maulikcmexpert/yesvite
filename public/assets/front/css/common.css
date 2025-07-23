@@ -927,6 +927,13 @@ ul.nav-tabs .nav-link:focus {
     min-width: 100% !important;
 }
 
+.adsense-center {
+    text-align: center;
+  }
+  .adsense-center ins.adsbygoogle {
+    margin: 0 auto;
+  }
+
 /* -----otp-varification-wrp--- */
 .otp-varification-wrp input {
     width: 100%;

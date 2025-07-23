@@ -61,7 +61,7 @@
             {{-- <input type="text" value="{{$rsvp_status}}" /> --}}
             <div class="tab-pane fade show active" id="nav-invite" role="tabpanel" aria-labelledby="nav-invite-tab">
                 <section class="rsvp-wrp">
-                    <div class="mx-auto">  
+                    <div class="mx-auto adsense-center" style="text-align: center;">  
                     @if((isset($display_ad)&& $display_ad==true))
                         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
                         data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
