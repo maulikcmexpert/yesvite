@@ -44,21 +44,22 @@
                                                 <x-main_menu.home.profile :profileData="$profileData" :draftEventArray="$draftEventArray" />
                                                 <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
 
-                                                <ins class="adsbygoogle" style="display:block;height:100px"
+                                                <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
                                                     data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
                                                     data-ad-format="auto" data-full-width-responsive="true"></ins>
                                                 <script>
+                                                    // (adsbygoogle = window.adsbygoogle || []).push({});
+                                                    const adElement = document.getElementById('adsbygoogle');
+                                                if (!adElement.classList.contains('adsbygoogle-noablate')) {
                                                     (adsbygoogle = window.adsbygoogle || []).push({});
+                                                }
 
-                                                                                                    setTimeout(function () {
-                                                    var adContainer = document.getElementById('ad-container');
-                                                    var insTag = adContainer.querySelector('ins.adsbygoogle');
-
-                                                    // If the ins tag has zero height, hide the ad container
-                                                    if (insTag && insTag.offsetHeight === 0) {
-                                                        adContainer.style.display = 'none';
+                                                // Hide container if ad is not shown after 2 seconds
+                                                setTimeout(function () {
+                                                    if (adElement.offsetHeight === 0) {
+                                                    document.getElementById('ad-container').style.display = 'none';
                                                     }
-                                                    }, 2000);
+                                                }, 2000);
                                                 </script>
                                                 </div>
                                                 {{-- <div id="ad-container">
