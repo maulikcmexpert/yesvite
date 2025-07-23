@@ -10,11 +10,6 @@ use Carbon\Carbon;
 <input id="host_image" type="hidden" value="{{$hosts_profile}}" />
 <input id="host_name" type="hidden" value="{{$hosts_name}}" />
 <div class="message-area">
-    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
-    data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -1725,7 +1720,11 @@ use Carbon\Carbon;
                 </div>
             </div>
 
-         
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
+            data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
 
         <!-- Message Modal -->
