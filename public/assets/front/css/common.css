@@ -929,9 +929,14 @@ ul.nav-tabs .nav-link:focus {
 
 .adsense-center {
     text-align: center;
+    width: 100% !important;
+    max-width: 800px;
+    padding: 0 12px !important;
+    margin: 0 auto !important;
   }
   .adsense-center ins.adsbygoogle {
     margin: 0 auto;
+    width: 100%;
   }
 
 /* -----otp-varification-wrp--- */
@@ -1090,6 +1095,13 @@ input:-webkit-autofill {
         color: var(--headingColor);
         line-height: 45px !important;
     }
+
+    .adsense-center {
+        text-align: center;
+        width: 100%;
+        max-width: 700;
+        padding: 0 12px !important;
+      }
 }
 
 @media only screen and (max-width: 767px) {
@@ -1112,6 +1124,14 @@ input:-webkit-autofill {
     #myModal .save-btn {
         width: 100%;
     }
+
+
+    .adsense-center {
+        text-align: center;
+        width: 100%;
+        max-width: 575;
+        padding: 0 12px !important;
+      }
 }
 
 @media only screen and (max-width: 575px) {
@@ -1153,6 +1173,14 @@ input:-webkit-autofill {
     select {
         font-size: 16px !important;
     }
+
+    .adsense-center {
+        text-align: center;
+        width: 100%;
+        max-width: 400px;
+        padding: 0 12px !important;
+      }
+
 }
 
 @keyframes rotate360 {

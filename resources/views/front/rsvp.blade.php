@@ -71,7 +71,7 @@
                     @endif
                 </div>
                     <div class="container">
-                        <div class="row">
+                        <div class="row mt-4">
                             <div class="col-lg-5 mb-lg-0 mb-sm-4 mb-md-4 mb-0">
                                 <div class="rsvp-slider owl-carousel owl-theme {{($eventInfo['guest_view']['event_images']!="" && count($eventInfo['guest_view']['event_images']) > 1 )?'slider-count':''}} " >    
                                     @if ($eventInfo['guest_view']['event_images']!="")
