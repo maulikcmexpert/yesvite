@@ -42,12 +42,15 @@
                                         <div class="home-center-main">
                                             <div class="home-center-content">
                                                 <x-main_menu.home.profile :profileData="$profileData" :draftEventArray="$draftEventArray" />
+                                                <div class="mx-auto adsense-center" style="text-align: center;height:auto;min-height:auto;">  
+
                                                 <ins class="adsbygoogle" style="display:block;height:100px"
                                                     data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
                                                     data-ad-format="auto" data-full-width-responsive="true"></ins>
                                                 <script>
                                                     (adsbygoogle = window.adsbygoogle || []).push({});
                                                 </script>
+                                                </div>
                                                 {{-- <div id="ad-container">
                                                 <ins class="adsbygoogle"
                                                     style="display:inline-block;width:690px;height:100px"
