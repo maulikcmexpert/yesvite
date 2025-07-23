@@ -49,7 +49,7 @@
 
   <input type="hidden" id="base_url" value="{{url('/')}}/" />
   {{-- <link rel="stylesheet" href="https://fabricjs.com/css/googlefonts.css"> --}}
-  @if(config('app.url') == 'https://yesvite.cmexpertiseinfotech.in')
+  @if(config('app.url') == 'https://yesvitedev.cmexpertiseinfotech.in')
     <link rel="stylesheet" href="{{ asset('assets/event/css/stylesheet.css') }}">
   @else
     <link rel="stylesheet" href="{{ asset('assets/event/css/stylesheet_live.css') }}">

@@ -30,7 +30,7 @@
                                                                 </a>
                     <div class="w-100">
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="#" class="invite-user-name yesvite-search" data-bs-toggle="modal" data-bs-target="#editguest" data-profile="https://yesvite.cmexpertiseinfotech.in/public/storage/profile/100_profile.jpg?v=82" data-search="fitsz Simon">
+                            <a href="#" class="invite-user-name yesvite-search" data-bs-toggle="modal" data-bs-target="#editguest"  data-profile="{{asset('storage/profile/100_profile.jpg?v=82')}}" data-search="fitsz Simon">
                                 {{$user['first_name']}} {{$user['last_name']}}</a>
                         </div>
                         <div class="d-flex align-items-center mt-1">
@@ -136,7 +136,7 @@
                                                                 </a>
                     <div class="w-100">
                         <div class="d-flex justify-content-between align-items-center">
-                            <a href="#" class="invite-user-name yesvite-search" data-bs-toggle="modal" data-bs-target="#editguest" data-profile="https://yesvite.cmexpertiseinfotech.in/public/storage/profile/100_profile.jpg?v=82" data-search="fitsz Simon">
+                            <a href="#" class="invite-user-name yesvite-search" data-bs-toggle="modal" data-bs-target="#editguest" data-profile="{{asset('storage/profile/100_profile.jpg?v=82')}}" data-search="fitsz Simon">
                                 {{$user['first_name']}} {{$user['last_name']}}</a>
                         </div>
                         <div class="d-flex align-items-center mt-1">

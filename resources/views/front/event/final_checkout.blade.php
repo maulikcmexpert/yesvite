@@ -1084,7 +1084,8 @@
                         <input type="hidden" id="event_guest_left_count">
                         <p><strong>Credits Used |</strong></p>
                         <div class="coin-invite"><strong><img
-                                    src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png"
+                                    {{-- src="https://yesvite.cmexpertiseinfotech.in/assets/front/image/credit-coin-img.png" --}}
+                                    src="{{asset('assets/front/image/credit-coin-img.png')}}"
                                     alt=""></strong></div><strong> <span class="invite-left_d">2933
                                 Left</span></strong>
                         <p></p>

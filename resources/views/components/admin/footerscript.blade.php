@@ -62,7 +62,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
 
-@if(config('app.url') == 'https://yesvite.cmexpertiseinfotech.in')
+@if(config('app.url') == 'https://yesvitedev.cmexpertiseinfotech.in')
 <script src="{{ asset('assets/event/js/fontLoder.js') }}"></script>
 @else
 <script src="{{ asset('assets/event/js/fontLoder_live.js') }}"></script>
