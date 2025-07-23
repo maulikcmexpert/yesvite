@@ -921,6 +921,12 @@ ul.nav-tabs .nav-link:focus {
     background: #f1f1f1 !important;
 }
 
+.adsbygoogle #aswift_1_host {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+}
+
 /* -----otp-varification-wrp--- */
 .otp-varification-wrp input {
     width: 100%;

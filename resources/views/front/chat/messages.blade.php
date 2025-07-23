@@ -33,7 +33,7 @@ use Carbon\Carbon;
                     </a>
                 </div>
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-12 mb-4">
                 <div class="chat-area">
                     <div class="chat-lists">
                         <div class="chat-header">

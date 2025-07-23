@@ -33,13 +33,6 @@
     @endphp
 <x-front.advertise />
 
-<style>
-    .adsbygoogle #aswift_1_host {
-        width: 100% !important;
-        max-width: 100% !important;
-        min-width: 100% !important;
-    }
-</style>
 
 <section class="rsvp-wrp new-main-content">
    <!-- ===main-section-start=== -->
