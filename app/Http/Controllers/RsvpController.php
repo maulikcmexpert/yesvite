@@ -13,7 +13,10 @@ use App\Models\{
     EventPostImage,
     EventSetting,
     User,
-    UserNotificationType
+    UserNotificationType,
+    TextData,
+    EventDesignCategory
+
 };
 use Auth;
 use App\Models\contact_sync;
@@ -179,6 +182,22 @@ class RsvpController extends BaseController
             }, 'event_schedule', 'event_settings', 'event_invited_user' => function ($query) {
                 $query->where('is_co_host', '1')->with('user');
             }])->where('id', $event_id)->first();
+
+
+
+
+            $getTemplateId=Event::where('id',$eventDetail->id)->select('template_id')->first();
+
+            if($getTemplateId->template_id==null){
+                $display_ad=true;
+            }
+            $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
+            if($getCategory){
+                $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
+                $display_ad=$getAd->display_ad=="1"?true:false;
+            }else{
+                $display_ad=false;
+            }
 
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
@@ -605,7 +624,8 @@ class RsvpController extends BaseController
                 'user_lastname',
                 'is_host',
                 'event_invited_user_id',
-                'isShare'
+                'isShare',
+                'display_ad'
             ));
             // return response()->json(['status' => 1, 'data' => $eventInfo, 'message' => "About event"]);
         } catch (QueryException $e) {

@@ -35,6 +35,13 @@
 <section class="rsvp-wrp new-main-content">
    <!-- ===main-section-start=== -->
    <div class="rsvp-tab-wrp event-center-tabs-main">
+    @if((isset($display_ad)&& $display_ad==true))
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
+        data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    @endif
     <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" data-tab="invite_tab" id="nav-invite-tab" data-bs-toggle="tab" data-bs-target="#nav-invite" type="button" role="tab" aria-controls="nav-invite" aria-selected="true">
