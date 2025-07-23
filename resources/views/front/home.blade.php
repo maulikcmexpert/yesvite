@@ -48,18 +48,21 @@
                                                     data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
                                                     data-ad-format="auto" data-full-width-responsive="true"></ins>
                                                 <script>
-                                                    // (adsbygoogle = window.adsbygoogle || []).push({});
-                                                    const adElement = document.getElementById('adsbygoogle');
-                                                if (!adElement.classList.contains('adsbygoogle-noablate')) {
+                                                    const adElement = document.getElementById('my-ad');
                                                     (adsbygoogle = window.adsbygoogle || []).push({});
-                                                }
-
-                                                // Hide container if ad is not shown after 2 seconds
+                                                // if (!adElement.classList.contains('adsbygoogle-noablate')) {
+                                                //     (adsbygoogle = window.adsbygoogle || []).push({});
+                                                // }
                                                 setTimeout(function () {
-                                                    if (adElement.offsetHeight === 0) {
-                                                    document.getElementById('ad-container').style.display = 'none';
+
+                                                    if(adElement.attr('data-ad-status')=="unfilled"){
+                                                        document.getElementById('ad-container').style.display = 'none';
+
                                                     }
                                                 }, 2000);
+
+                                                // Hide container if ad is not shown after 2 seconds
+                                              
                                                 </script>
                                                 </div>
                                                 {{-- <div id="ad-container">
