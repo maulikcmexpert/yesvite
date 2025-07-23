@@ -42,7 +42,7 @@
                                                 <script>
                                                     (adsbygoogle = window.adsbygoogle || []).push({});
                                                 </script>
-                                                ddd
+                                                
                                                 <x-main_menu.home.event_upcoming :eventList="$eventList" />
                                             </div>
 
