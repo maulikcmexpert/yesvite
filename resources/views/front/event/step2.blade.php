@@ -24,7 +24,11 @@
 
                 </div>
             </div>
-
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
+                data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
             <div class="filter-main-wrp categoryNew">
                 <div class="filters-drp">
                     <h5>Filter By</h5>
@@ -340,8 +344,8 @@
             //         if ($(this).is(":checked")) {
             //             $(".selected-items").append(
             //                 `<span class="selected-item" data-value="${value}">
-            //     ${value} <span class="close-btn">x</span>
-            // </span>`
+        //     ${value} <span class="close-btn">x</span>
+        // </span>`
             //             );
             //         } else {
             //             $(".selected-items").find(`[data-value='${value}']`).remove();
@@ -362,14 +366,14 @@
             //         $('input[name="design_subcategory"]:checked').each(function () {
             //             default_s++;
             //             $(".image-item").removeClass("d-none");
-                    
+
             //             const categoryId = $(this).data("category-id");
             //             const subcategoryId = $(this).data("subcategory-id");
-                    
+
             //             $(".image-item").each(function () {
             //                 const imgCategoryId = $(this).data("category-id");
             //                 const imgSubcategoryIds = $(this).data("subcategory-id").toString().split(',');
-                    
+
             //                 if (
             //                     imgCategoryId == categoryId &&
             //                     imgSubcategoryIds.includes(subcategoryId.toString())
@@ -400,64 +404,64 @@
             // );
 
 
-    $(document).on(
-        "change",
-        'input[name="design_subcategory"]:not(#Allcat)',
-        function () {
-            let default_s = 0;
-            var value = $(this).val();
-    
-            // Update selected tags UI
-            if ($(this).is(":checked")) {
-                $(".selected-items").append(
-                    `<span class="selected-item" data-value="${value}">
+            $(document).on(
+                "change",
+                'input[name="design_subcategory"]:not(#Allcat)',
+                function() {
+                    let default_s = 0;
+                    var value = $(this).val();
+
+                    // Update selected tags UI
+                    if ($(this).is(":checked")) {
+                        $(".selected-items").append(
+                            `<span class="selected-item" data-value="${value}">
                         ${value} <span class="close-btn">x</span>
                     </span>`
-                );
-            } else {
-                $(".selected-items").find(`[data-value='${value}']`).remove();
-            }
-    
-            // Step 1: Get all selected subcategory IDs
-            let selectedSubcategories = [];
-            $('input[name="design_subcategory"]:checked').each(function () {
-                selectedSubcategories.push($(this).data("subcategory-id").toString());
-                default_s++;
-            });
-    
-            // Step 2: Filter images based on selected subcategories
-            let visibleCount = 0;
-            $(".image-item").each(function () {
-                const imgSubcategoryIds = $(this).data("subcategory-id").toString().split(',');
-    
-                const isMatch = selectedSubcategories.some(id =>
-                    imgSubcategoryIds.includes(id)
-                );
-    
-                if (isMatch) {
-                    $(this)
-                        .show()
-                        .removeClass("d-none fadeInDown wow")
-                        .css("visibility", "visible")
-                        .fadeIn();
-                    visibleCount++;
-                } else {
-                    $(this).hide().fadeOut().addClass("d-none");
-                }
-            });
-    
-            // Step 3: Handle case when no checkbox is selected
-            if (default_s == 0) {
-                $(".image-item").removeClass("d-none");
-                $(".default_show").show();
-            }
-    
-            // Step 4: Update count
-            // $(".total_design_count").text(`${visibleCount} Items`);
-                        updateTotalCount();
+                        );
+                    } else {
+                        $(".selected-items").find(`[data-value='${value}']`).remove();
+                    }
 
-        }
-    );
+                    // Step 1: Get all selected subcategory IDs
+                    let selectedSubcategories = [];
+                    $('input[name="design_subcategory"]:checked').each(function() {
+                        selectedSubcategories.push($(this).data("subcategory-id").toString());
+                        default_s++;
+                    });
+
+                    // Step 2: Filter images based on selected subcategories
+                    let visibleCount = 0;
+                    $(".image-item").each(function() {
+                        const imgSubcategoryIds = $(this).data("subcategory-id").toString().split(',');
+
+                        const isMatch = selectedSubcategories.some(id =>
+                            imgSubcategoryIds.includes(id)
+                        );
+
+                        if (isMatch) {
+                            $(this)
+                                .show()
+                                .removeClass("d-none fadeInDown wow")
+                                .css("visibility", "visible")
+                                .fadeIn();
+                            visibleCount++;
+                        } else {
+                            $(this).hide().fadeOut().addClass("d-none");
+                        }
+                    });
+
+                    // Step 3: Handle case when no checkbox is selected
+                    if (default_s == 0) {
+                        $(".image-item").removeClass("d-none");
+                        $(".default_show").show();
+                    }
+
+                    // Step 4: Update count
+                    // $(".total_design_count").text(`${visibleCount} Items`);
+                    updateTotalCount();
+
+                }
+            );
             $(document).on("click", ".selected-items .close-btn", function() {
                 var parent = $(this).parent();
                 var value = parent.attr("data-value");
@@ -497,36 +501,36 @@
             //         $(".default_show:visible").length + " Items"
             //     );
             // });
-           $("#resetCategories").on("click", function (e) {
-            e.preventDefault();
-            $(".categoryNew").show();
-            $(".subcategoryNew").hide();
-            // $(".image-item-new").hide(); // Hide filtered items
-            // $(".image-item").show(); // Show default images
-            $("#category_name").hide();
-            $("#allchecked").hide();
-            $("#Allcat").prop("checked", false);
-            $('input[name="design_subcategory"]:not(#Allcat)').prop(
-                "checked",
-                false
-            );
-            $(".selected-items").empty();
-            // var visibleItems = $(".image-item:visible").length;
-            // $(".total_design_count").text(
-            //     $(".default_show:visible").length + " Items"
-            // );
+            $("#resetCategories").on("click", function(e) {
+                e.preventDefault();
+                $(".categoryNew").show();
+                $(".subcategoryNew").hide();
+                // $(".image-item-new").hide(); // Hide filtered items
+                // $(".image-item").show(); // Show default images
+                $("#category_name").hide();
+                $("#allchecked").hide();
+                $("#Allcat").prop("checked", false);
+                $('input[name="design_subcategory"]:not(#Allcat)').prop(
+                    "checked",
+                    false
+                );
+                $(".selected-items").empty();
+                // var visibleItems = $(".image-item:visible").length;
+                // $(".total_design_count").text(
+                //     $(".default_show:visible").length + " Items"
+                // );
 
-            $(".image-item").removeClass("d-none fadeInDown wow").show();
-            let allItems = $(".image-item");
-            if (allItems.length > 30) {
-                allItems.slice(30).addClass("d-none").hide();
-            }
-            $(".total_design_count").text(
-                $(".image-item:visible").length + " Items"
-            );
+                $(".image-item").removeClass("d-none fadeInDown wow").show();
+                let allItems = $(".image-item");
+                if (allItems.length > 30) {
+                    allItems.slice(30).addClass("d-none").hide();
+                }
+                $(".total_design_count").text(
+                    $(".image-item:visible").length + " Items"
+                );
 
-            $("#filtered_results").hide();
-    });
+                $("#filtered_results").hide();
+            });
             $("#filtered_results").hide();
             // $('#search_design_category').on('keyup', function () {
             //     let query = $(this).val().toLowerCase();
@@ -660,35 +664,34 @@
                 if (query.length > 0) {
                     $('.selected-items').html('');
                     designData.forEach(category => {
-                    if (category.name.toLowerCase().includes(query)) {
-                        results +=
-                            `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
-                    }
-                    // Check if no subcategory matched and add "No Data Found"
-    
-                    category.subcategories.forEach(subcategory => {
-                        if (subcategory.name.toLowerCase().includes(query)) {
+                        if (category.name.toLowerCase().includes(query)) {
                             results +=
-                                `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
+                                `<div class="search-item category"  data-category-id="${category.id}"  data-name="${category.name}">${category.name}</div>`;
                         }
                         // Check if no subcategory matched and add "No Data Found"
+
+                        category.subcategories.forEach(subcategory => {
+                            if (subcategory.name.toLowerCase().includes(query)) {
+                                results +=
+                                    `<div class="search-item subcategory" data-id="${subcategory.id}" data-category-id="${category.id}" data-name="${subcategory.name}">${subcategory.name}</div>`;
+                            }
+                            // Check if no subcategory matched and add "No Data Found"
+                        });
                     });
-                });
-                if (results == '') {
-                    $('#filtered_results').hide();
-                } else {
-                    $('#filtered_results').html(results).show();
-                }
+                    if (results == '') {
+                        $('#filtered_results').hide();
+                    } else {
+                        $('#filtered_results').html(results).show();
+                    }
 
                     let visibleCount = 0;
 
                     $(".image-item").each(function() {
                         let tags = $(this).data("tags") ?
-                            $(this).data("tags").toLowerCase().split(",") :
-                            [];
+                            $(this).data("tags").toLowerCase().split(",") : [];
                         let subcategories = $(this).data("subcategory_name") ?
                             $(this).data("subcategory_name").toLowerCase().split(
-                            ",") // Split subcategories by comma
+                                ",") // Split subcategories by comma
                             :
                             [];
                         let category = $(this).data("category_name") ?
@@ -781,51 +784,52 @@
             //     );
             // });
 
-            $(document).on("click", ".search-item", function () {
+            $(document).on("click", ".search-item", function() {
                 $('input[name="design_subcategory"]').prop("checked", false);
 
-        let selectedText = $(this).data("name");
-        let categoryId = $(this).data("category-id");
-        let subcategoryId = $(this).data("id");
-        $('.selected-items').html('');
+                let selectedText = $(this).data("name");
+                let categoryId = $(this).data("category-id");
+                let subcategoryId = $(this).data("id");
+                $('.selected-items').html('');
 
-        $("#search_design_category").val(selectedText);
-        $("#filtered_results").html("").hide();
-        $(".image-item").hide();
-    
-     
-        if (categoryId && subcategoryId) {
-            $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`).show();
-        } else if (categoryId) {
-            $(`.image-item[data-category-id="${categoryId}"]`).show();
-        }
+                $("#search_design_category").val(selectedText);
+                $("#filtered_results").html("").hide();
+                $(".image-item").hide();
 
-        $(".image-item").each(function () {
-            let tags = $(this).data("tags")
-                ? $(this).data("tags").toLowerCase().split(",")
-                : [];
-            let subcategories = $(this).data("subcategory_name")
-                ? $(this).data("subcategory_name").toLowerCase().split(",")
-                : [];
-            let category = $(this).data("category_name")
-                ? $(this).data("category_name").toLowerCase()
-                : "";
-    
-            let matches = tags.some(tag => tag.includes(selectedText.toLowerCase())) ||
-                subcategories.some(sub => sub.includes(selectedText.toLowerCase())) ||
-                category.includes(selectedText.toLowerCase());
-    
-            if (matches) {
-                $(this).show().removeClass("d-none").css("visibility", "visible").fadeIn();
-            } else {
-                $(this).fadeOut().addClass("d-none");
-            }
-        });
-    
-        $(".total_design_count").text(
-            $(".image-item:visible").length + " Items"
-        );
-    });
+
+                if (categoryId && subcategoryId) {
+                    $(`.image-item[data-category-id="${categoryId}"][data-subcategory-id="${subcategoryId}"]`)
+                        .show();
+                } else if (categoryId) {
+                    $(`.image-item[data-category-id="${categoryId}"]`).show();
+                }
+
+                $(".image-item").each(function() {
+                    let tags = $(this).data("tags") ?
+                        $(this).data("tags").toLowerCase().split(",") :
+                        [];
+                    let subcategories = $(this).data("subcategory_name") ?
+                        $(this).data("subcategory_name").toLowerCase().split(",") :
+                        [];
+                    let category = $(this).data("category_name") ?
+                        $(this).data("category_name").toLowerCase() :
+                        "";
+
+                    let matches = tags.some(tag => tag.includes(selectedText.toLowerCase())) ||
+                        subcategories.some(sub => sub.includes(selectedText.toLowerCase())) ||
+                        category.includes(selectedText.toLowerCase());
+
+                    if (matches) {
+                        $(this).show().removeClass("d-none").css("visibility", "visible").fadeIn();
+                    } else {
+                        $(this).fadeOut().addClass("d-none");
+                    }
+                });
+
+                $(".total_design_count").text(
+                    $(".image-item:visible").length + " Items"
+                );
+            });
 
             let previousSearch = "";
 

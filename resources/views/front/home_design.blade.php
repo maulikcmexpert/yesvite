@@ -67,17 +67,18 @@
                         class="green-text"> All designs and features included. Always.</span>
                 </h2>
                 <p class="home-banner-textOne">Simple pricing. All features. No nonsense.</p>
-                <p class="home-banner-textTwo">Free to try. Free to love. 30 invites on us to test the platform.
-                    <span>No Card
-                        Needed.</span></p>
+                <p class="home-banner-textTwo">Free to try.  Free to love. 30 invites on us to test the platform. <span>No Card
+                    Needed.</span></p>
             </div>
             <div class="col-md-5 col-xl-3">
                 <div class="app-store d-flex justify-content-center gap-2 home-banner-app-store">
                     <a href="https://play.google.com/store/apps/details?id=com.yesvite.android" class="google-app">
-                        <img src="{{ asset('assets/front/image/play_store.svg') }}" alt="google-app">
+                        <img src="{{ asset('assets/front/image/play_store.svg') }}"
+                            alt="google-app">
                     </a>
                     <a href="https://apps.apple.com/app/6736650042" class="mobile-app">
-                        <img src="{{ asset('assets/front/image/app_store.svg') }}" alt="mobile-app">
+                        <img src="{{ asset('assets/front/image/app_store.svg') }}"
+                            alt="mobile-app">
                     </a>
                 </div>
                 <div class="home-banner-img-main">
@@ -116,11 +117,7 @@
 
             </div>
         </div>
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
-            data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        
         {{-- {{$getDesignData}} --}}
         <div class="filter-main-wrp categoryNew">
             <div class="filters-drp">
