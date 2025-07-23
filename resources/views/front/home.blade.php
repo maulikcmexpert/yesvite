@@ -4,6 +4,12 @@
 {{-- {{dd($imagecount)}} --}}
 <x-front.advertise />
 <section class="home-web-tabs-wrp">
+    <ins class="adsbygoogle" style="display:block"
+                data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
+                data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
     <div class="container">
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -25,12 +31,7 @@
                 aria-labelledby="explore-designs-tab">
 
                 <!-- ============= contact-details ============ -->
-                <ins class="adsbygoogle" style="display:block"
-                data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
-                data-ad-format="auto" data-full-width-responsive="true"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
+                
                 <section class="contact-details profile-details supportive-home-wrp">
                     <div class="container">
                         <div class="row">
