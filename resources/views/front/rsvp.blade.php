@@ -32,6 +32,15 @@
             // dd($eventInfo,$loggedInUser);
     @endphp
 <x-front.advertise />
+
+<style>
+    .adsbygoogle #aswift_1_host {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+    }
+</style>
+
 <section class="rsvp-wrp new-main-content">
    <!-- ===main-section-start=== -->
    <div class="rsvp-tab-wrp event-center-tabs-main">
@@ -59,6 +68,7 @@
             {{-- <input type="text" value="{{$rsvp_status}}" /> --}}
             <div class="tab-pane fade show active" id="nav-invite" role="tabpanel" aria-labelledby="nav-invite-tab">
                 <section class="rsvp-wrp">
+                    <div class="mx-auto">  
                     @if((isset($display_ad)&& $display_ad==true))
                         <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
                         data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
@@ -66,6 +76,7 @@
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
                     @endif
+                </div>
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-5 mb-lg-0 mb-sm-4 mb-md-4 mb-0">
