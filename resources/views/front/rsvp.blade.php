@@ -79,20 +79,21 @@
                                 </div>
                                 <div class="mx-auto adsense-center sidebar-adsense" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
                                     <ins class="adsbygoogle"
+                                    id="my-adrsvp1"
                                     style="display:block"
                                     data-ad-client="ca-pub-7818976609984635"
                                     data-ad-slot="7204833835"
                                     data-ad-format="auto"
                                     data-full-width-responsive="true"></ins>
                                     <script>
-                                        const adElement = document.getElementById('my-ad');
+                                        const adElementrsvp1 = document.getElementById('my-adrsvp1');
                                         (adsbygoogle = window.adsbygoogle || []).push({});
                                     // if (!adElement.classList.contains('adsbygoogle-noablate')) {
                                     //     (adsbygoogle = window.adsbygoogle || []).push({});
                                     // }
                                     setTimeout(function () {
                             
-                                        if(adElement.getAttribute('data-ad-status')=="unfilled"){
+                                        if(adElementrsvp1.getAttribute('data-ad-status')=="unfilled"){
                                             document.getElementById('ad-container').style.display = 'none';
                             
                                         }
@@ -269,18 +270,19 @@
                                             <div class="mx-auto adsense-center" style="text-align: center;">  
                                                 @if((isset($display_ad)&& $display_ad==true))
                                                 <ins class="adsbygoogle"
+                                                id="my-adRsvp"
                                                 style="display:block"
                                                 data-ad-client="ca-pub-7818976609984635"
                                                 data-ad-slot="7204833835"
                                                 data-ad-format="auto"
                                                 data-full-width-responsive="true"></ins>
                                                 <script>
-                                            const adElement = document.getElementById('my-ad');
+                                            const adElementrsvp = document.getElementById('my-adRsvp');
                             
                                                 (adsbygoogle = window.adsbygoogle || []).push({});
                                                 setTimeout(function () {
                             
-                                                if(adElement.getAttribute('data-ad-status')=="unfilled"){
+                                                if(adElementrsvp.getAttribute('data-ad-status')=="unfilled"){
                                                 document.getElementById('ad-container').style.display = 'none';
                             
                                                 }
