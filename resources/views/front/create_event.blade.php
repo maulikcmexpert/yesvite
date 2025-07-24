@@ -583,9 +583,9 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
             </div>
             
 
-            <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
+            <div class="mx-auto adsense-center sidebar-adsense" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
 
-                <ins id="my-ad" class="adsbygoogle" style="display:block;width:300px; height:250px"
+                <ins id="my-ad" class="adsbygoogle" style="display:block;
                     data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
                     data-full-width-responsive="true"></ins>
                 <script>

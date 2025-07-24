@@ -962,6 +962,11 @@ ul.nav-tabs .nav-link:focus {
     max-height: 90px !important;
   }
 
+  .sidebar-adsense #my-ad{
+    width: 250px !important;
+    height: 250px !important;
+  }
+
 /* -----otp-varification-wrp--- */
 .otp-varification-wrp input {
     width: 100%;
@@ -1106,6 +1111,12 @@ input:-webkit-autofill {
         color: var(--headingColor);
         line-height: 45px !important;
     }
+
+    .sidebar-adsense #my-ad{
+        width: 300px !important;
+        height: 100px !important;
+      }
+
 }
 
 @media only screen and (max-width: 991px) {
