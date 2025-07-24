@@ -404,7 +404,6 @@ ul.nav-tabs .nav-link:focus {
     left: 8px;
 }
 
-
 .label-error label {
     font-size: 11px;
 }
@@ -638,7 +637,6 @@ ul.nav-tabs .nav-link:focus {
 
 #toast-container > .toast-error {
     background-image: url("../../toaster_error_icon.png") !important;
-
 }
 
 .toast.toast-success {
@@ -928,16 +926,16 @@ ul.nav-tabs .nav-link:focus {
 }
 
 .adsense-center {
+    display: block;
     text-align: center;
-    width: 100% !important;
-    max-width: 800px;
-    padding: 0 12px !important;
-    margin: 10px auto !important;
-  }
-  .adsense-center ins.adsbygoogle {
+    width: 100%;
+    margin: 10px auto;
+}
+
+.adsense-center ins.adsbygoogle {
     margin: 0 auto;
     width: 100%;
-  }
+}
 
 .small-adsense {
     text-align: center;
@@ -946,23 +944,22 @@ ul.nav-tabs .nav-link:focus {
     min-height: 80px !important;
     width: 100%;
     max-width: 800px !important;
-    padding: 0 12px ;
+    padding: 0 12px;
     margin: 10px auto !important;
-  }
+}
 
-  .small-adsense #my-bottomad {
+.small-adsense #my-bottomad {
     margin: auto !important;
     height: 100px !important;
     max-height: 120px !important;
-    width:728px !important;
-    height:90px !important;
-  }
+    width: 728px !important;
+    height: 90px !important;
+}
 
-
-  .sidebar-adsense #my-ad{
+.sidebar-adsense #my-ad {
     width: 250px !important;
     height: 250px !important;
-  }
+}
 
 /* -----otp-varification-wrp--- */
 .otp-varification-wrp input {
@@ -1034,46 +1031,46 @@ ul.nav-tabs .nav-link:focus {
     animation-delay: 0.45s;
 }
 
-.hosted-by-title-menu:focus{
+.hosted-by-title-menu:focus {
     outline: none !important;
     box-shadow: none !important;
     border: none !important;
 }
 
-.new-main-content button:focus{
+.new-main-content button:focus {
     outline: none !important;
     box-shadow: none !important;
     border: none !important;
 }
 
-button:focus{
+button:focus {
     outline: none !important;
     box-shadow: none !important;
     border: none !important;
 }
 
-body{
+body {
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-main{
+main {
     min-height: 100vh;
 }
 
-main:has(.main-content-wrp){
+main:has(.main-content-wrp) {
     min-height: auto;
 }
 
-input:-internal-autofill-selected{
+input:-internal-autofill-selected {
     background-color: #fff !important;
 }
 
 input:-webkit-autofill {
     background-color: #fff !important; /* Change to your preferred color */
     -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
-  }
+}
 
 @keyframes bounce {
     0%,
@@ -1087,6 +1084,51 @@ input:-webkit-autofill {
 }
 
 /* ======== Responsive ========= */
+
+/* Large Desktops: 1200px and up */
+@media only screen and (min-width: 1200px) {
+    .adsense-center {
+        text-align: center;
+        width: 100% !important;
+        max-width: 970px !important;
+        height: 250px !important;
+        margin: 10px auto !important;
+    }
+}
+
+/* Medium Desktops: 992px to 1199px */
+@media only screen and (min-width: 992px) and (max-width: 1199.98px) {
+    .adsense-center {
+        text-align: center;
+        width: 100% !important;
+        max-width: 728px !important;
+        height: 90px !important;
+        margin: 10px auto !important;
+    }
+}
+
+/* Tablets: 768px to 991px */
+@media only screen and (min-width: 768px) and (max-width: 991.98px) {
+    .adsense-center {
+        text-align: center;
+        width: 100% !important;
+        max-width: 468px !important;
+        height: 60px !important;
+        margin: 10px auto !important;
+    }
+}
+
+/* Mobiles: up to 767px */
+@media only screen and (max-width: 767.98px) {
+    .adsense-center {
+        text-align: center;
+        width: 100% !important;
+        max-width: 320px !important;
+        height: 100px !important;
+        margin: 10px auto !important;
+    }
+}
+
 @media (min-width: 2000px) and (max-width: 10000px) {
     /* footer {
         position: absolute;
@@ -1102,23 +1144,22 @@ input:-webkit-autofill {
     } */
 }
 
-@media only screen and  (max-width:1299px){
-
-    .sidebar-adsense #my-ad{
+@media only screen and (max-width: 1299px) {
+    .sidebar-adsense #my-ad {
         width: 320px !important;
         height: 100px !important;
-      }
+    }
 
-      .small-adsense{
+    .small-adsense {
         max-width: 500px !important;
-      }
+    }
 
-      .small-adsense #my-bottomad {
+    .small-adsense #my-bottomad {
         margin: auto !important;
         max-height: 120px !important;
-        width:468px !important;
+        width: 468px !important;
         height: 60px !important;
-      }
+    }
 }
 
 @media only screen and (max-width: 1199px) {
@@ -1127,23 +1168,19 @@ input:-webkit-autofill {
         color: var(--headingColor);
         line-height: 45px !important;
     }
-
-
 }
 
-@media only screen and (max-width:1024px) {
-
-   
-    .small-adsense{
+@media only screen and (max-width: 1024px) {
+    .small-adsense {
         max-width: 435px !important;
-      }
+    }
 
-      .small-adsense #my-bottomad {
+    .small-adsense #my-bottomad {
         margin: auto !important;
         max-height: 120px !important;
-        width:320px !important;
+        width: 320px !important;
         height: 100px !important;
-      }
+    }
 }
 
 @media only screen and (max-width: 991px) {
@@ -1157,23 +1194,16 @@ input:-webkit-autofill {
         line-height: 45px !important;
     }
 
-    .adsense-center {
-        text-align: center;
-        width: 100%;
-        max-width: 700;
-        padding: 0 12px !important;
-      }
-
-      .small-adsense {
+    .small-adsense {
         text-align: center;
         height: 100px !important;
         max-height: 100px !important;
         min-height: 80px !important;
         width: 100%;
         max-width: 700px !important;
-        padding: 0 12px ;
+        padding: 0 12px;
         margin: 10px auto !important;
-      }
+    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -1196,14 +1226,6 @@ input:-webkit-autofill {
     #myModal .save-btn {
         width: 100%;
     }
-
-
-    .adsense-center {
-        text-align: center;
-        width: 100%;
-        max-width: 575;
-        padding: 0 12px !important;
-      }
 }
 
 @media only screen and (max-width: 575px) {
@@ -1246,28 +1268,21 @@ input:-webkit-autofill {
         font-size: 16px !important;
     }
 
-    .adsense-center {
-        text-align: center;
-        width: 100%;
-        max-width: 400px;
-        padding: 0 12px !important;
-      }
-      .small-adsense #my-bottomad {
+    .small-adsense #my-bottomad {
         margin: auto !important;
         max-height: 120px !important;
-        width:320px !important;
+        width: 320px !important;
         height: 100px !important;
-      }
-
+    }
 }
 
-@media only screen and (max-width:375px){
+@media only screen and (max-width: 375px) {
     .small-adsense #my-bottomad {
         margin: auto !important;
         max-height: 120px !important;
         width: 250px !important;
         height: 250px !important;
-      }
+    }
 }
 
 @keyframes rotate360 {
