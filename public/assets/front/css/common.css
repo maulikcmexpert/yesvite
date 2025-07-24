@@ -944,6 +944,9 @@ ul.nav-tabs .nav-link:focus {
     height: 100px !important;
     max-height: 100px !important;
     min-height: 80px !important;
+    width: 100%;
+    max-width: 800px;
+    padding: 0 12px ;
 
   }
 
