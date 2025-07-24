@@ -589,14 +589,14 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                     data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
                     data-full-width-responsive="true"></ins>
                 <script>
-                    var adElement = document.getElementById('my-ad');
+                    const adElementcreatevent = document.getElementById('my-ad');
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 // if (!adElement.classList.contains('adsbygoogle-noablate')) {
                 //     (adsbygoogle = window.adsbygoogle || []).push({});
                 // }
                 setTimeout(function () {
         
-                    if(adElement.getAttribute('data-ad-status')=="unfilled"){
+                    if(adElementcreatevent.getAttribute('data-ad-status')=="unfilled"){
                         document.getElementById('ad-container').style.display = 'none';
         
                     }
