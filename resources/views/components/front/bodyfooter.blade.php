@@ -68,8 +68,7 @@
                       alt="logo">
               </a>
 
-              <div class="mx-auto adsense-center" id="ad-container"
-                  style="text-align: center; height:100px; max-height:100px;">
+              <div class="mx-auto adsense-center" id="ad-container" style="text-align: center; height:100px; max-height:100px;">
 
                   <ins id="my-bottomad" class="adsbygoogle" style="display:block;height:100px"
                       data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835" data-ad-format="auto"
@@ -77,9 +76,7 @@
                   <script>
                       const bottomad = document.getElementById('my-bottomad');
                       (adsbygoogle = window.adsbygoogle || []).push({});
-                      // if (!adElement.classList.contains('adsbygoogle-noablate')) {
-                      //     (adsbygoogle = window.adsbygoogle || []).push({});
-                      // }
+                   
                       setTimeout(function() {
 
                           if (adElement.getAttribute('data-ad-status') == "unfilled") {
@@ -88,7 +85,6 @@
                           }
                       }, 2000);
 
-                      // Hide container if ad is not shown after 2 seconds
                   </script>
               </div>
               
