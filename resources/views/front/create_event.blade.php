@@ -581,6 +581,8 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                 </ul>
                 @endif
             </div>
+            
+
             <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
 
                 <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
