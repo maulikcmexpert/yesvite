@@ -585,18 +585,18 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
 
             <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
 
-                <ins id="my-ad" class="adsbygoogle" style="display:block;"
+                <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
                     data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
                     data-full-width-responsive="true"></ins>
                 <script>
-                    const adElementcreatevent = document.getElementById('my-ad');
+                    const adElement = document.getElementById('my-ad');
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 // if (!adElement.classList.contains('adsbygoogle-noablate')) {
                 //     (adsbygoogle = window.adsbygoogle || []).push({});
                 // }
                 setTimeout(function () {
         
-                    if(adElementcreatevent.getAttribute('data-ad-status')=="unfilled"){
+                    if(adElement.getAttribute('data-ad-status')=="unfilled"){
                         document.getElementById('ad-container').style.display = 'none';
         
                     }
