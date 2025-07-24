@@ -69,7 +69,7 @@
               </a>
               <div class="small-adsense">
 
-                <div class="mx-auto adsense-center" id="ad-container">
+                <div class="mx-auto" id="ad-container">
 
                     <ins id="my-bottomad" class="adsbygoogle" style="display:block;"
                     data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835" data-ad-format="auto"
