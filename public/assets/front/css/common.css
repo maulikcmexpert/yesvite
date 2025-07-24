@@ -939,7 +939,7 @@ ul.nav-tabs .nav-link:focus {
     width: 100%;
   }
 
-  .adsense-center.small-adsense {
+.small-adsense {
     text-align: center;
     height: 100px !important;
     max-height: 100px !important;

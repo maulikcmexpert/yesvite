@@ -67,25 +67,27 @@
                   <img src="{{ asset('assets/front/image/yesvite_logo.png') }}" style="width:140px;height:65px;"
                       alt="logo">
               </a>
+              <div class="small-adsense" style="height:100px;min-height:80px;">
 
-              <div class="mx-auto adsense-center small-adsense" id="ad-container">
+                <div class="mx-auto adsense-center" id="ad-container">
 
-                <ins id="my-bottomad" class="adsbygoogle" style="display:block;"
-                data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835" data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                const bottomad = document.getElementById('my-bottomad');
-                (adsbygoogle = window.adsbygoogle || []).push({});
-             
-                setTimeout(function() {
+                    <ins id="my-bottomad" class="adsbygoogle" style="display:block;"
+                    data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835" data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    const bottomad = document.getElementById('my-bottomad');
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                
+                    setTimeout(function() {
 
-                    if (adElement.getAttribute('data-ad-status') == "unfilled") {
-                        document.getElementById('ad-container').style.display = 'none';
+                        if (adElement.getAttribute('data-ad-status') == "unfilled") {
+                            document.getElementById('ad-container').style.display = 'none';
 
-                    }
-                }, 2000);
+                        }
+                    }, 2000);
 
-            </script>
+                </script>
+                </div>
               </div>
               
               <ul class="nav">
