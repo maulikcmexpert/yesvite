@@ -957,11 +957,6 @@ ul.nav-tabs .nav-link:focus {
     width:728px;height:90
   }
 
-  .small-adsense #my-bottomad iframe {
-    height: 90px !important;
-    min-height: auto;
-    max-height: 90px !important;
-  }
 
   .sidebar-adsense #my-ad{
     width: 250px !important;
