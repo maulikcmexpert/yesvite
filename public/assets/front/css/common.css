@@ -950,6 +950,16 @@ ul.nav-tabs .nav-link:focus {
     margin: 10px auto !important;
   }
 
+  .small-adsense #my-bottomad {
+    margin: auto;
+  }
+
+  .small-adsense #my-bottomad iframe {
+    height: 90px !important;
+    min-height: auto;
+    max-height: 90px !important;
+  }
+
 /* -----otp-varification-wrp--- */
 .otp-varification-wrp input {
     width: 100%;
