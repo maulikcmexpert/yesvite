@@ -1140,6 +1140,17 @@ input:-webkit-autofill {
         max-width: 700;
         padding: 0 12px !important;
       }
+
+      .small-adsense {
+        text-align: center;
+        height: 100px !important;
+        max-height: 100px !important;
+        min-height: 80px !important;
+        width: 100%;
+        max-width: 700px !important;
+        padding: 0 12px ;
+        margin: 10px auto !important;
+      }
 }
 
 @media only screen and (max-width: 767px) {
@@ -1169,6 +1180,16 @@ input:-webkit-autofill {
         width: 100%;
         max-width: 575;
         padding: 0 12px !important;
+      }
+      .small-adsense {
+        text-align: center;
+        height: 100px !important;
+        max-height: 100px !important;
+        min-height: 80px !important;
+        width: 100%;
+        max-width: 575px !important;
+        padding: 0 12px ;
+        margin: 10px auto !important;
       }
 }
 
@@ -1217,6 +1238,17 @@ input:-webkit-autofill {
         width: 100%;
         max-width: 400px;
         padding: 0 12px !important;
+      }
+
+      .small-adsense {
+        text-align: center;
+        height: 100px !important;
+        max-height: 100px !important;
+        min-height: 80px !important;
+        width: 100%;
+        max-width: 350px !important;
+        padding: 0 12px ;
+        margin: 10px auto !important;
       }
 
 }
