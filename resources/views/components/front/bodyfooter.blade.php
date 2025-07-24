@@ -5,7 +5,7 @@
           <div class="footer-content d-flex justify-content-between">
               {{-- <a href="{{(Auth::guard('web')->check())?route('profile'):route('front.home')}}" class="footer-logo"> --}}
               <a href="{{ route('front.home') }}" class="footer-logo">
-                                    {{-- <svg width="129" height="36" viewBox="0 0 129 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {{-- <svg width="129" height="36" viewBox="0 0 129 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M8.86965 6.81981H8.48313C8.25473 6.80224 8.35136 6.58262 8.35136 6.58262C8.5007 6.23124 8.6149 6.09947 8.43042 5.95013C8.0966 5.68659 7.8155 5.3967 7.5871 5.08924C6.42753 3.52558 6.71742 1.58418 7.79793 0.837483C8.42163 0.407037 9.33524 0.407037 9.95894 0.837483C11.0395 1.58418 11.3206 3.52558 10.1698 5.08924C9.94137 5.3967 9.66905 5.68659 9.32645 5.95013C9.13319 6.09947 9.25617 6.22245 9.40551 6.58262C9.40551 6.58262 9.50214 6.79345 9.27374 6.81981H8.88722H8.86965Z" fill="#ECB015" />
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M25.9168 9.75338C25.9168 9.05061 26.1627 8.40934 26.5844 7.9174C27.1115 7.2849 27.9021 6.8896 28.7893 6.8896C30.3706 6.8896 31.6619 8.17215 31.6619 9.76217H34.6575C34.6575 6.52064 32.0309 3.89404 28.7893 3.89404C26.6986 3.89404 24.8714 4.98334 23.826 6.62606C23.7733 6.7139 23.7206 6.80175 23.6679 6.8896C23.1935 7.7417 22.9212 8.7168 22.9212 9.76217H25.9168V9.75338Z" fill="black" />
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M30.3552 22.1547C29.7227 27.5484 25.146 31.7299 19.5853 31.7299C14.0246 31.7299 9.3073 27.4255 8.78901 21.9175L12.013 21.3465L11.2663 17.1475L0.00439453 19.1416L0.751087 23.3406L4.57239 22.6642C5.45086 30.175 11.8373 35.9992 19.5853 35.9992C27.3333 35.9992 34.0009 29.9115 34.6509 22.1547C34.6861 21.733 34.7036 21.3114 34.7036 20.8809C34.7036 20.4505 34.6861 20.0464 34.6509 19.6423H30.3552C30.3992 20.0464 30.4255 20.4593 30.4255 20.8809C30.4255 21.3026 30.3992 21.733 30.3552 22.1547Z" fill="black" />
@@ -26,7 +26,7 @@
                                         <path fill-rule="evenodd" clip-rule="evenodd" d="M4.28744 9.54549C4.88479 10.0462 5.47336 10.4854 5.92138 10.8105C6.17613 11.0037 6.02679 11.1706 5.84232 11.645C5.84232 11.645 5.72812 11.9261 6.02679 11.9525H6.63293C6.94039 11.9349 6.81741 11.645 6.81741 11.645C6.62415 11.1706 6.47481 11.0037 6.73835 10.8105C7.18636 10.4854 7.77493 10.0462 8.37228 9.54549C9.26832 8.78123 10.2522 7.85884 10.7705 6.7959C12.176 3.9409 9.48793 -0.012174 6.33425 2.46509C3.18058 -0.012174 0.483699 3.9409 1.88924 6.7959C2.40753 7.85006 3.40019 8.78123 4.29622 9.54549H4.28744Z" fill="#EA555C" />
                                     </svg> --}}
 
-                                    {{-- <svg width="140" height="65" viewBox="0 0 140 65" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {{-- <svg width="140" height="65" viewBox="0 0 140 65" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="128.118" height="36" fill="white"/>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M115.196 20.3691C115.196 24.4363 117.955 26.896 121.952 26.896C123.963 26.896 126.045 26.0264 127.337 24.1377L124.332 23.0484C123.858 23.593 123.015 23.9708 121.846 23.9708C120.458 23.9708 119.114 23.1274 118.991 21.3881H128.101C128.347 17.0397 125.843 13.9387 121.794 13.9387C118.192 13.9387 115.188 16.4423 115.188 20.3691H115.196ZM121.899 16.741C123.366 16.741 124.552 17.558 124.605 19.148H118.991C119.211 17.4614 120.485 16.741 121.899 16.741Z" fill="black"/>
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M105.517 17.1647H107.555V23.1207C107.555 26.0284 108.6 26.5994 111.622 26.5994H114.003V23.5248H112.913C111.701 23.5248 111.323 23.3052 111.323 22.1368V17.1735H114.003V14.2921H111.323V11.2175H107.546V14.2921H105.508V17.1735L105.517 17.1647Z" fill="black"/>
@@ -62,35 +62,36 @@
                         <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_7906_43769" result="shape"/>
                         </filter>
                         </defs>
-                    </svg> --}} 
+                    </svg> --}}
 
                   <img src="{{ asset('assets/front/image/yesvite_logo.png') }}" style="width:140px;height:65px;"
                       alt="logo">
               </a>
 
-              <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
+              <div class="mx-auto adsense-center" id="ad-container"
+                  style="text-align: center;height:auto;min-height:auto;">
 
-                <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
-                    data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
-                    data-ad-format="auto" data-full-width-responsive="true"></ins>
-                <script>
-                    const adElement = document.getElementById('my-ad');
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                // if (!adElement.classList.contains('adsbygoogle-noablate')) {
-                //     (adsbygoogle = window.adsbygoogle || []).push({});
-                // }
-                setTimeout(function () {
-            
-                    if(adElement.getAttribute('data-ad-status')=="unfilled"){
-                        document.getElementById('ad-container').style.display = 'none';
-            
-                    }
-                }, 2000);
-            
-                // Hide container if ad is not shown after 2 seconds
+                  <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
+                      data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835" data-ad-format="auto"
+                      data-full-width-responsive="true"></ins>
+                  <script>
+                      const adElement = document.getElementById('my-ad');
+                      (adsbygoogle = window.adsbygoogle || []).push({});
+                      // if (!adElement.classList.contains('adsbygoogle-noablate')) {
+                      //     (adsbygoogle = window.adsbygoogle || []).push({});
+                      // }
+                      setTimeout(function() {
+
+                          if (adElement.getAttribute('data-ad-status') == "unfilled") {
+                              document.getElementById('ad-container').style.display = 'none';
+
+                          }
+                      }, 2000);
+
+                      // Hide container if ad is not shown after 2 seconds
+                  </script>
+              </div>
               
-                </script>
-                </div>
               <ul class="nav">
                   <li class="nav-item">
                       <a class="nav-link" href="{{ route('about') }}">About us</a>
