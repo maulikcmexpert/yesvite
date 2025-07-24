@@ -67,12 +67,12 @@
                   <img src="{{ asset('assets/front/image/yesvite_logo.png') }}" style="width:140px;height:65px;"
                       alt="logo">
               </a>
-              <div class="small-adsense">
+              <div class="small-adsense" id="small-adsense-id">
 
                 <div class="mx-auto" id="ad-container">
 
                     <ins id="my-bottomad" class="adsbygoogle" style="display:block;width:728px;height:90"
-                    data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835" data-ad-format="auto"
+                    data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
                     data-full-width-responsive="true"></ins>
                 <script>
                     const bottomad = document.getElementById('my-bottomad');
@@ -85,6 +85,10 @@
 
                         }
                     }, 2000);
+
+                    const container = document.getElementById("small-adsense-id")
+                        container.style.height = "100px"
+
 
                 </script>
                 </div>
