@@ -69,7 +69,7 @@
               </a>
 
               <div class="mx-auto adsense-center" id="ad-container"
-                  style="text-align: center;height:auto;min-height:auto;">
+                  style="text-align: center; height:100px; max-height:100px;">
 
                   <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
                       data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835" data-ad-format="auto"
