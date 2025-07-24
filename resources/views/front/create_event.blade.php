@@ -587,7 +587,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
 
                 <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
                     data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
-                    data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    data-full-width-responsive="true"></ins>
                 <script>
                     const adElement = document.getElementById('my-ad');
                     (adsbygoogle = window.adsbygoogle || []).push({});
