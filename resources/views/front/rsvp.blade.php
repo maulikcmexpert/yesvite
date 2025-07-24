@@ -78,10 +78,12 @@
                                     @endif
                                 </div>
                                 <div class="mx-auto adsense-center sidebar-adsense" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
-
-                                    <ins id="my-ad" class="adsbygoogle" style="display:block;"
-                                        data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
-                                        data-full-width-responsive="true"></ins>
+                                    <ins class="adsbygoogle"
+                                    style="display:block"
+                                    data-ad-client="ca-pub-7818976609984635"
+                                    data-ad-slot="7204833835"
+                                    data-ad-format="auto"
+                                    data-full-width-responsive="true"></ins>
                                     <script>
                                         const adElement = document.getElementById('my-ad');
                                         (adsbygoogle = window.adsbygoogle || []).push({});
@@ -266,8 +268,12 @@
                                             {{-- @if($is_host == "1") --}}
                                             <div class="mx-auto adsense-center" style="text-align: center;">  
                                                 @if((isset($display_ad)&& $display_ad==true))
-                                                    <ins id="my-ad" class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
-                                                    data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                                                <ins class="adsbygoogle"
+                                                style="display:block"
+                                                data-ad-client="ca-pub-7818976609984635"
+                                                data-ad-slot="7204833835"
+                                                data-ad-format="auto"
+                                                data-full-width-responsive="true"></ins>
                                                 <script>
                                             const adElement = document.getElementById('my-ad');
                             

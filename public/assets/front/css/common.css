@@ -954,7 +954,8 @@ ul.nav-tabs .nav-link:focus {
     margin: auto !important;
     height: 100px !important;
     max-height: 120px !important;
-    width:728px;height:90
+    width:728px !important;
+    height:90px !important;
   }
 
 
@@ -1115,7 +1116,8 @@ input:-webkit-autofill {
       .small-adsense #my-bottomad {
         margin: auto !important;
         max-height: 120px !important;
-        width:468x;height: 60px !important;
+        width:468px !important;
+        height: 60px !important;
       }
 }
 
@@ -1139,7 +1141,8 @@ input:-webkit-autofill {
       .small-adsense #my-bottomad {
         margin: auto !important;
         max-height: 120px !important;
-        width:320px;height: 100px !important;
+        width:320px !important;
+        height: 100px !important;
       }
 }
 
@@ -1252,7 +1255,8 @@ input:-webkit-autofill {
       .small-adsense #my-bottomad {
         margin: auto !important;
         max-height: 120px !important;
-        width:320px;height: 100px !important;
+        width:320px !important;
+        height: 100px !important;
       }
 
 }
@@ -1261,7 +1265,7 @@ input:-webkit-autofill {
     .small-adsense #my-bottomad {
         margin: auto !important;
         max-height: 120px !important;
-        width: 250px;
+        width: 250px !important;
         height: 250px !important;
       }
 }
