@@ -950,11 +950,11 @@ ul.nav-tabs .nav-link:focus {
     margin: 10px auto !important;
   }
 
-  .small-adsense #my-bottomad {
+  /* .small-adsense #my-bottomad {
     margin: auto;
     height: 100px !important;
     max-height: 120px !important;
-  }
+  } */
 
   .small-adsense #my-bottomad iframe {
     height: 90px !important;
