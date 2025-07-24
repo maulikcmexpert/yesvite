@@ -932,7 +932,7 @@ ul.nav-tabs .nav-link:focus {
     width: 100% !important;
     max-width: 800px;
     padding: 0 12px !important;
-    margin: 0 auto !important;
+    margin: 10px auto !important;
   }
   .adsense-center ins.adsbygoogle {
     margin: 0 auto;
