@@ -580,32 +580,33 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                     </li>
                 </ul>
                 @endif
+                <div class="mx-auto adsense-center sidebar-adsense" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
+
+                    <ins id="my-ad" class="adsbygoogle" style="display:block;"
+                        data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
+                        data-full-width-responsive="true"></ins>
+                    <script>
+                        const adElement = document.getElementById('my-ad');
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    // if (!adElement.classList.contains('adsbygoogle-noablate')) {
+                    //     (adsbygoogle = window.adsbygoogle || []).push({});
+                    // }
+                    setTimeout(function () {
+            
+                        if(adElement.getAttribute('data-ad-status')=="unfilled"){
+                            document.getElementById('ad-container').style.display = 'none';
+            
+                        }
+                    }, 2000);
+            
+                    // Hide container if ad is not shown after 2 seconds
+                  
+                    </script>
+                    </div>
             </div>
             
 
-            <div class="mx-auto adsense-center sidebar-adsense" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
-
-                <ins id="my-ad" class="adsbygoogle" style="display:block;"
-                    data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
-                    data-full-width-responsive="true"></ins>
-                <script>
-                    const adElement = document.getElementById('my-ad');
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                // if (!adElement.classList.contains('adsbygoogle-noablate')) {
-                //     (adsbygoogle = window.adsbygoogle || []).push({});
-                // }
-                setTimeout(function () {
-        
-                    if(adElement.getAttribute('data-ad-status')=="unfilled"){
-                        document.getElementById('ad-container').style.display = 'none';
-        
-                    }
-                }, 2000);
-        
-                // Hide container if ad is not shown after 2 seconds
-              
-                </script>
-                </div>
+            
             <div class="guest-wrp side-guest-wrp">
                 <div class="guest-pro">
                     <div>
