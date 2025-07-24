@@ -31,31 +31,42 @@
                 <div class="main-right-host-top-rsvp-card green">
                     <span>Hosting</span>
                 </div>
-            @else    
-                @if ((!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '0'))
+            @else
+                @if (!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '0')
                     <div class="main-right-guests-top-rsvp-card red">
                         <span class="main-right-guests-top-rsvp-card-text">Guest</span>
                         <div class="main-right-guests-top-rvsp-icon-text">
                             <span> Not Attending</span>
-                            <span><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9.9974 18.3327C14.5807 18.3327 18.3307 14.5827 18.3307 9.99935C18.3307 5.41602 14.5807 1.66602 9.9974 1.66602C5.41406 1.66602 1.66406 5.41602 1.66406 9.99935C1.66406 14.5827 5.41406 18.3327 9.9974 18.3327Z" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M7.64062 12.3592L12.3573 7.64258" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12.3573 12.3592L7.64062 7.64258" stroke="#E03137" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <span><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M9.9974 18.3327C14.5807 18.3327 18.3307 14.5827 18.3307 9.99935C18.3307 5.41602 14.5807 1.66602 9.9974 1.66602C5.41406 1.66602 1.66406 5.41602 1.66406 9.99935C1.66406 14.5827 5.41406 18.3327 9.9974 18.3327Z"
+                                        stroke="#E03137" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M7.64062 12.3592L12.3573 7.64258" stroke="#E03137" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M12.3573 12.3592L7.64062 7.64258" stroke="#E03137" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                </span>
+                            </span>
                         </div>
                     </div>
-                @elseif ((!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '1'))    
+                @elseif (!empty($rsvpSent) && $rsvpSent['rsvp_status'] == '1')
                     <div class="main-right-guests-top-rsvp-card green">
                         <span class="main-right-guests-top-rsvp-card-text">Guest</span>
                         <div class="main-right-guests-top-rvsp-icon-text">
                             <span>Attending</span>
                             <span>
-                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9.9974 18.4596C5.33187 18.4596 1.53906 14.6668 1.53906 10.0013C1.53906 5.33578 5.33187 1.54297 9.9974 1.54297C14.6629 1.54297 18.4557 5.33578 18.4557 10.0013C18.4557 14.6668 14.6629 18.4596 9.9974 18.4596ZM9.9974 1.79297C5.47125 1.79297 1.78906 5.47516 1.78906 10.0013C1.78906 14.5274 5.47125 18.2096 9.9974 18.2096C14.5235 18.2096 18.2057 14.5274 18.2057 10.0013C18.2057 5.47516 14.5235 1.79297 9.9974 1.79297Z" fill="#23AA26" stroke="#23AA26"/>
-                                    <path d="M8.46363 11.8299L8.81719 12.1834L9.17074 11.8299L13.4541 7.54652C13.4756 7.525 13.5063 7.51172 13.5422 7.51172C13.578 7.51172 13.6088 7.525 13.6303 7.54652C13.6518 7.56805 13.6651 7.59878 13.6651 7.63464C13.6651 7.67049 13.6518 7.70122 13.6303 7.72275L8.9053 12.4477C8.88133 12.4717 8.84974 12.4846 8.81719 12.4846C8.78464 12.4846 8.75304 12.4717 8.72907 12.4477L6.37074 10.0894C6.34921 10.0679 6.33594 10.0372 6.33594 10.0013C6.33594 9.96545 6.34921 9.93472 6.37074 9.91319C6.39227 9.89166 6.423 9.87839 6.45885 9.87839C6.49471 9.87839 6.52544 9.89166 6.54697 9.91319L8.46363 11.8299Z" fill="#23AA26" stroke="#23AA26"/>
-                                    </svg>
-                                </span>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M9.9974 18.4596C5.33187 18.4596 1.53906 14.6668 1.53906 10.0013C1.53906 5.33578 5.33187 1.54297 9.9974 1.54297C14.6629 1.54297 18.4557 5.33578 18.4557 10.0013C18.4557 14.6668 14.6629 18.4596 9.9974 18.4596ZM9.9974 1.79297C5.47125 1.79297 1.78906 5.47516 1.78906 10.0013C1.78906 14.5274 5.47125 18.2096 9.9974 18.2096C14.5235 18.2096 18.2057 14.5274 18.2057 10.0013C18.2057 5.47516 14.5235 1.79297 9.9974 1.79297Z"
+                                        fill="#23AA26" stroke="#23AA26" />
+                                    <path
+                                        d="M8.46363 11.8299L8.81719 12.1834L9.17074 11.8299L13.4541 7.54652C13.4756 7.525 13.5063 7.51172 13.5422 7.51172C13.578 7.51172 13.6088 7.525 13.6303 7.54652C13.6518 7.56805 13.6651 7.59878 13.6651 7.63464C13.6651 7.67049 13.6518 7.70122 13.6303 7.72275L8.9053 12.4477C8.88133 12.4717 8.84974 12.4846 8.81719 12.4846C8.78464 12.4846 8.75304 12.4717 8.72907 12.4477L6.37074 10.0894C6.34921 10.0679 6.33594 10.0372 6.33594 10.0013C6.33594 9.96545 6.34921 9.93472 6.37074 9.91319C6.39227 9.89166 6.423 9.87839 6.45885 9.87839C6.49471 9.87839 6.52544 9.89166 6.54697 9.91319L8.46363 11.8299Z"
+                                        fill="#23AA26" stroke="#23AA26" />
+                                </svg>
+                            </span>
                         </div>
                     </div>
                 @else
@@ -63,22 +74,25 @@
                         <span class="main-right-guests-top-rsvp-card-text">Guest</span>
                         <div class="main-right-guests-top-rvsp-icon-text">
                             <span>Need to RSVP</span>
-                            <span><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_5919_106207)">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M18.125 10C18.125 12.1549 17.269 14.2215 15.7452 15.7452C14.2215 17.269 12.1549 18.125 10 18.125C7.84512 18.125 5.77849 17.269 4.25476 15.7452C2.73102 14.2215 1.875 12.1549 1.875 10C1.875 7.84512 2.73102 5.77849 4.25476 4.25476C5.77849 2.73102 7.84512 1.875 10 1.875C12.1549 1.875 14.2215 2.73102 15.7452 4.25476C17.269 5.77849 18.125 7.84512 18.125 10ZM20 10C20 12.6522 18.9464 15.1957 17.0711 17.0711C15.1957 18.9464 12.6522 20 10 20C7.34784 20 4.8043 18.9464 2.92893 17.0711C1.05357 15.1957 0 12.6522 0 10C0 7.34784 1.05357 4.8043 2.92893 2.92893C4.8043 1.05357 7.34784 0 10 0C12.6522 0 15.1957 1.05357 17.0711 2.92893C18.9464 4.8043 20 7.34784 20 10ZM6.15875 6.2375C5.8025 6.77375 5.625 7.30375 5.625 7.825C5.625 8.07875 5.7375 8.315 5.9625 8.5325C6.1875 8.75 6.4625 8.8575 6.78875 8.8575C7.3425 8.8575 7.71875 8.5475 7.9175 7.925C8.1275 7.33125 8.38375 6.88125 8.6875 6.575C8.99125 6.27 9.4625 6.1175 10.105 6.1175C10.6537 6.1175 11.1013 6.2675 11.4488 6.57125C11.795 6.87375 11.9688 7.24625 11.9688 7.68625C11.9703 7.90699 11.9115 8.12396 11.7987 8.31375C11.6841 8.50724 11.5427 8.68357 11.3787 8.8375C11.1157 9.078 10.8456 9.3106 10.5688 9.535C10.1438 9.8875 9.805 10.1912 9.55375 10.4475C9.30375 10.7038 9.10125 11.0013 8.95 11.3387C8.5475 12.895 10.6375 13.02 11.12 11.9088C11.1788 11.8013 11.2675 11.6838 11.3863 11.5538C11.5063 11.425 11.665 11.275 11.8638 11.1038C12.3695 10.6825 12.8671 10.2516 13.3563 9.81125C13.6325 9.55625 13.8713 9.25125 14.0725 8.89875C14.28 8.52257 14.3843 8.09824 14.375 7.66875C14.375 7.075 14.1988 6.525 13.845 6.01875C13.4925 5.51125 12.9925 5.11125 12.345 4.81625C11.6975 4.5225 10.9512 4.375 10.105 4.375C9.195 4.375 8.39875 4.55 7.71625 4.90375C7.03375 5.25625 6.515 5.70125 6.15875 6.2375ZM8.83375 15.0875C8.83375 15.419 8.96545 15.737 9.19987 15.9714C9.43429 16.2058 9.75223 16.3375 10.0838 16.3375C10.4153 16.3375 10.7332 16.2058 10.9676 15.9714C11.2021 15.737 11.3338 15.419 11.3338 15.0875C11.3338 14.756 11.2021 14.438 10.9676 14.2036C10.7332 13.9692 10.4153 13.8375 10.0838 13.8375C9.75223 13.8375 9.43429 13.9692 9.19987 14.2036C8.96545 14.438 8.83375 14.756 8.83375 15.0875Z" fill="#94A3B8"/>
-                                </g>
-                                <defs>
-                                <clipPath id="clip0_5919_106207">
-                                <rect width="20" height="20" fill="white"/>
-                                </clipPath>
-                                </defs>
+                            <span><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_5919_106207)">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M18.125 10C18.125 12.1549 17.269 14.2215 15.7452 15.7452C14.2215 17.269 12.1549 18.125 10 18.125C7.84512 18.125 5.77849 17.269 4.25476 15.7452C2.73102 14.2215 1.875 12.1549 1.875 10C1.875 7.84512 2.73102 5.77849 4.25476 4.25476C5.77849 2.73102 7.84512 1.875 10 1.875C12.1549 1.875 14.2215 2.73102 15.7452 4.25476C17.269 5.77849 18.125 7.84512 18.125 10ZM20 10C20 12.6522 18.9464 15.1957 17.0711 17.0711C15.1957 18.9464 12.6522 20 10 20C7.34784 20 4.8043 18.9464 2.92893 17.0711C1.05357 15.1957 0 12.6522 0 10C0 7.34784 1.05357 4.8043 2.92893 2.92893C4.8043 1.05357 7.34784 0 10 0C12.6522 0 15.1957 1.05357 17.0711 2.92893C18.9464 4.8043 20 7.34784 20 10ZM6.15875 6.2375C5.8025 6.77375 5.625 7.30375 5.625 7.825C5.625 8.07875 5.7375 8.315 5.9625 8.5325C6.1875 8.75 6.4625 8.8575 6.78875 8.8575C7.3425 8.8575 7.71875 8.5475 7.9175 7.925C8.1275 7.33125 8.38375 6.88125 8.6875 6.575C8.99125 6.27 9.4625 6.1175 10.105 6.1175C10.6537 6.1175 11.1013 6.2675 11.4488 6.57125C11.795 6.87375 11.9688 7.24625 11.9688 7.68625C11.9703 7.90699 11.9115 8.12396 11.7987 8.31375C11.6841 8.50724 11.5427 8.68357 11.3787 8.8375C11.1157 9.078 10.8456 9.3106 10.5688 9.535C10.1438 9.8875 9.805 10.1912 9.55375 10.4475C9.30375 10.7038 9.10125 11.0013 8.95 11.3387C8.5475 12.895 10.6375 13.02 11.12 11.9088C11.1788 11.8013 11.2675 11.6838 11.3863 11.5538C11.5063 11.425 11.665 11.275 11.8638 11.1038C12.3695 10.6825 12.8671 10.2516 13.3563 9.81125C13.6325 9.55625 13.8713 9.25125 14.0725 8.89875C14.28 8.52257 14.3843 8.09824 14.375 7.66875C14.375 7.075 14.1988 6.525 13.845 6.01875C13.4925 5.51125 12.9925 5.11125 12.345 4.81625C11.6975 4.5225 10.9512 4.375 10.105 4.375C9.195 4.375 8.39875 4.55 7.71625 4.90375C7.03375 5.25625 6.515 5.70125 6.15875 6.2375ZM8.83375 15.0875C8.83375 15.419 8.96545 15.737 9.19987 15.9714C9.43429 16.2058 9.75223 16.3375 10.0838 16.3375C10.4153 16.3375 10.7332 16.2058 10.9676 15.9714C11.2021 15.737 11.3338 15.419 11.3338 15.0875C11.3338 14.756 11.2021 14.438 10.9676 14.2036C10.7332 13.9692 10.4153 13.8375 10.0838 13.8375C9.75223 13.8375 9.43429 13.9692 9.19987 14.2036C8.96545 14.438 8.83375 14.756 8.83375 15.0875Z"
+                                            fill="#94A3B8" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_5919_106207">
+                                            <rect width="20" height="20" fill="white" />
+                                        </clipPath>
+                                    </defs>
                                 </svg>
-                                </span>
+                            </span>
                         </div>
                     </div>
+                @endif
             @endif
-          @endif    
-  
+
         </div>
         <div class="main-right-guests-head">
             <h3>Attending Guests</h3>
@@ -108,7 +122,8 @@ if ($hostView) {
         <div class="guest-attending-wrp">
             <div class="total-attending-guest">
                 <h4>
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M7.5013 1.66669C5.31797 1.66669 3.54297 3.44169 3.54297 5.62502C3.54297 7.76669 5.21797 9.50002 7.4013 9.57502C7.46797 9.56669 7.53464 9.56669 7.58464 9.57502C7.6013 9.57502 7.60963 9.57502 7.6263 9.57502C7.63463 9.57502 7.63463 9.57502 7.64297 9.57502C9.7763 9.50002 11.4513 7.76669 11.4596 5.62502C11.4596 3.44169 9.68463 1.66669 7.5013 1.66669Z"
                             fill="#0DAD5F" />
@@ -193,23 +208,20 @@ if ($hostView) {
                                         <div class="posts-card-head-left-content contact_search"
                                             data-search = "{{ $guest['first_name'] }} {{ $guest['last_name'] }}">
                                             @php
-                                            $username = $guest['first_name'] . ' ' . $guest['last_name'];
-                                        @endphp
+                                                $username = $guest['first_name'] . ' ' . $guest['last_name'];
+                                            @endphp
 
                                             @if ($guest['is_sync'] == '0')
                                                 <h3 class="openProfileModal" data-bs-toggle="modal"
-                                                data-bs-target="#wall_profile"
-                                                data-userid="{{  $guest['id'] }}"
-                                                >
-                                                {{  $username }}
-                                            </h3>
-                                           @else
-                                            <h3 class="openProfileModal text-decoration-none" data-bs-toggle="modal"
-                                            data-userid="{{  $guest['id'] }}"
-                                            >
-                                            {{  $username }}
-                                        </h3>
-                                          @endif
+                                                    data-bs-target="#wall_profile" data-userid="{{ $guest['id'] }}">
+                                                    {{ $username }}
+                                                </h3>
+                                            @else
+                                                <h3 class="openProfileModal text-decoration-none"
+                                                    data-bs-toggle="modal" data-userid="{{ $guest['id'] }}">
+                                                    {{ $username }}
+                                                </h3>
+                                            @endif
 
                                             @if ($guest['prefer_by'] == 'email')
                                                 <p>{{ $guest['email'] }}</p>
@@ -255,8 +267,9 @@ if ($hostView) {
                                                                 <path d="M5.91797 5.91663L14.0841 14.0827"
                                                                     stroke="white" stroke-linecap="round"
                                                                     stroke-linejoin="round" />
-                                                                <path d="M5.91787 14.0827L14.084 5.91663" stroke="white"
-                                                                    stroke-linecap="round" stroke-linejoin="round" />
+                                                                <path d="M5.91787 14.0827L14.084 5.91663"
+                                                                    stroke="white" stroke-linecap="round"
+                                                                    stroke-linejoin="round" />
                                                             </svg>
                                                         </span>
                                                     @else
@@ -386,10 +399,9 @@ if ($hostView) {
             <div class="guests-listing-buttons">
                 <!-- <a href="javascript:void(0);" class="cmn-btn see-all-btn">See All</a> -->
                 @if (count($guestArray) > 7)
-                <a href="javascript:void(0);" class="cmn-btn see-all-guest-right-btn"
-
-                    data-eventId="{{ $eventId }}">See All</a>
-                    @endif
+                    <a href="javascript:void(0);" class="cmn-btn see-all-guest-right-btn"
+                        data-eventId="{{ $eventId }}">See All</a>
+                @endif
                 @if ($eventInfo['guest_view']['is_host'] == 1 || $eventInfo['guest_view']['is_co_host'] == '1')
                     @php
                         $event_date = $eventInfo['guest_view']['event_date'];
@@ -408,6 +420,30 @@ if ($hostView) {
     </div>
 
 </div>
+
+<div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
+
+    <ins id="my-adguest" class="adsbygoogle" style="display:block;height:100px"
+        data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
+        data-ad-format="auto" data-full-width-responsive="true"></ins>
+    <script>
+        const adElementguest = document.getElementById('my-adguest');
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    // if (!adElement.classList.contains('adsbygoogle-noablate')) {
+    //     (adsbygoogle = window.adsbygoogle || []).push({});
+    // }
+    setTimeout(function () {
+
+        if(adElementguest.getAttribute('data-ad-status')=="unfilled"){
+            document.getElementById('ad-container').style.display = 'none';
+
+        }
+    }, 2000);
+
+    // Hide container if ad is not shown after 2 seconds
+  
+    </script>
+    </div>
 <div class="modal fade cmn-modal" id="editrsvp3" tabindex="-1" aria-labelledby="editrsvpLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
