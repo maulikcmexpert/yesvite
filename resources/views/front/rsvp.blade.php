@@ -61,23 +61,7 @@
             {{-- <input type="text" value="{{$rsvp_status}}" /> --}}
             <div class="tab-pane fade show active" id="nav-invite" role="tabpanel" aria-labelledby="nav-invite-tab">
                 <section class="rsvp-wrp">
-                    <div class="mx-auto adsense-center" style="text-align: center;">  
-                    @if((isset($display_ad)&& $display_ad==true))
-                        <ins id="my-ad" class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
-                        data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                    <script>
-                const adElement = document.getElementById('my-ad');
-
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                    setTimeout(function () {
-
-                    if(adElement.getAttribute('data-ad-status')=="unfilled"){
-                    document.getElementById('ad-container').style.display = 'none';
-
-                    }
-                    }, 2000);                    </script>
-                    @endif
-                </div>
+                   
                     <div class="container">
                         <div class="row mt-4">
                             <div class="col-lg-5 mb-lg-0 mb-sm-4 mb-md-4 mb-0">
@@ -280,6 +264,24 @@
 
                                           </div>
                                             {{-- @if($is_host == "1") --}}
+                                            <div class="mx-auto adsense-center" style="text-align: center;">  
+                                                @if((isset($display_ad)&& $display_ad==true))
+                                                    <ins id="my-ad" class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
+                                                    data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                                                <script>
+                                            const adElement = document.getElementById('my-ad');
+                            
+                                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                                setTimeout(function () {
+                            
+                                                if(adElement.getAttribute('data-ad-status')=="unfilled"){
+                                                document.getElementById('ad-container').style.display = 'none';
+                            
+                                                }
+                                                }, 2000);                    </script>
+                                                @endif
+                                            </div>
+                                            
                                                 <div class="new_copy_event_Wrp">
                                                     <h4 class="title">Share Event Link</h4>
                                                     <div class="new_copy_event_inner">
