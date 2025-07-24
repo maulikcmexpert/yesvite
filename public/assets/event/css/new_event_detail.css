@@ -142,6 +142,8 @@
 .new-event-sidebar-menu {
     padding: 16px 24px 24px 24px;
     width: 100%;
+    overflow-y: scroll;
+    max-height: calc(100vh - 150px);
 }
 
 .new-event-sidebar-menu ul {
