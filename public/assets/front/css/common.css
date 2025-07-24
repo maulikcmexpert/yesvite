@@ -1110,7 +1110,7 @@ input:-webkit-autofill {
       }
 
       .small-adsense{
-        max-width: 500px;
+        max-width: 500px !important;
       }
 
       .small-adsense #my-bottomad {
@@ -1135,7 +1135,7 @@ input:-webkit-autofill {
 
    
     .small-adsense{
-        max-width: 500px;
+        max-width: 435px !important;
       }
 
       .small-adsense #my-bottomad {
