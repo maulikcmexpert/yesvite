@@ -75,17 +75,9 @@
                     data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
                     data-full-width-responsive="true"></ins>
                 <script>
-                    const bottomad = document.getElementById('my-bottomad');
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 
-                    setTimeout(function() {
-
-                        if (adElement.getAttribute('data-ad-status') == "unfilled") {
-                            document.getElementById('ad-container').style.display = 'none';
-
-                        }
-                    }, 2000);
-
+            
                     const container = document.getElementById("small-adsense-id")
                         container.style.height = "100px"
 

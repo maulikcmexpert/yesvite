@@ -427,18 +427,11 @@ if ($hostView) {
         data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
         data-ad-format="auto" data-full-width-responsive="true"></ins>
     <script>
-        const adElementguest = document.getElementById('my-adguest');
         (adsbygoogle = window.adsbygoogle || []).push({});
     // if (!adElement.classList.contains('adsbygoogle-noablate')) {
     //     (adsbygoogle = window.adsbygoogle || []).push({});
     // }
-    setTimeout(function () {
 
-        if(adElementguest.getAttribute('data-ad-status')=="unfilled"){
-            document.getElementById('ad-container').style.display = 'none';
-
-        }
-    }, 2000);
 
     // Hide container if ad is not shown after 2 seconds
   

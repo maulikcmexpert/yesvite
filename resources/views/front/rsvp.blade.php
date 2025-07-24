@@ -86,18 +86,11 @@
                                     data-ad-format="auto"
                                     data-full-width-responsive="true"></ins>
                                     <script>
-                                            const adElementrsvp1 = document.getElementById('my-adrsvp1');
                                         (adsbygoogle = window.adsbygoogle || []).push({});
                                     // if (!adElement.classList.contains('adsbygoogle-noablate')) {
                                     //     (adsbygoogle = window.adsbygoogle || []).push({});
                                     // }
-                                    setTimeout(function () {
-                            
-                                        if(adElementrsvp1.getAttribute('data-ad-status')=="unfilled"){
-                                            document.getElementById('ad-container').style.display = 'none';
-                            
-                                        }
-                                    }, 2000);
+                                 
                             
                                     // Hide container if ad is not shown after 2 seconds
                                   
@@ -277,16 +270,9 @@
                                                 data-ad-format="auto"
                                                 data-full-width-responsive="true"></ins>
                                                 <script>
-                                            const adElementrsvp = document.getElementById('my-adRsvp');
                             
                                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                                                setTimeout(function () {
-                            
-                                                if(adElementrsvp.getAttribute('data-ad-status')=="unfilled"){
-                                                document.getElementById('ad-container').style.display = 'none';
-                            
-                                                }
-                                                }, 2000);                    </script>
+                                                                </script>
                                                 @endif
                                             </div>
                                             
