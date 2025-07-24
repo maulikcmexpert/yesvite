@@ -71,11 +71,11 @@
               <div class="mx-auto adsense-center" id="ad-container"
                   style="text-align: center; height:100px; max-height:100px;">
 
-                  <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
+                  <ins id="my-bottomad" class="adsbygoogle" style="display:block;height:100px"
                       data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835" data-ad-format="auto"
                       data-full-width-responsive="true"></ins>
                   <script>
-                      const adElement = document.getElementById('my-ad');
+                      const bottomad = document.getElementById('my-bottomad');
                       (adsbygoogle = window.adsbygoogle || []).push({});
                       // if (!adElement.classList.contains('adsbygoogle-noablate')) {
                       //     (adsbygoogle = window.adsbygoogle || []).push({});
