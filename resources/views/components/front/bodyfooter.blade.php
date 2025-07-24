@@ -67,7 +67,7 @@
                   <img src="{{ asset('assets/front/image/yesvite_logo.png') }}" style="width:140px;height:65px;"
                       alt="logo">
               </a>
-              <div class="small-adsense" style="height:100px;min-height:80px;">
+              <div class="small-adsense">
 
                 <div class="mx-auto adsense-center" id="ad-container">
 
