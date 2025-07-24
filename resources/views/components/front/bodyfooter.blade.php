@@ -70,7 +70,22 @@
 
               <div class="mx-auto adsense-center small-adsense" id="ad-container">
 
-                  
+                <ins id="my-bottomad" class="adsbygoogle" style="display:block;"
+                data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835" data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                const bottomad = document.getElementById('my-bottomad');
+                (adsbygoogle = window.adsbygoogle || []).push({});
+             
+                setTimeout(function() {
+
+                    if (adElement.getAttribute('data-ad-status') == "unfilled") {
+                        document.getElementById('ad-container').style.display = 'none';
+
+                    }
+                }, 2000);
+
+            </script>
               </div>
               
               <ul class="nav">
