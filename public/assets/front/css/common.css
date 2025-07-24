@@ -945,7 +945,7 @@ ul.nav-tabs .nav-link:focus {
     max-height: 100px !important;
     min-height: 80px !important;
     width: 100%;
-    max-width: 800 !important;
+    max-width: 800px !important;
     padding: 0 12px ;
     margin: 10px auto !important;
   }
@@ -1201,16 +1201,6 @@ input:-webkit-autofill {
         max-width: 575;
         padding: 0 12px !important;
       }
-      .small-adsense {
-        text-align: center;
-        height: 100px !important;
-        max-height: 100px !important;
-        min-height: 80px !important;
-        width: 100%;
-        max-width: 575px !important;
-        padding: 0 12px ;
-        margin: 10px auto !important;
-      }
 }
 
 @media only screen and (max-width: 575px) {
@@ -1259,18 +1249,21 @@ input:-webkit-autofill {
         max-width: 400px;
         padding: 0 12px !important;
       }
-
-      .small-adsense {
-        text-align: center;
-        height: 100px !important;
-        max-height: 100px !important;
-        min-height: 80px !important;
-        width: 100%;
-        max-width: 350px !important;
-        padding: 0 12px ;
-        margin: 10px auto !important;
+      .small-adsense #my-bottomad {
+        margin: auto !important;
+        max-height: 120px !important;
+        width:320px;height: 100px !important;
       }
 
+}
+
+@media only screen and (max-width:375px){
+    .small-adsense #my-bottomad {
+        margin: auto !important;
+        max-height: 120px !important;
+        width: 250px;
+        height: 250px !important;
+      }
 }
 
 @keyframes rotate360 {
