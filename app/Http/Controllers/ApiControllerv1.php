@@ -119,7 +119,7 @@ use stdClass;
 use Spatie\Image\Image;
 use App\Services\GooglePlayServices;
 
-class ApiControllerv2 extends Controller
+class ApiControllerv1 extends Controller
 
 
 {
