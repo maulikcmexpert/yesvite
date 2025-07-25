@@ -625,8 +625,8 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
             </div>
             
             @php
-                $display_plan=isset($eventData['event_type'])?$eventData['event_type']:"";
-                dd($display_plan);
+                $display_plan=isset($eventDetail['event_type'])?$eventDetail['event_type']:"";
+                // dd($display_plan);
             @endphp
             
             <div class="guest-wrp side-guest-wrp paid_plan_status {{ $display_plan === "0" ? 'd-none' : '' }}">
