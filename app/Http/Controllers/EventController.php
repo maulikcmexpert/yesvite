@@ -395,6 +395,7 @@ class EventController extends BaseController
 
                     // $eventDetail['event_type_id'] = (!empty($getEventData->event_type_id) && $getEventData->event_type_id != NULL) ? $getEventData->event_type_id : "";
                     $eventDetail['event_name'] = (!empty($getEventData->event_name) && $getEventData->event_name != NULL) ? $getEventData->event_name : "";
+                    $eventDetail['event_type'] = (isset($getEventData->event_type) && $getEventData->event_type != NULL) ? $getEventData->event_type : "";
                     $eventDetail['isRsvpEvent'] = $getEventData->isRsvpEvent;
                     $eventDetail['hosted_by'] = (!empty($getEventData->hosted_by) && $getEventData->hosted_by != NULL) ? $getEventData->hosted_by : "";
                     $eventDetail['start_date'] = (!empty($getEventData->start_date) && $getEventData->start_date != NULL) ? $getEventData->start_date : "";
