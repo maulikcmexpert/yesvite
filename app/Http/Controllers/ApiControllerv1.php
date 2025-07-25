@@ -11071,6 +11071,7 @@ class ApiControllerv1 extends Controller
             $eventAboutHost['host_id'] = (!empty($eventDetail->user_id) && $eventDetail->user_id != NULL) ? $eventDetail->user_id : "";
             $isCoHost =  EventInvitedUser::where(['event_id' => $input['event_id'], 'user_id' => $user->id, 'is_co_host' => '1'])->first();
             $eventAboutHost['is_co_host'] = (isset($isCoHost) && $isCoHost->is_co_host != "") ? $isCoHost->is_co_host : "0";
+            $eventAboutHost['event_type'] = (!empty($eventDetail->event_type) && $eventDetail->event_type != NULL) ? $eventDetail->event_type : "";
 
 
             $eventAboutHost['event_wall'] = $eventDetail->event_settings->event_wall;
