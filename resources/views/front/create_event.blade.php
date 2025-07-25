@@ -1,6 +1,6 @@
 {{-- //////vrushali///// --}}
 @php
-dd($eventDetail);
+
 if (Auth::guard('web')->check()) {
 $userS = Auth::guard('web')->user();
 
