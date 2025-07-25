@@ -226,6 +226,158 @@ Route::prefix('user/v2/')->middleware('checkUser')->group(function () {
     Route::get('check_category_adv', [ApiControllerv2::class, 'check_category_adv']);
 });
 
+Route::prefix('user/v1/')->middleware('checkUser')->group(function () {
+
+    Route::post('upload_application', [ApiControllerv2::class, 'uploadApplication']);
+
+    Route::get('home', [ApiControllerv2::class, 'home']);
+    Route::post('create_professional_account', [ApiControllerv2::class, 'createProfessionalAccount']);
+    Route::post('update_profile', [ApiControllerv2::class, 'updateProfile']);
+    Route::post('update_profile_or_bg_profile', [ApiControllerv2::class, 'updateProfileOrBgProfile']);
+    Route::post('remove_profile', [ApiControllerv2::class, 'removeProfile']);
+    Route::post('my_profile', [ApiControllerv2::class, 'myProfile']);
+    Route::post('change_password', [ApiControllerv2::class, 'changePassword']);
+    Route::post('privacy_setting', [ApiControllerv2::class, 'privacySetting']);
+    Route::post('message_privacy_setting', [ApiControllerv2::class, 'MessageprivacySetting']);
+    Route::post('general_setting', [ApiControllerv2::class, 'generalSetting']);
+    Route::post('delete_account', [ApiControllerv2::class, 'deleteAccount']);
+    Route::get('get_event_type', [ApiControllerv2::class, 'getEventType']);
+    Route::post('get_design_list', [ApiControllerv2::class, 'getDesignList']);
+
+    Route::get('get_design_style_option_data_list', [ApiControllerv2::class, 'getDesignStyleOptionDataList']);
+
+    Route::post('get_design_option_data_list', [ApiControllerv2::class, 'getDesignOptionDataList']);
+    Route::get('get_yesvite_contact_list', [ApiControllerv2::class, 'getYesviteContactList']);
+    Route::post('get_yesvite_contact_list_page', [ApiControllerv2::class, 'getYesviteContactListPage']);
+    Route::post('get_yesvite_selected_user_list_page', [ApiControllerv2::class, 'getYesviteSelectedUserListPage']);
+    Route::post('add_contact', [ApiControllerv2::class, 'addContact']);
+    Route::post('edit_contact', [ApiControllerv2::class, 'editContact']);
+    Route::post('create_event', [ApiControllerv2::class, 'createEvent']);
+    Route::post('edit_event', [ApiControllerv2::class, 'editEvent']);
+    Route::post('set_user_event_create_step', [ApiControllerv2::class, 'setUserEventCreateStep']);
+    Route::post('draft_event_list', [ApiControllerv2::class, 'draftEventList']);
+    Route::post('get_event_data', [ApiControllerv2::class, 'getEventData']);
+    Route::post('get_single_event', [ApiControllerv2::class, 'getSingleEvent']);
+
+    Route::post('create_greeting_card', [ApiControllerv2::class, 'createGreetingCard']);
+    Route::post('update_greeting_card', [ApiControllerv2::class, 'updateGreetingCard']);
+    Route::post('delete_greeting_card', [ApiControllerv2::class, 'deleteGreetingCard']);
+    Route::post('get_greeting_card_list', [ApiControllerv2::class, 'getGreetingCardList']);
+
+    Route::post('create_gift_registry', [ApiControllerv2::class, 'createGiftregistry']);
+    Route::post('update_gift_registry', [ApiControllerv2::class, 'updateGiftregistry']);
+    Route::post('delete_gift_registry', [ApiControllerv2::class, 'deleteGiftregistry']);
+    Route::post('get_gift_registry_list', [ApiControllerv2::class, 'getGiftRegistryList']);
+
+    Route::post('store_event_image', [ApiControllerv2::class, 'storeEventImage']);
+    Route::post('delete_event', [ApiControllerv2::class, 'deleteEvent']);
+    Route::post('invite_user', [ApiControllerv2::class, 'inviteUser']);
+    Route::post('event_list', [ApiControllerv2::class, 'EventList']);
+    Route::post('event_list_for_calendar', [ApiControllerv2::class, 'eventListForCalendar']);
+    Route::post('pending_rsvp_event_list', [ApiControllerv2::class, 'pendingRsvpEventList']);
+    Route::post('sent_rsvp', [ApiControllerv2::class, 'sentRsvp']);
+    Route::post('event_about', [ApiControllerv2::class, 'eventAbout']);
+    Route::post('event_about_v2', [ApiControllerv2::class, 'eventAboutv2']);
+    Route::post('create_post', [ApiControllerv2::class, 'createPost']);
+    Route::post('update_post', [ApiControllerv2::class, 'updatePost']);
+    Route::post('post_control', [ApiControllerv2::class, 'postControl']);
+    Route::post('post_media_report', [ApiControllerv2::class, 'postMediaReport']);
+    Route::post('chat_report', [ApiControllerv2::class, 'chatReport']);
+
+    Route::post('delete_post', [ApiControllerv2::class, 'deletePost']);
+    Route::post('create_event_post_photo', [ApiControllerv2::class, 'createEventPostPhoto']);
+    Route::post('event_wall', [ApiControllerv2::class, 'eventWall']);
+    Route::post('event_wall_manage', [ApiControllerv2::class, 'eventWallManage']);
+    Route::post('event_post_detail', [ApiControllerv2::class, 'eventPostDetail']);
+
+    Route::post('create_story', [ApiControllerv2::class, 'createStory']);
+    Route::post('user_seen_story', [ApiControllerv2::class, 'userSeenStory']);
+    Route::post('delete_story', [ApiControllerv2::class, 'deleteStory']);
+
+    Route::post('post_comment_reply_list', [ApiControllerv2::class, 'postCommentReplyList']);
+
+    Route::post('user_post_like_dislike', [ApiControllerv2::class, 'userPostLikeDislike']);
+    Route::post('user_post_photo_like_dislike', [ApiControllerv2::class, 'userPostPhotoLikeDislike']);
+
+    Route::post('user_post_comment', [ApiControllerv2::class, 'userPostComment']);
+    Route::post('user_post_comment_reply', [ApiControllerv2::class, 'userPostCommentReply']);
+    Route::post('user_post_comment_reply_reaction', [ApiControllerv2::class, 'userPostCommentReplyReaction']);
+
+    Route::post('user_post_photo_comment', [ApiControllerv2::class, 'userPostPhotoComment']);
+    Route::post('user_post_photo_comment_reply', [ApiControllerv2::class, 'userPostPhotoCommentReply']);
+    Route::post('user_post_photo_comment_reply_reaction', [ApiControllerv2::class, 'userPostPhotoCommentReplyReaction']);
+
+    Route::post('event_post_photo_list', [ApiControllerv2::class, 'eventPostPhotoList']);
+    Route::post('event_post_photo_list1', [ApiControllerv2::class, 'eventPostPhotoList1']);
+    Route::post('remove_event_post_photo', [ApiControllerv2::class, 'removeEventPostPhoto']);
+    Route::post('remove_event_post_single_photo', [ApiControllerv2::class, 'removeEventPostSinglePhoto']);
+
+    Route::post('event_post_photo_detail', [ApiControllerv2::class, 'eventPostPhotoDetail']);
+
+
+    Route::post('event_post_photo_list_filter', [ApiControllerv2::class, 'eventPostPhotoListFilter']);
+    Route::post('post_photo_comment_reply_list', [ApiControllerv2::class, 'postPhotoCommentReplyList']);
+
+
+    // potluck category and item add or edit //
+    Route::post('add_potluck_category', [ApiControllerv2::class, 'addPotluckCategory']);
+    Route::post('edit_potluck_category', [ApiControllerv2::class, 'editPotluckCategory']);
+    Route::post('add_potluck_category_item', [ApiControllerv2::class, 'addPotluckCategoryItem']);
+    Route::post('edit_potluck_category_item', [ApiControllerv2::class, 'editPotluckCategoryItem']);
+    Route::post('event_potluck_category_delete', [ApiControllerv2::class, 'EventpotluckCategoryDelete']);
+    Route::post('add_user_potluck_item', [ApiControllerv2::class, 'addUserPotluckItem']);
+    Route::post('edit_user_potluck_item', [ApiControllerv2::class, 'editUserPotluckItem']);
+    Route::post('delete_user_potluck_item', [ApiControllerv2::class, 'deleteUserPotluckItem']);
+    Route::post('delete_potluck', [ApiControllerv2::class, 'deletePotluck']);
+
+    Route::post('user_vote_of_poll', [ApiControllerv2::class, 'userVoteOfPoll']);
+    Route::post('event_guest', [ApiControllerv2::class, 'eventGuest']);
+
+    Route::post('faild_invites', [ApiControllerv2::class, 'faildInvites']);
+    Route::post('send_invitation', [ApiControllerv2::class, 'sendInvitation']);
+
+    Route::post('remove_guest_from_invite', [ApiControllerv2::class, 'removeGuestFromInvite']);
+    Route::post('delete_contact', [ApiControllerv2::class, 'deleteContact']);
+
+    Route::post('notification_list', [ApiControllerv2::class, 'notificationList']);
+    Route::post('delete_notification', [ApiControllerv2::class, 'deleteNotification']);
+    Route::post('notification_read_unread', [ApiControllerv2::class, 'notificationReadUnread']);
+    Route::get('notification_all_read', [ApiControllerv2::class, 'notificationAllRead']);
+    Route::get('get_events_list', [ApiControllerv2::class, 'getEventsList']);
+    Route::post('event_potluck', [ApiControllerv2::class, 'eventPotluck']);
+
+    Route::post('create_group', [ApiControllerv2::class, 'createGroup']);
+    Route::post('group_list', [ApiControllerv2::class, 'groupList']);
+    Route::post('delete_group', [ApiControllerv2::class, 'deleteGroup']);
+    Route::post('add_group_member', [ApiControllerv2::class, 'addGroupMember']);
+    Route::post('member_list', [ApiControllerv2::class, 'memberList']);
+    Route::post('remove_user_from_group', [ApiControllerv2::class, 'removeUserFromGroup']);
+    Route::post('my_account', [ApiControllerv2::class, 'myAccount']);
+    Route::get('get_notification_setting', [ApiControllerv2::class, 'getNotificationSetting']);
+    Route::post('notification_setting', [ApiControllerv2::class, 'notificationSetting']);
+    Route::post('regenarate_token', [ApiControllerv2::class, 'regenarateToken']);
+    Route::post('accept_reject_co_host', [ApiControllerv2::class, 'acceptRejectCoHost']);
+    Route::post('notification_on_off', [ApiControllerv2::class, 'notificationOnOff']);
+    Route::post('add_subscription', [ApiControllerv2::class, 'addSubscription']);
+    Route::post('add_product_subscription', [ApiControllerv2::class, 'addProductSubscription']);
+    Route::get('check_subscription', [ApiControllerv2::class, 'checkSubscription']);
+    Route::post('send_app_link', [ApiControllerv2::class, 'appInviteLink']);
+
+    Route::post('get_all_template_data', [ApiControllerv2::class, 'getAllTemplateData']);
+    Route::post('get_single_template_data', [ApiControllerv2::class, 'getSingleTemplateData']);
+
+    Route::post('check_user_notification', [ApiControllerv2::class, 'checkUserNotification']);
+
+    Route::get('notificationtest', [ApiControllerv2::class, 'notificationtest']);
+
+    Route::get('logout', [ApiControllerv2::class, 'logout']);
+    Route::post('sync_contact', [ApiContactController::class, 'sync_contact']);
+    Route::post('coin_transactions', [ApiControllerv2::class, 'coin_transactions']);
+    Route::post('coin_graph', [ApiControllerv2::class, 'coin_graph']);
+    Route::post('search_tags', [ApiControllerv2::class, 'searchTags']);
+    Route::get('pricing_list', [ApiControllerv2::class, 'pricing_list']);
+    Route::get('check_category_adv', [ApiControllerv2::class, 'check_category_adv']);
+});
 
 Route::prefix('user/v3/')->middleware('checkUser')->group(function () {
 
