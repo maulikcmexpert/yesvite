@@ -981,7 +981,7 @@ class EventController extends BaseController
 
         $potluck = session('category');
         // dd($request);
-        // dd($request);
+        dd($request);
 
         Session::forget('desgin');
         Session::forget('custom_image');
@@ -1054,6 +1054,7 @@ class EventController extends BaseController
         }
         $isRsvpEvent = $request->isRsvpEvent;
         // $event_creation->event_type_id = (isset($request->event_type) && $request->event_type != "") ? (int)$request->event_type : "";
+        $event_creation->event_type = (isset($request->event_plan_type) && $request->event_plan_type != "") ?$request->event_plan_type : "";
         $event_creation->user_id = $user_id;
         $event_creation->event_name = (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "";
         $event_creation->hosted_by = (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "";
@@ -1094,7 +1095,7 @@ class EventController extends BaseController
             $get_count_invited_user = $request->Alreadyguest + $get_count_invited_user;
         }
         if (isset($request->isdraft) && $request->isdraft == "0") {
-            if(isset($request->event_type)&&$request->event_type=="1"){
+            if(isset($request->event_plan_type)&&$request->event_plan_type=="1"){
                 debit_coins($user_id, $eventId, $get_count_invited_user);
             }
             $step = $event_creation->step;
@@ -1559,7 +1560,7 @@ class EventController extends BaseController
                     if ($request->isCopy != "") {
                         $get_count_invited_user = $request->Alreadyguest + $get_count_invited_user;
                     }
-                    if(isset($request->event_type)&&$request->event_type=="1"){
+                    if(isset($request->event_plan_type)&&$request->event_plan_type=="1"){
                     debit_coins($user_id, $eventId, $get_count_invited_user);
                     }
                 }
@@ -4097,6 +4098,7 @@ class EventController extends BaseController
         }
         // $event_creation->user_id = $user_id;
         $event_creation->event_name = (isset($request->event_name) && $request->event_name != "") ? $request->event_name : "";
+        $event_creation->event_type = (isset($request->event_plan_type) && $request->event_plan_type != "") ? $request->event_plan_type : "";
         $event_creation->template_id = (isset($request->temp_id) && $request->temp_id) ? $request->temp_id : $event_creation->template_id;
         $event_creation->hosted_by = (isset($request->hosted_by) && $request->hosted_by) ? $request->hosted_by : "";
         $event_creation->start_date = (isset($startDate) && $startDate != "" && $startDateObj != false) ? $startDateFormat : $startDate;
@@ -4560,7 +4562,7 @@ class EventController extends BaseController
             }
 
             if ($request->isDraftEdit == "1" || $request->is_update_event == '1') {
-                if(isset($request->event_type)&&$request->event_type=="1"){
+                if(isset($request->event_plan_type)&&$request->event_plan_type=="1"){
                 debit_coins($user_id, $eventId, $get_count_invited_user);
                 }
             }

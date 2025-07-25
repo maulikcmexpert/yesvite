@@ -197,7 +197,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
             </a>
 
             <h5>Detail Events</h5> --}}
-            <div class="small-adsense topbar-adsense mt-2" id="small-adsense-id">
+            {{-- <div class="small-adsense topbar-adsense mt-2" id="small-adsense-id">
 
                 <div class="mx-auto" id="ad-container" style="margin-top: 0.95rem !important;">
 
@@ -214,7 +214,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
 
                 </script>
                 </div>
-              </div>
+              </div> --}}
 
             <div class="dropdown new_event_detail_header_dropdown">
                 <div class="new_event_detail_header-right dropdown-toggle" id="dropdownMenuButton1"
@@ -3380,7 +3380,201 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
 <div id="sidebar_list_group_member_overlay" class="overlay" onclick="toggleSidebar()"></div>
 
 
+<div class="modal fade" id="select_event_type" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog comman-modal-dialog modal-dialog-centered">
+        <div class="modal-content comman-modal-content">
+            <div class="modal-header comman-modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                <button type="button" data-bs-dismiss="modal" aria-label="Close">
+                    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 5.5L18.9991 19.4991" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M5.00094 19.4991L19 5.5" stroke="#64748B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body comman-modal-body">
+                <div class="modal-body-top-side">
+                    <div class="icon-section">
+                        <img src="{{asset('assets/front/image/header_plan_icon.png')}}" alt="">
+                    </div>
+                    <div class="modal-body-top-side-details-section">
+                        <h3 class="modal-body-top-side-title">Choose your plan to publish the event</h3>
+                        <p class="modal-body-top-side-text">Start with a free or premium experience</p>
+                    </div>
+                </div>
 
+                <div class="creditBalance-card">
+                    <div class="creditBalance-card-header">
+                        <div class="creditBalance-card-header-details">
+                            <h4 class="creditBalance-card-header-title">Your current credit balance</h4>
+                            <p class="creditBalance-card-header-text">Credits are used to send event invites. 1 Credit = 1 Invite.</p>
+                        </div>
+                        <div class="creditBalance-card-icon-text">
+                            <div class="icon-section">
+                                <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
+                            </div>
+                            <span class="icon-text">0</span>
+                        </div>
+                    </div>
+
+                    <div class="creditBalance-card-bdoy">
+                        <p class="creditBalance-card-bdoy-text">Total Credits needed to this event</p>
+                        <h5 class="creditBalance-card-bdoy-title">50 Credits</h5>
+                    </div>
+
+                </div>
+
+                <div class="plan-card">
+                    <div class="plan-inner-card">
+                        <div class="plan-inner-card-header">
+                            <div class="plan-inner-card-header-details">
+                                <h5 class="plan-inner-card-header-title">Free Plan</h5>
+                                <p class="plan-inner-card-header-text">Your current plan</p>
+                            </div>
+                            <input class="form-check-input select_plan_check" type="checkbox" value="0"
+                            {{ isset($eventDetail['event_type']) && $eventDetail['event_type'] == "0" ? 'checked' : '' }}>                        </div>
+                        <div class="plan-inner-card-body">
+                            <ul class="plan-inner-card-list">
+                                <li class="plan-inner-card-item">
+                                    <div class="icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.0026 1.33203C4.32927 1.33203 1.33594 4.32536 1.33594 7.9987C1.33594 11.672 4.32927 14.6654 8.0026 14.6654C11.6759 14.6654 14.6693 11.672 14.6693 7.9987C14.6693 4.32536 11.6759 1.33203 8.0026 1.33203ZM11.1893 6.46536L7.40927 10.2454C7.31594 10.3387 7.18927 10.392 7.05594 10.392C6.9226 10.392 6.79594 10.3387 6.7026 10.2454L4.81594 8.3587C4.6226 8.16536 4.6226 7.84536 4.81594 7.65203C5.00927 7.4587 5.32927 7.4587 5.5226 7.65203L7.05594 9.18536L10.4826 5.7587C10.6759 5.56536 10.9959 5.56536 11.1893 5.7587C11.3826 5.95203 11.3826 6.26536 11.1893 6.46536Z" fill="#27B076" />
+                                        </svg>
+                                    </div>
+                                    <h5>Up to 500 invites per event</h5>
+                                </li>
+                                <li class="plan-inner-card-item">
+                                    <div class="icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.0026 1.33203C4.32927 1.33203 1.33594 4.32536 1.33594 7.9987C1.33594 11.672 4.32927 14.6654 8.0026 14.6654C11.6759 14.6654 14.6693 11.672 14.6693 7.9987C14.6693 4.32536 11.6759 1.33203 8.0026 1.33203ZM11.1893 6.46536L7.40927 10.2454C7.31594 10.3387 7.18927 10.392 7.05594 10.392C6.9226 10.392 6.79594 10.3387 6.7026 10.2454L4.81594 8.3587C4.6226 8.16536 4.6226 7.84536 4.81594 7.65203C5.00927 7.4587 5.32927 7.4587 5.5226 7.65203L7.05594 9.18536L10.4826 5.7587C10.6759 5.56536 10.9959 5.56536 11.1893 5.7587C11.3826 5.95203 11.3826 6.26536 11.1893 6.46536Z" fill="#27B076" />
+                                        </svg>
+                                    </div>
+                                    <h5>Ads displayed to host and guests</h5>
+                                </li>
+                                <li class="plan-inner-card-item">
+                                    <div class="icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.0026 1.33203C4.32927 1.33203 1.33594 4.32536 1.33594 7.9987C1.33594 11.672 4.32927 14.6654 8.0026 14.6654C11.6759 14.6654 14.6693 11.672 14.6693 7.9987C14.6693 4.32536 11.6759 1.33203 8.0026 1.33203ZM11.1893 6.46536L7.40927 10.2454C7.31594 10.3387 7.18927 10.392 7.05594 10.392C6.9226 10.392 6.79594 10.3387 6.7026 10.2454L4.81594 8.3587C4.6226 8.16536 4.6226 7.84536 4.81594 7.65203C5.00927 7.4587 5.32927 7.4587 5.5226 7.65203L7.05594 9.18536L10.4826 5.7587C10.6759 5.56536 10.9959 5.56536 11.1893 5.7587C11.3826 5.95203 11.3826 6.26536 11.1893 6.46536Z" fill="#27B076" />
+                                        </svg>
+                                    </div>
+                                    <h5>Yesvite Lists to manage attendees</h5>
+                                </li>
+                                <li class="plan-inner-card-item">
+                                    <div class="icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.0026 1.33203C4.32927 1.33203 1.33594 4.32536 1.33594 7.9987C1.33594 11.672 4.32927 14.6654 8.0026 14.6654C11.6759 14.6654 14.6693 11.672 14.6693 7.9987C14.6693 4.32536 11.6759 1.33203 8.0026 1.33203ZM11.1893 6.46536L7.40927 10.2454C7.31594 10.3387 7.18927 10.392 7.05594 10.392C6.9226 10.392 6.79594 10.3387 6.7026 10.2454L4.81594 8.3587C4.6226 8.16536 4.6226 7.84536 4.81594 7.65203C5.00927 7.4587 5.32927 7.4587 5.5226 7.65203L7.05594 9.18536L10.4826 5.7587C10.6759 5.56536 10.9959 5.56536 11.1893 5.7587C11.3826 5.95203 11.3826 6.26536 11.1893 6.46536Z" fill="#27B076" />
+                                        </svg>
+                                    </div>
+                                    <h5>Guest polls on the event wall</h5>
+                                </li>
+                                <li class="plan-inner-card-item">
+                                    <div class="icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.0026 1.33203C4.32927 1.33203 1.33594 4.32536 1.33594 7.9987C1.33594 11.672 4.32927 14.6654 8.0026 14.6654C11.6759 14.6654 14.6693 11.672 14.6693 7.9987C14.6693 4.32536 11.6759 1.33203 8.0026 1.33203ZM11.1893 6.46536L7.40927 10.2454C7.31594 10.3387 7.18927 10.392 7.05594 10.392C6.9226 10.392 6.79594 10.3387 6.7026 10.2454L4.81594 8.3587C4.6226 8.16536 4.6226 7.84536 4.81594 7.65203C5.00927 7.4587 5.32927 7.4587 5.5226 7.65203L7.05594 9.18536L10.4826 5.7587C10.6759 5.56536 10.9959 5.56536 11.1893 5.7587C11.3826 5.95203 11.3826 6.26536 11.1893 6.46536Z" fill="#27B076" />
+                                        </svg>
+                                    </div>
+                                    <h5>3-photo slider on invite page</h5>
+                                </li>
+                                <li class="plan-inner-card-item">
+                                    <div class="icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.0026 1.33203C4.32927 1.33203 1.33594 4.32536 1.33594 7.9987C1.33594 11.672 4.32927 14.6654 8.0026 14.6654C11.6759 14.6654 14.6693 11.672 14.6693 7.9987C14.6693 4.32536 11.6759 1.33203 8.0026 1.33203ZM11.1893 6.46536L7.40927 10.2454C7.31594 10.3387 7.18927 10.392 7.05594 10.392C6.9226 10.392 6.79594 10.3387 6.7026 10.2454L4.81594 8.3587C4.6226 8.16536 4.6226 7.84536 4.81594 7.65203C5.00927 7.4587 5.32927 7.4587 5.5226 7.65203L7.05594 9.18536L10.4826 5.7587C10.6759 5.56536 10.9959 5.56536 11.1893 5.7587C11.3826 5.95203 11.3826 6.26536 11.1893 6.46536Z" fill="#27B076" />
+                                        </svg>
+                                    </div>
+                                    <h5>Co-host support</h5>
+                                </li>
+                                <li class="plan-inner-card-item">
+                                    <div class="icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.0026 1.33203C4.32927 1.33203 1.33594 4.32536 1.33594 7.9987C1.33594 11.672 4.32927 14.6654 8.0026 14.6654C11.6759 14.6654 14.6693 11.672 14.6693 7.9987C14.6693 4.32536 11.6759 1.33203 8.0026 1.33203ZM11.1893 6.46536L7.40927 10.2454C7.31594 10.3387 7.18927 10.392 7.05594 10.392C6.9226 10.392 6.79594 10.3387 6.7026 10.2454L4.81594 8.3587C4.6226 8.16536 4.6226 7.84536 4.81594 7.65203C5.00927 7.4587 5.32927 7.4587 5.5226 7.65203L7.05594 9.18536L10.4826 5.7587C10.6759 5.56536 10.9959 5.56536 11.1893 5.7587C11.3826 5.95203 11.3826 6.26536 11.1893 6.46536Z" fill="#27B076" />
+                                        </svg>
+                                    </div>
+                                    <h5>Thank-you messages after event</h5>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="plan-inner-card-footer">
+                            <button class="show-moreless-btn">
+                                <h4 class="show-moreless-btn-text">Show More</h4>
+                                <div class="icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M13.2787 5.96484L8.93208 10.3115C8.41875 10.8248 7.57875 10.8248 7.06542 10.3115L2.71875 5.96484" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plan-card recommended">
+                    <h6 class="plan-card-title">RECOMMENDED</h6>
+                    <div class="plan-inner-card">
+                        <div class="plan-inner-card-header">
+                            <div class="plan-inner-card-header-details">
+                                <h5 class="plan-inner-card-header-title">Premium Plan</h5>
+                            </div>
+                            <input class="form-check-input select_plan_check" type="checkbox" value="1"
+                            {{ !isset($eventDetail['event_type']) || $eventDetail['event_type'] == "1" ? 'checked' : '' }}>                        </div>
+                        <div class="plan-inner-card-body">
+                            <ul class="plan-inner-card-list">
+                                <li class="plan-inner-card-item">
+                                    <div class="icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.0026 1.33203C4.32927 1.33203 1.33594 4.32536 1.33594 7.9987C1.33594 11.672 4.32927 14.6654 8.0026 14.6654C11.6759 14.6654 14.6693 11.672 14.6693 7.9987C14.6693 4.32536 11.6759 1.33203 8.0026 1.33203ZM11.1893 6.46536L7.40927 10.2454C7.31594 10.3387 7.18927 10.392 7.05594 10.392C6.9226 10.392 6.79594 10.3387 6.7026 10.2454L4.81594 8.3587C4.6226 8.16536 4.6226 7.84536 4.81594 7.65203C5.00927 7.4587 5.32927 7.4587 5.5226 7.65203L7.05594 9.18536L10.4826 5.7587C10.6759 5.56536 10.9959 5.56536 11.1893 5.7587C11.3826 5.95203 11.3826 6.26536 11.1893 6.46536Z" fill="#27B076" />
+                                        </svg>
+                                    </div>
+                                    <h5>Everything in the free version</h5>
+                                </li>
+                                <li class="plan-inner-card-item">
+                                    <div class="icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.0026 1.33203C4.32927 1.33203 1.33594 4.32536 1.33594 7.9987C1.33594 11.672 4.32927 14.6654 8.0026 14.6654C11.6759 14.6654 14.6693 11.672 14.6693 7.9987C14.6693 4.32536 11.6759 1.33203 8.0026 1.33203ZM11.1893 6.46536L7.40927 10.2454C7.31594 10.3387 7.18927 10.392 7.05594 10.392C6.9226 10.392 6.79594 10.3387 6.7026 10.2454L4.81594 8.3587C4.6226 8.16536 4.6226 7.84536 4.81594 7.65203C5.00927 7.4587 5.32927 7.4587 5.5226 7.65203L7.05594 9.18536L10.4826 5.7587C10.6759 5.56536 10.9959 5.56536 11.1893 5.7587C11.3826 5.95203 11.3826 6.26536 11.1893 6.46536Z" fill="#27B076" />
+                                        </svg>
+                                    </div>
+                                    <h5>No ads for both host & guests</h5>
+                                </li>
+                                <li class="plan-inner-card-item">
+                                    <div class="icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.0026 1.33203C4.32927 1.33203 1.33594 4.32536 1.33594 7.9987C1.33594 11.672 4.32927 14.6654 8.0026 14.6654C11.6759 14.6654 14.6693 11.672 14.6693 7.9987C14.6693 4.32536 11.6759 1.33203 8.0026 1.33203ZM11.1893 6.46536L7.40927 10.2454C7.31594 10.3387 7.18927 10.392 7.05594 10.392C6.9226 10.392 6.79594 10.3387 6.7026 10.2454L4.81594 8.3587C4.6226 8.16536 4.6226 7.84536 4.81594 7.65203C5.00927 7.4587 5.32927 7.4587 5.5226 7.65203L7.05594 9.18536L10.4826 5.7587C10.6759 5.56536 10.9959 5.56536 11.1893 5.7587C11.3826 5.95203 11.3826 6.26536 11.1893 6.46536Z" fill="#27B076" />
+                                        </svg>
+                                    </div>
+                                    <h5>Let guests respond with short videos</h5>
+                                </li>
+                                <li class="plan-inner-card-item">
+                                    <div class="icon">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.0026 1.33203C4.32927 1.33203 1.33594 4.32536 1.33594 7.9987C1.33594 11.672 4.32927 14.6654 8.0026 14.6654C11.6759 14.6654 14.6693 11.672 14.6693 7.9987C14.6693 4.32536 11.6759 1.33203 8.0026 1.33203ZM11.1893 6.46536L7.40927 10.2454C7.31594 10.3387 7.18927 10.392 7.05594 10.392C6.9226 10.392 6.79594 10.3387 6.7026 10.2454L4.81594 8.3587C4.6226 8.16536 4.6226 7.84536 4.81594 7.65203C5.00927 7.4587 5.32927 7.4587 5.5226 7.65203L7.05594 9.18536L10.4826 5.7587C10.6759 5.56536 10.9959 5.56536 11.1893 5.7587C11.3826 5.95203 11.3826 6.26536 11.1893 6.46536Z" fill="#27B076" />
+                                        </svg>
+                                    </div>
+                                    <h5>Shared photos section for you and your guests</h5>
+                                </li>
+                            </ul>
+
+                            <div class="plan-inner-card-error">
+                                <div class="icon"><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8.0026 15.1654C11.6693 15.1654 14.6693 12.1654 14.6693 8.4987C14.6693 4.83203 11.6693 1.83203 8.0026 1.83203C4.33594 1.83203 1.33594 4.83203 1.33594 8.4987C1.33594 12.1654 4.33594 15.1654 8.0026 15.1654Z" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8 5.83203V9.16536" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M8 11.168H8.00599" stroke="#F73C71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <p>You currently have <span> 0 Credits </span>. You’ll be redirected to buy credits before publishing with Premium.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer comman-modal-footer">
+                <div class="modal-footer-btn-section">
+                    <button type="button" class="cmn-btn reset-btn" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="cmn-btn select_plan_btn">Continue Buy Credits</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <input type="hidden" id="eventEditId" value="{{ $eventDetail['eventeditId'] }}">
@@ -3406,6 +3600,7 @@ $static_information = isset($eventDetail['static_information']) ? $eventDetail['
 $step = isset($eventDetail['step']) ? $eventDetail['step'] : null;
 $eventID = isset($eventDetail['id']) ? $eventDetail['id'] : null;
 $isDraft = isset($eventDetail['is_draft_save']) ? $eventDetail['is_draft_save'] : null;
+$eventType = isset($eventDetail['event_type']) ? $eventDetail['event_type'] : '1';
 
 $cohostpreferby =
 isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0
@@ -3442,6 +3637,7 @@ $totalCategoryItem = isset($eventDetail['totalCategoryItem']) ? $eventDetail['to
 <input type="hidden" id="static_information" value="{{ $static_information }}">
 <input type="hidden" id="step" value="{{ $step }}">
 <input type="hidden" id="isDraft" value="{{ $isDraft }}">
+<input type="hidden" id="eventType" value="{{ $eventType }}">
 <input type="hidden" id="eventID" value="{{ $eventID }}">
 <input type="hidden" id="cohostId" value="{{ $cohostId }}">
 <input type="hidden" id="cohostpreferby" value="{{ $cohostpreferby }}">

@@ -66,13 +66,6 @@ if ($("#isUserLoggedIn").val() === "1") {
     var create_co_event_yesvite_scroll = false;
     var apiCalled = false;
     var base_url = $("#base_url").val();
-    var eventType=$('#eventType').val();
-
-    if(eventType==""){
-        eventData.event_plan_type="1";
-    }else{
-        eventData.event_plan_type=eventType;
-    }
     if (final_profile_or_text == "1") {
         $(".guest-img .selected-co-host-image").show();
         $(".guest-img .selected-co-host-image").attr("src", final_profilePhoto);
@@ -2306,6 +2299,7 @@ function add_user_counter() {
 }
 
 function guest_counter(total_guest, max_guest) {
+    // alert();
     Alreadyguest = $(".users-data.invited_users").length;
     var total_guest = $(".users-data.invited_user").length;
     eventData.Alreadyguest = Alreadyguest;
@@ -2316,13 +2310,13 @@ function guest_counter(total_guest, max_guest) {
         remainingCount = max_guest - total_guest;
     }
 
-    // if (remainingCount <= 0) {
-    //     $(".invite-left_d").text("0 Left");
-    //     $(".invite-left_d").addClass("left-minus");
-    // } else {
-    //     $(".invite-left_d").text(remainingCount + " Left");
-    //     $(".invite-left_d").removeClass("left-minus");
-    // }
+    if (remainingCount <= 0) {
+        $(".invite-left_d").text("0 Left");
+        $(".invite-left_d").addClass("left-minus");
+    } else {
+        $(".invite-left_d").text(remainingCount + " Left");
+        $(".invite-left_d").removeClass("left-minus");
+    }
     // $(".invite-left_d").text(
     //     remainingCount + " Left"
     // );
@@ -4090,6 +4084,7 @@ $(document).on("click", "#close_createEvent", async function (e) {
             eventData.events_schedule = "1";
         }
         console.log(eventData);
+
         $.ajax({
             url: base_url + "event/store",
             type: "POST",
@@ -4620,7 +4615,6 @@ function savePage1Data(close = null, direct = false) {
         eventData.end_event_date = end_event_date;
     }
 
-    $('#select_event_type').modal('show');
     // eventData.page1 = {
     //     event_type: event_type,
     //     event_name: event_name,
@@ -7272,7 +7266,6 @@ $(document).on("click", ".store_desgin_temp", async function () {
 
 $(document).on("click", "#next_guest_step", function () {
     savePage1Data();
-    // $()
 });
 
 var busyyesvite = false;
@@ -11396,32 +11389,3 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
         // localStorage.removeItem('final_upload_image');
     }, 3000);
 }
-
-$(".show-moreless-btn").on("click", function () {
-    $(".plan-inner-card-list").toggleClass("active");
-    $(this).toggleClass("active");
- 
-    const btnTextEl = $(this).find(".show-moreless-btn-text");
-    const currentText = btnTextEl.text();
- 
-    btnTextEl.text(currentText === "Show More" ? "Show Less" : "Show More");
-  });
- 
-  $('.select_plan_check').on('change', function () {
-    $('.select_plan_check').not(this).prop('checked', false);
-
-    if ($(this).val() == "1") {
-        $('.select_plan_btn').text('Continue Buy Credits');
-    } else {
-        $('.select_plan_btn').text('Continue Free');
-    }
-});
-
-$(document).on('click', '.select_plan_btn', function () {
-    var plan_value = $('.select_plan_check:checked').val();
-    eventData.event_type=plan_value;
-
-});
-
-
-
