@@ -47,6 +47,15 @@ Route::prefix('user/v2/')->group(function () {
     Route::post('reset_password', [ApiAuthController::class, 'resetPassword']);
 });
 
+Route::prefix('user/v1/')->group(function () {
+    Route::post('login', [ApiAuthController::class, 'login']);
+    Route::post('social_login', [ApiAuthController::class, 'socialLogin']);
+    Route::post('signup', [ApiAuthController::class, 'signup']);
+    Route::get('verify/{token}', [ApiAuthController::class, 'verifyAccount']);
+    Route::post('forgotpassword', [ApiAuthController::class, 'passwordLink']);
+    Route::post('verify_otp', [ApiAuthController::class, 'verifyOtp']);
+    Route::post('reset_password', [ApiAuthController::class, 'resetPassword']);
+});
 
 
 
