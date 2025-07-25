@@ -1,4 +1,3 @@
-{{dd($eventDetails,$display_ad)}}
 <div class="main-content-left">
     <div class="hosted-by-title">
         <div class="hosted-by-info">
@@ -261,17 +260,7 @@
 </div>
 
 
-    @if((isset($display_ad)&& $display_ad==true))
-        <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
-
-            <ins id="my-adguest" class="adsbygoogle" style="display:block;height:100px"
-                data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
-                data-ad-format="auto" data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-            </div>
-    @endif
+ 
 <!-- ====== cancel event ======== -->
 <div class="modal fade cmn-modal cancel-event" id="cancelevent2" tabindex="-1" aria-labelledby="canceleventLabel"
     aria-hidden="true">
