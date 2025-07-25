@@ -197,7 +197,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
             </a>
 
             <h5>Detail Events</h5> --}}
-            <div class="small-adsense mt-2" id="small-adsense-id">
+            <div class="small-adsense topbar-adsense mt-2" id="small-adsense-id">
 
                 <div class="mx-auto" id="ad-container" style="margin-top: 0.95rem !important;">
 
