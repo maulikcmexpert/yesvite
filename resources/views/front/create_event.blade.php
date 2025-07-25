@@ -626,10 +626,10 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
             
             @php
                 $display_plan=isset($eventDetail['event_type'])?$eventDetail['event_type']:"";
-                dd($display_plan);
+                // dd($display_plan);
             @endphp
             
-            <div class="guest-wrp side-guest-wrp paid_plan_status {{ $display_plan === "0" ? 'd-none' : '' }}">
+            <div class="guest-wrp side-guest-wrp paid_plan_status {{ $display_plan == "0" ? 'd-none' : '' }}">
 
                 <div class="guest-pro">
                     <div>
@@ -740,7 +740,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                 </div>
             </div>
 
-            <div class="guest-wrp side-guest-wrp free_plan_status {{ !isset($eventData['event_type']) || $display_plan === "1" ? 'd-none' : '' }}">
+            <div class="guest-wrp side-guest-wrp free_plan_status {{ !isset($eventDetail['event_type']) || $display_plan == "1" ? 'd-none' : '' }}">
                 <div class="guest-pro">
                     <div>
                         <!-- <h5>Pro</h5>
