@@ -11421,6 +11421,7 @@ $(".show-moreless-btn").on("click", function () {
 
 $(document).on('click', '.select_plan_btn', function () {
     var plan_value = $('.select_plan_check:checked').val();
+    console.log("plan_value "+plan_value)
     eventData.event_plan_type=plan_value;
 
 });
