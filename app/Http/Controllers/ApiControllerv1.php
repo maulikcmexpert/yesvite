@@ -3839,7 +3839,7 @@ class ApiControllerv1 extends Controller
             'subscription_plan_name' => (!empty($eventData['subscription_plan_name'])) ? $eventData['subscription_plan_name'] : "",
             'subscription_invite_count' => (!empty($eventData['subscription_invite_count'])) ? $eventData['subscription_invite_count'] : 0,
             'is_draft_save' => $eventData['is_draft_save'],
-            'event_type'=>(!empty($eventData['event_type']))?$eventData['event_type']: ''
+            // 'event_type'=>(!empty($eventData['event_type']))?$eventData['event_type']: ''
             // 'static_information' => $staticInformation,
             // 'design_image' => (!empty($eventData['design_image'])) ? $eventData['design_image'] : "",
 
@@ -3852,7 +3852,7 @@ class ApiControllerv1 extends Controller
             $eventCreation->static_information = $staticInformation;
             $eventCreation->template_id =(isset($eventData['template_id']) && !empty($eventData['template_id']))? (int)$eventData['template_id']: null;
             // dd($eventData);
-            // $eventCreation->event_type =(isset($eventData['event_type']) && !empty($eventData['event_type']))?$eventData['event_type']: '';
+            $eventCreation->event_type =(isset($eventData['event_type']) && !empty($eventData['event_type']))?$eventData['event_type']: '';
             $eventCreation->proplan_variant = (isset($eventData['proplan_variant']) && !empty($eventData['proplan_variant'])) ? (int)$eventData['proplan_variant'] : 0;
             $eventCreation->is_template_image = (isset($eventData['is_template_image']) && !empty($eventData['is_template_image'])) ? (int)$eventData['is_template_image'] : 0;
             if (!empty($eventData['invited_user_id'])) {
