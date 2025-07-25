@@ -678,7 +678,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                                     fill="#41BC3F" />
                             </svg>
 
-                            <p>Guests</p>
+                            <p>Guestss</p>
                         </div>
                         <div class="invite-left">
 
@@ -788,7 +788,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                                     fill="#41BC3F" />
                             </svg>
 
-                            <p>Guests</p>
+                            <p>Guestssss</p>
                         </div>
                         <div class="invite-left">
 
