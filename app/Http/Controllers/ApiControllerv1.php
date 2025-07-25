@@ -3806,7 +3806,7 @@ class ApiControllerv1 extends Controller
             }
         }
         $staticInformation = (isset($eventData['static_information']) && $eventData['static_information'] != '') ? $eventData['static_information'] : null;
-
+        dd($eventData);
         $eventCreation =  Event::create([
             'event_type_id' => (!empty($eventData['event_type_id'])) ? (int)$eventData['event_type_id'] : NULL,
             'event_name' => (!empty($eventData['event_name'])) ? $eventData['event_name'] : "",
