@@ -359,6 +359,10 @@
                         disabled>
                         Purchase - $0.00
                     </button>
+                    <button type="button" class="btn btn-secondary switch_plan" data-price-id="" data-price="0"
+                        disabled>
+                        Switch Plan
+                    </button>
                 </div>
             </div>
         </div>
