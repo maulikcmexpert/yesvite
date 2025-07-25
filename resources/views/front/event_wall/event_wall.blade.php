@@ -5,8 +5,8 @@
         <div class="row">
             <div class="col-xxl-3 col-xl-3 col-lg-4 event-info-left">
                 <!-- =============mainleft-====================== -->
-
-                <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails" />
+                {{dd($display_ad);}}
+                <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails" :display_ad="$display_ad" />
             </div>
             <div class="col-xxl-6 col-xl-6 col-lg-8 event-info-center">
                 <div class="main-content-center">
