@@ -56,15 +56,7 @@
                             <div class="tab-pane fade {{ $photos_show }} {{ $photos_active }}" id="nav-photos"
                                 role="tabpanel" aria-labelledby="nav-photos-tab">
                                 <div class="photos-main-wrp">
-                                    @if((isset($display_ad)&& $display_ad==true))
-                                    <ins id="my-ad" class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
-                                    data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                                <script>
-
-                                    (adsbygoogle = window.adsbygoogle || []).push({});
-                                      
-                                </script>
-                               @endif
+                                  
                                     @php
                                         $hide_image = '';
                                         // $photo = $postPhotoList['mediaData'][0]['post_media'] ?? null;

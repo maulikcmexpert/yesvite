@@ -140,7 +140,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                 <span>Create New Event</span>
                 @endif
             </div>
-            <a class="navbar-brand mobile-header-logo" href="#">
+            {{-- <a class="navbar-brand mobile-header-logo" href="#">
                 <svg width="129" height="36" viewBox="0 0 129 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                         d="M8.86965 6.81981H8.48313C8.25473 6.80224 8.35136 6.58262 8.35136 6.58262C8.5007 6.23124 8.6149 6.09947 8.43042 5.95013C8.0966 5.68659 7.8155 5.3967 7.5871 5.08924C6.42753 3.52558 6.71742 1.58418 7.79793 0.837483C8.42163 0.407037 9.33524 0.407037 9.95894 0.837483C11.0395 1.58418 11.3206 3.52558 10.1698 5.08924C9.94137 5.3967 9.66905 5.68659 9.32645 5.95013C9.13319 6.09947 9.25617 6.22245 9.40551 6.58262C9.40551 6.58262 9.50214 6.79345 9.27374 6.81981H8.88722H8.86965Z"
@@ -196,7 +196,25 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                 </svg>
             </a>
 
-            <h5>Detail Events</h5>
+            <h5>Detail Events</h5> --}}
+            <div class="small-adsense" id="small-adsense-id">
+
+                <div class="mx-auto" id="ad-container">
+
+                    <ins id="my-upperad" class="adsbygoogle" style="display:block;width:728px;height:75px"
+                    data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                
+            
+                    const container = document.getElementById("small-adsense-id")
+                        container.style.height = "100px"
+
+
+                </script>
+                </div>
+              </div>
 
             <div class="dropdown new_event_detail_header_dropdown">
                 <div class="new_event_detail_header-right dropdown-toggle" id="dropdownMenuButton1"

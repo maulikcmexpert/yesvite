@@ -62,22 +62,7 @@
                                 <div class="tab-pane fade {{ $about_active }} {{ $about_show }}" id="nav-about"
                                     role="tabpanel" aria-labelledby="nav-about-tab">
                                     <div class="about-main-wrp">
-                                        @if((isset($display_ad)&& $display_ad==true))
-                                        <ins id="my-ad" class="adsbygoogle" style="display:block" data-ad-client="ca-pub-7818976609984635"
-                                        data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
-                                    <script>
-                                        //  const adElement = document.getElementById('my-ad');
-
-                                        (adsbygoogle = window.adsbygoogle || []).push({});
-                                        // setTimeout(function () {
-
-                                        // if(adElement.getAttribute('data-ad-status')=="unfilled"){
-                                        // document.getElementById('ad-container').style.display = 'none';
-
-                                        // }
-                                        // }, 2000);    
-                                    </script>
-                                   @endif
+                                       
                                         <div class="about-details cmn-card">
                                             <div class="hosted-by-template-slider about-slider">
                                                 <div class="swiper mySwiper">

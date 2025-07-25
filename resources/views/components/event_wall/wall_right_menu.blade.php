@@ -421,22 +421,7 @@ if ($hostView) {
 
 </div>
 
-<div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
 
-    <ins id="my-adguest" class="adsbygoogle" style="display:block;height:100px"
-        data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
-        data-ad-format="auto" data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    // if (!adElement.classList.contains('adsbygoogle-noablate')) {
-    //     (adsbygoogle = window.adsbygoogle || []).push({});
-    // }
-
-
-    // Hide container if ad is not shown after 2 seconds
-  
-    </script>
-    </div>
 <div class="modal fade cmn-modal" id="editrsvp3" tabindex="-1" aria-labelledby="editrsvpLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
