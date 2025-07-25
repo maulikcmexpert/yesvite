@@ -2194,6 +2194,9 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
         // $(this).prop("disabled", true);
         var total_guest = $(".users-data.invited_user").length;
         var max_guest = $("#coins").val();
+        if(eventData.event_plan_type=="0"){
+            max_guest = 500
+        }
 
         console.log({ max_guest });
         if (max_guest <= 0) {
@@ -2377,6 +2380,9 @@ function delete_invited_user(userId, is_contact = "0") {
 
             // var max_guest = 15;
             var max_guest = $("#coins").val();
+            if(eventData.event_plan_type=="0"){
+                max_guest = 500
+            }
             guest_counter(0, max_guest);
             // var remainingCount = max_guest - total_guest;
 
@@ -2410,6 +2416,9 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     var is_contact = $(this).data("contact");
     if (isChecked == true || isChecked == "true") {
         var max_guest = $("#coins").val();
+        if(eventData.event_plan_type=="0"){
+            max_guest = 500
+        }
         var total_guest = $(".users-data.invited_user").length;
         console.log({ max_guest });
         if (max_guest <= 0) {
@@ -2532,6 +2541,9 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 // $(".invite-count").text(total_guest + 0);
 
                 var max_guest = $("#coins").val();
+                if(eventData.event_plan_type=="0"){
+                    max_guest = 500
+                }
                 var remainingCount = max_guest - total_guest;
                 guest_counter(0, max_guest);
                 // if (remainingCount < 0) {
@@ -4622,7 +4634,7 @@ function savePage1Data(close = null, direct = false) {
         eventData.end_event_date = end_event_date;
     }
 
-    $('#select_event_type').modal('show');
+    // $('#select_event_type').modal('show');
     // eventData.page1 = {
     //     event_type: event_type,
     //     event_name: event_name,
@@ -5874,6 +5886,9 @@ $(document).on(
             $(".invite-count").text(total_guest);
 
             var max_guest = $("#coins").val();
+            if(eventData.event_plan_type=="0"){
+                max_guest = 500
+            }
 
             var remainingCount = max_guest - total_guest;
             if (remainingCount <= 0) {
@@ -5900,6 +5915,9 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
         $(".invite-count").text(total_guest);
 
         var max_guest = $("#coins").val();
+        if(eventData.event_plan_type=="0"){
+            max_guest = 500
+        }
 
         var remainingCount = max_guest - total_guest;
         if (remainingCount <= 0) {
@@ -7655,6 +7673,9 @@ $(document).on("click", ".invite_group_member", function () {
             console.log(response);
             $(".inivted_user_list").append(response.view);
             var max_guest = $("#coins").val();
+            if(eventData.event_plan_type=="0"){
+                max_guest = 500
+            }
             // var length = responsive_invite_user();
             // $(".user-list-responsive").html(response.responsive_view);
             // if(length < 4){
@@ -10829,6 +10850,9 @@ function getcoins() {
     Alreadyguest = $(".users-data.invited_users").length;
     eventData.Alreadyguest = Alreadyguest;
     var max_guest = $("#coins").val();
+    if(eventData.event_plan_type=="0"){
+        max_guest = 500
+    }
 
     var AllCoins = max_guest - Alreadyguest;
 
@@ -11426,5 +11450,9 @@ $(document).on('click', '.select_plan_btn', function () {
 
 });
 
+$(document).on('click','.switch_plan',function(){
+    $('#buycreditsmodal').modal('hide');
+    $('#select_event_type').modal('show');
+});
 
 

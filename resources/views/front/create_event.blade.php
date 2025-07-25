@@ -702,7 +702,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                             <span class="coin-invite-wrp-inner">
                                 {{-- {{$setPrice[0]['coins']}} | --}}
 
-                                <span class="green-price">Buy Credits
+                                <span class="green-price" >Buy Credits
                                     {{-- ${{$setPrice[0]['price']}} --}}
                                 </span><i class="fa-solid fa-chevron-right"></i>
                             </span>
@@ -3569,7 +3569,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
             <div class="modal-footer comman-modal-footer">
                 <div class="modal-footer-btn-section">
                     <button type="button" class="cmn-btn reset-btn" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="cmn-btn select_plan_btn">Continue Buy Credits</button>
+                    <button type="button" class="cmn-btn select_plan_btn" data-bs-dismiss="modal">Continue Buy Credits</button>
                 </div>
             </div>
         </div>
