@@ -626,7 +626,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
             
             @php
                 $display_plan=isset($eventData['event_type'])?$eventData['event_type']:"";
-
+                dd($display_plan);
             @endphp
             
             <div class="guest-wrp side-guest-wrp paid_plan_status {{ $display_plan === "0" ? 'd-none' : '' }}">
@@ -678,7 +678,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                                     fill="#41BC3F" />
                             </svg>
 
-                            <p>Guestss</p>
+                            <p>Guests</p>
                         </div>
                         <div class="invite-left">
 
@@ -788,7 +788,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                                     fill="#41BC3F" />
                             </svg>
 
-                            <p>Guestssss</p>
+                            <p>Guests</p>
                         </div>
                         <div class="invite-left">
 
