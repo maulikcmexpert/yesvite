@@ -1,4 +1,4 @@
-{{-- {{dd($eventDetails)}} --}}
+{{dd($eventDetails,$display_ad)}}
 <div class="main-content-left">
     <div class="hosted-by-title">
         <div class="hosted-by-info">
@@ -261,7 +261,6 @@
 </div>
 
 
-{{dd($display_ad);}}
     @if((isset($display_ad)&& $display_ad==true))
         <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
 
