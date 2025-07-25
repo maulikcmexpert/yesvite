@@ -7194,20 +7194,32 @@ class ApiControllerv1 extends Controller
         try {
             $checkEvent = Event::where(['id' => $request->event_id])->first();
 
-            $getCategory=TextData::where('id',$checkEvent->template_id)->select('event_design_category_id')->first();
+            // $getCategory=TextData::where('id',$checkEvent->template_id)->select('event_design_category_id')->first();
 
-            if($checkEvent->template_id==null){
-                $display_ad=true;
-                return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
-            }
+            // if($checkEvent->template_id==null){
+            //     $display_ad=true;
+            //     return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
+            // }
 
-            if($getCategory){
-                $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
-                $display_ad=$getAd->display_ad=="1"?true:false;
-            }else{
+            // if($getCategory){
+            //     $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
+            //     $display_ad=$getAd->display_ad=="1"?true:false;
+            // }else{
+            //     $display_ad=false;
+
+            // }
+
+
+            $getTemplateId=Event::where('id',$request->event_id)->select('template_id')->first();
+
+            if($getTemplateId->event_type=='1'){
                 $display_ad=false;
-
+                return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
+            }else{
+                $display_ad=true;
+                return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);  
             }
+
 
             if ($checkEvent->end_date < date('Y-m-d')) {
                 return response()->json(['status' => 0, 'message' => "Event is past , you can't attempt RSVP"]);
@@ -14835,19 +14847,22 @@ class ApiControllerv1 extends Controller
 
             $getTemplateId=Event::where('id',$request->event_id)->select('template_id')->first();
 
-            if($getTemplateId->template_id==null){
-                $display_ad=true;
-                return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
-            }
-            $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
-            if($getCategory){
-                $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
-                $display_ad=$getAd->display_ad=="1"?true:false;
-                return response()->json(data: ['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
-            }else{
+            if($getTemplateId->event_type=='1'){
                 $display_ad=false;
-                return response()->json(data: ['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
+                return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
+            }else{
+                $display_ad=true;
+                return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);  
             }
+            // $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
+            // if($getCategory){
+            //     $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
+            //     $display_ad=$getAd->display_ad=="1"?true:false;
+            //     return response()->json(data: ['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
+            // }else{
+            //     $display_ad=false;
+            //     return response()->json(data: ['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
+            // }
 
             
 
