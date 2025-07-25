@@ -2318,7 +2318,7 @@ function guest_counter(total_guest, max_guest) {
     if (isCopy == "" && isDraftEvent == "0") {
         remainingCount = max_guest - total_guest;
     }
-    if(eventData.event_plan_type=="1"){
+    // if(eventData.event_plan_type=="1"){
         if (remainingCount <= 0) {
             $(".invite-left_d").text("0 Left");
             $(".invite-left_d").addClass("left-minus");
@@ -2329,7 +2329,7 @@ function guest_counter(total_guest, max_guest) {
         $(".invite-left_d").text(
             remainingCount + " Left"
         );
-    }
+    // }
 
     $("#event_guest_left_count").val(remainingCount);
 }
@@ -10855,7 +10855,12 @@ function getcoins() {
     }
 
     var AllCoins = max_guest - Alreadyguest;
-
+    
+    if (eventData.event_plan_type != "") {
+        Alreadyguest = $('.user_choice:checked').length;
+        AllCoins = max_guest - Alreadyguest;
+    }
+    
     if (isCopy == "" && isDraftEvent == "0") {
         AllCoins = max_guest;
     }
@@ -11445,8 +11450,18 @@ $(".show-moreless-btn").on("click", function () {
 
 $(document).on('click', '.select_plan_btn', function () {
     var plan_value = $('.select_plan_check:checked').val();
+    if(plan_value=="1"){
+        $('.free_plan_status').addClass('d-none');
+        $('.paid_plan_status').removeClass('d-none');
+    }else{
+        $('.free_plan_status').removeClass('d-none');
+        $('.paid_plan_status').addClass('d-none'); 
+    }
+    
     console.log("plan_value "+plan_value)
     eventData.event_plan_type=plan_value;
+    getcoins()
+
 
 });
 
