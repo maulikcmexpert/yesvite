@@ -3767,9 +3767,12 @@ class ApiControllerv1 extends Controller
         if ($invitation_count > 0 && $eventData['is_draft_save'] == '0') {
             $user_detail = User::where('id', $user->id)->first();
             if ($user_detail) {
-                if ($user_detail->coins < $invitation_count) {
-                    return response()->json(['status' => 0, 'message' => "Insufficient coins."]);
+                if($eventData['event_type']=="1"){
+                    if ($user_detail->coins < $invitation_count) {
+                        return response()->json(['status' => 0, 'message' => "Insufficient coins."]);
+                    }
                 }
+                
             }
         }
 
@@ -4823,11 +4826,13 @@ class ApiControllerv1 extends Controller
 
                     if ($invitation_count > 0) {
                         $user_detail = User::where('id', $user->id)->first();
+                        if($eventData['event_type']=="1"){
                         if ($user_detail) {
                             if ($user_detail->coins < $invitation_count) {
                                 return response()->json(['status' => 0, 'message' => "Insufficient coins."]);
                             }
                         }
+                    }
                     }
                     EventInvitedUser::where(['event_id' => $eventData['event_id']])->delete();
                 }
