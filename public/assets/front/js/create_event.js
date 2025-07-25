@@ -2315,17 +2315,19 @@ function guest_counter(total_guest, max_guest) {
     if (isCopy == "" && isDraftEvent == "0") {
         remainingCount = max_guest - total_guest;
     }
+    if(eventData.event_type=="1"){
+        if (remainingCount <= 0) {
+            $(".invite-left_d").text("0 Left");
+            $(".invite-left_d").addClass("left-minus");
+        } else {
+            $(".invite-left_d").text(remainingCount + " Left");
+            $(".invite-left_d").removeClass("left-minus");
+        }
+        $(".invite-left_d").text(
+            remainingCount + " Left"
+        );
+    }
 
-    // if (remainingCount <= 0) {
-    //     $(".invite-left_d").text("0 Left");
-    //     $(".invite-left_d").addClass("left-minus");
-    // } else {
-    //     $(".invite-left_d").text(remainingCount + " Left");
-    //     $(".invite-left_d").removeClass("left-minus");
-    // }
-    // $(".invite-left_d").text(
-    //     remainingCount + " Left"
-    // );
     $("#event_guest_left_count").val(remainingCount);
 }
 
