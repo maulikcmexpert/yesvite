@@ -4456,7 +4456,7 @@ class ApiControllerv1 extends Controller
             if ($getEventData != null) {
                 $eventDetail['id'] = (!empty($getEventData->id) && $getEventData->id != NULL) ? $getEventData->id : "";
                 $eventDetail['event_type_id'] = (!empty($getEventData->event_type_id) && $getEventData->event_type_id != NULL) ? $getEventData->event_type_id : "";
-                $eventDetail['event_type'] = (!empty($getEventData->event_type) && $getEventData->event_type != NULL) ? $getEventData->event_type : "";
+                $eventDetail['event_type'] = (isset($getEventData->event_type) && $getEventData->event_type != NULL) ? $getEventData->event_type : "";
                 $eventDetail['template_id'] = (!empty($getEventData->template_id) && $getEventData->template_id != NULL) ? (string)$getEventData->template_id : (string)0;
                 $eventDetail['event_name'] = (!empty($getEventData->event_name) && $getEventData->event_name != NULL) ? $getEventData->event_name : "";
                 $eventDetail['hosted_by'] = (!empty($getEventData->hosted_by) && $getEventData->hosted_by != NULL) ? $getEventData->hosted_by : "";
@@ -4850,7 +4850,7 @@ class ApiControllerv1 extends Controller
                     // dd($start_date,$yesterday);
                 }
                 $updateEvent->event_type_id = (!empty($eventData['event_type_id'])) ? (int)$eventData['event_type_id'] : NULL;
-                $updateEvent->event_type = (isset($eventData['event_type'])&&!empty($eventData['event_type'])) ? $eventData['event_type'] : '1';
+                $updateEvent->event_type = (isset($eventData['event_type'])&& $eventData['event_type']!="") ? $eventData['event_type'] : '1';
                 $updateEvent->template_id =  (isset($eventData['template_id']) && !empty($eventData['template_id']))? (int)$eventData['template_id']: null;
                 $updateEvent->event_name = (!empty($eventData['event_name'])) ? $eventData['event_name'] : "";
                 $updateEvent->hosted_by = (!empty($eventData['hosted_by'])) ? $eventData['hosted_by'] : $user->firstname . ' ' . $user->lastname;
