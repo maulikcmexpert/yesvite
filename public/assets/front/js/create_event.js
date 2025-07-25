@@ -2315,7 +2315,7 @@ function guest_counter(total_guest, max_guest) {
     if (isCopy == "" && isDraftEvent == "0") {
         remainingCount = max_guest - total_guest;
     }
-    if(eventData.event_type=="1"){
+    if(eventData.event_plan_type=="1"){
         if (remainingCount <= 0) {
             $(".invite-left_d").text("0 Left");
             $(".invite-left_d").addClass("left-minus");
