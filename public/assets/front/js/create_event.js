@@ -2299,7 +2299,7 @@ function add_user_counter() {
 }
 
 function guest_counter(total_guest, max_guest) {
-    alert();
+    // alert();
     Alreadyguest = $(".users-data.invited_users").length;
     var total_guest = $(".users-data.invited_user").length;
     eventData.Alreadyguest = Alreadyguest;
