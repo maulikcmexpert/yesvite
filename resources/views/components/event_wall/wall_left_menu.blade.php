@@ -261,7 +261,7 @@
 </div>
 
 
-
+{{dd($display_ad);}}
     @if((isset($display_ad)&& $display_ad==true))
         <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
 
