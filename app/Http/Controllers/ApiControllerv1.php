@@ -3850,7 +3850,7 @@ class ApiControllerv1 extends Controller
             $eventCreation->isRsvpEvent = $isRsvpEvent;
             $eventCreation->static_information = $staticInformation;
             $eventCreation->template_id =(isset($eventData['template_id']) && !empty($eventData['template_id']))? (int)$eventData['template_id']: null;
-            $eventCreation->event_type =(isset($eventData['event_type']) && !empty($eventData['event_type']))?$eventData['event_type']: '1';
+            $eventCreation->event_type =(isset($eventData['event_type']) && !empty($eventData['event_type']))?$eventData['event_type']: '';
             $eventCreation->proplan_variant = (isset($eventData['proplan_variant']) && !empty($eventData['proplan_variant'])) ? (int)$eventData['proplan_variant'] : 0;
             $eventCreation->is_template_image = (isset($eventData['is_template_image']) && !empty($eventData['is_template_image'])) ? (int)$eventData['is_template_image'] : 0;
             if (!empty($eventData['invited_user_id'])) {
