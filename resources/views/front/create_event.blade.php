@@ -197,9 +197,9 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
             </a>
 
             <h5>Detail Events</h5> --}}
-            <div class="small-adsense" id="small-adsense-id">
+            <div class="small-adsense mt-2" id="small-adsense-id">
 
-                <div class="mx-auto" id="ad-container">
+                <div class="mx-auto" id="ad-container" style="margin-top: 0.95rem !important;">
 
                     <ins id="my-upperad" class="adsbygoogle" style="display:block;width:728px;height:75px"
                     data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
