@@ -2179,13 +2179,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
         return;
     }
     // if ($(this).is(":checked") === false) { 
-
-        if(eventData.event_plan_type=="1"&&inviteCount >= 5){
-                e.preventDefault();
-                toastr.error('Please select perimum plan for more inivtes')
-                return;
-            
-        }
+      
     // }
    
     $("#loader").css("display", "flex");
@@ -2197,6 +2191,14 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
  
 
     if (isChecked == true || isChecked == "true") {
+        if(eventData.event_plan_type=="1"&&inviteCount >= 5){
+            $(this).prop("checked", false);
+            toastr.error('Please select perimum plan for more inivtes')
+            $("#loader").css("display", "none");
+
+            return;
+        
+    }
         // $('input[name="email_invite[]"]').attr('disabled', true);
         // $(this).prop("disabled", true);
         var total_guest = $(".users-data.invited_user").length;
