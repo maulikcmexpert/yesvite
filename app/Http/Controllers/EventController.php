@@ -3033,7 +3033,6 @@ class EventController extends BaseController
         if (is_null($userIds)) {
             $userIds = [];
         }
-        dd($userIds);
         if (!empty($unselectusers)) {
             foreach ($unselectusers as $value) {
                 $id = $value['id'];
