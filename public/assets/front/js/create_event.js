@@ -10910,6 +10910,7 @@ function getcoins() {
     if (isCopy == "" && isDraftEvent == "0") {
         AllCoins = max_guest;
     }
+    console.log("all coins "+AllCoins);
 
     console.log("invite-left_d "+AllCoins);
     
