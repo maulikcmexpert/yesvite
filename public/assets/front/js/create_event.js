@@ -2195,7 +2195,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     if (isChecked == true || isChecked == "true") {
         if(eventData.event_plan_type=="0"&& total_users_all >= 5){
             $(this).prop("checked", false);
-            toastr.error('Please select perimum plan for more inivtes')
+            toastr.error('Please select the Premium Plan for more invites')
             $("#loader").css("display", "none");
             return;
         
@@ -2447,7 +2447,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
         var total_users_all= parseInt($('#get_all_total_users').val())
         if(eventData.event_plan_type=="0"&&total_users_all >= 5){
             $(this).prop("checked", false);
-            toastr.error('Please select perimum plan for more inivtes')
+            toastr.error('Please select the Premium Plan for more invites')
             $("#loader").css("display", "none");
             return;
         
