@@ -2499,12 +2499,12 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 $(".invite-count").text(total_guest);
 
                 var remainingCount = max_guest - total_guest;
-                if(eventData.event_plan_type=="0"){
-                    if(currentInviteCount >= 5){
-                        $('.user_choice').prop('disabled',true);
-                        toastr.success('please purchase permium plan')
-                    }
-                }
+                // if(eventData.event_plan_type=="0"){
+                //     if(currentInviteCount >= 5){
+                //         $('.user_choice').prop('disabled',true);
+                //         toastr.success('please purchase permium plan')
+                //     }
+                // }
                 $(".inivted_user_list").append(response.view);
                 // $(".user-list-responsive").empty();
                 // $(".user-list-responsive").html(response.responsive_view);
@@ -11584,4 +11584,8 @@ $(document).on('click','.switch_plan',function(){
     }
 });
 
+$(document).on('click','.openPlans',function(){
+    $('#select_event_type').modal('show');
+
+})
 

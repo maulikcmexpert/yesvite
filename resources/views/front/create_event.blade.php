@@ -828,7 +828,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                             </span>
                         </div>
                         @else
-                        <div class="coin-invite-wrp buycredits">
+                        <div class="coin-invite-wrp openPlans" >
                             <span class="coin-invite-wrp-inner free_plan_coin_invite">
                                 <span class="green-price" >Free
                                 </span><i class="fa-solid fa-chevron-right"></i>
