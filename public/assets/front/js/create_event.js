@@ -2277,7 +2277,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                 }
 
 
-                current_user_count_email=$('.invited_user').length
+                current_user_count_email=$(".user-contacts.inivted_user_list .users-data.invited_user").length;
 
                 // }else{
                 //     add_user_counter();
@@ -2537,7 +2537,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                     );
                 }
 
-                current_user_count_email=$('.invited_user').length
+                current_user_count_email==$(".user-contacts.inivted_user_list .users-data.invited_user").length;
 
                 guest_counter(0, max_guest);
                 $("#loader").css("display", "none");
