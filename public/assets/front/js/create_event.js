@@ -2429,7 +2429,7 @@ function delete_invited_user(userId, is_contact = "0") {
 }
 
 $(document).on("click", 'input[name="mobile[]"]', function (e) {
-    return;
+    // return;
     // if ($(this).is(':disabled')) {
     //     e.preventDefault();
     //     return;
@@ -11419,10 +11419,12 @@ $(document).on("click", ".user_choice", function () {
     });
     let buttonText = `Send Invites (0)`;
     if (anyCheckedNotDisabled) {
-        $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
+        
+        // $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
         buttonText = ` Send Invites(${checkedCount})`;
     } else {
-        $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
+        // alert(2);
+        // $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
     }
 
     $("a.saveGuestOnly.isdisabled").text(buttonText);
