@@ -11424,11 +11424,11 @@ $(document).on("click", ".user_choice", function () {
     let buttonText = `Send Invites (0)`;
     if (anyCheckedNotDisabled) {
     // alert(1);
-        // $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
+        $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
         buttonText = ` Send Invites(${checkedCount})`;
     } else {
     // alert(2);
-        // $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
+        $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
     }
 
     $("a.saveGuestOnly.isdisabled").text(buttonText);
