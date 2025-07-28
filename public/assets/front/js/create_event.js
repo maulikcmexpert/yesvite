@@ -9057,7 +9057,10 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
                 create_event_phone_scroll = true;
             }
             if (currentInviteCount >= coins) {
-                // $(".user_choice").prop("disabled", true);
+                if(eventData.event_plan_type=="1"){
+                    $(".user_choice").prop("disabled", true);
+
+                }
             }
             if (html.view == "" && html.scroll == "true") {
                 // $("#YesviteContactsAll").html("No data found");
