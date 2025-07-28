@@ -989,7 +989,12 @@ class EventController extends BaseController
         Session::forget('desgin_slider');
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
+        $invitedusersession = session('user_ids');
+        $max_free=5;
+        $total_invited= count($invitedusersession);
 
+        dd($max_free ,$total_invited);
+        if(count($invitedusersession))
         // if (strpos($dateString, ' To ') !== false) {
         //     list($startDate, $endDate) = explode(' To ', $dateString);
         // } else {
