@@ -2192,7 +2192,9 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
  
 
     if (isChecked == true || isChecked == "true") {
-        if(eventData.event_plan_type=="0"&&inviteCount >= 5){
+        $("#event_guest_count").text(total_guest + " Guests");
+        // $total_all_count= $("#event_guest_count").text
+        if(eventData.event_plan_type=="0"&&total_guest >= 5){
             $(this).prop("checked", false);
             toastr.error('Please select perimum plan for more inivtes')
             $("#loader").css("display", "none");
@@ -2443,7 +2445,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     var mobile = $(this).data("mobile");
     var is_contact = $(this).data("contact");
     if (isChecked == true || isChecked == "true") {
-        if(eventData.event_plan_type=="0"&&inviteCount >= 5){
+        if(eventData.event_plan_type=="0"&&total_guest >= 5){
             $(this).prop("checked", false);
             toastr.error('Please select perimum plan for more inivtes')
             $("#loader").css("display", "none");
