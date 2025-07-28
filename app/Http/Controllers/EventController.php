@@ -4001,6 +4001,24 @@ class EventController extends BaseController
         // dd(session('user_ids'),session('contact_ids'));
         $conatctId = session('contact_ids');
         $potluck = session('category');
+
+        $user_ids_count=[];
+        $contact_ids_count=[];
+        $user_ids_count=count(session('user_ids',[]));
+        $contact_ids_count=count(session('contact_ids',[]));
+        $total_user_invited_event = $user_ids_count+ $contact_ids_count;
+        $max_free=5;
+
+        // dd($max_free ,$total_user_invited_event);
+        if($request->event_plan_type=="0"){
+            if($total_user_invited_event>$max_free){
+            
+                return response()->json([
+                    'success' => false,
+                    'exceed_limit'=>"1"
+                ]);
+            }
+        }
         // dd($potluck);
         $invitedCount = session('user_ids');
         $get_count_invited_user = (isset($contactId) ? count($contactId) : 0) + (isset($invitedCount) ? count($invitedCount) : 0);

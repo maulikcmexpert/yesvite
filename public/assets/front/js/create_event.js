@@ -9833,6 +9833,17 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 });
 
 function updateEventData() {
+
+    var curr_aval_coins=$('#user_avaliable_coins').val()
+
+    if(eventData.event_plan_type=="1"){
+        if(curr_aval_coins==0||curr_aval_coins=="0"){
+            toastr.error('Insufficient coins.');
+            return;
+        }
+    }
+
+
     if (apiCalled == true) {
         return;
     }
@@ -9851,6 +9862,12 @@ function updateEventData() {
         success: function (response) {
             if (response.status == 401 && response.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
+                return;
+            }
+            if(response.exceed_limit=="1"){
+                toastr.error('Guest limit reached. Upgrade to a premium plan to add more guests.');
+                apiCalled=false;
+                $("#loader").css("display", "none");
                 return;
             }
             $(".main-content-wrp").removeClass("blurred");
