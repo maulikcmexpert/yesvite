@@ -5972,9 +5972,16 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
 $(document).on("change", "#YesviteUserAll .user_choice", function () {
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
-        // $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
-        //     .not(this)
-        //     .prop("checked", false);
+        $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
+            .not(this)
+            .prop("checked", false);
+
+            var currentInviteCount = parseInt(
+                $("#currentInviteCount").val()
+            );
+            currentInviteCount--;
+            $("#currentInviteCount").val(currentInviteCount);
+
     } else {
         var id = $(this).data("id");
         $("#" + id).remove();
