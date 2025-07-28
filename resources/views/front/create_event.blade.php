@@ -807,20 +807,25 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                             <p>Purchasing</p>
                         </div>
                         @if (Auth::guard('web')->check())
-                        <div class="coin-invite-wrp buycredits">
+                        
 
-                            {{-- @php
-                        $setPrice = array_reverse($prices);
-                    @endphp --}}
-                      
+                        @if (isset($eventDetail['is_draft_save']) &&
+                        $eventDetail['is_draft_save'] == '0' &&
+                        (isset($eventDetail['id']) && $eventDetail['id'] != ''))
+                        <div class="coin-invite-wrp">
                             <span class="coin-invite-wrp-inner free_plan_coin_invite">
-                                {{-- {{$setPrice[0]['coins']}} | --}}
-
                                 <span class="green-price" >Free
-                                    {{-- ${{$setPrice[0]['price']}} --}}
+                                </span>
+                            </span>
+                        </div>
+                        @else
+                        <div class="coin-invite-wrp buycredits">
+                            <span class="coin-invite-wrp-inner free_plan_coin_invite">
+                                <span class="green-price" >Free
                                 </span><i class="fa-solid fa-chevron-right"></i>
                             </span>
                         </div>
+                        @endif
                         @else
                         <div class="coin-invite-wrp">
 
