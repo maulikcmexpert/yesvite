@@ -10902,10 +10902,15 @@ function getcoins() {
 
     var AllCoins = max_guest - Alreadyguest;
 
-    if (eventData.event_plan_type != "" && eventId=="") {
-        Alreadyguest = $('.user_choice:checked').length;
-        AllCoins = max_guest - Alreadyguest;
+    var Alreadyguest2 = $('.user_choice:checked').length;
+
+    if(Alreadyguest2!=0){
+        AllCoins = max_guest - Alreadyguest2;
     }
+    // if (eventData.event_plan_type != "" && eventId=="") {
+    //     Alreadyguest = $('.user_choice:checked').length;
+    //     AllCoins = max_guest - Alreadyguest;
+    // }
     
     // if (isCopy == "" && isDraftEvent == "0") {
     //     AllCoins = max_guest;
