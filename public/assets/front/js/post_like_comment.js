@@ -1526,6 +1526,8 @@ $(document).on("click", ".add_guest", function (e) {
             guest_list: guestList,
         },
         success: function (response) {
+            console.log(response);
+            
             if (response.status === 1) {
                 window.location.reload();
                 toastr.success("Invited successfully");
