@@ -2431,181 +2431,181 @@ function delete_invited_user(userId, is_contact = "0") {
     });
 }
 
-// $(document).on("click", 'input[name="mobile[]"]', function (e) {
-//     // if ($(this).is(':disabled')) {
-//     //     e.preventDefault();
-//     //     return;
-//     // }
-//     var inviteCount = parseInt($("#currentInviteCount").val());
+$(document).on("click", 'input[name="mobile[]"]', function (e) {
+    // if ($(this).is(':disabled')) {
+    //     e.preventDefault();
+    //     return;
+    // }
+    var inviteCount = parseInt($("#currentInviteCount").val());
 
     
-//     var userId = $(this).val();
-//     var isChecked = $(this).is(":checked");
-//     var mobile = $(this).data("mobile");
-//     var is_contact = $(this).data("contact");
-//     if (isChecked == true || isChecked == "true") {
-//         var total_users_all= parseInt($('#get_all_total_users').val())
-//         if(eventData.event_plan_type=="0"&&total_users_all >= 5){
-//             $(this).prop("checked", false);
-//             toastr.error('Please select perimum plan for more inivtes')
-//             $("#loader").css("display", "none");
-//             return;
+    var userId = $(this).val();
+    var isChecked = $(this).is(":checked");
+    var mobile = $(this).data("mobile");
+    var is_contact = $(this).data("contact");
+    if (isChecked == true || isChecked == "true") {
+        var total_users_all= parseInt($('#get_all_total_users').val())
+        if(eventData.event_plan_type=="0"&&total_users_all >= 5){
+            $(this).prop("checked", false);
+            toastr.error('Please select perimum plan for more inivtes')
+            $("#loader").css("display", "none");
+            return;
         
-//     }
+    }
 
-//         var max_guest = $("#coins").val();
-//         if(eventData.event_plan_type=="0"){
-//             max_guest = 5
-//         }
-//         var total_guest = $(".users-data.invited_user").length;
-//         console.log({ max_guest });
-//         if (max_guest <= 0) {
-//             $("#loader").css("display", "none");
-//             $(this).prop("checked", false);
-//             $("#buycreditsmodal").modal("show");
-//             return;
-//         } else if (max_guest - total_guest == 0) {
-//             $("#loader").css("display", "none");
-//             $(this).prop("checked", false);
-//             $("#buycreditsmodal").modal("show");
-//             return;
-//         }
-//         $("#loader").css("display", "flex");
-//         $.ajax({
-//             url: base_url + "event/store_user_id",
-//             method: "POST",
-//             data: {
-//                 user_id: userId,
-//                 is_checked: isChecked,
-//                 mobile: mobile,
-//                 is_contact: is_contact,
-//                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
-//             },
-//             success: function (response) {
-//                 console.log(response);
-//                 if (response.status == 401 && response.info == "logout") {
-//                     window.location.href = "/login"; // Redirect to home page
-//                     return;
-//                 }
-//                 var currentInviteCount = $("#currentInviteCount").val();
-//                 currentInviteCount++;
-//                 $("#currentInviteCount").val(currentInviteCount);
+        var max_guest = $("#coins").val();
+        if(eventData.event_plan_type=="0"){
+            max_guest = 5
+        }
+        var total_guest = $(".users-data.invited_user").length;
+        console.log({ max_guest });
+        if (max_guest <= 0) {
+            $("#loader").css("display", "none");
+            $(this).prop("checked", false);
+            $("#buycreditsmodal").modal("show");
+            return;
+        } else if (max_guest - total_guest == 0) {
+            $("#loader").css("display", "none");
+            $(this).prop("checked", false);
+            $("#buycreditsmodal").modal("show");
+            return;
+        }
+        $("#loader").css("display", "flex");
+        $.ajax({
+            url: base_url + "event/store_user_id",
+            method: "POST",
+            data: {
+                user_id: userId,
+                is_checked: isChecked,
+                mobile: mobile,
+                is_contact: is_contact,
+                _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
+            },
+            success: function (response) {
+                console.log(response);
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/login"; // Redirect to home page
+                    return;
+                }
+                var currentInviteCount = $("#currentInviteCount").val();
+                currentInviteCount++;
+                $("#currentInviteCount").val(currentInviteCount);
 
-//                 if (response.is_duplicate == 1) {
-//                     $("#user-" + userId).remove();
-//                     $(".user_id-" + userId).remove();
-//                     // $(".user-list-responsive").empty();
-//                     // $(".user-list-responsive").html(response.responsive_view);
-//                 }
+                if (response.is_duplicate == 1) {
+                    $("#user-" + userId).remove();
+                    $(".user_id-" + userId).remove();
+                    // $(".user-list-responsive").empty();
+                    // $(".user-list-responsive").html(response.responsive_view);
+                }
 
-//                 var total_guest = $(".users-data.invited_user").length;
-//                 $("#event_guest_count").text(total_guest + " Guests");
-//                 $(".invite-count").text(total_guest);
+                var total_guest = $(".users-data.invited_user").length;
+                $("#event_guest_count").text(total_guest + " Guests");
+                $(".invite-count").text(total_guest);
 
-//                 var remainingCount = max_guest - total_guest;
-//                 // if(eventData.event_plan_type=="0"){
-//                 //     if(currentInviteCount >= 5){
-//                 //         $('.user_choice').prop('disabled',true);
-//                 //         toastr.success('please purchase permium plan')
-//                 //     }
-//                 // }
-//                 $(".inivted_user_list").append(response.view);
-//                 // $(".user-list-responsive").empty();
-//                 // $(".user-list-responsive").html(response.responsive_view);
-//                 console.log({ is_yesvite: response.is_yesvite });
-//                 console.log({ is_phone: response.is_phone });
-//                 if (response.is_yesvite == "1") {
-//                     $(".user-list-responsive_yesvite").empty();
-//                     $(".user-list-responsive_yesvite").html(
-//                         response.responsive_view
-//                     );
-//                 }
-//                 if (response.is_phone == "1") {
-//                     $(".user-list-responsive_phone").empty();
-//                     $(".user-list-responsive_phone").html(
-//                         response.responsive_view
-//                     );
-//                 }
-//                 guest_counter(0, max_guest);
-//                 $("#loader").css("display", "none");
+                var remainingCount = max_guest - total_guest;
+                // if(eventData.event_plan_type=="0"){
+                //     if(currentInviteCount >= 5){
+                //         $('.user_choice').prop('disabled',true);
+                //         toastr.success('please purchase permium plan')
+                //     }
+                // }
+                $(".inivted_user_list").append(response.view);
+                // $(".user-list-responsive").empty();
+                // $(".user-list-responsive").html(response.responsive_view);
+                console.log({ is_yesvite: response.is_yesvite });
+                console.log({ is_phone: response.is_phone });
+                if (response.is_yesvite == "1") {
+                    $(".user-list-responsive_yesvite").empty();
+                    $(".user-list-responsive_yesvite").html(
+                        response.responsive_view
+                    );
+                }
+                if (response.is_phone == "1") {
+                    $(".user-list-responsive_phone").empty();
+                    $(".user-list-responsive_phone").html(
+                        response.responsive_view
+                    );
+                }
+                guest_counter(0, max_guest);
+                $("#loader").css("display", "none");
 
-//                 // var length = responsive_invite_user();
-//                 // if(length < 4){
-//                 //     $('.all_user_list').remove();
-//                 //     $(".user-list-responsive").empty();
-//                 //     $(".user-list-responsive").html(response.responsive_view);
-//                 //     // $(".user-list-responsive").append(response.responsive_view);
-//                 // }else{
-//                 //     // add_user_counter();
-//                 // }
-//                 // if(remainingCount < 0){
-//                 //     $(".invite-left_d").text("0 Left");
-//                 // }else{
-//                 //     $(".invite-left_d").text(remainingCount + " Left");
+                // var length = responsive_invite_user();
+                // if(length < 4){
+                //     $('.all_user_list').remove();
+                //     $(".user-list-responsive").empty();
+                //     $(".user-list-responsive").html(response.responsive_view);
+                //     // $(".user-list-responsive").append(response.responsive_view);
+                // }else{
+                //     // add_user_counter();
+                // }
+                // if(remainingCount < 0){
+                //     $(".invite-left_d").text("0 Left");
+                // }else{
+                //     $(".invite-left_d").text(remainingCount + " Left");
 
-//                 // }
-//                 // $("#event_guest_left_count").val(remainingCount);
-//             },
-//             error: function (xhr, status, error) {
-//                 toastr.error(error);
-//             },
-//         });
-//     } else {
-//         $("#loader").css("display", "flex");
+                // }
+                // $("#event_guest_left_count").val(remainingCount);
+            },
+            error: function (xhr, status, error) {
+                toastr.error(error);
+            },
+        });
+    } else {
+        $("#loader").css("display", "flex");
 
-//         $.ajax({
-//             url: base_url + "event/delete_user_id",
-//             method: "POST",
-//             data: {
-//                 user_id: userId,
-//                 is_contact: is_contact,
-//                 _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
-//             },
-//             success: function (response) {
-//                 if (response.status == 401 && response.info == "logout") {
-//                     window.location.href = "/login"; // Redirect to home page
-//                     return;
-//                 }
-//                 if (is_contact == "1") {
-//                     $("#contact_tel-" + userId).remove();
-//                     $(".sync_user_id_tel-" + userId).remove();
-//                 } else {
-//                     $("#user_tel-" + userId).remove();
-//                     $(".user_id_tel-" + userId).remove();
-//                 }
-//                 var currentInviteCount = $("#currentInviteCount").val();
-//                 currentInviteCount--;
-//                 $("#currentInviteCount").val(currentInviteCount);
-//                 var total_guest = $(".users-data.invited_user").length;
-//                 var alreadyguest = $(".users-data.invited_users").length;
-//                 // $("#event_guest_count").text(total_guest + " Guests");
-//                 // $(".invite-count").text(total_guest + 0);
+        $.ajax({
+            url: base_url + "event/delete_user_id",
+            method: "POST",
+            data: {
+                user_id: userId,
+                is_contact: is_contact,
+                _token: $('meta[name="csrf-token"]').attr("content"), // Adding CSRF token
+            },
+            success: function (response) {
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/login"; // Redirect to home page
+                    return;
+                }
+                if (is_contact == "1") {
+                    $("#contact_tel-" + userId).remove();
+                    $(".sync_user_id_tel-" + userId).remove();
+                } else {
+                    $("#user_tel-" + userId).remove();
+                    $(".user_id_tel-" + userId).remove();
+                }
+                var currentInviteCount = $("#currentInviteCount").val();
+                currentInviteCount--;
+                $("#currentInviteCount").val(currentInviteCount);
+                var total_guest = $(".users-data.invited_user").length;
+                var alreadyguest = $(".users-data.invited_users").length;
+                // $("#event_guest_count").text(total_guest + " Guests");
+                // $(".invite-count").text(total_guest + 0);
 
-//                 var max_guest = $("#coins").val();
-//                 if(eventData.event_plan_type=="0"){
-//                     max_guest = 5
-//                 }
-//                 var remainingCount = max_guest - total_guest;
-//                 guest_counter(0, max_guest);
-//                 // if (remainingCount < 0) {
-//                 //     $(".invite-left_d").text("0 Left");
-//                 // } else {
-//                 //     $(".invite-left_d").text(
-//                 //         remainingCount + " Left"
-//                 //     );
-//                 // }
-//                 // $("#event_guest_left_count").val(remainingCount);
-//                 $("#loader").css("display", "none");
+                var max_guest = $("#coins").val();
+                if(eventData.event_plan_type=="0"){
+                    max_guest = 5
+                }
+                var remainingCount = max_guest - total_guest;
+                guest_counter(0, max_guest);
+                // if (remainingCount < 0) {
+                //     $(".invite-left_d").text("0 Left");
+                // } else {
+                //     $(".invite-left_d").text(
+                //         remainingCount + " Left"
+                //     );
+                // }
+                // $("#event_guest_left_count").val(remainingCount);
+                $("#loader").css("display", "none");
 
-//                 console.log("User ID deleted successfully.");
-//             },
-//             error: function (xhr, status, error) {
-//                 console.error("An error occurred while storing the User ID.");
-//                 toastr.error(error);
-//             },
-//         });
-//     }
-// });
+                console.log("User ID deleted successfully.");
+            },
+            error: function (xhr, status, error) {
+                console.error("An error occurred while storing the User ID.");
+                toastr.error(error);
+            },
+        });
+    }
+});
 
 $(document).on("click", "#openDivButton", function () {
     $("#categoryDiv").slideDown();
@@ -5972,30 +5972,30 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
     }
 });
 
-$(document).on("change", "#YesviteUserAll .user_choice", function () {
-    var groupId = $(this).closest(".user_choice_group").data("id");
-    if ($(this).is(":checked")) {
-        $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
-            .not(this)
-            .prop("checked", false);
+// $(document).on("change", "#YesviteUserAll .user_choice", function () {
+//     var groupId = $(this).closest(".user_choice_group").data("id");
+//     if ($(this).is(":checked")) {
+//         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
+//             .not(this)
+//             .prop("checked", false);
 
-    } else {
-        var id = $(this).data("id");
-        $("#" + id).remove();
-    }
-});
+//     } else {
+//         var id = $(this).data("id");
+//         $("#" + id).remove();
+//     }
+// });
 
-$(document).on("change", ".user_group_member .user_choice", function () {
-    var groupId = $(this).closest(".user_choice_group").data("id");
-    if ($(this).is(":checked")) {
-        $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
-            .not(this)
-            .prop("checked", false);
-    } else {
-        var id = $(this).data("id");
-        $("#" + id).remove();
-    }
-});
+// $(document).on("change", ".user_group_member .user_choice", function () {
+//     var groupId = $(this).closest(".user_choice_group").data("id");
+//     if ($(this).is(":checked")) {
+//         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
+//             .not(this)
+//             .prop("checked", false);
+//     } else {
+//         var id = $(this).data("id");
+//         $("#" + id).remove();
+//     }
+// });
 
 $(document).on("click", ".delete_potluck_category", function () {
     var delete_id = $(this).data("id");
@@ -11412,27 +11412,27 @@ async function handleLoginSuccess(response) {
     }
 }
 
-$(document).on("click", ".user_choice", function () {
-    let checkedCount = 0;
-    let anyCheckedNotDisabled = false;
-    $(".user_choice").each(function () {
-        if ($(this).is(":checked") && !$(this).prop("disabled")) {
-            anyCheckedNotDisabled = true;
-            checkedCount++;
-        }
-    });
-    let buttonText = `Send Invites (0)`;
-    if (anyCheckedNotDisabled) {
-    // alert(1);
-        $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
-        buttonText = ` Send Invites(${checkedCount})`;
-    } else {
-    // alert(2);
-        $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
-    }
+// $(document).on("click", ".user_choice", function () {
+//     let checkedCount = 0;
+//     let anyCheckedNotDisabled = false;
+//     $(".user_choice").each(function () {
+//         if ($(this).is(":checked") && !$(this).prop("disabled")) {
+//             anyCheckedNotDisabled = true;
+//             checkedCount++;
+//         }
+//     });
+//     let buttonText = `Send Invites (0)`;
+//     if (anyCheckedNotDisabled) {
+//     // alert(1);
+//         $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
+//         buttonText = ` Send Invites(${checkedCount})`;
+//     } else {
+//     // alert(2);
+//         $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
+//     }
 
-    $("a.saveGuestOnly.isdisabled").text(buttonText);
-});
+//     $("a.saveGuestOnly.isdisabled").text(buttonText);
+// });
 // ========vrushali===============
 let pageRefresh = localStorage.getItem("pageRefresh");
 //let storedImageUrl = localStorage.getItem("uploadedImageUrl");
