@@ -2191,6 +2191,8 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     var is_contact = $(this).data("contact");
  
 
+    console.log(inviteCount);
+    
     if (isChecked == true || isChecked == "true") {
         if(eventData.event_plan_type=="0"&&inviteCount >= 5){
             $(this).prop("checked", false);
@@ -2436,6 +2438,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     // }
     var inviteCount = parseInt($("#currentInviteCount").val());
 
+    console.log(inviteCount);
     
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
