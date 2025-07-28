@@ -3098,6 +3098,9 @@ class EventWallController extends BaseController
             $is_failed = "1";
         }
 
+        if($user->coins <= 0){
+            return response()->json(['status' => 0, 'coins' => "0"]);
+        }
         // try {
         if (!empty($request['guest_list'])) {
 

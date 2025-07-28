@@ -1532,6 +1532,9 @@ $(document).on("click", ".add_guest", function (e) {
                 // alert(response.message); // Show success message
                 guestList = []; // Clear guest list after successful submission
             } else {
+                if(response.coins=="0"){
+                    toastr.error('Insufficent Coins');
+                }
                 // alert(response.message); // Show error message
             }
         },
