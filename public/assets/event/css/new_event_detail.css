@@ -1600,6 +1600,13 @@
     align-items: center;
 }
 
+.new-event-sidebar-wrp .coin-invite-wrp span{
+    width: 100%;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    text-align: center;
+}
+
 .new-event-sidebar-wrp .guest-wrp.side-guest-wrp .invite-pro img {
     min-width: 24px;
 }

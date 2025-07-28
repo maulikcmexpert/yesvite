@@ -813,7 +813,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                         $setPrice = array_reverse($prices);
                     @endphp --}}
                       
-                            <span class="coin-invite-wrp-inner">
+                            <span class="coin-invite-wrp-inner free_plan_coin_invite">
                                 {{-- {{$setPrice[0]['coins']}} | --}}
 
                                 <span class="green-price" >Free
