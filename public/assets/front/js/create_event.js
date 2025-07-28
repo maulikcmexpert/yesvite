@@ -5975,12 +5975,6 @@ $(document).on("change", "#YesviteUserAll .user_choice", function () {
             .not(this)
             .prop("checked", false);
 
-            var currentInviteCount = parseInt(
-                $("#currentInviteCount").val()
-            );
-            currentInviteCount--;
-            $("#currentInviteCount").val(currentInviteCount);
-            
     } else {
         var id = $(this).data("id");
         $("#" + id).remove();
