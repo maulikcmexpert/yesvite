@@ -2192,7 +2192,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
  
 
     console.log(inviteCount);
-    
+
     if (isChecked == true || isChecked == "true") {
         if(eventData.event_plan_type=="0"&&inviteCount >= 5){
             $(this).prop("checked", false);
@@ -11423,11 +11423,11 @@ $(document).on("click", ".user_choice", function () {
     let buttonText = `Send Invites (0)`;
     if (anyCheckedNotDisabled) {
         
-        // $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
+        $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
         buttonText = ` Send Invites(${checkedCount})`;
     } else {
         // alert(2);
-        // $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
+        $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
     }
 
     $("a.saveGuestOnly.isdisabled").text(buttonText);
