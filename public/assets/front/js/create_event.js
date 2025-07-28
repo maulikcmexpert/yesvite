@@ -2192,9 +2192,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
  
 
     if (isChecked == true || isChecked == "true") {
-        $("#event_guest_count").text(total_guest + " Guests");
-        // $total_all_count= $("#event_guest_count").text
-        if(eventData.event_plan_type=="0"&&total_guest >= 5){
+        if(eventData.event_plan_type=="0"&&inviteCount >= 5){
             $(this).prop("checked", false);
             toastr.error('Please select perimum plan for more inivtes')
             $("#loader").css("display", "none");
@@ -2438,14 +2436,13 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     // }
     var inviteCount = parseInt($("#currentInviteCount").val());
 
-    console.log(inviteCount);
     
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
     var mobile = $(this).data("mobile");
     var is_contact = $(this).data("contact");
     if (isChecked == true || isChecked == "true") {
-        if(eventData.event_plan_type=="0"&&total_guest >= 5){
+        if(eventData.event_plan_type=="0"&&inviteCount >= 5){
             $(this).prop("checked", false);
             toastr.error('Please select perimum plan for more inivtes')
             $("#loader").css("display", "none");
@@ -5975,9 +5972,9 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
 $(document).on("change", "#YesviteUserAll .user_choice", function () {
     var groupId = $(this).closest(".user_choice_group").data("id");
     if ($(this).is(":checked")) {
-        $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
-            .not(this)
-            .prop("checked", false);
+        // $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
+        //     .not(this)
+        //     .prop("checked", false);
     } else {
         var id = $(this).data("id");
         $("#" + id).remove();
