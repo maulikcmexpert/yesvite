@@ -3102,7 +3102,7 @@ class EventWallController extends BaseController
         $guestList = $request->input('guest_list', []);
         // count guests safely
         $totalUsers = count($guestList);
-        dd($totalUsers);
+        // dd($totalUsers);
         $eventData=Event::where('id',$request['event_id'])->first();
         if($eventData->event_type="0"){
                 if((int)$request['totalusers']==$freeInvite){
