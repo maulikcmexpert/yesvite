@@ -11480,6 +11480,7 @@ $(".show-moreless-btn").on("click", function () {
 
     if ($(this).val() == "1") {
         $('.select_plan_btn').text('Continue Permium Plan');
+        
     } else {
         $('.select_plan_btn').text('Continue Free Plan');
     }
@@ -11493,9 +11494,16 @@ $(document).on('click', '.select_plan_btn', function () {
     if(plan_value=="1"){
         $('.free_plan_status').addClass('d-none');
         $('.paid_plan_status').removeClass('d-none');
+
+        $('.free_current_plan').hide();
+        $('.paid_current_plan').show();
     }else{
         $('.free_plan_status').removeClass('d-none');
         $('.paid_plan_status').addClass('d-none'); 
+
+
+        $('.free_current_plan').show();
+        $('.paid_current_plan').hide();
     }
     
     console.log("plan_value "+plan_value)
@@ -11514,11 +11522,15 @@ $(document).on('click','.switch_plan',function(){
     $('#select_event_type').modal('show');
     if(eventData.event_plan_type=="1"){
         $('.paid_plan_chk').prop('checked',true)
+        $('.free_current_plan').hide();
+        $('.paid_current_plan').show();
         $('.free_plan_chk').prop('checked',false)
         $('.select_plan_btn').text('Continue Permium Plan')
 
     }else{
         $('.free_plan_chk').prop('checked',true)
+        $('.free_current_plan').show();
+        $('.paid_current_plan').hide();
         $('.paid_plan_chk').prop('checked',false)
         $('.select_plan_btn').text('Continue Free Plan')
 

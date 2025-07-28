@@ -3544,7 +3544,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                         <div class="plan-inner-card-header">
                             <div class="plan-inner-card-header-details">
                                 <h5 class="plan-inner-card-header-title">Free Plan</h5>
-                                <p class="plan-inner-card-header-text">Your current plan</p>
+                                <p class="plan-inner-card-header-text free_current_plan">Your current plan</p>
                             </div>
                             <input class="form-check-input select_plan_check free_plan_chk" type="checkbox" value="0"
                             {{ !isset($eventDetail['event_type']) || $eventDetail['event_type'] == "0" ? 'checked' : '' }}>     
@@ -3628,6 +3628,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                         <div class="plan-inner-card-header">
                             <div class="plan-inner-card-header-details">
                                 <h5 class="plan-inner-card-header-title">Premium Plan</h5>
+                                <p class="plan-inner-card-header-text paid_current_plan" style="display: none;">Your current plan</p>
                             </div>
                             <input class="form-check-input select_plan_check paid_plan_chk"  type="checkbox" value="1"
                             {{ isset($eventDetail['event_type']) && $eventDetail['event_type'] == "1" ? 'checked' : '' }}>     
