@@ -3098,9 +3098,10 @@ class EventWallController extends BaseController
             $is_failed = "1";
         }
         $freeInvite=5;
+        dd($request);
         $eventData=Event::where('id',$request['event_id'])->first();
         if($eventData->event_type="0"){
-                if($request->totalusers==$freeInvite){
+                if($request['totalusers']==$freeInvite){
                     return response()->json(['status' => 0, 'free' => "0"]);
                 }
         }
