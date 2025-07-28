@@ -10888,6 +10888,7 @@ $(document).on("click", "#final_see_invite_btn", function (event) {
 });
 
 function getcoins() {
+    return
     // alert();
     // console.log(eventData);
     Alreadyguest = $(".users-data.invited_users").length;
