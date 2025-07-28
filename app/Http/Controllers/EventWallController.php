@@ -3100,12 +3100,14 @@ class EventWallController extends BaseController
         $freeInvite=5;
         // dd($request);
         $eventData=Event::where('id',$request['event_id'])->first();
-        if($eventData->event_type=="0"){
+        if($eventData->event_type="0"){
                 if((int)$request['totalusers']==$freeInvite){
                     return response()->json(['status' => 0, 'free' => "0"]);
                 }
         }
-        if($user->coins <= 0){
+        // $totalallusers=(int)$request['totalusers'] + count($request['guestList']);
+
+        if($user->coins <= 0 ||count($request['guestList']) >  $user->coins){
             return response()->json(['status' => 0, 'coins' => "0"]);
         }
         // try {
