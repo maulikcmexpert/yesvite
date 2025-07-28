@@ -10903,7 +10903,7 @@ function getcoins() {
     var AllCoins = max_guest - Alreadyguest;
     console.log('Allcoins 1 '+AllCoins);
 
-    if (eventData.event_plan_type != "") {
+    if (eventData.event_plan_type != "" && eventId=="") {
         Alreadyguest = $('.user_choice:checked').length;
         AllCoins = max_guest - Alreadyguest;
     }
