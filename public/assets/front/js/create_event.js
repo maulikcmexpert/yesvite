@@ -10890,7 +10890,7 @@ $(document).on("click", "#final_see_invite_btn", function (event) {
 });
 
 function getcoins() {
-    return
+    // return
     // alert();
     // console.log(eventData);
     Alreadyguest = $(".users-data.invited_users").length;
@@ -10901,11 +10901,13 @@ function getcoins() {
     }
 
     var AllCoins = max_guest - Alreadyguest;
-    
+    console.log('Allcoins 1 '+AllCoins);
+
     if (eventData.event_plan_type != "") {
         Alreadyguest = $('.user_choice:checked').length;
         AllCoins = max_guest - Alreadyguest;
     }
+    console.log('Allcoins 2 '+AllCoins);
     
     if (isCopy == "" && isDraftEvent == "0") {
         AllCoins = max_guest;
