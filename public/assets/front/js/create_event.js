@@ -7220,9 +7220,11 @@ $(document).on("click", ".final_checkout", function () {
 $(document).on("click", ".final_create_event", function (e) {
     var curr_aval_coins=$('#user_avaliable_coins').val()
 
-    if(curr_aval_coins==0||curr_aval_coins=="0"){
-        toastr.error('Insufficient coins.');
-        return;
+    if(eventData.event_plan_type=="1"){
+        if(curr_aval_coins==0||curr_aval_coins=="0"){
+            toastr.error('Insufficient coins.');
+            return;
+        }
     }
     if (apiCalled == true) {
         return;
