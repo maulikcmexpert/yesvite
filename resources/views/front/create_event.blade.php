@@ -797,8 +797,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                             <h6 class="invite-count">0</h6>
                             {{-- <p id="invite-left"><strong>0</strong>Left</p> --}}
                             <input type="hidden" id="event_guest_left_count" />
-                            <p><strong>Invites |<div class="coin-invite"><img
-                                            src="{{asset('assets/front/image/credit-coin-img.png')}}" alt=""></div>
+                            <p><strong>Invites |<div class="coin-invite"></div>
                                     <span class="invite-left_d"></span></strong></p>
                             <input type="hidden" id="currentInviteCount" value="0">
                         </div>
@@ -3547,7 +3546,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                                 <h5 class="plan-inner-card-header-title">Free Plan</h5>
                                 <p class="plan-inner-card-header-text">Your current plan</p>
                             </div>
-                            <input class="form-check-input select_plan_check" type="checkbox" value="0"
+                            <input class="form-check-input select_plan_check free_plan_chk" type="checkbox" value="0"
                             {{ !isset($eventDetail['event_type']) || $eventDetail['event_type'] == "0" ? 'checked' : '' }}>     
                                            </div>
                         <div class="plan-inner-card-body">
@@ -3630,7 +3629,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                             <div class="plan-inner-card-header-details">
                                 <h5 class="plan-inner-card-header-title">Premium Plan</h5>
                             </div>
-                            <input class="form-check-input select_plan_check" type="checkbox" value="1"
+                            <input class="form-check-input select_plan_check paid_plan_chk"  type="checkbox" value="1"
                             {{ isset($eventDetail['event_type']) && $eventDetail['event_type'] == "1" ? 'checked' : '' }}>     
                             
                                            </div>
@@ -3688,10 +3687,10 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
 
             </div>
             <div class="modal-footer comman-modal-footer">
-                <div class="modal-footer-btn-section">
+                <div class="modal-footer-btn-section mt-4">
                     <button type="button" class="cmn-btn reset-btn" data-bs-dismiss="modal">Close</button>
                     {{-- <button type="button" class="cmn-btn select_plan_btn" data-bs-dismiss="modal">Continue Buy Credits</button> --}}
-                    <button type="button" class="cmn-btn select_plan_btn" data-bs-dismiss="modal">Continue Premium Plan</button>
+                    <button type="button" class="cmn-btn select_plan_btn" data-bs-dismiss="modal">Continue Free Plan</button>
                 </div>
             </div>
         </div>

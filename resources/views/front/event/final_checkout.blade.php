@@ -1079,7 +1079,7 @@
                         <button type="button" id="event_copy_link_btn"
                             style="background: black; border-color:black">Copy Link</button>
                     </div>
-                    <div class="invite-left">
+                    <div class="invite-left create_event_popup_coin">
                         <h6 class="invite-count" style="color: #23aa26">0</h6>
                         <input type="hidden" id="event_guest_left_count">
                         <p><strong>Credits Used |</strong></p>
