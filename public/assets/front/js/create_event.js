@@ -2205,6 +2205,10 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
         var max_guest = $("#coins").val();
         if(eventData.event_plan_type=="0"){
             max_guest = 500
+            if(eventId!=""){
+                max_guest = 500 - total_guest;
+
+            }
         }
 
         console.log({ max_guest });
@@ -10902,16 +10906,12 @@ function getcoins() {
 
     var AllCoins = max_guest - Alreadyguest;
 
-    var Alreadyguest2 = $('.user_choice:checked').length;
-    console.log('Alreadyguest '+Alreadyguest)
-    console.log('Alreadyguest2 '+Alreadyguest2)
-    if(Alreadyguest2!=0){
+    Alreadyguest = $('.user_choice:checked').length;
+
+    if (eventData.event_plan_type != "" && eventId=="") {
+        Alreadyguest = $('.user_choice:checked').length;
         AllCoins = max_guest - Alreadyguest;
     }
-    // if (eventData.event_plan_type != "" && eventId=="") {
-    //     Alreadyguest = $('.user_choice:checked').length;
-    //     AllCoins = max_guest - Alreadyguest;
-    // }
     
     // if (isCopy == "" && isDraftEvent == "0") {
     //     AllCoins = max_guest;
