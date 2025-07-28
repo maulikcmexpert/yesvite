@@ -5972,30 +5972,30 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
     }
 });
 
-// $(document).on("change", "#YesviteUserAll .user_choice", function () {
-//     var groupId = $(this).closest(".user_choice_group").data("id");
-//     if ($(this).is(":checked")) {
-//         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
-//             .not(this)
-//             .prop("checked", false);
+$(document).on("change", "#YesviteUserAll .user_choice", function () {
+    var groupId = $(this).closest(".user_choice_group").data("id");
+    if ($(this).is(":checked")) {
+        $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
+            .not(this)
+            .prop("checked", false);
 
-//     } else {
-//         var id = $(this).data("id");
-//         $("#" + id).remove();
-//     }
-// });
+    } else {
+        var id = $(this).data("id");
+        $("#" + id).remove();
+    }
+});
 
-// $(document).on("change", ".user_group_member .user_choice", function () {
-//     var groupId = $(this).closest(".user_choice_group").data("id");
-//     if ($(this).is(":checked")) {
-//         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
-//             .not(this)
-//             .prop("checked", false);
-//     } else {
-//         var id = $(this).data("id");
-//         $("#" + id).remove();
-//     }
-// });
+$(document).on("change", ".user_group_member .user_choice", function () {
+    var groupId = $(this).closest(".user_choice_group").data("id");
+    if ($(this).is(":checked")) {
+        $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
+            .not(this)
+            .prop("checked", false);
+    } else {
+        var id = $(this).data("id");
+        $("#" + id).remove();
+    }
+});
 
 $(document).on("click", ".delete_potluck_category", function () {
     var delete_id = $(this).data("id");
@@ -11412,27 +11412,26 @@ async function handleLoginSuccess(response) {
     }
 }
 
-// $(document).on("click", ".user_choice", function () {
-//     let checkedCount = 0;
-//     let anyCheckedNotDisabled = false;
-//     $(".user_choice").each(function () {
-//         if ($(this).is(":checked") && !$(this).prop("disabled")) {
-//             anyCheckedNotDisabled = true;
-//             checkedCount++;
-//         }
-//     });
-//     let buttonText = `Send Invites (0)`;
-//     if (anyCheckedNotDisabled) {
-//     // alert(1);
-//         $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
-//         buttonText = ` Send Invites(${checkedCount})`;
-//     } else {
-//     // alert(2);
-//         $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
-//     }
+$(document).on("click", ".user_choice", function () {
+    let checkedCount = 0;
+    let anyCheckedNotDisabled = false;
+    $(".user_choice").each(function () {
+        if ($(this).is(":checked") && !$(this).prop("disabled")) {
+            anyCheckedNotDisabled = true;
+            checkedCount++;
+        }
+    });
+    let buttonText = `Send Invites (0)`;
+    if (anyCheckedNotDisabled) {
+        $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
+        buttonText = ` Send Invites(${checkedCount})`;
+    } else {
+    // alert(2);
+        $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
+    }
 
-//     $("a.saveGuestOnly.isdisabled").text(buttonText);
-// });
+    $("a.saveGuestOnly.isdisabled").text(buttonText);
+});
 // ========vrushali===============
 let pageRefresh = localStorage.getItem("pageRefresh");
 //let storedImageUrl = localStorage.getItem("uploadedImageUrl");
