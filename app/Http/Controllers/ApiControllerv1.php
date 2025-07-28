@@ -8102,7 +8102,16 @@ class ApiControllerv1 extends Controller
             $eventDetails['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
 
 
-            return response()->json(['status' => 1, 'data' => $eventDetails, 'message' => "About event"]);
+            $getTemplateId=Event::where('id',$eventDetail->id)->select('event_type')->first();
+
+            if($getTemplateId->event_type=='1'){
+                $display_ad=false;
+            }else{
+                $display_ad=true;
+            }
+
+
+            return response()->json(['status' => 1, 'data' => $eventDetails,'show_adv'=>$display_ad, 'message' => "About event"]);
         } catch (QueryException $e) {
 
             DB::rollBack();
@@ -9077,7 +9086,15 @@ class ApiControllerv1 extends Controller
         $commentnumber = json_encode(['status' => 1, 'rsvp_status' => $rsvp_status, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data"]);
         Storage::append($filename, $commentnumber);
 
-        return response()->json(['status' => 1, 'rsvp_status' => $rsvp_status, 'is_co_host' => $is_co_host, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data", 'subscription_plan_name' => $eventCreator->subscription_plan_name]);
+        $getTemplateId=Event::where('id',$input['event_id'])->select('event_type')->first();
+
+        if($getTemplateId->event_type=='1'){
+            $display_ad=false;
+        }else{
+            $display_ad=true;
+        }
+
+        return response()->json(['status' => 1, 'rsvp_status' => $rsvp_status,'show_adv'=>$display_ad, 'is_co_host' => $is_co_host, 'total_page_of_stories' => $total_page_of_stories, 'total_page_of_eventPosts' => $total_page_of_eventPosts, 'data' => $wallData, 'message' => "Event wall data", 'subscription_plan_name' => $eventCreator->subscription_plan_name]);
         // } catch (QueryException $e) {
         //     DB::rollBack();
         //     return response()->json(['status' => 0, 'message' => "db error"]);
@@ -11310,7 +11327,16 @@ class ApiControllerv1 extends Controller
             $eventAboutHost['rsvp_rate_percent'] = ($totalEnvitedUser != 0) ? $eventattending / $totalEnvitedUser * 100 . "%" : 0 . "%";
 
             $eventAboutHost['today_upstick'] = ($totalEnvitedUser != 0) ? $todayrsvprate / $totalEnvitedUser * 100 . "%" : 0 . "%";
-            return response()->json(['status' => 1, 'data' => $eventAboutHost, 'message' => "Guest event"]);
+          
+            $getTemplateId=Event::where('id',$eventDetail->id)->select('event_type')->first();
+
+            if($getTemplateId->event_type=='1'){
+                $display_ad=false;
+            }else{
+                $display_ad=true;
+            }
+
+            return response()->json(['status' => 1, 'data' => $eventAboutHost,'show_adv'=>$display_ad, 'message' => "Guest event"]);
         } catch (QueryException $e) {
             // dd($e);
             DB::rollBack();
