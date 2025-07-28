@@ -989,6 +989,10 @@ class EventController extends BaseController
         Session::forget('desgin_slider');
         $user_id =  Auth::guard('web')->user()->id;
         $dateString = (isset($request->event_date)) ? $request->event_date : "";
+        $user_ids_count=[];
+        $contact_ids_count=[];
+        $user_ids_count=count(session('user_ids',[]));
+        $contact_ids_count=count(session('contact_ids',[]));
         $total_user_invited_event = count(session('user_ids'))+count(session('contact_ids'));
         $max_free=5;
 
