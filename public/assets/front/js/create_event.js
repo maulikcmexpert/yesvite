@@ -10907,9 +10907,9 @@ function getcoins() {
         AllCoins = max_guest - Alreadyguest;
     }
     
-    if (isCopy == "" && isDraftEvent == "0") {
-        AllCoins = max_guest;
-    }
+    // if (isCopy == "" && isDraftEvent == "0") {
+    //     AllCoins = max_guest;
+    // }
     console.log("all coins "+AllCoins);
 
     console.log("invite-left_d "+AllCoins);
