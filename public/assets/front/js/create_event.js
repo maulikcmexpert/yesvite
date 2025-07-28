@@ -188,7 +188,7 @@ if ($("#isUserLoggedIn").val() === "1") {
     var eventEditId = $("#eventEditId").val();
     var inviteTotalCount = $("#inviteTotalCount").val();
     $(".invite-count").text(inviteTotalCount);
-    // $("#event_guest_count").text(inviteTotalCount + " Guests");
+    $("#event_guest_count").text(inviteTotalCount + " Guests");
     $(".select_plan_credits").text(inviteTotalCount + " Credits");
     var isSetSession = 0;
     eventData.allow_limit_count = $("#allow_limit_count").val();
