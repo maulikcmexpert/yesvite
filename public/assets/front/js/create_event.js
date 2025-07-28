@@ -2338,9 +2338,10 @@ function guest_counter(total_guest, max_guest) {
     $(".select_plan_credits").text(total_guest + Alreadyguest + " Credits");
     $(".invite-count").text(total_guest + Alreadyguest);
     var remainingCount = max_guest - (total_guest + Alreadyguest);
-    if (isCopy == "" && isDraftEvent == "0") {
-        remainingCount = max_guest - total_guest;
-    }
+    
+    // if (isCopy == "" && isDraftEvent == "0") {
+    //     remainingCount = max_guest - total_guest;
+    // }
     // if(eventData.event_plan_type=="1"){
         if (remainingCount <= 0) {
             $(".invite-left_d").text("0 Left");
