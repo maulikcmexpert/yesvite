@@ -10903,9 +10903,10 @@ function getcoins() {
     var AllCoins = max_guest - Alreadyguest;
 
     var Alreadyguest2 = $('.user_choice:checked').length;
-
+    console.log('Alreadyguest '+Alreadyguest)
+    console.log('Alreadyguest2 '+Alreadyguest2)
     if(Alreadyguest2!=0){
-        AllCoins = max_guest - Alreadyguest2;
+        AllCoins = max_guest - Alreadyguest;
     }
     // if (eventData.event_plan_type != "" && eventId=="") {
     //     Alreadyguest = $('.user_choice:checked').length;
