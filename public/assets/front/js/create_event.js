@@ -11480,9 +11480,14 @@ $(".show-moreless-btn").on("click", function () {
 
     if ($(this).val() == "1") {
         $('.select_plan_btn').text('Continue Permium Plan');
+        $('.free_current_plan').hide();
+        $('.paid_current_plan').show();
         
     } else {
         $('.select_plan_btn').text('Continue Free Plan');
+
+        $('.free_current_plan').show();
+        $('.paid_current_plan').hide();
     }
 });
 
@@ -11495,15 +11500,12 @@ $(document).on('click', '.select_plan_btn', function () {
         $('.free_plan_status').addClass('d-none');
         $('.paid_plan_status').removeClass('d-none');
 
-        $('.free_current_plan').hide();
-        $('.paid_current_plan').show();
+    
     }else{
         $('.free_plan_status').removeClass('d-none');
         $('.paid_plan_status').addClass('d-none'); 
 
 
-        $('.free_current_plan').show();
-        $('.paid_current_plan').hide();
     }
     
     console.log("plan_value "+plan_value)
