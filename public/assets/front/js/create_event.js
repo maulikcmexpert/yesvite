@@ -7511,7 +7511,7 @@ function displayRecords(
                 create_event_yesvite_scroll = true;
             }
             if (currentInviteCount >= coins) {
-                $(".user_choice").prop("disabled", true);
+                // $(".user_choice").prop("disabled", true);
             }
             console.log(html);
             if (html == "" && alluserscroll == 1) {
