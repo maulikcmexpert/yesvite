@@ -2172,8 +2172,6 @@ $(document).on("change", 'input[name^="add_by_"]', function () {
     }
 });
   
-var current_user_count_email=0;
-
 $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     var inviteCount = parseInt($("#currentInviteCount").val());
 
@@ -2193,12 +2191,8 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     var is_contact = $(this).data("contact");
  
 
-    console.log(inviteCount);
-
-    console.log('current_user_count_mobile '+current_user_count_email)
-
     if (isChecked == true || isChecked == "true") {
-        if(eventData.event_plan_type=="0"&&current_user_count_email >= 5){
+        if(eventData.event_plan_type=="0"&&inviteCount >= 5){
             $(this).prop("checked", false);
             toastr.error('Please select perimum plan for more inivtes')
             $("#loader").css("display", "none");
@@ -2275,10 +2269,6 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                         response.responsive_view
                     );
                 }
-
-
-                current_user_count_email=$(".user-contacts.inivted_user_list .users-data.invited_user").length;
-
                 // }else{
                 //     add_user_counter();
                 // }
@@ -2452,10 +2442,8 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     var isChecked = $(this).is(":checked");
     var mobile = $(this).data("mobile");
     var is_contact = $(this).data("contact");
-
-    
     if (isChecked == true || isChecked == "true") {
-        if(eventData.event_plan_type=="0"&&current_user_count_email >= 5){
+        if(eventData.event_plan_type=="0"&&inviteCount >= 5){
             $(this).prop("checked", false);
             toastr.error('Please select perimum plan for more inivtes')
             $("#loader").css("display", "none");
@@ -2536,9 +2524,6 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                         response.responsive_view
                     );
                 }
-
-                current_user_count_email==$(".user-contacts.inivted_user_list .users-data.invited_user").length;
-
                 guest_counter(0, max_guest);
                 $("#loader").css("display", "none");
 
@@ -11436,11 +11421,11 @@ $(document).on("click", ".user_choice", function () {
     let buttonText = `Send Invites (0)`;
     if (anyCheckedNotDisabled) {
         
-        $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
+        // $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
         buttonText = ` Send Invites(${checkedCount})`;
     } else {
         // alert(2);
-        $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
+        // $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
     }
 
     $("a.saveGuestOnly.isdisabled").text(buttonText);
