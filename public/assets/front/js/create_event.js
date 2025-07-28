@@ -2193,9 +2193,11 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
 
     console.log(inviteCount);
 
-    var current_user_count=$('.invited_user').length
+    var current_user_count_email=$('.invited_user').length
+    console.log('current_user_count_mobile '+current_user_count_email)
+
     if (isChecked == true || isChecked == "true") {
-        if(eventData.event_plan_type=="0"&&current_user_count >= 5){
+        if(eventData.event_plan_type=="0"&&current_user_count_email >= 5){
             $(this).prop("checked", false);
             toastr.error('Please select perimum plan for more inivtes')
             $("#loader").css("display", "none");
@@ -2446,10 +2448,10 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     var mobile = $(this).data("mobile");
     var is_contact = $(this).data("contact");
 
-    var current_user_count=$('.invited_user').length
-
+    var current_user_count_mobile=$('.invited_user').length
+    console.log('current_user_count_mobile '+current_user_count_mobile)
     if (isChecked == true || isChecked == "true") {
-        if(eventData.event_plan_type=="0"&&current_user_count >= 5){
+        if(eventData.event_plan_type=="0"&&current_user_count_mobile >= 5){
             $(this).prop("checked", false);
             toastr.error('Please select perimum plan for more inivtes')
             $("#loader").css("display", "none");
