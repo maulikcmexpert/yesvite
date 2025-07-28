@@ -629,7 +629,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                 // dd($display_plan);
             @endphp
             
-            <div class="guest-wrp side-guest-wrp paid_plan_status {{ $display_plan == "0" ? 'd-none' : '' }}">
+            <div class="guest-wrp side-guest-wrp paid_plan_status  {{ !isset($eventDetail['event_type']) || $display_plan == "0" ? 'd-none' : '' }}">
 
                 <div class="guest-pro">
                     <div>
@@ -739,8 +739,9 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                     {{-- </div> --}}
                 </div>
             </div>
-
-            <div class="guest-wrp side-guest-wrp free_plan_status {{ !isset($eventDetail['event_type']) || $display_plan == "1" ? 'd-none' : '' }}">
+            
+           
+            <div class="guest-wrp side-guest-wrp free_plan_status {{ $display_plan == "1" ? 'd-none' : '' }}">
                 <div class="guest-pro">
                     <div>
                         <!-- <h5>Pro</h5>
@@ -3547,7 +3548,8 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                                 <p class="plan-inner-card-header-text">Your current plan</p>
                             </div>
                             <input class="form-check-input select_plan_check" type="checkbox" value="0"
-                            {{ isset($eventDetail['event_type']) && $eventDetail['event_type'] == "0" ? 'checked' : '' }}>                        </div>
+                            {{ !isset($eventDetail['event_type']) || $eventDetail['event_type'] == "0" ? 'checked' : '' }}>     
+                                           </div>
                         <div class="plan-inner-card-body">
                             <ul class="plan-inner-card-list">
                                 <li class="plan-inner-card-item">
@@ -3629,7 +3631,9 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                                 <h5 class="plan-inner-card-header-title">Premium Plan</h5>
                             </div>
                             <input class="form-check-input select_plan_check" type="checkbox" value="1"
-                            {{ !isset($eventDetail['event_type']) || $eventDetail['event_type'] == "1" ? 'checked' : '' }}>                        </div>
+                            {{ isset($eventDetail['event_type']) && $eventDetail['event_type'] == "1" ? 'checked' : '' }}>     
+                            
+                                           </div>
                         <div class="plan-inner-card-body">
                             <ul class="plan-inner-card-list">
                                 <li class="plan-inner-card-item">
@@ -3718,7 +3722,7 @@ $static_information = isset($eventDetail['static_information']) ? $eventDetail['
 $step = isset($eventDetail['step']) ? $eventDetail['step'] : null;
 $eventID = isset($eventDetail['id']) ? $eventDetail['id'] : null;
 $isDraft = isset($eventDetail['is_draft_save']) ? $eventDetail['is_draft_save'] : null;
-$eventType = isset($eventDetail['event_type']) ? $eventDetail['event_type'] : '1';
+$eventType = isset($eventDetail['event_type']) ? $eventDetail['event_type'] : '0';
 
 $cohostpreferby =
 isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0

@@ -69,7 +69,7 @@ if ($("#isUserLoggedIn").val() === "1") {
     var eventType=$('#eventType').val();
 
     if(eventType==""){
-        eventData.event_plan_type="1";
+        eventData.event_plan_type="0";
     }else{
         eventData.event_plan_type=eventType;
     }
@@ -2191,11 +2191,10 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
  
 
     if (isChecked == true || isChecked == "true") {
-        if(eventData.event_plan_type=="1"&&inviteCount >= 5){
+        if(eventData.event_plan_type=="0"&&inviteCount >= 5){
             $(this).prop("checked", false);
             toastr.error('Please select perimum plan for more inivtes')
             $("#loader").css("display", "none");
-
             return;
         
     }
@@ -2426,21 +2425,21 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     //     return;
     // }
     var inviteCount = parseInt($("#currentInviteCount").val());
-    if ($(this).is(":checked") === false) { 
 
-        if(eventData.event_plan_type=="0"&&inviteCount >= 5){
-                e.preventDefault();
-                toastr.error('Please select perimum plan for more inivtes')
-                return;
-            
-        }
-    }
     
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
     var mobile = $(this).data("mobile");
     var is_contact = $(this).data("contact");
     if (isChecked == true || isChecked == "true") {
+        if(eventData.event_plan_type=="0"&&inviteCount >= 5){
+            $(this).prop("checked", false);
+            toastr.error('Please select perimum plan for more inivtes')
+            $("#loader").css("display", "none");
+            return;
+        
+    }
+
         var max_guest = $("#coins").val();
         if(eventData.event_plan_type=="0"){
             max_guest = 500
@@ -10876,6 +10875,8 @@ $(document).on("click", "#final_see_invite_btn", function (event) {
 });
 
 function getcoins() {
+    // alert();
+    // console.log(eventData);
     Alreadyguest = $(".users-data.invited_users").length;
     eventData.Alreadyguest = Alreadyguest;
     var max_guest = $("#coins").val();
