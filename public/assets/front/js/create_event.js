@@ -2429,6 +2429,7 @@ function delete_invited_user(userId, is_contact = "0") {
 }
 
 $(document).on("click", 'input[name="mobile[]"]', function (e) {
+    return;
     // if ($(this).is(':disabled')) {
     //     e.preventDefault();
     //     return;
