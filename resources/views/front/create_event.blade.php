@@ -3487,7 +3487,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
 </div>
 
 {{-- =========================== --}}
-
+<input type="hidden" id="get_all_total_users" />
 <div id="sidebar_potluck_overlay" class="overlay" onclick="toggleSidebar()"></div>
 <div id="sidebar_addcategory_overlay" class="overlay" onclick="toggleSidebar()"></div>
 <div id="sidebar_addcategoryitem_overlay" class="overlay" onclick="toggleSidebar()"></div>

@@ -2190,9 +2190,10 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     var email = $(this).data("email");
     var is_contact = $(this).data("contact");
  
+    var total_users_all= parseInt($('#get_all_total_users').val())
 
     if (isChecked == true || isChecked == "true") {
-        if(eventData.event_plan_type=="0"&&inviteCount >= 5){
+        if(eventData.event_plan_type=="0"&& total_users_all >= 5){
             $(this).prop("checked", false);
             toastr.error('Please select perimum plan for more inivtes')
             $("#loader").css("display", "none");
@@ -2332,6 +2333,7 @@ function guest_counter(total_guest, max_guest) {
 
     eventData.Alreadyguest = Alreadyguest;
     $("#event_guest_count").text(total_guest + Alreadyguest + " Guests");
+    $('#get_all_total_users').val(total_guest + Alreadyguest);
     $(".select_plan_credits").text(total_guest + Alreadyguest + " Credits");
     $(".invite-count").text(total_guest + Alreadyguest);
     var remainingCount = max_guest - (total_guest + Alreadyguest);
@@ -2441,7 +2443,8 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     var mobile = $(this).data("mobile");
     var is_contact = $(this).data("contact");
     if (isChecked == true || isChecked == "true") {
-        if(eventData.event_plan_type=="0"&&inviteCount >= 5){
+        var total_users_all= parseInt($('#get_all_total_users').val())
+        if(eventData.event_plan_type=="0"&&total_users_all >= 5){
             $(this).prop("checked", false);
             toastr.error('Please select perimum plan for more inivtes')
             $("#loader").css("display", "none");
