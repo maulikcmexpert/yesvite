@@ -7234,9 +7234,9 @@ $(document).on("click", ".final_create_event", function (e) {
             return;
         }
     }
-    if (apiCalled == true) {
-        return;
-    }
+    // if (apiCalled == true) {
+    //     return;
+    // }
     apiCalled = true;
     eventData.is_update_event = "0";
     eventData.isPhonecontact = isPhonecontact;
