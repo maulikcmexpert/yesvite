@@ -7222,6 +7222,7 @@ $(document).on("click", ".final_create_event", function (e) {
 
     if(curr_aval_coins==0||curr_aval_coins=="0"){
         toastr.error('Insufficient coins.');
+        return;
     }
     if (apiCalled == true) {
         return;
