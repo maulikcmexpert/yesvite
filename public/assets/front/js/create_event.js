@@ -2330,6 +2330,7 @@ function guest_counter(total_guest, max_guest) {
 
     console.log('Alreadyguest '+Alreadyguest);
     console.log('total_guest '+total_guest);
+    console.log('max_guest '+max_guest);
     
 
     eventData.Alreadyguest = Alreadyguest;
