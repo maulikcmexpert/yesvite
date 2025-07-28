@@ -2204,7 +2204,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
         var total_guest = $(".users-data.invited_user").length;
         var max_guest = $("#coins").val();
         if(eventData.event_plan_type=="0"){
-            max_guest = 500
+            max_guest = 5
            
         }
 
@@ -2404,7 +2404,7 @@ function delete_invited_user(userId, is_contact = "0") {
             // var max_guest = 15;
             var max_guest = $("#coins").val();
             if(eventData.event_plan_type=="0"){
-                max_guest = 500
+                max_guest = 5
             }
             guest_counter(0, max_guest);
             // var remainingCount = max_guest - total_guest;
@@ -2451,7 +2451,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
 
         var max_guest = $("#coins").val();
         if(eventData.event_plan_type=="0"){
-            max_guest = 500
+            max_guest = 5
         }
         var total_guest = $(".users-data.invited_user").length;
         console.log({ max_guest });
@@ -2579,7 +2579,7 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
 
                 var max_guest = $("#coins").val();
                 if(eventData.event_plan_type=="0"){
-                    max_guest = 500
+                    max_guest = 5
                 }
                 var remainingCount = max_guest - total_guest;
                 guest_counter(0, max_guest);
@@ -5924,7 +5924,7 @@ $(document).on(
 
             var max_guest = $("#coins").val();
             if(eventData.event_plan_type=="0"){
-                max_guest = 500
+                max_guest = 5
             }
 
             var remainingCount = max_guest - total_guest;
@@ -5953,7 +5953,7 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
 
         var max_guest = $("#coins").val();
         if(eventData.event_plan_type=="0"){
-            max_guest = 500
+            max_guest = 5
         }
 
         var remainingCount = max_guest - total_guest;
@@ -7725,7 +7725,7 @@ $(document).on("click", ".invite_group_member", function () {
             $(".inivted_user_list").append(response.view);
             var max_guest = $("#coins").val();
             if(eventData.event_plan_type=="0"){
-                max_guest = 500
+                max_guest = 5
             }
             // var length = responsive_invite_user();
             // $(".user-list-responsive").html(response.responsive_view);
@@ -10905,7 +10905,7 @@ function getcoins() {
     eventData.Alreadyguest = Alreadyguest;
     var max_guest = $("#coins").val();
     if(eventData.event_plan_type=="0"){
-        max_guest = 500
+        max_guest = 5
     }
 
     var AllCoins = max_guest - Alreadyguest;
