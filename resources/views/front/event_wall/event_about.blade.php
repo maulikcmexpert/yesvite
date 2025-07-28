@@ -13,6 +13,17 @@
                     <!-- =============mainleft-====================== -->
 
                     <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails"/>
+                    @if((isset($display_ad)&& $display_ad==true))
+                    <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
+                        <img src="{{asset('assets/front/img/demo_ad.jpg')}}" />
+                        <ins id="my-adguest" class="adsbygoogle" style="display:block;height:100px"
+                            data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
+                            data-ad-format="auto" data-full-width-responsive="true"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                        </div>
+                @endif
                 </div>
                 <div class="col-xxl-6 col-xl-6 col-lg-8 event-info-center">
                     <div class="main-content-center">
