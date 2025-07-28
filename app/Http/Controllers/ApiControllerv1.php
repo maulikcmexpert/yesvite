@@ -7217,7 +7217,7 @@ class ApiControllerv1 extends Controller
             // }
 
 
-            $getTemplateId=Event::where('id',$request->event_id)->select('template_id')->first();
+            $getTemplateId=Event::where('id',$request->event_id)->select('event_type')->first();
 
             if($getTemplateId->event_type=='1'){
                 $display_ad=false;
