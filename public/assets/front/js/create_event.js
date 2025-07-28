@@ -7277,6 +7277,7 @@ $(document).on("click", ".final_create_event", function (e) {
             if(response.exceed_limit=="1"){
                 toastr.error('Guest limit reached. Upgrade to a premium plan to add more guests.');
                 apiCalled=false;
+                $("#loader").css("display", "none");
                 return;
             }
             $("#loader").css("display", "none");
