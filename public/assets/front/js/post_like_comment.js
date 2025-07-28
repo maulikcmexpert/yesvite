@@ -1516,6 +1516,7 @@ $(document).on("click", ".add_guest", function (e) {
     e.preventDefault();
     console.log("Guest list before submit:", guestList);
     console.log("Sending guest list:", guestList);
+    var totalusers= $('.contactslist').length;
     $.ajax({
         url: base_url + "event_wall/send-invitation", // Your Laravel route
         method: "POST",
@@ -1525,6 +1526,7 @@ $(document).on("click", ".add_guest", function (e) {
         data: {
             event_id: $("#event_id").val(), // Event ID from a hidden input
             guest_list: guestList,
+            totalusers: totalusers,
         },
         success: function (response) {
             console.log(response);
@@ -1539,6 +1541,9 @@ $(document).on("click", ".add_guest", function (e) {
                     toastr.error('Insufficent Coins');
                 }
                 // alert(response.message); // Show error message
+            }
+            if(response.free=="0"){
+                toastr.error('You can not invite more than 500 in free event');
             }
         },
         error: function (xhr) {
