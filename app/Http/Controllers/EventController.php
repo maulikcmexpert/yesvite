@@ -992,8 +992,17 @@ class EventController extends BaseController
         $total_user_invited_event = count(session('user_ids'))+count(session('contact_ids'));
         $max_free=5;
 
-        dd($max_free ,$total_user_invited_event);
-        if(count($invitedusersession))
+        // dd($max_free ,$total_user_invited_event);
+        if($request->event_plan_type=="0"){
+            if($total_user_invited_event>$max_free){
+            
+                return response()->json([
+                    'success' => false,
+                    'exceed_limit'=>"1"
+                ]);
+            }
+        }
+
         // if (strpos($dateString, ' To ') !== false) {
         //     list($startDate, $endDate) = explode(' To ', $dateString);
         // } else {

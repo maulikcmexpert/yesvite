@@ -7274,6 +7274,11 @@ $(document).on("click", ".final_create_event", function (e) {
                 window.location.href = "/login"; // Redirect to home page
                 return;
             }
+            if(response.exceed_limit=="1"){
+                toastr.error('Guest limit reached. Upgrade to a premium plan to add more guests.');
+                apiCalled=false;
+                return;
+            }
             $("#loader").css("display", "none");
             $(".main-content-wrp").removeClass("blurred");
             $("#created_event_id").val(response.event_id);
