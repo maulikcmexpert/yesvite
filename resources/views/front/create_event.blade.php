@@ -3527,13 +3527,14 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                             <div class="icon-section">
                                 <img src="{{asset('assets/front/image/credit-coin-img.png')}}" alt="">
                             </div>
-                            <span class="icon-text">0</span>
+                            <span class="icon-text available-coins">{{ $coins }}</span>
+
                         </div>
                     </div>
 
                     <div class="creditBalance-card-bdoy">
                         <p class="creditBalance-card-bdoy-text">Total Credits needed to this event</p>
-                        <h5 class="creditBalance-card-bdoy-title">50 Credits</h5>
+                        <h5 class="creditBalance-card-bdoy-title select_plan_credits">0 Credits</h5>
                     </div>
 
                 </div>
@@ -3619,7 +3620,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                         </div>
                     </div>
                 </div>
-
+            <input type="hidden" id="user_avaliable_coins" value="{{$coins}}" />
                 <div class="plan-card recommended">
                     <h6 class="plan-card-title">RECOMMENDED</h6>
                     <div class="plan-inner-card">
@@ -3664,16 +3665,18 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                                     <h5>Shared photos section for you and your guests</h5>
                                 </li>
                             </ul>
-
-                            <div class="plan-inner-card-error">
-                                <div class="icon"><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M8.0026 15.1654C11.6693 15.1654 14.6693 12.1654 14.6693 8.4987C14.6693 4.83203 11.6693 1.83203 8.0026 1.83203C4.33594 1.83203 1.33594 4.83203 1.33594 8.4987C1.33594 12.1654 4.33594 15.1654 8.0026 15.1654Z" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M8 5.83203V9.16536" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M8 11.168H8.00599" stroke="#F73C71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
+                            @if($coins==0)
+                                <div class="plan-inner-card-error">
+                                    <div class="icon"><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M8.0026 15.1654C11.6693 15.1654 14.6693 12.1654 14.6693 8.4987C14.6693 4.83203 11.6693 1.83203 8.0026 1.83203C4.33594 1.83203 1.33594 4.83203 1.33594 8.4987C1.33594 12.1654 4.33594 15.1654 8.0026 15.1654Z" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M8 5.83203V9.16536" stroke="#F73C71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M8 11.168H8.00599" stroke="#F73C71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                    <p>You currently have <span> 0 Credits </span>. You’ll be redirected to buy credits before publishing with Premium.</p>
                                 </div>
-                                <p>You currently have <span> 0 Credits </span>. You’ll be redirected to buy credits before publishing with Premium.</p>
-                            </div>
+                            @endif
+
 
                         </div>
                     </div>
@@ -3683,7 +3686,8 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
             <div class="modal-footer comman-modal-footer">
                 <div class="modal-footer-btn-section">
                     <button type="button" class="cmn-btn reset-btn" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="cmn-btn select_plan_btn" data-bs-dismiss="modal">Continue Buy Credits</button>
+                    {{-- <button type="button" class="cmn-btn select_plan_btn" data-bs-dismiss="modal">Continue Buy Credits</button> --}}
+                    <button type="button" class="cmn-btn select_plan_btn" data-bs-dismiss="modal">Continue Premium Plan</button>
                 </div>
             </div>
         </div>

@@ -2170,11 +2170,15 @@ $(document).on("change", 'input[name^="add_by_"]', function () {
             .prop("checked", false);
     }
 });
-
+  
 $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     var inviteCount = parseInt($("#currentInviteCount").val());
 
     if ($(this).is(":disabled")) {
+        e.preventDefault();
+        return;
+    }
+    if(inviteCount >= 5){
         e.preventDefault();
         return;
     }
@@ -2184,10 +2188,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     var isChecked = $(this).is(":checked");
     var email = $(this).data("email");
     var is_contact = $(this).data("contact");
-    // if(inviteCount > 15){
-    //     e.preventDefault();
-    //     return;
-    // }
+ 
 
     if (isChecked == true || isChecked == "true") {
         // $('input[name="email_invite[]"]').attr('disabled', true);
@@ -2265,9 +2266,12 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
 
                 guest_counter(0, max_guest);
                 // $('input[name="email_invite[]"]').prop('disabled', false);
-                // if(currentInviteCount >= 15){
-                //     $('.user_choice').prop('disabled',true);
+                // if(eventData.event_plan_type=="0"){
+                //     if(currentInviteCount >= 5){
+                //         $('.user_choice').prop('disabled',true);
+                //     }
                 // }
+        
                 $("#loader").css("display", "none");
                 // }
             },
@@ -2313,6 +2317,7 @@ function guest_counter(total_guest, max_guest) {
     var total_guest = $(".users-data.invited_user").length;
     eventData.Alreadyguest = Alreadyguest;
     $("#event_guest_count").text(total_guest + Alreadyguest + " Guests");
+    $(".select_plan_credits").text(total_guest + Alreadyguest + " Credits");
     $(".invite-count").text(total_guest + Alreadyguest);
     var remainingCount = max_guest - (total_guest + Alreadyguest);
     if (isCopy == "" && isDraftEvent == "0") {
@@ -2324,11 +2329,13 @@ function guest_counter(total_guest, max_guest) {
             $(".invite-left_d").addClass("left-minus");
         } else {
             $(".invite-left_d").text(remainingCount + " Left");
+
             $(".invite-left_d").removeClass("left-minus");
         }
         $(".invite-left_d").text(
             remainingCount + " Left"
         );
+
     // }
 
     $("#event_guest_left_count").val(remainingCount);
@@ -2410,6 +2417,12 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     //     e.preventDefault();
     //     return;
     // }
+    var inviteCount = parseInt($("#currentInviteCount").val());
+
+    if(inviteCount >= 5){
+        e.preventDefault();
+        return;
+    }
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
     var mobile = $(this).data("mobile");
@@ -2465,9 +2478,12 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 $(".invite-count").text(total_guest);
 
                 var remainingCount = max_guest - total_guest;
-                // if(currentInviteCount >= 15){
-                //     $('.user_choice').prop('disabled',true);
-                // }
+                if(eventData.event_plan_type=="0"){
+                    if(currentInviteCount >= 5){
+                        $('.user_choice').prop('disabled',true);
+                        toastr.success('please purchase permium plan')
+                    }
+                }
                 $(".inivted_user_list").append(response.view);
                 // $(".user-list-responsive").empty();
                 // $(".user-list-responsive").html(response.responsive_view);
@@ -11450,6 +11466,9 @@ $(".show-moreless-btn").on("click", function () {
 
 $(document).on('click', '.select_plan_btn', function () {
     var plan_value = $('.select_plan_check:checked').val();
+    var aval_coins=$('#user_avaliable_coins').val()
+    console.log(aval_coins);
+    
     if(plan_value=="1"){
         $('.free_plan_status').addClass('d-none');
         $('.paid_plan_status').removeClass('d-none');
@@ -11461,6 +11480,10 @@ $(document).on('click', '.select_plan_btn', function () {
     console.log("plan_value "+plan_value)
     eventData.event_plan_type=plan_value;
     getcoins()
+    if((aval_coins==0||aval_coins=="0")&& plan_value=="1"){
+        $('#select_event_type').modal('hide');
+        $('#buycreditsmodal').modal('show');
+    }
 
 
 });

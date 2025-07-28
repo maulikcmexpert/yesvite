@@ -1814,8 +1814,8 @@
       0px 12px 12px -6px #2929290a, 0px 6px 6px -3px #2929290a,
       0px 3px 3px -1.5px #29292905, 0px 1px 1px 0.5px #2929290a;
     width: 100%;
-    max-width: 51px;
-    min-width: 51px;
+    max-width: min-content;
+    min-width: max-content;
     height: 29px;
     border-radius: 1000px;
     padding: 8px 10px 8px 4px;

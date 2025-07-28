@@ -359,10 +359,14 @@
                         disabled>
                         Purchase - $0.00
                     </button>
+                    @if(Request::segment(1) == 'events')
+
                     <button type="button" class="btn btn-secondary switch_plan" data-price-id="" data-price="0"
                         >
                         Switch Plan
                     </button>
+
+                    @endif
                 </div>
             </div>
         </div>
