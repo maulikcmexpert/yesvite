@@ -1512,8 +1512,8 @@ $(document).ready(function () {
 });
 
 $(document).on("click", ".add_guest", function (e) {
+    alert(2);
     e.preventDefault();
-    alert();
     console.log("Guest list before submit:", guestList);
     console.log("Sending guest list:", guestList);
     $.ajax({
