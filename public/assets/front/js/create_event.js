@@ -10901,18 +10901,18 @@ function getcoins() {
     }
 
     var AllCoins = max_guest - Alreadyguest;
-    console.log('Allcoins 1 '+AllCoins);
 
     if (eventData.event_plan_type != "" && eventId=="") {
         Alreadyguest = $('.user_choice:checked').length;
         AllCoins = max_guest - Alreadyguest;
     }
-    console.log('Allcoins 2 '+AllCoins);
     
     if (isCopy == "" && isDraftEvent == "0") {
         AllCoins = max_guest;
     }
 
+    console.log("invite-left_d "+AllCoins);
+    
     $(".invite-left_d").text(AllCoins + " Left");
 
     if (AllCoins <= 0) {
