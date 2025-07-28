@@ -2172,6 +2172,8 @@ $(document).on("change", 'input[name^="add_by_"]', function () {
     }
 });
   
+var current_user_count_email=0;
+
 $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     var inviteCount = parseInt($("#currentInviteCount").val());
 
@@ -2193,7 +2195,6 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
 
     console.log(inviteCount);
 
-    var current_user_count_email=$('.invited_user').length
     console.log('current_user_count_mobile '+current_user_count_email)
 
     if (isChecked == true || isChecked == "true") {
@@ -2274,6 +2275,10 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                         response.responsive_view
                     );
                 }
+
+
+                current_user_count_email=$('.invited_user').length
+
                 // }else{
                 //     add_user_counter();
                 // }
@@ -2448,10 +2453,9 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     var mobile = $(this).data("mobile");
     var is_contact = $(this).data("contact");
 
-    var current_user_count_mobile=$('.invited_user').length
-    console.log('current_user_count_mobile '+current_user_count_mobile)
+    
     if (isChecked == true || isChecked == "true") {
-        if(eventData.event_plan_type=="0"&&current_user_count_mobile >= 5){
+        if(eventData.event_plan_type=="0"&&current_user_count_email >= 5){
             $(this).prop("checked", false);
             toastr.error('Please select perimum plan for more inivtes')
             $("#loader").css("display", "none");
@@ -2532,6 +2536,9 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                         response.responsive_view
                     );
                 }
+
+                current_user_count_email=$('.invited_user').length
+
                 guest_counter(0, max_guest);
                 $("#loader").css("display", "none");
 
