@@ -2503,7 +2503,12 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 $(".invite-count").text(total_guest);
 
                 var remainingCount = max_guest - total_guest;
-            
+                // if(eventData.event_plan_type=="0"){
+                //     if(currentInviteCount >= 5){
+                //         $('.user_choice').prop('disabled',true);
+                //         toastr.success('please purchase permium plan')
+                //     }
+                // }
                 $(".inivted_user_list").append(response.view);
                 // $(".user-list-responsive").empty();
                 // $(".user-list-responsive").html(response.responsive_view);
@@ -11418,10 +11423,10 @@ $(document).on("click", ".user_choice", function () {
     });
     let buttonText = `Send Invites (0)`;
     if (anyCheckedNotDisabled) {
-        // $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
+        $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
         buttonText = ` Send Invites(${checkedCount})`;
     } else {
-        // $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
+        $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
     }
 
     $("a.saveGuestOnly.isdisabled").text(buttonText);
