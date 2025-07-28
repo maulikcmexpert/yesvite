@@ -186,19 +186,26 @@ class RsvpController extends BaseController
 
 
 
-            $getTemplateId=Event::where('id',$eventDetail->id)->select('template_id')->first();
+            // $getTemplateId=Event::where('id',$eventDetail->id)->select('template_id')->first();
 
-            if($getTemplateId->template_id==null){
+            // if($getTemplateId->template_id==null){
+            //     $display_ad=true;
+            // }
+            // $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
+            // if($getCategory){
+            //     $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
+            //     $display_ad=$getAd->display_ad=="1"?true:false;
+            // }else{
+            //     $display_ad=false;
+            // }
+            $getTemplateId=Event::where('id',$eventDetail->id)->select('event_type')->first();
+
+            if($getTemplateId->event_type=='1'){
+                $display_ad=false;
+            }else{
                 $display_ad=true;
             }
-            $getCategory=TextData::where('id',$getTemplateId->template_id)->select('event_design_category_id')->first();
-            if($getCategory){
-                $getAd=EventDesignCategory::where('id',$getCategory->event_design_category_id)->select('display_ad')->first();
-                $display_ad=$getAd->display_ad=="1"?true:false;
-            }else{
-                $display_ad=false;
-            }
-
+            
             $guestView = [];
             $eventDetails['id'] = $eventDetail->id;
             $eventDetails['event_images'] = [];
