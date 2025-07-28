@@ -7511,7 +7511,7 @@ function displayRecords(
                 create_event_yesvite_scroll = true;
             }
             if (currentInviteCount >= coins) {
-                // $(".user_choice").prop("disabled", true);
+                $(".user_choice").prop("disabled", true);
             }
             console.log(html);
             if (html == "" && alluserscroll == 1) {
@@ -9057,7 +9057,7 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
                 create_event_phone_scroll = true;
             }
             if (currentInviteCount >= coins) {
-                $(".user_choice").prop("disabled", true);
+                // $(".user_choice").prop("disabled", true);
             }
             if (html.view == "" && html.scroll == "true") {
                 // $("#YesviteContactsAll").html("No data found");
