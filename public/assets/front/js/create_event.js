@@ -2333,9 +2333,10 @@ function guest_counter(total_guest, max_guest) {
 
     eventData.Alreadyguest = Alreadyguest;
     $("#event_guest_count").text(total_guest + Alreadyguest + " Guests");
-    $('#get_all_total_users').val(total_guest + Alreadyguest);
     $(".select_plan_credits").text(total_guest + Alreadyguest + " Credits");
     $(".invite-count").text(total_guest + Alreadyguest);
+    $('#get_all_total_users').val(total_guest + Alreadyguest);
+
     var remainingCount = max_guest - (total_guest + Alreadyguest);
     
     // if (isCopy == "" && isDraftEvent == "0") {
@@ -11422,10 +11423,10 @@ $(document).on("click", ".user_choice", function () {
     });
     let buttonText = `Send Invites (0)`;
     if (anyCheckedNotDisabled) {
-        $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
+        // $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
         buttonText = ` Send Invites(${checkedCount})`;
     } else {
-        $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
+        // $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
     }
 
     $("a.saveGuestOnly.isdisabled").text(buttonText);
