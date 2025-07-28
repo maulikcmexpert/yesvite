@@ -2205,10 +2205,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
         var max_guest = $("#coins").val();
         if(eventData.event_plan_type=="0"){
             max_guest = 500
-            if(eventId!=""){
-                max_guest = 500 - total_guest;
-
-            }
+           
         }
 
         console.log({ max_guest });
