@@ -11421,15 +11421,15 @@ $(document).on("click", ".user_choice", function () {
             checkedCount++;
         }
     });
-    let buttonText = `Send Invites (0)`;
-    if (anyCheckedNotDisabled) {
-        // $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
-        buttonText = ` Send Invites(${checkedCount})`;
-    } else {
-        // $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
-    }
+    // let buttonText = `Send Invites (0)`;
+    // if (anyCheckedNotDisabled) {
+    //     // $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
+    //     buttonText = ` Send Invites(${checkedCount})`;
+    // } else {
+    //     // $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
+    // }
 
-    $("a.saveGuestOnly.isdisabled").text(buttonText);
+    // $("a.saveGuestOnly.isdisabled").text(buttonText);
 });
 // ========vrushali===============
 let pageRefresh = localStorage.getItem("pageRefresh");
