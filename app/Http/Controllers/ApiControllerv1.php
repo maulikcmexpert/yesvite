@@ -7221,10 +7221,8 @@ class ApiControllerv1 extends Controller
 
             if($getTemplateId->event_type=='1'){
                 $display_ad=false;
-                return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);
             }else{
                 $display_ad=true;
-                return response()->json(['status' => 1, 'message' => "Display ad", 'show_adv' => $display_ad]);  
             }
 
 
