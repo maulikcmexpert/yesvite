@@ -2178,10 +2178,16 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
         e.preventDefault();
         return;
     }
-    if(inviteCount >= 5){
-        e.preventDefault();
-        return;
-    }
+    // if ($(this).is(":checked") === false) { 
+
+        if(eventData.event_plan_type=="1"&&inviteCount >= 5){
+                e.preventDefault();
+                toastr.error('Please select perimum plan for more inivtes')
+                return;
+            
+        }
+    // }
+   
     $("#loader").css("display", "flex");
 
     var userId = $(this).val();
@@ -2418,11 +2424,16 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     //     return;
     // }
     var inviteCount = parseInt($("#currentInviteCount").val());
+    if ($(this).is(":checked") === false) { 
 
-    if(inviteCount >= 5){
-        e.preventDefault();
-        return;
+        if(eventData.event_plan_type=="0"&&inviteCount >= 5){
+                e.preventDefault();
+                toastr.error('Please select perimum plan for more inivtes')
+                return;
+            
+        }
     }
+    
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
     var mobile = $(this).data("mobile");
