@@ -2327,6 +2327,11 @@ function add_user_counter() {
 function guest_counter(total_guest, max_guest) {
     Alreadyguest = $(".users-data.invited_users").length;
     var total_guest = $(".users-data.invited_user").length;
+
+    console.log('Alreadyguest '+Alreadyguest);
+    console.log('total_guest '+total_guest);
+    
+
     eventData.Alreadyguest = Alreadyguest;
     $("#event_guest_count").text(total_guest + Alreadyguest + " Guests");
     $(".select_plan_credits").text(total_guest + Alreadyguest + " Credits");
