@@ -355,16 +355,19 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary purchase-button" data-price-id="" data-price="0"
+                    <div class="cmn-btn-footer-section">
+
+                        <button type="button" class="btn btn-secondary purchase-button" data-price-id="" data-price="0"
                         disabled>
                         Purchase - $0.00
                     </button>
                     @if(Request::segment(1) == 'events')
-
+                    
                     <button type="button" class="btn btn-secondary switch_plan" data-price-id="" data-price="0"
-                        >
-                        Switch Plan
-                    </button>
+                    >
+                    Switch Plan
+                </button>
+            </div>
 
                     @endif
                 </div>

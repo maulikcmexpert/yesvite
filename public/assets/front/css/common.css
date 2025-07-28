@@ -1087,6 +1087,20 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
     }
 }
 
+.cmn-btn-footer-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    width: 100% !important;
+}
+
+.cmn-btn-footer-section button{
+    width: auto !important;
+    flex: 1 1 auto;
+}
+
 /* ======== Responsive ========= */
 
 /* Large Desktops: 1200px and up */
