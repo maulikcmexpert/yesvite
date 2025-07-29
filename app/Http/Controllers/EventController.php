@@ -957,7 +957,6 @@ class EventController extends BaseController
             'page',
             'js',
             'user',
-
             'event_type',
             'groups',
             'imagecount',
