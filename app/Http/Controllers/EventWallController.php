@@ -3239,7 +3239,7 @@ class EventWallController extends BaseController
                 ];
                 sendNotificationGuest('invite', $notificationParam);
             }
-            if ($is_failed == "0") {
+            if ($is_failed == "0" && $eventData->event_type=="1") {
                 debit_coins($user->id, $request['event_id'], count($ids));
             }
         }
