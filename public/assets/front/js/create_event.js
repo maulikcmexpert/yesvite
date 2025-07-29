@@ -9901,7 +9901,15 @@ function updateEventData() {
                     toastr.success("Event Created Successfully");
                     // window.location.href = "profile";
                 }
+
+                
                 $("#eventModal").modal("show");
+                if(eventData.event_plan_type=="0"){
+                    $('.create_event_popup_coin').hide();
+                }else{
+                    $('.create_event_popup_coin').show();
+    
+                }
                 $("#eventModal").on("hide.bs.modal", function (event) {
                     event.preventDefault(); // Prevents modal from closing
                 });
