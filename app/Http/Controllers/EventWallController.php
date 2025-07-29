@@ -3097,7 +3097,7 @@ class EventWallController extends BaseController
         if (isset($request->is_failed) && $request->is_failed != "") {
             $is_failed = "1";
         }
-        $freeInvite=5;
+        $freeInvite=500;
         // dd($request);
         $guestList = $request->input('guest_list', []);
         // count guests safely

@@ -994,7 +994,7 @@ class EventController extends BaseController
         $user_ids_count=count(session('user_ids',[]));
         $contact_ids_count=count(session('contact_ids',[]));
         $total_user_invited_event = $user_ids_count+ $contact_ids_count;
-        $max_free=5;
+        $max_free=500;
 
         // dd($max_free ,$total_user_invited_event);
         if($request->event_plan_type=="0"){
@@ -4007,7 +4007,7 @@ class EventController extends BaseController
         $user_ids_count=count(session('user_ids',[]));
         $contact_ids_count=count(session('contact_ids',[]));
         $total_user_invited_event = $user_ids_count+ $contact_ids_count;
-        $max_free=5;
+        $max_free=500;
 
         // dd($max_free ,$total_user_invited_event);
         if($request->event_plan_type=="0"){
