@@ -3108,12 +3108,14 @@ class EventWallController extends BaseController
                 if((int)$request['totalusers']==$freeInvite){
                     return response()->json(['status' => 0, 'free' => "0"]);
                 }
+        }else{
+            if($user->coins <= 0 ||$totalUsers >  $user->coins){
+                return response()->json(['status' => 0, 'coins' => "0"]);
+            }
         }
         // $totalallusers=(int)$request['totalusers'] + count($request['guestList']);
 
-        if($user->coins <= 0 ||$totalUsers >  $user->coins){
-            return response()->json(['status' => 0, 'coins' => "0"]);
-        }
+     
         // try {
         if (!empty($request['guest_list'])) {
 
