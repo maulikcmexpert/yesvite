@@ -11623,6 +11623,9 @@ $(document).on('click','.openPlans',function(){
     $('.select_plan_btn').text('Continue Free Plan');
     $('.paid_plan_chk').prop('checked',false)
 
+    $('.paid_current_plan').hide();
+    $('.free_current_plan').show();
+
     $('#select_event_type').modal('show');
 
 
