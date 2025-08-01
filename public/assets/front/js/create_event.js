@@ -11559,10 +11559,8 @@ $('.select_plan_check').on('change', function () {
         return;
     }
 
-    // Uncheck all others
     $('.select_plan_check').not(this).prop('checked', false);
 
-    // Update button text
     if ($(this).val() == "1") {
         $('.select_plan_btn').text('Continue Premium Plan');
     } else {
