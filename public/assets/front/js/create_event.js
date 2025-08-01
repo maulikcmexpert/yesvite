@@ -11537,21 +11537,39 @@ $(".show-moreless-btn").on("click", function () {
     btnTextEl.text(currentText === "Show More" ? "Show Less" : "Show More");
   });
  
-  $('.select_plan_check').on('change', function () {
+//   $('.select_plan_check').on('change', function () {
+//     $('.select_plan_check').not(this).prop('checked', false);
+
+//     if ($(this).val() == "1") {
+//         $('.select_plan_btn').text('Continue Permium Plan');
+//         // $('.free_current_plan').hide();
+//         // $('.paid_current_plan').show();
+        
+//     } else {
+//         $('.select_plan_btn').text('Continue Free Plan');
+
+//         // $('.free_current_plan').show();
+//         // $('.paid_current_plan').hide();
+//     }
+// });
+$('.select_plan_check').on('change', function () {
+    // If the clicked checkbox is being unchecked
+    if (!$(this).prop('checked')) {
+        $(this).prop('checked', true); // keep it checked
+        return;
+    }
+
+    // Uncheck all others
     $('.select_plan_check').not(this).prop('checked', false);
 
+    // Update button text
     if ($(this).val() == "1") {
-        $('.select_plan_btn').text('Continue Permium Plan');
-        // $('.free_current_plan').hide();
-        // $('.paid_current_plan').show();
-        
+        $('.select_plan_btn').text('Continue Premium Plan');
     } else {
         $('.select_plan_btn').text('Continue Free Plan');
-
-        // $('.free_current_plan').show();
-        // $('.paid_current_plan').hide();
     }
 });
+
 
 $(document).on('click', '.select_plan_btn', function () {
     var plan_value = $('.select_plan_check:checked').val();
@@ -11602,10 +11620,13 @@ $(document).on('click','.switch_plan',function(){
 });
 
 $(document).on('click','.openPlans',function(){
-    $('#select_event_type').modal('show');
 
     $('.free_plan_chk').prop('checked',true)
+    $('.select_plan_btn').text('Continue Free Plan');
     $('.paid_plan_chk').prop('checked',false)
+
+    $('#select_event_type').modal('show');
+
 
 })
 
