@@ -11603,6 +11603,9 @@ $(document).on('click','.switch_plan',function(){
 
 $(document).on('click','.openPlans',function(){
     $('#select_event_type').modal('show');
+    
+    $('.free_plan_chk').prop('checked',true)
+    $('.paid_plan_chk').prop('checked',false)
 
 })
 
