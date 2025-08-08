@@ -599,9 +599,13 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                     </li>
                 </ul>
                 @endif
-                <div class="mx-auto adsense-center sidebar-adsense" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
 
-                    <ins id="my-ad" class="adsbygoogle" style="display:block;"
+
+
+                <div class="mx-auto adsense-center sidebar-adsense" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
+                    <img src="{{asset('assets/front/img/demo_ad.jpg')}}" />
+
+                    {{-- <ins id="my-ad" class="adsbygoogle" style="display:block;"
                         data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
                         data-full-width-responsive="true"></ins>
                     <script>
@@ -620,7 +624,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
             
                     // Hide container if ad is not shown after 2 seconds
                   
-                    </script>
+                    </script> --}}
                     </div>
             </div>
             
@@ -694,7 +698,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                     </div>
                     <div class="coin-invite-main">
                         <div class="heading">
-                            <p>Purchasing</p>
+                            <p>Plan</p>
                         </div>
                         @if (Auth::guard('web')->check())
 
@@ -813,7 +817,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                     </div>
                     <div class="coin-invite-main">
                         <div class="heading">
-                            <p>Purchasing</p>
+                            <p>Plan</p>
                         </div>
                         @if (Auth::guard('web')->check())
                         

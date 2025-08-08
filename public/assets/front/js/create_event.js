@@ -790,7 +790,7 @@ if (/Mobi/.test(navigator.userAgent)) {
     //   showTodayButton: true,
     //   icons: {
     //     next: "fa fa-chevron-right",
-    //     previous: "fa fa-chevron-left",
+    //     previous: "fa fa-chevron-avaliable",
     //     today: 'todayText',
     //   }
     // });
@@ -2344,15 +2344,15 @@ function guest_counter(total_guest, max_guest) {
     // }
     // if(eventData.event_plan_type=="1"){
         if (remainingCount <= 0) {
-            $(".invite-left_d").text("0 Left");
+            $(".invite-left_d").text("0 Avaliable");
             $(".invite-left_d").addClass("left-minus");
         } else {
-            $(".invite-left_d").text(remainingCount + " Left");
+            $(".invite-left_d").text(remainingCount + " Avaliable");
 
             $(".invite-left_d").removeClass("left-minus");
         }
         $(".invite-left_d").text(
-            remainingCount + " Left"
+            remainingCount + " Avaliable"
         );
 
     // }
@@ -2413,10 +2413,10 @@ function delete_invited_user(userId, is_contact = "0") {
             // var remainingCount = max_guest - total_guest;
 
             // if (remainingCount < 0) {
-            //     $(".invite-left_d").text("0 Left");
+            //     $(".invite-left_d").text("0 Avaliable");
             // } else {
             //     $(".invite-left_d").text(
-            //         remainingCount + " Left"
+            //         remainingCount + " Avaliable"
             //     );
             // }
             // $("#event_guest_left_count").val(remainingCount);
@@ -2539,9 +2539,9 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 //     // add_user_counter();
                 // }
                 // if(remainingCount < 0){
-                //     $(".invite-left_d").text("0 Left");
+                //     $(".invite-left_d").text("0 Avaliable");
                 // }else{
-                //     $(".invite-left_d").text(remainingCount + " Left");
+                //     $(".invite-left_d").text(remainingCount + " Avaliable");
 
                 // }
                 // $("#event_guest_left_count").val(remainingCount);
@@ -2588,10 +2588,10 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 var remainingCount = max_guest - total_guest;
                 guest_counter(0, max_guest);
                 // if (remainingCount < 0) {
-                //     $(".invite-left_d").text("0 Left");
+                //     $(".invite-left_d").text("0 Avaliable");
                 // } else {
                 //     $(".invite-left_d").text(
-                //         remainingCount + " Left"
+                //         remainingCount + " Avaliable"
                 //     );
                 // }
                 // $("#event_guest_left_count").val(remainingCount);
@@ -5270,7 +5270,7 @@ function edit_design_modal() {
                 linethrough: element.linethrough,
                 backgroundColor: element.backgroundColor,
                 textAlign: element.textAlign,
-                textAlign: "left",
+                textAlign: "avaliable",
                 editable: false,
                 selectable: false,
                 hasControls: false,
@@ -5788,12 +5788,12 @@ $(document).on("click", "#delete_invited_user", function () {
 
     $("#event_guest_count").text(re_total_guest + " Guests");
     $(".invite-count").text(re_total_guest);
-    // $(".invite-left_d").text(re_total_remaining_count + " Left");
+    // $(".invite-left_d").text(re_total_remaining_count + " Avaliable");
     if (re_total_remaining_count <= 0) {
-        $(".invite-left_d").text("0 Left");
+        $(".invite-left_d").text("0 Avaliable");
         $(".invite-left_d").addClass("left-minus");
     } else {
-        $(".invite-left_d").text(re_total_remaining_count + " Left");
+        $(".invite-left_d").text(re_total_remaining_count + " Avaliable");
         $(".invite-left_d").removeClass("left-minus");
     }
 
@@ -5833,13 +5833,13 @@ $(document).on("click", "#delete_invited_user_tel", function () {
     $("#event_guest_count").text(re_total_guest + " Guests");
     $(".invite-count").text(re_total_guest);
     if (re_total_remaining_count <= 0) {
-        $(".invite-left_d").text("0 Left");
+        $(".invite-left_d").text("0 Avaliable");
         $(".invite-left_d").addClass("left-minus");
     } else {
-        $(".invite-left_d").text(re_total_remaining_count + " Left");
+        $(".invite-left_d").text(re_total_remaining_count + " Avaliable");
         $(".invite-left_d").removeClass("left-minus");
     }
-    // $(".invite-left_d").text(re_total_remaining_count + " Left");
+    // $(".invite-left_d").text(re_total_remaining_count + " Avaliable");
     $("#event_guest_left_count").val(re_total_remaining_count);
 
     delete_invited_user(userId, is_contact);
@@ -5933,10 +5933,10 @@ $(document).on(
 
             var remainingCount = max_guest - total_guest;
             if (remainingCount <= 0) {
-                $(".invite-left_d").text("0 Left");
+                $(".invite-left_d").text("0 Avaliable");
                 $(".invite-left_d").addClass("left-minus");
             } else {
-                $(".invite-left_d").text(remainingCount + " Left");
+                $(".invite-left_d").text(remainingCount + " Avaliable");
                 $(".invite-left_d").removeClass("left-minus");
             }
             $("#event_guest_left_count").val(remainingCount);
@@ -5962,10 +5962,10 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
 
         var remainingCount = max_guest - total_guest;
         if (remainingCount <= 0) {
-            $(".invite-left_d").text("0 Left");
+            $(".invite-left_d").text("0 Avaliable");
             $(".invite-left_d").addClass("left-minus");
         } else {
-            $(".invite-left_d").text(remainingCount + " Left");
+            $(".invite-left_d").text(remainingCount + " Avaliable");
             $(".invite-left_d").removeClass("left-minus");
         }
         $("#event_guest_left_count").val(remainingCount);
@@ -10963,7 +10963,7 @@ function getcoins() {
 
     console.log("invite-left_d "+AllCoins);
     
-    $(".invite-left_d").text(AllCoins + " Left");
+    $(".invite-left_d").text(AllCoins + " Avaliable");
 
     if (AllCoins <= 0) {
         $(".invite-left_d").addClass("left-minus");
@@ -11576,12 +11576,15 @@ $(document).on('click', '.select_plan_btn', function () {
     
     if(plan_value=="1"){
         $('.free_plan_status').addClass('d-none');
+        $('.sidebar-adsense').addClass('d-none');
         $('.paid_plan_status').removeClass('d-none');
 
     
     }else{
         $('.free_plan_status').removeClass('d-none');
         $('.paid_plan_status').addClass('d-none'); 
+        $('.sidebar-adsense').removeClass('d-none');
+
 
 
     }

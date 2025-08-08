@@ -700,7 +700,7 @@
                     </div>
                     <div class="coin-invite-main">
                     <div class="heading">
-                            <p>Purchasing</p>
+                            <p>Plan</p>
                         </div>
                     <div class="coin-invite-wrp buycredits">
                         
