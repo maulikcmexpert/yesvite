@@ -611,7 +611,7 @@ class RsvpController extends BaseController
             }
             $eventLink = url('/rsvp/' . encrypt("") . '/' .encrypt($event_id).'/'.encrypt(1));
             $shortLink = createShortUrl($eventLink);
-
+            $eventType = $eventDetail->event_type;
             return view('layout', compact(
                 'title',
                 'page',
