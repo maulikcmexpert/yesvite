@@ -1328,7 +1328,7 @@ class EventController extends BaseController
             if (isset($request->eventSetting) && $request->eventSetting == "1") {
                 $eventSetting = EventSetting::where('event_id', $eventId)->first();
                 if ($eventSetting != null) {
-                    dd(1);
+                  
                     $eventSetting->allow_for_1_more = (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0";
                     $eventSetting->allow_limit = (isset($request->allow_limit_count)) ? (int)$request->allow_limit_count : 0;
                     $eventSetting->adult_only_party = (isset($request->only_adults)) ? $request->only_adults : "0";
@@ -1346,7 +1346,7 @@ class EventController extends BaseController
                     $eventSetting->photos = (isset($request->event_photos)) ? $request->event_photos : "0";
                     $eventSetting->save();
                 } else {
-                    dd(2);
+
                     EventSetting::create([
                         'event_id' => $eventId,
                         'allow_for_1_more' => (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0",
