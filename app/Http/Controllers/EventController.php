@@ -1347,6 +1347,7 @@ class EventController extends BaseController
                     $eventSetting->save();
                 } else {
                     
+                    $eventSetting = new EventSetting();
                     $eventSetting->event_id = $eventId;
                     $eventSetting->allow_for_1_more = (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0";
                     $eventSetting->allow_limit = (isset($request->allow_limit_count)) ? (int)$request->allow_limit_count : 0;
