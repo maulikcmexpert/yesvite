@@ -4650,6 +4650,7 @@ class ApiControllerv1 extends Controller
                         "gift_registry" => $eventSettings->gift_registry,
                         "events_schedule" => $eventSettings->events_schedule,
                         "event_wall" => $eventSettings->event_wall,
+                        "event_photos" => $eventSettings->photos,
                         "guest_list_visible_to_guests" => $eventSettings->guest_list_visible_to_guests,
                         "podluck" => $eventSettings->podluck,
                         "rsvp_updates" => $eventSettings->rsvp_updates,
