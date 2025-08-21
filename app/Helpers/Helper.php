@@ -265,6 +265,7 @@ function sendNotification($notificationType, $postData)
                             'event_wall' => (string)$value->event->event_settings->event_wall,
                             'guest_list_visible_to_guests' => (string)$value->event->event_settings->guest_list_visible_to_guests,
                             'event_potluck' => (string)$value->event->event_settings->podluck,
+                            'event_photos' => (string)$value->event->event_settings->photos,
                             'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id']),
                             'rsvp_status' => '0',
                             'is_co_host' => $is_co_host
@@ -439,6 +440,7 @@ function sendNotification($notificationType, $postData)
                                 'event_wall' => (string)$value->event->event_settings->event_wall,
                                 'guest_list_visible_to_guests' => (string)$value->event->event_settings->guest_list_visible_to_guests,
                                 'event_potluck' => (string)$value->event->event_settings->podluck,
+                                'event_photos' => (string)$value->event->event_settings->photos,
                                 'rsvp_status' => (isset($value->rsvp_status) && $value->rsvp_status != null) ? (string)$value->rsvp_status : '',
                                 'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id']),
                                 'is_co_host' => $is_co_host
@@ -512,6 +514,7 @@ function sendNotification($notificationType, $postData)
                                 'event_wall' => (string)$value->event->event_settings->event_wall,
                                 'guest_list_visible_to_guests' => (string)$value->event->event_settings->guest_list_visible_to_guests,
                                 'event_potluck' => (string)$value->event->event_settings->podluck,
+                                'event_photos' => (string)$value->event->event_settings->photos,
                                 'rsvp_status' => (isset($value->rsvp_status) && $value->rsvp_status != null) ? (string)$value->rsvp_status : '',
                                 'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id']),
                                 'is_co_host' => $is_co_host
@@ -570,6 +573,7 @@ function sendNotification($notificationType, $postData)
                     'event_wall' => (string)$getEventOwner->event_settings->event_wall,
                     'guest_list_visible_to_guests' => isset($getEventOwner->event_settings->guest_list_visible_to_guests) ? (string)$getEventOwner->event_settings->guest_list_visible_to_guests : '',
                     'event_potluck' => (string)$getEventOwner->event_settings->podluck,
+                    'event_photos' => (string)$getEventOwner->event_settings->photos,
                     'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id'])
                 ];
 
@@ -651,6 +655,7 @@ function sendNotification($notificationType, $postData)
                             'is_in_photo_moudle' => (string)$postData['is_in_photo_moudle'],
                             'post_type' => (string)$postData['post_type'],
                             'event_wall' => isset($ownerEvent->event_settings->event_wall) ? (string)$ownerEvent->event_settings->event_wall : '',
+                            'event_photos' => isset($ownerEvent->event_settings->photos) ? (string)$ownerEvent->event_settings->photos : '',
                             'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? (string)$ownerEvent->event_settings->guest_list_visible_to_guests : '',
                             'is_event_owner' => '1',
                             'is_post_by_host' => '1',
@@ -745,6 +750,7 @@ function sendNotification($notificationType, $postData)
                             'is_in_photo_moudle' => (string)$postData['is_in_photo_moudle'],
                             'post_type' => (string)$postData['post_type'],
                             'event_wall' => isset($ownerEvent->event_settings->event_wall) ? (string)$ownerEvent->event_settings->event_wall : '',
+                            'event_photos' => isset($ownerEvent->event_settings->photos) ? (string)$ownerEvent->event_settings->photos : '',
                             'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? (string)$ownerEvent->event_settings->guest_list_visible_to_guests : '',
                             'is_event_owner' => '1',
                             'is_post_by_host' => '1',
@@ -804,6 +810,7 @@ function sendNotification($notificationType, $postData)
                             'is_in_photo_moudle' => (string)$postData['is_in_photo_moudle'],
                             'post_type' => (string)$postData['post_type'],
                             'event_wall' => isset($ownerEvent->event_settings->event_wall) ? (string)$ownerEvent->event_settings->event_wall : '',
+                            'event_photos' => isset($ownerEvent->event_settings->photos) ? (string)$ownerEvent->event_settings->photos : '',
                             'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? (string)$ownerEvent->event_settings->guest_list_visible_to_guests : '',
                             'is_event_owner' => (string)$is_event_owner,
                             'is_post_by_host' => (string)$is_post_by_host,
@@ -865,6 +872,7 @@ function sendNotification($notificationType, $postData)
                             'is_in_photo_moudle' => (string)$postData['is_in_photo_moudle'],
                             'post_type' => (string)$postData['post_type'],
                             'event_wall' => isset($ownerEvent->event_settings->event_wall) ? (string)$ownerEvent->event_settings->event_wall : '',
+                            'event_photos' => isset($ownerEvent->event_settings->photos) ? (string)$ownerEvent->event_settings->photos : '',
                             'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? (string)$ownerEvent->event_settings->guest_list_visible_to_guests : '',
                             'is_event_owner' => (string)$is_event_owner,
                             'is_post_by_host' => (string)$is_post_by_host,
@@ -926,6 +934,7 @@ function sendNotification($notificationType, $postData)
                             'is_in_photo_moudle' => (string)$postData['is_in_photo_moudle'],
                             'post_type' => (string)$postData['post_type'],
                             'event_wall' => isset($ownerEvent->event_settings->event_wall) ? (string)$ownerEvent->event_settings->event_wall : '',
+                            'event_photos' => isset($ownerEvent->event_settings->photos) ? (string)$ownerEvent->event_settings->photos : '',
                             'guest_list_visible_to_guests' => isset($ownerEvent->event_settings->guest_list_visible_to_guests) ? (string)$ownerEvent->event_settings->guest_list_visible_to_guests : '',
                             'is_event_owner' => (string)$is_event_owner,
                             'is_post_by_host' => (string)$is_post_by_host,
@@ -1239,6 +1248,7 @@ function sendNotification($notificationType, $postData)
                             'event_wall' => (string)$getPostOwnerId->event_settings->event_wall,
                             'guest_list_visible_to_guests' => (string)$getPostOwnerId->event_settings->guest_list_visible_to_guests,
                             'event_potluck' => (string)$getPostOwnerId->event_settings->podluck,
+                            'event_photos' => (string)$getPostOwnerId->event_settings->photos,
                             'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id']),
                         ];
 
@@ -1309,6 +1319,7 @@ function sendNotification($notificationType, $postData)
                         'event_wall' => (string)$getPostOwnerId->event_settings->event_wall,
                         'guest_list_visible_to_guests' => (string)$getPostOwnerId->event_settings->guest_list_visible_to_guests,
                         'event_potluck' => (string)$getPostOwnerId->event_settings->podluck,
+                        'event_photos' => (string)$getPostOwnerId->event_settings->photos,
                         'guest_pending_count' => (string)getGuestPendingRsvpCount($postData['event_id'])
                     ];
                     $checkNotificationSetting = checkNotificationSetting($getPostOwnerId->user_id);

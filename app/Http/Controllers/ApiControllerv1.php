@@ -475,6 +475,7 @@ class ApiControllerv1 extends Controller
                     $eventDetail['event_potluck'] = $value->event_settings->podluck;
                     $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id, 1);
                     $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
+                    $eventDetail['event_photos'] = $value->event_settings->photos;
                     $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
 
 
@@ -776,6 +777,7 @@ class ApiControllerv1 extends Controller
                         $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                         $eventDetail['host_name'] = $value->hosted_by;
                         $eventDetail['allow_limit'] = $value->event_settings->allow_limit;
+                        $eventDetail['event_photos'] = $value->event_settings->photos;
                         $eventDetail['is_past'] = ($value->end_date < date('Y-m-d')) ? true : false;
                         $eventDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
                         $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
@@ -1023,6 +1025,8 @@ class ApiControllerv1 extends Controller
                         $eventDetail['post_time'] =  $this->setpostTime($value->event->updated_at);
                         $eventDetail['is_gone_time'] = $this->evenGoneTime($value->event->end_date);
                         $eventDetail['allow_limit'] = (isset($value->event->event_settings->allow_limit) && $value->event->event_settings->allow_limit != "") ? $value->event->event_settings->allow_limit : "";
+                        $eventDetail['event_photos'] = $value->event->event_settings->photos;
+
                         $images = EventImage::where('event_id', $value->event->id)->orderBy('type', 'ASC')->first();
 
                         $eventDetail['event_images'] = "";
@@ -1268,6 +1272,7 @@ class ApiControllerv1 extends Controller
                         $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
                         $eventDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
                         $eventDetail['allow_limit'] = (isset($value->event_settings->allow_limit) && $value->event_settings->allow_limit != '') ? $value->event_settings->allow_limit : 0;
+                        $eventDetail['event_photos'] = $value->event_settings->photos;
                         $eventDetail['kids'] = 0;
                         $eventDetail['adults'] = 0;
 
@@ -1538,6 +1543,8 @@ class ApiControllerv1 extends Controller
                         $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
                         $eventDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
                         $eventDetail['allow_limit'] = $value->event_settings->allow_limit;
+                        $eventDetail['event_photos'] = $value->event_settings->photos;
+                        $eventDetail['event_photos'] = $value->event_settings->photos;
                         $eventDetail['kids'] = 0;
                         $eventDetail['adults'] = 0;
 
@@ -1821,6 +1828,7 @@ class ApiControllerv1 extends Controller
                         $eventDetail['post_time'] =  $this->setpostTime($value->event->updated_at);
                         $eventDetail['is_gone_time'] = $this->evenGoneTime($value->event->end_date);
                         $eventDetail['allow_limit'] = $value->event->event_settings->allow_limit;
+                        $eventDetail['event_photos'] = $value->event->event_settings->photos;
                         $images = EventImage::where('event_id', $value->event->id)->orderBy('type', 'ASC')->first();
 
                         $eventDetail['event_images'] = "";
@@ -3924,7 +3932,6 @@ class ApiControllerv1 extends Controller
                     'allow_for_1_more' => $eventData['event_setting']['allow_for_1_more'],
                     'allow_limit' => $eventData['event_setting']['allow_limit'],
                     'adult_only_party' => $eventData['event_setting']['adult_only_party'],
-
                     'thank_you_cards' => $eventData['event_setting']['thank_you_cards'],
                     'add_co_host' => $eventData['event_setting']['add_co_host'],
                     'gift_registry' => $eventData['event_setting']['gift_registry'],
@@ -3936,6 +3943,8 @@ class ApiControllerv1 extends Controller
                     'event_wall_post' => $eventData['event_setting']['event_wall_post'],
                     'send_event_dater_reminders' => $eventData['event_setting']['send_event_dater_reminders'],
                     'request_event_photos_from_guests' => $eventData['event_setting']['request_event_photos_from_guests'],
+                    'photos' => $eventData['event_setting']['event_photos'],
+
                 ]);
             }
 
@@ -4634,7 +4643,7 @@ class ApiControllerv1 extends Controller
                         "allow_for_1_more" => $eventSettings->allow_for_1_more,
                         "allow_limit" => strval($eventSettings->allow_limit),
                         "adult_only_party" => $eventSettings->adult_only_party,
-
+                        "event_photos"=> $eventSettings->photos,
                         "rsvp_by_date" => $getEventData->rsvp_by_date,
                         "thank_you_cards" => $eventSettings->thank_you_cards,
                         "add_co_host" => $eventSettings->add_co_host,
@@ -5029,6 +5038,7 @@ class ApiControllerv1 extends Controller
                         $updateEventSetting->event_wall_post = $eventData['event_setting']['event_wall_post'];
                         $updateEventSetting->send_event_dater_reminders = $eventData['event_setting']['send_event_dater_reminders'];
                         $updateEventSetting->request_event_photos_from_guests = $eventData['event_setting']['request_event_photos_from_guests'];
+                        $updateEventSetting->photos = $eventData['event_setting']['event_photos'];
                         $updateEventSetting->save();
                     }
 
@@ -7943,6 +7953,7 @@ class ApiControllerv1 extends Controller
                 if ($eventDetail->start_date != $eventDetail->end_date) {
                     $eventData[] = "Multiple Day Event";
                 }
+                
                 // if(!empty($eventDetails['co_host_list'])){
                 if ($coHosts != NULL) {
                     $eventData[] = "Co-Host";
@@ -7966,6 +7977,7 @@ class ApiControllerv1 extends Controller
             }
            
             $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
+            $eventDetails['event_photos'] = $eventDetail->event_settings->photos;
             $rsvp_status = 'rsvp';
 
 
@@ -12635,6 +12647,7 @@ class ApiControllerv1 extends Controller
                 $notificationDetail['new_start_end_date'] = ($values->new_start_end_date != null || $values->new_start_end_date != "") ? $values->new_start_end_date : "";
 
                 $notificationDetail['event_wall'] = $values->event->event_settings->event_wall;
+                $notificationDetail['event_photos'] = $values->event->event_settings->photos;
                 $notificationDetail['guest_list_visible_to_guests'] = $values->event->event_settings->guest_list_visible_to_guests;
                 $notificationDetail['event_potluck'] = $values->event->event_settings->podluck;
                 $notificationDetail['guest_pending_count'] = getGuestRsvpPendingCount($values->event->id);
@@ -13867,8 +13880,7 @@ class ApiControllerv1 extends Controller
                 $eventDetail['event_wall'] = $value->event_settings->event_wall;
                 $eventDetail['guest_list_visible_to_guests'] = $value->event_settings->guest_list_visible_to_guests;
                 $eventDetail['event_potluck'] = $value->event_settings->podluck;
-
-
+                $eventDetail['event_photos'] = $value->event_settings->photos;
                 $eventDetail['guest_pending_count'] = getGuestRsvpPendingCount($value->id);
                 $eventDetail['adult_only_party'] = $value->event_settings->adult_only_party;
                 $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);

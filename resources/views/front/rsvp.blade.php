@@ -36,6 +36,28 @@
 
 <section class="rsvp-wrp new-main-content">
    <!-- ===main-section-start=== -->
+   @if((isset($display_ad)&& $display_ad==true))
+    
+   <div class="mx-auto adsense-center sidebar-adsense" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
+       <ins class="adsbygoogle"
+       id="my-adrsvp1"
+       style="display:block"
+       data-ad-client="ca-pub-7818976609984635"
+       data-ad-slot="7204833835"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+       <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+       // if (!adElement.classList.contains('adsbygoogle-noablate')) {
+       //     (adsbygoogle = window.adsbygoogle || []).push({});
+       // }
+    
+
+       // Hide container if ad is not shown after 2 seconds
+     
+       </script>
+       </div>
+   @endif
    <div class="rsvp-tab-wrp event-center-tabs-main">
 
     <nav>
@@ -77,6 +99,8 @@
                                         @endforeach
                                     @endif
                                 </div>
+                                @if((isset($display_ad)&& $display_ad==true))
+
                                 <div class="mx-auto adsense-center sidebar-adsense" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
                                     <ins class="adsbygoogle"
                                     id="my-adrsvp1"
@@ -96,6 +120,7 @@
                                   
                                     </script>
                                     </div>
+                                @endif
                             </div>
 
                             <div class="col-lg-7">
