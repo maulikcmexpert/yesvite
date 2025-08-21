@@ -4847,7 +4847,11 @@ function savePage4Data() {
     } else {
         eventData.event_wall = "0";
     }
-
+    if ($("#eventPhotos").is(":checked")) {
+        eventData.event_photos = "1";
+    } else {
+        eventData.event_photos = "0";
+    }
     if ($("#guest_list_visible_to_guest").is(":checked")) {
         eventData.guest_list_visible_to_guest = "1";
     } else {

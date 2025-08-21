@@ -4639,7 +4639,6 @@ class ApiControllerv1 extends Controller
 
                 if ($eventSettings != NULL) {
                     $eventDetail['event_setting'] = [
-
                         "allow_for_1_more" => $eventSettings->allow_for_1_more,
                         "allow_limit" => strval($eventSettings->allow_limit),
                         "adult_only_party" => $eventSettings->adult_only_party,

@@ -345,7 +345,7 @@
                                             <span><img src="{{asset('assets/event/image/file.svg')}}" alt=""></span>
                                             <h5>Event Page Extras</h6>
                                         </div>
-                                        <h6 id="event_page_checkbox">0/2</span>
+                                        <h6 id="event_page_checkbox">0/3</span>
                                     </div>
                                 </button>
                             </h2>
@@ -371,6 +371,33 @@
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
                                                         <input type="checkbox" id="eventwall" name="notification_setting[]" onchange="savePage4Data()" class="checkbox event_page_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['event_wall']=="1") ? "checked":"checked"}}/>
+                                                        <div class="knobs"></div>
+                                                        <div class="layer"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-con">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex">
+                                                <p><strong>Event Photos</strong></p>
+                                                <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="Where you can chat with other guests,upload photos,post/reply to polls and see RSVP updates/responses"> -->
+                                                <button data-position="bottom">  
+                                                <span>Where you can upload photo</span>
+                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M9.99984 18.3337C14.5832 18.3337 18.3332 14.5837 18.3332 10.0003C18.3332 5.41699 14.5832 1.66699 9.99984 1.66699C5.4165 1.66699 1.6665 5.41699 1.6665 10.0003C1.6665 14.5837 5.4165 18.3337 9.99984 18.3337Z" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path d="M10 6.66699V10.8337" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                        <path d="M9.99561 13.333H10.0031" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                    </svg>
+                                                <!-- </a> -->
+                                                </button>
+
+                                            </div>
+                                            <div class="toggle-button-cover">
+                                                <div class="button-cover">
+                                                    <div class="button r" id="button-1">
+                                                        <input type="checkbox" id="eventPhotos" name="notification_setting[]" onchange="savePage4Data()" class="checkbox event_page_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['photos']=="1") ? "checked":"checked"}}/>
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>

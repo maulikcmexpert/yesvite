@@ -979,7 +979,7 @@ class EventController extends BaseController
     public function store(Request $request)
     {
 
-        $potluck = session('category');https://yesvitedev.cmexpertiseinfotech.in/events#
+        $potluck = session('category');
         // dd($request);
 
         Session::forget('desgin');
@@ -1342,6 +1342,7 @@ class EventController extends BaseController
                     $eventSetting->event_wall_post = (isset($request->event_wall_post)) ? $request->event_wall_post : "0";
                     $eventSetting->send_event_dater_reminders = (isset($request->rsvp_remainder)) ? $request->rsvp_remainder : "0";
                     $eventSetting->request_event_photos_from_guests = (isset($request->request_photo)) ? $request->request_photo : "0";
+                    $eventSetting->photos = (isset($request->event_photos)) ? $request->event_photos : "0";
                     $eventSetting->save();
                 } else {
                     EventSetting::create([
@@ -1360,6 +1361,7 @@ class EventController extends BaseController
                         'event_wall_post' => (isset($request->event_wall_post)) ? $request->event_wall_post : "0",
                         'send_event_dater_reminders' => (isset($request->rsvp_remainder)) ? $request->rsvp_remainder : "0",
                         'request_event_photos_from_guests' => (isset($request->request_photo)) ? $request->request_photo : "0",
+                        'photos' => (isset($request->event_photos)) ? $request->event_photos : "0",
                     ]);
                 }
             }
@@ -4416,6 +4418,7 @@ class EventController extends BaseController
                     $eventSetting->event_wall_post = (isset($request->event_wall_post)) ? $request->event_wall_post : "0";
                     $eventSetting->send_event_dater_reminders = (isset($request->rsvp_remainder)) ? $request->rsvp_remainder : "0";
                     $eventSetting->request_event_photos_from_guests = (isset($request->request_photo)) ? $request->request_photo : "0";
+                    $eventSetting->photos = (isset($request->event_photos)) ? $request->event_photos : "0";
                     $eventSetting->save();
                 } else {
                     EventSetting::create([
@@ -4434,6 +4437,7 @@ class EventController extends BaseController
                         'event_wall_post' => (isset($request->event_wall_post)) ? $request->event_wall_post : "0",
                         'send_event_dater_reminders' => (isset($request->rsvp_remainder)) ? $request->rsvp_remainder : "0",
                         'request_event_photos_from_guests' => (isset($request->request_photo)) ? $request->request_photo : "0",
+                        'photos' => (isset($request->event_photos)) ? $request->event_photos : "0",
                     ]);
                 }
             }
