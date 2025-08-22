@@ -591,6 +591,7 @@ class EventController extends BaseController
                                 "guest_list_visible_to_guests" => $eventSettings->guest_list_visible_to_guests,
                                 "podluck" => $eventSettings->podluck,
                                 "rsvp_updates" => $eventSettings->rsvp_updates,
+                                "event_photos"=> $eventSettings->photos,
                                 "event_wall_post" => $eventSettings->event_wall_post,
                                 "send_event_dater_reminders" => $eventSettings->send_event_dater_reminders,
                                 "request_event_photos_from_guests" => $eventSettings->request_event_photos_from_guests
