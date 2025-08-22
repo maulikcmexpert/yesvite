@@ -4423,24 +4423,25 @@ class EventController extends BaseController
                     $eventSetting->photos = (isset($request->event_photos)) ? $request->event_photos : "0";
                     $eventSetting->save();
                 } else {
-                    EventSetting::create([
-                        'event_id' => $eventId,
-                        'allow_for_1_more' => (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0",
-                        'allow_limit' => (isset($request->allow_limit_count)) ? (int)$request->allow_limit_count : 0,
-                        'adult_only_party' => (isset($request->only_adults)) ? $request->only_adults : "0",
-                        'thank_you_cards' => (isset($request->thankyou_message)) ? $request->thankyou_message : "0",
-                        'add_co_host' => (isset($request->add_co_host)) ? $request->add_co_host : "0",
-                        'gift_registry' => (isset($request->gift_registry)) ? $request->gift_registry : "0",
-                        'events_schedule' => (isset($request->events_schedule)) ? $request->events_schedule : "0",
-                        'event_wall' => (isset($request->event_wall)) ? $request->event_wall : "0",
-                        'guest_list_visible_to_guests' => (isset($request->guest_list_visible_to_guest)) ? $request->guest_list_visible_to_guest : "0",
-                        'podluck' => (isset($request->potluck)) ? $request->potluck : "0",
-                        'rsvp_updates' => (isset($request->rsvp_update)) ? $request->rsvp_update : "0",
-                        'event_wall_post' => (isset($request->event_wall_post)) ? $request->event_wall_post : "0",
-                        'send_event_dater_reminders' => (isset($request->rsvp_remainder)) ? $request->rsvp_remainder : "0",
-                        'request_event_photos_from_guests' => (isset($request->request_photo)) ? $request->request_photo : "0",
-                        'photos' => (isset($request->event_photos)) ? $request->event_photos : "0",
-                    ]);
+                         
+                    $eventSetting = new EventSetting();
+                    $eventSetting->event_id = $eventId;
+                    $eventSetting->allow_for_1_more = (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0";
+                    $eventSetting->allow_limit = (isset($request->allow_limit_count)) ? (int)$request->allow_limit_count : 0;
+                    $eventSetting->adult_only_party = (isset($request->only_adults)) ? $request->only_adults : "0";
+                    $eventSetting->thank_you_cards = (isset($request->thankyou_message)) ? $request->thankyou_message : "0";
+                    $eventSetting->add_co_host = (isset($request->add_co_host)) ? $request->add_co_host : "0";
+                    $eventSetting->gift_registry = (isset($request->gift_registry)) ? $request->gift_registry : "0";
+                    $eventSetting->events_schedule = (isset($request->events_schedule)) ? $request->events_schedule : "0";
+                    $eventSetting->event_wall = (isset($request->event_wall)) ? $request->event_wall : "0";
+                    $eventSetting->guest_list_visible_to_guests = (isset($request->guest_list_visible_to_guest)) ? $request->guest_list_visible_to_guest : "0";
+                    $eventSetting->podluck = (isset($request->potluck)) ? $request->potluck : "0";
+                    $eventSetting->rsvp_updates = (isset($request->rsvp_update)) ? $request->rsvp_update : "0";
+                    $eventSetting->event_wall_post = (isset($request->event_wall_post)) ? $request->event_wall_post : "0";
+                    $eventSetting->send_event_dater_reminders = (isset($request->rsvp_remainder)) ? $request->rsvp_remainder : "0";
+                    $eventSetting->request_event_photos_from_guests = (isset($request->request_photo)) ? $request->request_photo : "0";
+                    $eventSetting->photos = (isset($request->event_photos)) ? $request->event_photos : "0";
+                    $eventSetting->save();
                 }
             }
             if (isset($request->potluck) && $request->potluck == "0") {
