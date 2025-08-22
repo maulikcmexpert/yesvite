@@ -11584,13 +11584,17 @@ $(document).on('click', '.select_plan_btn', function () {
         $('.paid_plan_status').removeClass('d-none');
         $('.select_event_photos').removeClass('disabled_event_photos');
 
-    
+        if ($("#eventPhotos").is(":checked")) {
+            eventData.event_photos = "1";
+        }
     }else{
         $('.free_plan_status').removeClass('d-none');
         $('.paid_plan_status').addClass('d-none'); 
         $('.sidebar-adsense').removeClass('d-none');
         $('#eventPhotos').prop('checked',false);
         $('.select_event_photos').addClass('disabled_event_photos');
+        eventData.event_photos = "0";
+
     }
     
     console.log("plan_value "+plan_value)
