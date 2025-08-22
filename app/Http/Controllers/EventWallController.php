@@ -1185,6 +1185,7 @@ class EventWallController extends BaseController
         $eventDetails['podluck'] = $eventDetail->event_settings->podluck ?? "";
         $eventDetails['isRsvpEvent'] = $eventDetail->isRsvpEvent ?? "";
         $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
+        $eventDetails['event_photos'] = $eventDetail->event_settings->photos ?? "";
         $totalAdults = $eventDetail->event_invited_user->sum('adults');
         $totalKids = $eventDetail->event_invited_user->sum('kids');
         $totalGuests = $totalAdults + $totalKids;
