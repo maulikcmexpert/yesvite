@@ -1,4 +1,4 @@
-{{-- {{dd($eventDetails)}} --}}
+{{dd($eventDetails)}}
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <!-- Wall Tab -->
@@ -58,7 +58,7 @@
                 Photos
             </a>
         @endif
-        
+
         @if (
             ($eventDetails['is_host'] == 1 && $eventDetails['podluck'] == "1") ||
             ($eventDetails['is_host'] == 0 && $eventDetails['is_co_host'] == "0"  && $eventDetails['rsvp_status'] == '1'  &&  $eventDetails['podluck'] == "1") ||
