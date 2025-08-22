@@ -633,7 +633,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                 // dd($display_plan);
             @endphp
             
-            <div class="guest-wrp side-guest-wrp paid_plan_status  {{ !isset($eventDetail['event_type']) || $display_plan == "0" ? 'd-none' : '' }}">
+            <div class="guest-wrp side-guest-wrp paid_plan_status {{ $display_plan == "0" ? 'd-none' : '' }}">
 
                 <div class="guest-pro">
                     <div>
@@ -752,9 +752,11 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                     {{-- </div> --}}
                 </div>
             </div>
+            {{-- {{ !isset($eventDetail['event_type']) || $display_plan == "0" ? 'd-none' : '' }}
+            {{ $display_plan == "1" ? 'd-none' : '' }} --}}
             
            
-            <div class="guest-wrp side-guest-wrp free_plan_status {{ $display_plan == "1" ? 'd-none' : '' }}">
+            <div class="guest-wrp side-guest-wrp free_plan_status  {{ !isset($eventDetail['event_type']) || $display_plan == "1" ? 'd-none' : '' }}">
                 <div class="guest-pro">
                     <div>
                         <!-- <h5>Pro</h5>
@@ -3740,7 +3742,7 @@ $static_information = isset($eventDetail['static_information']) ? $eventDetail['
 $step = isset($eventDetail['step']) ? $eventDetail['step'] : null;
 $eventID = isset($eventDetail['id']) ? $eventDetail['id'] : null;
 $isDraft = isset($eventDetail['is_draft_save']) ? $eventDetail['is_draft_save'] : null;
-$eventType = isset($eventDetail['event_type']) ? $eventDetail['event_type'] : '0';
+$eventType = isset($eventDetail['event_type']) ? $eventDetail['event_type'] : '1';
 
 $cohostpreferby =
 isset($eventDetail['co_host_list']) && count($eventDetail['co_host_list']) > 0

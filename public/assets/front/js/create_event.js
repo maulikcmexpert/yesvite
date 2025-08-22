@@ -69,7 +69,7 @@ if ($("#isUserLoggedIn").val() === "1") {
     var eventType=$('#eventType').val();
 
     if(eventType==""){
-        eventData.event_plan_type="0";
+        eventData.event_plan_type="1";
     }else{
         eventData.event_plan_type=eventType;
     }
@@ -11576,18 +11576,21 @@ $('.select_plan_check').on('change', function () {
 $(document).on('click', '.select_plan_btn', function () {
     var plan_value = $('.select_plan_check:checked').val();
     var aval_coins=$('#user_avaliable_coins').val()
-    console.log(aval_coins);
-    
+    console.log(plan_value);
+    // alert(plan_value);
     if(plan_value=="1"){
         $('.free_plan_status').addClass('d-none');
         $('.sidebar-adsense').addClass('d-none');
         $('.paid_plan_status').removeClass('d-none');
+        $('.select_event_photos').removeClass('disabled_event_photos');
+
     
     }else{
         $('.free_plan_status').removeClass('d-none');
         $('.paid_plan_status').addClass('d-none'); 
         $('.sidebar-adsense').removeClass('d-none');
         $('#eventPhotos').prop('checked',false);
+        $('.select_event_photos').addClass('disabled_event_photos');
     }
     
     console.log("plan_value "+plan_value)
@@ -11622,15 +11625,31 @@ $(document).on('click','.switch_plan',function(){
 });
 
 $(document).on('click','.openPlans',function(){
+    // $('.free_plan_chk').prop('checked',false)
+    // $('.select_plan_btn').text('Continue Permium Plan');
+    // $('.paid_plan_chk').prop('checked',true)
+    // $('.paid_current_plan').show();
+    // $('.free_current_plan').hide();
+    // $('#select_event_type').modal('show');
 
-    $('.free_plan_chk').prop('checked',true)
-    $('.select_plan_btn').text('Continue Free Plan');
-    $('.paid_plan_chk').prop('checked',false)
+    if(eventData.event_plan_type=="1"){
+        $('.paid_plan_chk').prop('checked',true)
+        $('.free_current_plan').hide();
+        $('.paid_current_plan').show();
+        $('.free_plan_chk').prop('checked',false)
+        $('.select_plan_btn').text('Continue Permium Plan')
 
-    $('.paid_current_plan').hide();
-    $('.free_current_plan').show();
+    }else{
+        $('.free_plan_chk').prop('checked',true)
+        $('.free_current_plan').show();
+        $('.paid_current_plan').hide();
+        $('.paid_plan_chk').prop('checked',false)
+        $('.select_plan_btn').text('Continue Free Plan')
+
+    }
 
     $('#select_event_type').modal('show');
+
 
 
 })
