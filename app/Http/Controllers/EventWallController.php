@@ -439,6 +439,7 @@ class EventWallController extends BaseController
             'event_wall' => $eventDetail->event_settings->event_wall ?? "",
             'total_limit' => $eventDetail->event_settings->allow_limit ?? 0,
             'allow_limit' => $eventDetail->event_settings->allow_limit ?? 0,
+            'event_photos' => $eventDetail->event_settings->photos ?? "0",
             'adult_only_party' => $eventDetail->event_settings->adult_only_party ?? 0,
             'event_created_timestamp' => Carbon::parse($eventDetail->start_date)->timestamp,
             'event_detail' => [],

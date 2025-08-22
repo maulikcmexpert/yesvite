@@ -290,6 +290,8 @@ class EventPotluckController extends BaseController
                 $eventDetails['host_id'] = $eventDetail->user_id;
                 $eventDetails['podluck'] = $eventDetail->event_settings->podluck;
                 $eventDetails['event_wall'] = $eventDetail->event_settings->event_wall ?? "";
+                $eventDetails['event_photos'] = $eventDetail->event_settings->photos;
+
                 $totalAdults = $eventDetail->event_invited_user->sum('adults');
                 $totalKids = $eventDetail->event_invited_user->sum('kids');
                 $totalGuests = $totalAdults + $totalKids;

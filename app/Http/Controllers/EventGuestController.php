@@ -173,6 +173,7 @@ class EventGuestController extends BaseController
             $eventDetails['city'] = $eventDetail->city;
             $eventDetails['latitude'] = (!empty($eventDetail->latitude) || $eventDetail->latitude != null) ? $eventDetail->latitude : "";
             $eventDetails['logitude'] = (!empty($eventDetail->logitude) || $eventDetail->logitude != null) ? $eventDetail->logitude : "";
+            $eventDetails['event_photos'] = $eventDetail->event_settings->photos;
 
             $eventsScheduleList = [];
             foreach ($eventDetail->event_schedule as $key => $value) {

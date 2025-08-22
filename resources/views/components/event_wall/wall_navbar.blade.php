@@ -48,15 +48,17 @@
 
 
         <!-- Photos Tab -->
-        <a href="{{ route('event.event_photos', ['id' => encrypt($event)]) }}"
-           class="nav-link {{ $page == 'photos' ? 'active' : '' }}"
-           id="nav-photos-tab"
-           role="tab"
-           aria-controls="nav-photos"
-           aria-selected="{{ $page == 'photos' ? 'true' : 'false' }}">
-            Photos
-        </a>
-
+        @if(isset($eventDetails['event_photos'])&&$eventDetails['event_photos']=="1")
+            <a href="{{ route('event.event_photos', ['id' => encrypt($event)]) }}"
+            class="nav-link {{ $page == 'photos' ? 'active' : '' }}"
+            id="nav-photos-tab"
+            role="tab"
+            aria-controls="nav-photos"
+            aria-selected="{{ $page == 'photos' ? 'true' : 'false' }}">
+                Photos
+            </a>
+        @endif
+        
         @if (
             ($eventDetails['is_host'] == 1 && $eventDetails['podluck'] == "1") ||
             ($eventDetails['is_host'] == 0 && $eventDetails['is_co_host'] == "0"  && $eventDetails['rsvp_status'] == '1'  &&  $eventDetails['podluck'] == "1") ||

@@ -254,6 +254,8 @@ class EventAboutController extends BaseController
                 $eventDetails['event_detail'] = $eventData;
             }
             $eventDetails['total_limit'] = $eventDetail->event_settings->allow_limit;
+            $eventDetails['event_photos'] = $eventDetail->event_settings->photos;
+
             $eventInfo['guest_view'] = $eventDetails;
             $eventattending = EventInvitedUser::
                 // whereHas('user', function ($query) {
