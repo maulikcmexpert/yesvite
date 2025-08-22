@@ -247,7 +247,7 @@ class EventPotluckController extends BaseController
                 $eventDetail = Event::with(['user', 'event_image' => function ($query) {
                     $query->orderBy('type', 'ASC');
                 }, 'event_schedule', 'event_settings' => function ($query) {
-                    $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party', 'event_wall', 'guest_list_visible_to_guests');
+                    $query->select('event_id', 'podluck', 'allow_limit', 'adult_only_party','photos','event_wall', 'guest_list_visible_to_guests');
                 },  'event_invited_user' => function ($query) {
 
                     $query->where('is_co_host', '1')->with('user');
