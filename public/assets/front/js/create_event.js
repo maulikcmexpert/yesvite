@@ -11582,15 +11582,12 @@ $(document).on('click', '.select_plan_btn', function () {
         $('.free_plan_status').addClass('d-none');
         $('.sidebar-adsense').addClass('d-none');
         $('.paid_plan_status').removeClass('d-none');
-
     
     }else{
         $('.free_plan_status').removeClass('d-none');
         $('.paid_plan_status').addClass('d-none'); 
         $('.sidebar-adsense').removeClass('d-none');
-
-
-
+        $('#eventPhotos').prop('checked',false);
     }
     
     console.log("plan_value "+plan_value)

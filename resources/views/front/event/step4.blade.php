@@ -378,7 +378,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-con">
+                                    <div class="accordion-con disabled_event_photos">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex">
                                                 <p><strong>Event Photos</strong></p>
