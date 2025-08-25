@@ -3927,25 +3927,46 @@ class ApiControllerv1 extends Controller
                 }
             }
             if ($eventData['event_setting']) {
-                EventSetting::create([
-                    'event_id' => $eventId,
-                    'allow_for_1_more' => $eventData['event_setting']['allow_for_1_more'],
-                    'allow_limit' => $eventData['event_setting']['allow_limit'],
-                    'adult_only_party' => $eventData['event_setting']['adult_only_party'],
-                    'thank_you_cards' => $eventData['event_setting']['thank_you_cards'],
-                    'add_co_host' => $eventData['event_setting']['add_co_host'],
-                    'gift_registry' => $eventData['event_setting']['gift_registry'],
-                    'events_schedule' => $eventData['event_setting']['events_schedule'],
-                    'event_wall' => $eventData['event_setting']['event_wall'],
-                    'guest_list_visible_to_guests' => $eventData['event_setting']['guest_list_visible_to_guests'],
-                    'podluck' => $eventData['event_setting']['podluck'],
-                    'rsvp_updates' => $eventData['event_setting']['rsvp_updates'],
-                    'event_wall_post' => $eventData['event_setting']['event_wall_post'],
-                    'send_event_dater_reminders' => $eventData['event_setting']['send_event_dater_reminders'],
-                    'request_event_photos_from_guests' => $eventData['event_setting']['request_event_photos_from_guests'],
-                    'photos' => $eventData['event_setting']['event_photos'],
+                    $eventSetting = new EventSetting();
+                    $eventSetting->event_id = $eventId;
+                    $eventSetting->allow_for_1_more = $eventData['event_setting']['allow_for_1_more'];
+                    $eventSetting->allow_limit = $eventData['event_setting']['allow_limit'];
+                    $eventSetting->adult_only_party = $eventData['event_setting']['adult_only_party'];
+                    $eventSetting->thank_you_cards = $eventData['event_setting']['thank_you_cards'];
+                    $eventSetting->add_co_host = $eventData['event_setting']['add_co_host'];
+                    $eventSetting->gift_registry = $eventData['event_setting']['gift_registry'];
+                    $eventSetting->events_schedule = $eventData['event_setting']['events_schedule'];
+                    $eventSetting->event_wall = $eventData['event_setting']['event_wall'];
+                    $eventSetting->guest_list_visible_to_guests = $eventData['event_setting']['guest_list_visible_to_guests'];
+                    $eventSetting->podluck = $eventData['event_setting']['podluck'];
+                    $eventSetting->rsvp_updates = $eventData['event_setting']['rsvp_updates'];
+                    $eventSetting->event_wall_post = $eventData['event_setting']['event_wall_post'];
+                    $eventSetting->send_event_dater_reminders = $eventData['event_setting']['send_event_dater_reminders'];
+                    $eventSetting->request_event_photos_from_guests = $eventData['event_setting']['request_event_photos_from_guests'];
+                    $eventSetting->photos = $eventData['event_setting']['event_photos'];
+                    $eventSetting->save();
 
-                ]);
+
+                           
+                    // $eventSetting = new EventSetting();
+                    // $eventSetting->event_id = $eventId;
+                    // $eventSetting->allow_for_1_more = (isset($request->allow_for_1_more)) ? $request->allow_for_1_more : "0";
+                    // $eventSetting->allow_limit = (isset($request->allow_limit_count)) ? (int)$request->allow_limit_count : 0;
+                    // $eventSetting->adult_only_party = (isset($request->only_adults)) ? $request->only_adults : "0";
+                    // $eventSetting->thank_you_cards = (isset($request->thankyou_message)) ? $request->thankyou_message : "0";
+                    // $eventSetting->add_co_host = (isset($request->add_co_host)) ? $request->add_co_host : "0";
+                    // $eventSetting->gift_registry = (isset($request->gift_registry)) ? $request->gift_registry : "0";
+                    // $eventSetting->events_schedule = (isset($request->events_schedule)) ? $request->events_schedule : "0";
+                    // $eventSetting->event_wall = (isset($request->event_wall)) ? $request->event_wall : "0";
+                    // $eventSetting->guest_list_visible_to_guests = (isset($request->guest_list_visible_to_guest)) ? $request->guest_list_visible_to_guest : "0";
+                    // $eventSetting->podluck = (isset($request->potluck)) ? $request->potluck : "0";
+                    // $eventSetting->rsvp_updates = (isset($request->rsvp_update)) ? $request->rsvp_update : "0";
+                    // $eventSetting->event_wall_post = (isset($request->event_wall_post)) ? $request->event_wall_post : "0";
+                    // $eventSetting->send_event_dater_reminders = $eventData['event_setting']['send_event_dater_reminders'];
+                    // $eventSetting->request_event_photos_from_guests = $eventData['event_setting']['request_event_photos_from_guests'];
+                    // $eventSetting->photos = $eventData['event_setting']['event_photos'];
+                    // $eventSetting->save();
+                
             }
 
 
