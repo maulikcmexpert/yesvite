@@ -259,11 +259,11 @@
 
             @endphp
 
-            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown default_show">
+            {{-- <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown default_show">
                 <div class="card-img collection-card card-blue design-card">
                     <img src="{{asset('assets/front/img/demo_ad.jpg')}}" />
                 </div>
-            </div>
+            </div> --}}
             @foreach ($allImages as $image)
                 @if ($image['is_visible'] == '1')
                     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs
