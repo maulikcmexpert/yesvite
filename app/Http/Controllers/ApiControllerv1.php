@@ -1272,7 +1272,7 @@ class ApiControllerv1 extends Controller
                         $eventDetail['post_time'] =  $this->setpostTime($value->updated_at);
                         $eventDetail['is_gone_time'] = $this->evenGoneTime($value->end_date);
                         $eventDetail['allow_limit'] = (isset($value->event_settings->allow_limit) && $value->event_settings->allow_limit != '') ? $value->event_settings->allow_limit : 0;
-                        $eventDetail['event_photos'] = $value->event_settings->photos;
+                        $eventDetail['event_photos'] = $value->event_settings->photos ?? '0';
                         $eventDetail['kids'] = 0;
                         $eventDetail['adults'] = 0;
 
