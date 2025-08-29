@@ -1105,7 +1105,7 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
     display: none !important;
 }
 
-.
+
 /* ======== Responsive ========= */
 
 /* Large Desktops: 1200px and up */
@@ -1140,7 +1140,10 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
         margin: 10px auto !important;
     }
 
-    .
+    .ads-responsive{
+        display: block !important;
+    }
+    
 }
 
 /* Mobiles: up to 767px */
