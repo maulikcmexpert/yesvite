@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xxl-3 col-xl-3 col-lg-4 event-info-left">
+            {{dd($display_ad)}}
                 <!-- =============mainleft-====================== -->
                 @if((isset($display_ad)&& $display_ad==true))
                     <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
