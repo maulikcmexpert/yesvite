@@ -861,7 +861,11 @@
 }
 
 
+.ads-responsive{
+    display: none !important;
+}
 /* For mobile responsiveness, adjust button position */
+
 
 
 @media screen and (min-width:1440px) {
@@ -912,6 +916,10 @@
     .banner-wrapper .home-banner-textOne,
     .banner-wrapper .home-banner-textTwo{
         font-size: 18px !important;
+    }
+
+    .ads-responsive{
+        display: block !important;
     }
 
 }
