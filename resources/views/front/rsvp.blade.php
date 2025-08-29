@@ -50,8 +50,7 @@
        // if (!adElement.classList.contains('adsbygoogle-noablate')) {
        //     (adsbygoogle = window.adsbygoogle || []).push({});
        // }
-    
-
+        
        // Hide container if ad is not shown after 2 seconds
      
        </script>
