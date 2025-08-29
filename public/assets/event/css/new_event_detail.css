@@ -2133,6 +2133,14 @@
     border-color: #2DA9FC !important;
   }
 
+  .plan-inner-card-title{
+    font-family: var(--SFProRounded-blod) !important;
+  }
+
+  .plan-inner-card-main-text{
+    color: var(--primaryColor) !important;
+  }
+
 
 /* ======Responsiveness===== */
 
