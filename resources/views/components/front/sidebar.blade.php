@@ -272,22 +272,16 @@
        
         </ul>
     </div>
-    <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
+    {{-- <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
 
         <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
             data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
             data-ad-format="auto" data-full-width-responsive="true"></ins>
         <script>
             (adsbygoogle = window.adsbygoogle || []).push({});
-        // if (!adElement.classList.contains('adsbygoogle-noablate')) {
-        //     (adsbygoogle = window.adsbygoogle || []).push({});
-        // }
- 
 
-        // Hide container if ad is not shown after 2 seconds
-      
         </script>
-        </div>
+        </div> --}}
   </div>
   <div class="modal fade cmn-modal cancel-event cancel_event_mainmenu" id="cancelevent" tabindex="-1" aria-labelledby="canceleventLabel">
         <div class="modal-dialog modal-dialog-centered">
