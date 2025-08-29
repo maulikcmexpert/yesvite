@@ -117,6 +117,8 @@ $(".rsvp-slide").owlCarousel({
 });
 $(document).ready(function () {
     $(".moblie-menu-bar").click(function () {
+        // alert(3);
+
         $(".mobile-menu-wrp").toggleClass("active");
         $(".line").toggleClass("active");
         $(".mobile-menu-overlay").toggleClass("active");
@@ -125,6 +127,5 @@ $(document).ready(function () {
         $(".mobile-menu-wrp").removeClass("active");
         $(".line").removeClass("active");
         $(".mobile-menu-overlay").removeClass("active");
-        console.log("click")
     });
 });

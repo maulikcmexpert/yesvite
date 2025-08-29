@@ -43,18 +43,19 @@ document.addEventListener("click", (event) => {
 });
 
 // ----header-dropdown-menu---
-$(document).ready(function () {
-    $(".moblie-menu-bar").click(function () {
-        $(".mobile-menu-wrp").toggleClass("active");
-        $(".line").toggleClass("active");
-        $(".mobile-menu-overlay").toggleClass("active");
-    });
-    $(".mobile-menu-overlay").click(function () {
-        $(".mobile-menu-wrp").removeClass("active");
-        $(".line").removeClass("active");
-        $(".mobile-menu-overlay").removeClass("active");
-    });
-});
+// $(document).ready(function () {
+//     $(".moblie-menu-bar").click(function () {
+//         alert(1);
+//         $(".mobile-menu-wrp").toggleClass("active");
+//         $(".line").toggleClass("active");
+//         $(".mobile-menu-overlay").toggleClass("active");
+//     });
+//     $(".mobile-menu-overlay").click(function () {
+//         $(".mobile-menu-wrp").removeClass("active");
+//         $(".line").removeClass("active");
+//         $(".mobile-menu-overlay").removeClass("active");
+//     });
+// });
 
 // Add new option on click
 // $(".option-add-btn").on("click", function () {
