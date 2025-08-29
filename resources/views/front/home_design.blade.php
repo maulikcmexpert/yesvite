@@ -260,7 +260,7 @@
             @endphp
 
             <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown default_show">
-                <div class="card-img collection-card card-blue design-card" style="max-height: 308px !important;">
+                <div class="" style="max-height: 308px !important;">
                     {{-- <img src="{{asset('assets/front/img/demo_ad.jpg')}}" /> --}}
                     <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
 
