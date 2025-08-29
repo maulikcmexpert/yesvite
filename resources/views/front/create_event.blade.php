@@ -3515,9 +3515,9 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
             </div>
             <div class="modal-body comman-modal-body">
                 <div class="modal-body-top-side">
-                    <div class="icon-section">
+                    {{-- <div class="icon-section">
                         <img src="{{asset('assets/front/image/header_plan_icon.png')}}" alt="">
-                    </div>
+                    </div> --}}
                     <div class="modal-body-top-side-details-section">
                         <h3 class="modal-body-top-side-title">Choose your plan to publish the event</h3>
                         <p class="modal-body-top-side-text">Start with a free or premium experience</p>
