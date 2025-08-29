@@ -36,7 +36,7 @@
 
 <section class="rsvp-wrp new-main-content">
    <!-- ===main-section-start=== -->
-   @if((isset($display_ad)&& $display_ad==true))
+   {{-- @if((isset($display_ad)&& $display_ad==true))
     
    <div class="mx-auto adsense-center sidebar-adsense" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
        <ins class="adsbygoogle"
@@ -57,7 +57,7 @@
      
        </script>
        </div>
-   @endif
+   @endif --}}
    <div class="rsvp-tab-wrp event-center-tabs-main">
 
     <nav>
