@@ -498,6 +498,17 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @if((isset($display_ad)&& $display_ad==true))
+                                        <div class="mx-auto adsense-center ads-responsive" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
+                                            <img src="{{asset('assets/front/img/demo_ad.jpg')}}" />
+                                            <ins id="my-adguest" class="adsbygoogle" style="display:block;height:100px"
+                                                data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
+                                                data-ad-format="auto" data-full-width-responsive="true"></ins>
+                                            <script>
+                                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                            </script>
+                                        </div>
+                                    @endif
                                         {{-- @if($eventDetails['is_host']==1 || $eventDetails['is_co_host']=="1") --}}
                                             <div class="new_copy_event_Wrp">
                                                 <h4 class="title">Share Event Link</h4>
