@@ -1155,9 +1155,7 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
         height: 100px !important;
         margin: 10px auto !important;
     }
-    .small-adsense-header{
-        display: none !important;
-    }
+
 
     .ads-responsive{
         display: block !important;
@@ -1253,6 +1251,9 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
         max-width: 400px !important;
         height: 60px !important;
         max-height: 60px !important;
+    }
+    .small-adsense.small-adsense-header{
+        display: none !important;
     }
 }
 

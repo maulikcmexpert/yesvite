@@ -125,5 +125,6 @@ $(document).ready(function () {
         $(".mobile-menu-wrp").removeClass("active");
         $(".line").removeClass("active");
         $(".mobile-menu-overlay").removeClass("active");
+        console.log("click")
     });
 });
