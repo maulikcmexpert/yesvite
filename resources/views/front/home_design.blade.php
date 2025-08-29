@@ -190,7 +190,24 @@
             <h5 class="total-items ms-auto total_design_count"></h5>
         </div>
 
+<div class="row">
+    <div class="col-md-2">
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown default_show">
+            <div class="" style="max-height: 308px !important;">
+                <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
 
+                    <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
+                        data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
+                        data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+            
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
         <div class="row list_all_design_catgeory">
             @php
                 $allImages = collect([]);
@@ -259,20 +276,7 @@
 
             @endphp
 
-            {{-- <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown default_show">
-                <div class="" style="max-height: 308px !important;">
-                    <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
-
-                        <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
-                            data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
-                            data-ad-format="auto" data-full-width-responsive="true"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                
-                        </script>
-                    </div>
-                </div>
-            </div> --}}
+           
             @foreach ($allImages as $image)
                 @if ($image['is_visible'] == '1')
                     <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs
@@ -294,6 +298,9 @@
                 @endif
             @endforeach
         </div>
+    </div>
+</div>
+        
 
 
         {{-- <div class="row list_all_design_catgeory search_category">
