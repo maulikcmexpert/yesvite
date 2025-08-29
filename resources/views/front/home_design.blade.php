@@ -206,6 +206,20 @@
                 </div>
             </div>
         </div>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown default_show">
+            <div class="" style="max-height: 308px !important;">
+                <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
+
+                    <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
+                        data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
+                        data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+            
+                    </script>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-md-10">
         <div class="row list_all_design_catgeory">
