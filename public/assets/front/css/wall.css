@@ -861,9 +861,7 @@
 }
 
 
-.ads-responsive{
-    display: none !important;
-}
+
 /* For mobile responsiveness, adjust button position */
 
 
@@ -918,9 +916,7 @@
         font-size: 18px !important;
     }
 
-    .ads-responsive{
-        display: block !important;
-    }
+   
 
 }
 
