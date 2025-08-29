@@ -1155,6 +1155,9 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
     .ads-responsive{
         display: block !important;
     }
+    .small-adsense-header{
+        display: none !important;
+    }
 }
 
 @media (min-width: 2000px) and (max-width: 10000px) {

@@ -19,7 +19,7 @@ $notification_list=getNotificationList();
       </a>
       @if (Auth::guard('web')->check())
 
-      <div class="small-adsense" id="small-adsense-id">
+      <div class="small-adsense small-adsense-header" id="small-adsense-id">
         <div class="mx-auto" id="ad-container">
 
             <ins id="my-bottomad" class="adsbygoogle" style="display:block;width:728px;height:90"
@@ -1927,7 +1927,7 @@ $notification_list=getNotificationList();
                              </div>
                          </button>
 
-                         <div class="small-adsense" id="small-adsense-id">
+                         <div class="small-adsense small-adsense-header" id="small-adsense-id">
                           <div class="mx-auto" id="ad-container">
   
                               <ins id="my-bottomad" class="adsbygoogle" style="display:block;width:728px;height:90"

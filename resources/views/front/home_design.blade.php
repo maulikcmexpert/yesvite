@@ -67,18 +67,17 @@
                         class="green-text"> All designs and features included. Always.</span>
                 </h2>
                 <p class="home-banner-textOne">Simple pricing. All features. No nonsense.</p>
-                <p class="home-banner-textTwo">Free to try.  Free to love. 30 invites on us to test the platform. <span>No Card
-                    Needed.</span></p>
+                <p class="home-banner-textTwo">Free to try. Free to love. 30 invites on us to test the platform.
+                    <span>No Card
+                        Needed.</span></p>
             </div>
             <div class="col-md-5 col-xl-3">
                 <div class="app-store d-flex justify-content-center gap-2 home-banner-app-store">
                     <a href="https://play.google.com/store/apps/details?id=com.yesvite.android" class="google-app">
-                        <img src="{{ asset('assets/front/image/play_store.svg') }}"
-                            alt="google-app">
+                        <img src="{{ asset('assets/front/image/play_store.svg') }}" alt="google-app">
                     </a>
                     <a href="https://apps.apple.com/app/6736650042" class="mobile-app">
-                        <img src="{{ asset('assets/front/image/app_store.svg') }}"
-                            alt="mobile-app">
+                        <img src="{{ asset('assets/front/image/app_store.svg') }}" alt="mobile-app">
                     </a>
                 </div>
                 <div class="home-banner-img-main">
@@ -117,7 +116,7 @@
 
             </div>
         </div>
-        
+
         {{-- {{$getDesignData}} --}}
         <div class="filter-main-wrp categoryNew">
             <div class="filters-drp">
@@ -190,133 +189,150 @@
             <h5 class="total-items ms-auto total_design_count"></h5>
         </div>
 
-<div class="row">
-    <div class="col-md-2">
         <div class="row">
-            <div class="col-12 mt-4 wow fadeInDown default_show">          
-                  <div class="" style="max-height: 308px !important;">
-                <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
+            <div class="col-md-2">
+                <div class="row">
+                    <div class="col-12 mt-4 wow fadeInDown default_show">
+                        <div class="" style="max-height: 308px !important;">
+                            <div class="mx-auto adsense-center" id="ad-container"
+                                style="text-align: center;height:auto;min-height:auto;">
 
-                    <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
-                        data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
-                        data-ad-format="auto" data-full-width-responsive="true"></ins>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-            
-                    </script>
-                </div>
-            </div>
-            </div>
-            <div class="col-12 mt-4 wow fadeInDown default_show">          
-                <div class="" style="max-height: 308px !important;">
-                    <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
-
-                        <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
-                            data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
-                            data-ad-format="auto" data-full-width-responsive="true"></ins>
-                        <script>
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                
-                        </script>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-10">
-        <div class="row list_all_design_catgeory">
-            @php
-                $allImages = collect([]);
-                $randomIds = [];
-                $processedImageIds = [];
-
-                // dd($textdatatss);
-                foreach ($textdatatss as $category) {
-                    $randomIds[] = $category['imageId'];
-
-                    $allImages->push([
-                        'imageId' => $category['imageId'],
-                        'subcategory_name' => $category['subcategory_name'],
-                        // 'subcategory_name' =>$subcategory->subcategory_name,
-                        'static_information' => json_encode($category['static_information']),
-                        'shape_image' =>
-                            $category['shape_image'] != '' ? asset('storage/canvas/' . $category['shape_image']) : '',
-                        'image' => asset('storage/canvas/' . $category['image']),
-                        'tags' => $category['tags'],
-                        'is_visible' => $category['is_visible'],
-                        'category_id' => $category['category_id'],
-                        // 'subcategory_id' => $subcategory->id,
-                        // 'subcategory_id' => $relatedSubcategoryIds,
-                        // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
-                        'subcategory_id' => $category['subcategory_id'], // Get all subcategory IDs from pivot
-                        'category_name' => $category['category_name'],
-                        'image_path' => asset('storage/canvas/' . $category['image_path']),
-                    ]);
-                    // foreach ($category->subcategory as $subcategory) {
-                    //     foreach ($subcategory->textdatas as $image) {
-                    //         if (in_array($image->id, $processedImageIds)) {
-                    //             continue;
-                    //         }
-
-                    //         $processedImageIds[] = $image->id;
-                    //         $randomIds[] = $image->id;
-                    //         $relatedSubcategoryNames = $image->subcategories->pluck('subcategory_name')->implode(', ');
-                    //         $relatedSubcategoryIds = $image->subcategories->pluck('id')->implode(','); // Get comma-separated IDs
-
-                    //         $allImages->push([
-                    //             'imageId' => $image->id,
-                    //             'subcategory_name' =>$relatedSubcategoryNames,
-                    //             // 'subcategory_name' =>$subcategory->subcategory_name,
-                    //             'static_information' => json_encode($image->static_information),
-                    //             'shape_image' =>
-                    //                 $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
-                    //             'image' => asset('storage/canvas/' . $image->image),
-                    //             'tags' => $image->tags,
-                    //             'is_visible' => $image->is_visible,
-                    //             'category_id' => $category->id,
-                    //             // 'subcategory_id' => $subcategory->id,
-                    //             // 'subcategory_id' => $relatedSubcategoryIds,
-                    //             // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
-                    //             'subcategory_id' => $relatedSubcategoryIds, // Get all subcategory IDs from pivot
-                    //             'category_name' => $category->category_name,
-                    //             'image_path' => asset('storage/canvas/' . $image->filled_image),
-                    //         ]);
-                    //     }
-                    // }
-                }
-
-                shuffle($randomIds);
-                $randomIds = array_slice($randomIds, 0, 30);
-
-                $randomImages = $allImages->shuffle()->take(30);
-
-            @endphp
-
-           
-            @foreach ($allImages as $image)
-                @if ($image['is_visible'] == '1')
-                    <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs
-                 {{ in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none' }}"
-                        data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
-                        data-category-id="{{ $image['category_id'] }}"
-                        data-subcategory-id="{{ $image['subcategory_id'] }}"
-                        data-subcategory_name="{{ $image['subcategory_name'] }}"
-                        data-category_name="{{ $image['category_name'] }}" data-tags="{{ $image['tags'] }}">
-
-                        <div class="card-img collection-card card-blue edit_design_tem design-card"
-                            data-image="{{ $image['image'] }}" data-shape_image="{{ $image['shape_image'] }}"
-                            data-json="{{ $image['static_information'] }}" data-id="{{ $image['imageId'] }}"
-                            data-subcategory_name="{{ $image['subcategory_name'] }}">
-                            <img src="{{ $image['image_path'] }}" alt="shower-card">
+                                <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
+                                    data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
+                                    data-ad-format="auto" data-full-width-responsive="true"></ins>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
                         </div>
-
                     </div>
-                @endif
-            @endforeach
+                    <div class="col-12 mt-4 wow fadeInDown default_show">
+                        <div class="" style="max-height: 308px !important;">
+                            <div class="mx-auto adsense-center" id="ad-container"
+                                style="text-align: center;height:auto;min-height:auto;">
+
+                                <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
+                                    data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
+                                    data-ad-format="auto" data-full-width-responsive="true"></ins>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4 wow fadeInDown default_show">
+                        <div class="" style="max-height: 308px !important;">
+                            <div class="mx-auto adsense-center" id="ad-container"
+                                style="text-align: center;height:auto;min-height:auto;">
+
+                                <ins id="my-ad" class="adsbygoogle" style="display:block;height:100px"
+                                    data-ad-client="ca-pub-7818976609984635" data-ad-slot="7204833835"
+                                    data-ad-format="auto" data-full-width-responsive="true"></ins>
+                                <script>
+                                    (adsbygoogle = window.adsbygoogle || []).push({});
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="row list_all_design_catgeory">
+                    @php
+                        $allImages = collect([]);
+                        $randomIds = [];
+                        $processedImageIds = [];
+
+                        // dd($textdatatss);
+                        foreach ($textdatatss as $category) {
+                            $randomIds[] = $category['imageId'];
+
+                            $allImages->push([
+                                'imageId' => $category['imageId'],
+                                'subcategory_name' => $category['subcategory_name'],
+                                // 'subcategory_name' =>$subcategory->subcategory_name,
+                                'static_information' => json_encode($category['static_information']),
+                                'shape_image' =>
+                                    $category['shape_image'] != ''
+                                        ? asset('storage/canvas/' . $category['shape_image'])
+                                        : '',
+                                'image' => asset('storage/canvas/' . $category['image']),
+                                'tags' => $category['tags'],
+                                'is_visible' => $category['is_visible'],
+                                'category_id' => $category['category_id'],
+                                // 'subcategory_id' => $subcategory->id,
+                                // 'subcategory_id' => $relatedSubcategoryIds,
+                                // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
+                                'subcategory_id' => $category['subcategory_id'], // Get all subcategory IDs from pivot
+                                'category_name' => $category['category_name'],
+                                'image_path' => asset('storage/canvas/' . $category['image_path']),
+                            ]);
+                            // foreach ($category->subcategory as $subcategory) {
+                            //     foreach ($subcategory->textdatas as $image) {
+                            //         if (in_array($image->id, $processedImageIds)) {
+                            //             continue;
+                            //         }
+
+                            //         $processedImageIds[] = $image->id;
+                            //         $randomIds[] = $image->id;
+                            //         $relatedSubcategoryNames = $image->subcategories->pluck('subcategory_name')->implode(', ');
+                            //         $relatedSubcategoryIds = $image->subcategories->pluck('id')->implode(','); // Get comma-separated IDs
+
+                            //         $allImages->push([
+                            //             'imageId' => $image->id,
+                            //             'subcategory_name' =>$relatedSubcategoryNames,
+                            //             // 'subcategory_name' =>$subcategory->subcategory_name,
+                            //             'static_information' => json_encode($image->static_information),
+                            //             'shape_image' =>
+                            //                 $image->shape_image != '' ? asset('storage/canvas/' . $image->shape_image) : '',
+                            //             'image' => asset('storage/canvas/' . $image->image),
+                            //             'tags' => $image->tags,
+                            //             'is_visible' => $image->is_visible,
+                            //             'category_id' => $category->id,
+                            //             // 'subcategory_id' => $subcategory->id,
+                            //             // 'subcategory_id' => $relatedSubcategoryIds,
+                            //             // 'subcategory_id' => $subcategory->id, // Use the subcategory ID from the loop
+                            //             'subcategory_id' => $relatedSubcategoryIds, // Get all subcategory IDs from pivot
+                            //             'category_name' => $category->category_name,
+                            //             'image_path' => asset('storage/canvas/' . $image->filled_image),
+                            //         ]);
+                            //     }
+                            // }
+                        }
+
+                        shuffle($randomIds);
+                        $randomIds = array_slice($randomIds, 0, 30);
+
+                        $randomImages = $allImages->shuffle()->take(30);
+
+                    @endphp
+
+
+                    @foreach ($allImages as $image)
+                        @if ($image['is_visible'] == '1')
+                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 mt-xl-4 mt-sm-4 mt-4 wow fadeInDown image-item all_designs
+                 {{ in_array($image['imageId'], $randomIds) ? 'default_show' : 'd-none' }}"
+                                data-wow-duration="2s" data-wow-delay="0" data-wow-offset="0"
+                                data-category-id="{{ $image['category_id'] }}"
+                                data-subcategory-id="{{ $image['subcategory_id'] }}"
+                                data-subcategory_name="{{ $image['subcategory_name'] }}"
+                                data-category_name="{{ $image['category_name'] }}" data-tags="{{ $image['tags'] }}">
+
+                                <div class="card-img collection-card card-blue edit_design_tem design-card"
+                                    data-image="{{ $image['image'] }}"
+                                    data-shape_image="{{ $image['shape_image'] }}"
+                                    data-json="{{ $image['static_information'] }}" data-id="{{ $image['imageId'] }}"
+                                    data-subcategory_name="{{ $image['subcategory_name'] }}">
+                                    <img src="{{ $image['image_path'] }}" alt="shower-card">
+                                </div>
+
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-        
+
 
 
         {{-- <div class="row list_all_design_catgeory search_category">
