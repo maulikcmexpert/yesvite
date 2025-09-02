@@ -199,7 +199,6 @@
                         // dd($textdatatss);
                         foreach ($textdatatss as $category) {
                             $randomIds[] = $category['imageId'];
-
                             $allImages->push([
                                 'imageId' => $category['imageId'],
                                 'subcategory_name' => $category['subcategory_name'],
