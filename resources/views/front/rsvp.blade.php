@@ -283,6 +283,8 @@
 
                                           </div>
                                             {{-- @if($is_host == "1") --}}
+                                            @if((isset($display_ad)&& $display_ad==true))
+
                                             <div class="mx-auto adsense-center" style="text-align: center;">  
                                                 @if((isset($display_ad)&& $display_ad==true))
                                                 <ins class="adsbygoogle"
@@ -298,6 +300,8 @@
                                                                 </script>
                                                 @endif
                                             </div>
+                                            @endif
+                                            
                                             
                                                 <div class="new_copy_event_Wrp">
                                                     <h4 class="title">Share Event Link</h4>
