@@ -697,17 +697,17 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                                     alt=""></div>
                             <span class="coin-invite-wrp-inner">
 
-                                <span class="green-price" >Buy Credits
+                                <span class="green-price" >Paid
                                 </span>
                             </span>
                         </div>
                         @else
-                        <div class="coin-invite-wrp buycredits">
+                        <div class="coin-invite-wrp switch_plan">
                             <div class="coin-invite"><img src="{{asset('assets/front/image/credit-coin-img.png')}}"
                                     alt=""></div>
                             <span class="coin-invite-wrp-inner">
 
-                                <span class="green-price" >Buy Credits
+                                <span class="green-price" >Paid
                                 </span><i class="fa-solid fa-chevron-right"></i>
                             </span>
                         </div>
@@ -723,7 +723,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                             <span class="coin-invite-wrp-inner">
                                 {{-- {{$setPrice[0]['coins']}} | --}}
 
-                                <span class="green-price">Buy Credits
+                                <span class="green-price">Paid
                                     {{-- ${{$setPrice[0]['price']}} --}}
                                 </span><i class="fa-solid fa-chevron-right"></i>
                             </span>
@@ -839,7 +839,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                             <span class="coin-invite-wrp-inner">
                                 {{-- {{$setPrice[0]['coins']}} | --}}
 
-                                <span class="green-price">Buy Credits
+                                <span class="green-price">Paid
                                     {{-- ${{$setPrice[0]['price']}} --}}
                                 </span><i class="fa-solid fa-chevron-right"></i>
                             </span>
@@ -3529,6 +3529,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                         <div class="creditBalance-card-header-details">
                             <h4 class="creditBalance-card-header-title">Your current credit balance</h4>
                             <p class="creditBalance-card-header-text">Credits are used to send event invites. 1 Credit = 1 Invite.</p>
+                            <p class="buycredits" style="cursor: pointer">Purchase more credits</p>
                         </div>
                         <div class="creditBalance-card-icon-text">
                             <div class="icon-section">

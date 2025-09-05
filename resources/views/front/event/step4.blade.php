@@ -528,7 +528,7 @@
                                             <p class="title"><strong>Reminders</strong></p>
                                         </div>
                                     </div>
-                                    <div class="accordion-con">
+                                    <div class="accordion-con select_event_photos">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex">
                                                 <p><strong>Request event photos from guests</strong></p>
