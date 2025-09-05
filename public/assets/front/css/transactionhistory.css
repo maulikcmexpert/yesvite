@@ -472,6 +472,16 @@
 
 /* ==responsive== */
 
+@media only screen and (min-height:1100px){
+    .bulk-credit-options-listing ul{
+        overflow: visible;
+        max-height: 100%;
+    }
+    .credit-feature-details-listing{
+        max-height: 629px;
+    }
+}
+
 @media only screen and (max-width: 1399px) {
 
 }
