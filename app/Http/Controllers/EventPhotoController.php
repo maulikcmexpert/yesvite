@@ -232,6 +232,8 @@ class EventPhotoController extends BaseController
             $eventDetails['end_date'] = $eventDetail->end_date;
             $eventDetails['end_time'] = $eventDetail->rsvp_end_time;
             $eventDetails['event_time'] = $eventDetail->rsvp_start_time;
+            $eventDetails['event_photos'] = $eventDetail->event_settings->photos ?? "";
+
             // if ($eventDetail->event_schedule->isNotEmpty()) {
 
             //     $eventDetails['event_time'] = $eventDetail->event_schedule->first()->start_time . ' to ' . $eventDetail->event_schedule->last()->end_time;
