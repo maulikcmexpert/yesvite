@@ -70,7 +70,7 @@
 
               @if (!Auth::guard('web')->check())
 
-              @if(Request::segment(1) !== 'rsvp')
+              {{-- @if(Request::segment(1) !== 'rsvp') --}}
                     <div class="small-adsense" id="small-adsense-id">
 
                         <div class="mx-auto" id="ad-container">
@@ -89,7 +89,7 @@
                         </script>
                         </div>
                     </div>
-                @endif
+                {{-- @endif --}}
 
               @endif
 

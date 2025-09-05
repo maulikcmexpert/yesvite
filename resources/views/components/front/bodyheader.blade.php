@@ -1911,7 +1911,7 @@ $notification_list=getNotificationList();
                              </div>
                          </button>
 
-                          @if(Request::segment(1) !== 'rsvp')
+                          {{-- @if(Request::segment(1) !== 'rsvp') --}}
 
 
                          <div class="small-adsense small-adsense-header" id="small-adsense-id">
@@ -1929,7 +1929,7 @@ $notification_list=getNotificationList();
                           </div>
                         </div>
 
-                        @endif
+                        {{-- @endif --}}
                          @endif
 
 
