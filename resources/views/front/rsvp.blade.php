@@ -123,8 +123,11 @@
 
                             <div class="col-lg-7">
                                 @if((isset($display_ad)&& $display_ad==true))
-                                            <div class="mx-auto adsense-center" style="text-align: center;">  
-                                                <img src="{{asset('assets/front/img/demo_ad.jpg')}}" />
+
+                                <div class="small-adsense" id="small-adsense-id">
+
+                                    <div class="mx-auto" id="ad-container">            
+                                                                            <img src="{{asset('assets/front/img/demo_ad.jpg')}}" />
 
                                                 <ins class="adsbygoogle"
                                                 id="my-adRsvp"
@@ -138,6 +141,7 @@
                                                 (adsbygoogle = window.adsbygoogle || []).push({});
                                                                 </script>
                                             </div>
+                                </div>
                                             @endif
                                  <div class="rsvp-form">
                                      <h5 class="title">RSVP</h5>
