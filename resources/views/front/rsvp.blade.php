@@ -126,7 +126,7 @@
                                             <div class="mx-auto adsense-center" style="text-align: center;">  
                                                 <img src="{{asset('assets/front/img/demo_ad.jpg')}}" />
 
-                                                @if((isset($display_ad)&& $display_ad==true))
+                                                {{-- @if((isset($display_ad)&& $display_ad==true))
                                                 <ins class="adsbygoogle"
                                                 id="my-adRsvp"
                                                 style="display:block"
@@ -138,7 +138,7 @@
                             
                                                 (adsbygoogle = window.adsbygoogle || []).push({});
                                                                 </script>
-                                                @endif
+                                                @endif --}}
                                             </div>
                                             @endif
                                  <div class="rsvp-form">
