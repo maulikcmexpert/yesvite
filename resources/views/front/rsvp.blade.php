@@ -122,7 +122,7 @@
                             </div>
 
                             <div class="col-lg-7">
-                                @if((isset($display_ad)&& $display_ad==true))
+                                {{-- @if((isset($display_ad)&& $display_ad==true)) --}}
                                                     <img src="{{asset('assets/front/img/demo_ad.jpg')}}" />
 
                                             {{-- <div class="mx-auto adsense-center" style="text-align: center;">  
@@ -140,7 +140,7 @@
                                                                 </script>
                                                 @endif
                                             </div> --}}
-                                            @endif
+                                            {{-- @endif --}}
                                  <div class="rsvp-form">
                                      <h5 class="title">RSVP</h5>
                                      <div class="author-wrp">
