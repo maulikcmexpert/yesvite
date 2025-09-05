@@ -141,7 +141,7 @@
     /* left: 50%;
     transform: translateX(-50%); */
     padding-left: 16px;
-    z-index: 10;
+    z-index: 999 !important;
 }
 
 .guest-checkout-respo {
