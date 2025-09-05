@@ -1602,8 +1602,10 @@
 
 .new-event-sidebar-wrp .coin-invite-wrp span{
     width: 100%;
-    font-size: 13px !important;
-    font-weight: 600 !important;
+    font-size: 18px !important;
+    font-family: var(--SFProDisplay-Bold) !important;
+    font-weight: 700 !important;
+    text-transform: uppercase;
     text-align: center;
 }
 
@@ -1813,6 +1815,15 @@
     letter-spacing: 0px;
     color: var(--text-color);
     margin-bottom: 0;
+  }
+
+  .creditBalance-card-header .buycredits.greentext{
+    font-size: 13px !important;
+    color: #34C759 !important;
+    font-family: var(--SFProDisplay-Regular) !important;
+    line-height: 1.3 !important;
+    text-decoration: underline  !important;
+    font-weight: 400 !important;
   }
   
   .creditBalance-card-icon-text {

@@ -3529,7 +3529,7 @@ $fontColorUser = 'fontcolor' . $firstInitialUser;
                         <div class="creditBalance-card-header-details">
                             <h4 class="creditBalance-card-header-title">Your current credit balance</h4>
                             <p class="creditBalance-card-header-text">Credits are used to send event invites. 1 Credit = 1 Invite.</p>
-                            <p class="buycredits" style="cursor: pointer">Purchase more credits</p>
+                            <p class="buycredits greentext" style="cursor: pointer">Purchase more credits</p>
                         </div>
                         <div class="creditBalance-card-icon-text">
                             <div class="icon-section">

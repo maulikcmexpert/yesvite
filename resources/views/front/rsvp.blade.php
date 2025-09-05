@@ -122,6 +122,25 @@
                             </div>
 
                             <div class="col-lg-7">
+                                @if((isset($display_ad)&& $display_ad==true))
+                                                    {{-- <img src="{{asset('assets/front/img/demo_ad.jpg')}}" /> --}}
+
+                                            <div class="mx-auto adsense-center" style="text-align: center;">  
+                                                @if((isset($display_ad)&& $display_ad==true))
+                                                <ins class="adsbygoogle"
+                                                id="my-adRsvp"
+                                                style="display:block"
+                                                data-ad-client="ca-pub-7818976609984635"
+                                                data-ad-slot="7204833835"
+                                                data-ad-format="auto"
+                                                data-full-width-responsive="true"></ins>
+                                                <script>
+                            
+                                                (adsbygoogle = window.adsbygoogle || []).push({});
+                                                                </script>
+                                                @endif
+                                            </div>
+                                            @endif
                                  <div class="rsvp-form">
                                      <h5 class="title">RSVP</h5>
                                      <div class="author-wrp">
@@ -283,24 +302,7 @@
 
                                           </div>
                                             {{-- @if($is_host == "1") --}}
-                                            @if((isset($display_ad)&& $display_ad==true))
-
-                                            <div class="mx-auto adsense-center" style="text-align: center;">  
-                                                @if((isset($display_ad)&& $display_ad==true))
-                                                <ins class="adsbygoogle"
-                                                id="my-adRsvp"
-                                                style="display:block"
-                                                data-ad-client="ca-pub-7818976609984635"
-                                                data-ad-slot="7204833835"
-                                                data-ad-format="auto"
-                                                data-full-width-responsive="true"></ins>
-                                                <script>
-                            
-                                                (adsbygoogle = window.adsbygoogle || []).push({});
-                                                                </script>
-                                                @endif
-                                            </div>
-                                            @endif
+                                            
                                             
                                             
                                                 <div class="new_copy_event_Wrp">
