@@ -38,14 +38,14 @@
        @if (isset($display_ad) && $display_ad == true)
        <div class="mx-auto adsense-center ads-responsive" style="text-align: center;">
 
-               <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" />
+               {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
 
-               {{-- <ins class="adsbygoogle" id="my-adrsvp1" style="display:block" data-ad-client="ca-pub-7818976609984635"
+               <ins class="adsbygoogle" id="my-adrsvp1" style="display:block" data-ad-client="ca-pub-7818976609984635"
                    data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
                <script>
                    (adsbygoogle = window.adsbygoogle || []).push({});
                  
-               </script> --}}
+               </script>
            </div>
        @endif
        <div class="rsvp-tab-wrp event-center-tabs-main">
@@ -98,9 +98,9 @@
                                        </div>
                                        @if (isset($display_ad) && $display_ad == true)
                                        <div class="mx-auto adsense-center" style="text-align: center;">
-                                           <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" />
+                                           {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
 
-                                           {{-- <ins class="adsbygoogle"
+                                           <ins class="adsbygoogle"
                                             id="my-adRsvp"
                                             style="display:block"
                                             data-ad-client="ca-pub-7818976609984635"
@@ -110,7 +110,7 @@
                                             <script>
                         
                                             (adsbygoogle = window.adsbygoogle || []).push({});
-                                                            </script> --}}
+                                                            </script>
                                        </div>
                                    @endif
                                    </div>
@@ -118,9 +118,9 @@
                                    <div class="col-lg-7">
                                        @if (isset($display_ad) && $display_ad == true)
                                            <div class="mx-auto adsense-center mobile-respo-middle-ad-rsvp" style="text-align: center;">
-                                               <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" />
+                                               {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
 
-                                               {{-- <ins class="adsbygoogle"
+                                               <ins class="adsbygoogle"
                                                 id="my-adRsvp"
                                                 style="display:block"
                                                 data-ad-client="ca-pub-7818976609984635"
@@ -130,7 +130,7 @@
                                                 <script>
                             
                                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                                                                </script> --}}
+                                                                </script>
                                            </div>
                                        @endif
                                        <div class="rsvp-form">
@@ -1925,9 +1925,9 @@
                                        </div>
                                        @if (isset($display_ad) && $display_ad == true)
                                            <div class="mx-auto adsense-center" style="text-align: center;">
-                                               <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" />
+                                               {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
 
-                                               {{-- <ins class="adsbygoogle"
+                                               <ins class="adsbygoogle"
                                                 id="my-adRsvp"
                                                 style="display:block"
                                                 data-ad-client="ca-pub-7818976609984635"
@@ -1937,7 +1937,7 @@
                                                 <script>
                             
                                                 (adsbygoogle = window.adsbygoogle || []).push({});
-                                                                </script> --}}
+                                                                </script>
                                            </div>
                                        @endif
                                    </div>
