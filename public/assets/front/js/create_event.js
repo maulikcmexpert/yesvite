@@ -11581,6 +11581,8 @@ $(document).on('click', '.select_plan_btn', function () {
         $('.sidebar-adsense').addClass('d-none');
         $('.paid_plan_status').removeClass('d-none');
         $('.select_event_photos').removeClass('disabled_event_photos');
+        $('#eventPhotos').prop('checked',true);
+        $('#request_photo').prop('checked',true);
         if ($("#eventPhotos").is(":checked")) {
             eventData.event_photos = "1";
         }
