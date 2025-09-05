@@ -35,20 +35,20 @@
 
    <section class="rsvp-wrp new-main-content">
        <!-- ===main-section-start=== -->
-       @if (isset($display_ad) && $display_ad == true)
+       {{-- @if (isset($display_ad) && $display_ad == true)
            <div class="mx-auto adsense-center sidebar-adsense" id="ad-container"
                style="text-align: center;height:auto;min-height:auto;">
 
                <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" />
 
-               {{-- <ins class="adsbygoogle" id="my-adrsvp1" style="display:block" data-ad-client="ca-pub-7818976609984635"
+               <ins class="adsbygoogle" id="my-adrsvp1" style="display:block" data-ad-client="ca-pub-7818976609984635"
                    data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
                <script>
                    (adsbygoogle = window.adsbygoogle || []).push({});
                  
-               </script> --}}
+               </script>
            </div>
-       @endif
+       @endif --}}
        <div class="rsvp-tab-wrp event-center-tabs-main">
 
            <nav>
@@ -104,7 +104,7 @@
                                        @if (isset($display_ad) && $display_ad == true)
                                            <div class="mx-auto adsense-center" style="text-align: center;">
                                                <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" />
-
+aaaa
                                                {{-- <ins class="adsbygoogle"
                                                 id="my-adRsvp"
                                                 style="display:block"
