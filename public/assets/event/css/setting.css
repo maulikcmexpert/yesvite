@@ -1042,6 +1042,7 @@
     overflow: hidden;
     height: fit-content;
     background: transparent;
+    min-width: 20px;
 }
 .setting-accordion-wrp .accordion-con button span {
     position: absolute;
