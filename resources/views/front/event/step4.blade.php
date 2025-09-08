@@ -380,9 +380,10 @@
                                     </div>
                                     <div class="accordion-con  select_event_photos">
                                         <div class="d-flex justify-content-between">
-                                            <div class="d-flex">
-                                                <p><strong>Event Photos</strong></p>
-                                                <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="Where you can chat with other guests,upload photos,post/reply to polls and see RSVP updates/responses"> -->
+                                            <div class="d-flex align-items-center">
+                                                <p style="min-width: max-content"><strong>Event Photos</strong></p>
+                                                                                              <img src="{{ asset('assets/front/img/paid.png') }}" style="height: 17px; object-fit: contain;margin-right: 10px" />
+                                              
                                                 <button data-position="bottom">  
                                                 <span>Where you can upload photo</span>
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -532,7 +533,6 @@
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex">
                                                 <p><strong>Request event photos from guests</strong></p>
-                                                <!-- <a href="#" data-toggle="tooltip" data-placement="bottom" title="Request event photos from guests"> -->
                                                 <button data-position="bottom">  
                                                 <span>Request event photos from guests</span>
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
