@@ -15,7 +15,7 @@
                     <script>
                       (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
-                  </div>
+                  </div>                                  
                   
                 @endif
                 <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails" :display_ad="$display_ad" />
