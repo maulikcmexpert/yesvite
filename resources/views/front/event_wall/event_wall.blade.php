@@ -7,16 +7,16 @@
             {{-- {{dd($display_ad)}} --}}
                 <!-- =============mainleft-====================== -->
                 @if((isset($display_ad)&& $display_ad==true))
-                    <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
-                        {{-- <img src="{{asset('assets/front/img/demo_ad.jpg')}}" /> --}}
-                            <ins class="adsbygoogle"
-                            style="display:inline-block;width:400px;height:90px"
-                            data-ad-client="ca-pub-7818976609984635"
-                            data-ad-slot="1762643692"></ins>
-                            <script>
-                                    (adsbygoogle = window.adsbygoogle || []).push({});
-                            </script>
-                        </div>
+                <div class="mx-auto adsense-center" id="ad-container" style="text-align:center; min-width:400px; min-height:90px;">
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:400px;height:90px"
+                         data-ad-client="ca-pub-7818976609984635"
+                         data-ad-slot="1762643692"></ins>
+                    <script>
+                      (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                  </div>
+                  
                 @endif
                 <x-event_wall.wall_left_menu :page="$current_page" :eventDetails="$eventDetails" :display_ad="$display_ad" />
                 
@@ -1166,16 +1166,16 @@
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-0 event-info-right">
                 @if((isset($display_ad)&& $display_ad==true))
-                    <div class="mx-auto adsense-center" id="ad-container" style="text-align: center;height:auto;min-height:auto;">  
-                        {{-- <img src="{{asset('assets/front/img/demo_ad.jpg')}}" /> --}}
-                        <ins class="adsbygoogle"
-                        style="display:inline-block;width:400px;height:90px"
-                        data-ad-client="ca-pub-7818976609984635"
-                        data-ad-slot="1762643692"></ins>
-                        <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
-                        </div>
+                <div class="mx-auto adsense-center" id="ad-container" style="text-align:center; min-width:400px; min-height:90px;">
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:400px;height:90px"
+                         data-ad-client="ca-pub-7818976609984635"
+                         data-ad-slot="1762643692"></ins>
+                    <script>
+                      (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                  </div>
+                  
             @endif
                 <x-event_wall.wall_right_menu :eventInfo="$eventInfo" :event="$event" :login_user_id="$login_user_id"
                     :rsvpSent="$rsvpSent" />
