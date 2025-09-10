@@ -19,7 +19,8 @@
 
 .rsvp-slider .rsvp-img {
     border-radius: 10px;
-    height: 650px;
+    max-height: 650px;
+    aspect-ratio: 5/7;
 }
 .rsvp-slider .rsvp-img img {
     border-radius: 10px;
