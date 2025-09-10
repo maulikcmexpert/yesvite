@@ -17,7 +17,7 @@
     box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.08);
 }
 
-.rsvp-slider .owl-carousel.owl-drag .owl-item{
+.rsvp-slider.owl-carousel .owl-item{
     width: auto !important;
     aspect-ratio: 5/7;
 }
