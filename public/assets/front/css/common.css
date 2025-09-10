@@ -1156,14 +1156,16 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
     .adsense-center {
         text-align: center;
         width: 100% !important;
-        max-width: 300px !important;
-        height: auto !important;
+        /* max-width: 300px !important;
+        height: auto !important; */
         margin: 10px auto !important;
     }
 
 
     .ads-responsive{
         display: block !important;
+        max-width: 300px !important;
+        height: 90px !important; 
     }
     .mobile-respo-middle-ad-rsvp{
         display: none !important;
