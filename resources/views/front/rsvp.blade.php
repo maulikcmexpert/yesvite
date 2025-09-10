@@ -97,7 +97,7 @@
                                            @endif
                                        </div>
                                        @if (isset($display_ad) && $display_ad == true)
-                                       <div class="mx-auto adsense-center" style="text-align: center;">
+                                       <div class="mx-auto adsense-center mt-2" style="text-align: center;">
                                            {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
 
                                            <ins class="adsbygoogle"
@@ -116,9 +116,8 @@
                                    </div>
 
                                    <div class="col-lg-7">
-                                       @if (isset($display_ad) && $display_ad == true)
+                                       {{-- @if (isset($display_ad) && $display_ad == true)
                                            <div class="mx-auto adsense-center mobile-respo-middle-ad-rsvp" style="text-align: center;">
-                                               {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
 
                                                <ins class="adsbygoogle"
                                                 id="my-adRsvp"
@@ -132,7 +131,7 @@
                                                 (adsbygoogle = window.adsbygoogle || []).push({});
                                                                 </script>
                                            </div>
-                                       @endif
+                                       @endif --}}
                                        <div class="rsvp-form">
                                            <h5 class="title">RSVP</h5>
                                            <div class="author-wrp">
