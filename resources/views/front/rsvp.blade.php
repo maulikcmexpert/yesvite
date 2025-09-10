@@ -115,6 +115,7 @@
                                                             </script>
                                        </div>
 
+
                                        <div class="mx-auto adsense-center ads-responsive" style="text-align: center;">
 
                                         {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
@@ -128,6 +129,7 @@
                                    </script>
                          
                                     </div>
+                                       
                                    @endif
                                    </div>
 
