@@ -99,7 +99,7 @@
                                            @endif
                                        </div>
                                        @if (isset($display_ad) && $display_ad == true)
-                                       <div class="mx-auto adsense-center" style="text-align: center;marign-top:30px !important;">
+                                       <div class="mx-auto adsense-center ads-normal" style="text-align: center;marign-top:30px !important;">
                                            {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
 
                                            <ins class="adsbygoogle"
@@ -114,6 +114,20 @@
                                             (adsbygoogle = window.adsbygoogle || []).push({});
                                                             </script>
                                        </div>
+
+                                       <div class="mx-auto adsense-center ads-responsive" style="text-align: center;">
+
+                                        {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
+                         
+                                        <ins class="adsbygoogle"
+                                        style="display:inline-block;width:300px;height:90px"
+                                        data-ad-client="ca-pub-7818976609984635"
+                                        data-ad-slot="3995438255"></ins>
+                                   <script>
+                                        (adsbygoogle = window.adsbygoogle || []).push({});
+                                   </script>
+                         
+                                    </div>
                                    @endif
                                    </div>
 
@@ -1925,7 +1939,7 @@
                                            @endif
                                        </div>
                                        @if (isset($display_ad) && $display_ad == true)
-                                           <div class="mx-auto adsense-center" style="text-align: center;">
+                                           <div class="mx-auto adsense-center ads-normal" style="text-align: center;">
                                                {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
 
                                                <ins class="adsbygoogle"
@@ -1940,6 +1954,19 @@
                                                 (adsbygoogle = window.adsbygoogle || []).push({});
                                                                 </script>
                                            </div>
+                                           <div class="mx-auto adsense-center ads-responsive" style="text-align: center;">
+
+                                            {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
+                             
+                                            <ins class="adsbygoogle"
+                                            style="display:inline-block;width:300px;height:90px"
+                                            data-ad-client="ca-pub-7818976609984635"
+                                            data-ad-slot="3995438255"></ins>
+                                       <script>
+                                            (adsbygoogle = window.adsbygoogle || []).push({});
+                                       </script>
+                             
+                                        </div>
                                        @endif
                                    </div>
                                </div>
