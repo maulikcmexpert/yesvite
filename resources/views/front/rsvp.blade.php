@@ -97,7 +97,7 @@
                                            @endif
                                        </div>
                                        @if (isset($display_ad) && $display_ad == true)
-                                       <div class="mx-auto adsense-center" style="text-align: center;">
+                                       <div class="mx-auto adsense-center" style="text-align: center;marign-top:30px !important;">
                                            <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" />
 
                                            {{-- <ins class="adsbygoogle"
