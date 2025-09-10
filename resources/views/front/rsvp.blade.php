@@ -40,12 +40,14 @@
 
                {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
 
-               <ins class="adsbygoogle" id="my-adrsvp1" style="display:block" data-ad-client="ca-pub-7818976609984635"
-                   data-ad-slot="7204833835" data-ad-format="auto" data-full-width-responsive="true"></ins>
-               <script>
-                   (adsbygoogle = window.adsbygoogle || []).push({});
-                 
-               </script>
+               <ins class="adsbygoogle"
+               style="display:inline-block;width:600px;height:90px"
+               data-ad-client="ca-pub-7818976609984635"
+               data-ad-slot="3995438255"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+          
            </div>
        @endif
        <div class="rsvp-tab-wrp event-center-tabs-main">
