@@ -37,8 +37,8 @@
        <!-- ===main-section-start=== -->
        @if (isset($display_ad) && $display_ad == true)
        <div class="mx-auto adsense-center ads-responsive" style="text-align: center;width:300px;height:90px !important">
-
         {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
+        <div class="rsvp-tab-wrp event-center-tabs-main">
 
         <ins class="adsbygoogle"
         style="display:inline-block;width:300px;height:90px"
@@ -48,7 +48,7 @@
    <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
    </script>
-
+        </div>
     </div>
        @endif
        <div class="rsvp-tab-wrp event-center-tabs-main">
