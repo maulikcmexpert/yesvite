@@ -43,7 +43,8 @@
         <ins class="adsbygoogle"
         style="display:inline-block;width:300px;height:90px"
         data-ad-client="ca-pub-7818976609984635"
-        data-ad-slot="3995438255"></ins>
+        data-ad-slot="3995438255">
+    </ins>
    <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
    </script>
