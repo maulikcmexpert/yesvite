@@ -40,7 +40,7 @@
         {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
 
         <ins class="adsbygoogle"
-        style="display:inline-block;width:275px;height:75px"
+        style="display:inline-block;width:270px;height:70px"
         data-ad-client="ca-pub-7818976609984635"
         data-ad-slot="3995438255">
     </ins>
