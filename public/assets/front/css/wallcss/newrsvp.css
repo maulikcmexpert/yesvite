@@ -17,6 +17,11 @@
     box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.08);
 }
 
+.rsvp-slider .owl-carousel.owl-drag .owl-item{
+    width: auto !important;
+    aspect-ratio: 5/7;
+}
+
 .rsvp-slider .rsvp-img {
     border-radius: 10px;
     max-height: 650px;
