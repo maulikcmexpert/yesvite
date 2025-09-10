@@ -1153,20 +1153,21 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
 
 /* Mobiles: up to 767px */
 @media only screen and (max-width: 767.98px) {
-    .adsense-center {
-        text-align: center;
-        width: 100% !important;
-        /* max-width: 300px !important;
-        height: auto !important; */
-        margin: 10px auto !important;
-    }
+   
 
 
     .ads-responsive{
         display: block !important;
-        max-width: 300px !important;
-        height: 90px !important; 
     }
+
+    .adsense-center {
+        text-align: center;
+        width: 100% !important;
+        max-width: 300px !important;
+        height: auto !important;
+        margin: 10px auto !important;
+    }
+    
     .mobile-respo-middle-ad-rsvp{
         display: none !important;
     }
