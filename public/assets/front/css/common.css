@@ -1159,7 +1159,7 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
         margin: 10px auto !important;
     }
 
-    .adsense-center .adsbygoogle{
+    .adsense-center > div{
         height: 300px !important;
     }
 
