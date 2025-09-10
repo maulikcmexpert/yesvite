@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-xxl-3 col-xl-3 col-lg-4 event-info-left">
                 @if((isset($display_ad)&& $display_ad==true))
-                <div class="mx-auto adsense-center" id="ad-container" style="text-align:center; min-width:400px; min-height:90px;">
+                <div class="mx-auto adsense-center" id="ad-container" style="text-align:center; ">
                     <ins class="adsbygoogle"
                          style="display:inline-block;width:400px;height:90px"
                          data-ad-client="ca-pub-7818976609984635"
@@ -560,7 +560,7 @@
             </div>
             <div class="col-xxl-3 col-xl-3 col-lg-0 event-info-right">
                 @if((isset($display_ad)&& $display_ad==true))
-                <div class="mx-auto adsense-center" id="ad-container" style="text-align:center; min-width:400px; min-height:90px;">
+                <div class="mx-auto adsense-center" id="ad-container" style="text-align:center; ">
                     <ins class="adsbygoogle"
                          style="display:inline-block;width:400px;height:90px"
                          data-ad-client="ca-pub-7818976609984635"
