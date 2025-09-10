@@ -1117,7 +1117,7 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
         text-align: center;
         width: 100% !important;
         max-width: 970px !important;
-        height: 250px !important;
+        /* height: 250px !important; */
         margin: 10px auto !important;
     }
 }
