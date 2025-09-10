@@ -98,9 +98,9 @@
                                        </div>
                                        @if (isset($display_ad) && $display_ad == true)
                                        <div class="mx-auto adsense-center mt-2" style="text-align: center;">
-                                           {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
+                                           <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" />
 
-                                           <ins class="adsbygoogle"
+                                           {{-- <ins class="adsbygoogle"
                                             id="my-adRsvp"
                                             style="display:block"
                                             data-ad-client="ca-pub-7818976609984635"
@@ -110,7 +110,7 @@
                                             <script>
                         
                                             (adsbygoogle = window.adsbygoogle || []).push({});
-                                                            </script>
+                                                            </script> --}}
                                        </div>
                                    @endif
                                    </div>
