@@ -1162,6 +1162,9 @@ ins.adsbygoogle[data-ad-status="unfilled"] {
     .adsense-center > div{
         height: 300px !important;
     }
+    .adsense-center ins{
+        height: 100px !important;
+    }
 
 
     .ads-responsive{
