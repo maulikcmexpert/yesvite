@@ -36,11 +36,11 @@
    <section class="rsvp-wrp new-main-content">
        <!-- ===main-section-start=== -->
        @if (isset($display_ad) && $display_ad == true)
-       <div class="mx-auto adsense-center ads-responsive" style="text-align: center;width:300px;height:90px !important">
+       <div class="mx-auto adsense-center ads-responsive" style="text-align: center;">
         {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
 
         <ins class="adsbygoogle"
-        style="display:inline-block;width:250px;height:70px"
+        style="display:inline-block;width:275px;height:70px"
         data-ad-client="ca-pub-7818976609984635"
         data-ad-slot="3995438255">
     </ins>
