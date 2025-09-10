@@ -36,7 +36,7 @@
    <section class="rsvp-wrp new-main-content">
        <!-- ===main-section-start=== -->
        @if (isset($display_ad) && $display_ad == true)
-       <div class="mx-auto adsense-center ads-responsive" style="text-align: center;">
+       <div class="mx-auto adsense-center ads-responsive" style="text-align: center;width:300px;height:90px">
 
         {{-- <img src="{{ asset('assets/front/img/demo_ad.jpg') }}" /> --}}
 
