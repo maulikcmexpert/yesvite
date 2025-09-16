@@ -11571,6 +11571,11 @@ $('.select_plan_check').on('change', function () {
     }
 });
 
+$(document).on('click', '.select_event_photos', function () {
+    if($(this).hasClass('disabled_event_photos')){
+        $('#select_event_type').modal('show');
+    }
+});
 
 $(document).on('click', '.select_plan_btn', function () {
     var plan_value = $('.select_plan_check:checked').val();
@@ -11581,8 +11586,8 @@ $(document).on('click', '.select_plan_btn', function () {
         $('.sidebar-adsense').addClass('d-none');
         $('.paid_plan_status').removeClass('d-none');
         $('.select_event_photos').removeClass('disabled_event_photos');
-        $('#eventPhotos').prop('checked',true);
-        $('#request_photo').prop('checked',true);
+        // $('#eventPhotos').prop('checked',true);
+        // $('#request_photo').prop('checked',true);
         if ($("#eventPhotos").is(":checked")) {
             eventData.event_photos = "1";
         }

@@ -378,7 +378,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="accordion-con  select_event_photos">
+                                    
+                                    <div class="accordion-con  select_event_photos {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['event_photos']!="1")&&isset($eventDetail['event_type']) && $eventDetail['event_type'] == '0' ? "disabled_event_photos":""}}">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <p style="min-width: max-content"><strong>Event Photos</strong></p>
@@ -398,7 +399,12 @@
                                             <div class="toggle-button-cover">
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
-                                                        <input type="checkbox" id="eventPhotos" name="notification_setting[]" onchange="savePage4Data()" class="checkbox event_page_checkbox" {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['event_photos']=="1") ? "checked":"checked"}}/>
+                                                        <input type="checkbox" id="eventPhotos" name="notification_setting[]" onchange="savePage4Data()" class="checkbox event_page_checkbox" {{ 
+                                                            (!isset($eventDetail['event_setting']['event_photos']) || $eventDetail['event_setting']['event_photos'] == "1") 
+                                                                ? "checked" 
+                                                                : "" 
+                                                        }}
+                                                        />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
@@ -529,7 +535,7 @@
                                             <p class="title"><strong>Reminders</strong></p>
                                         </div>
                                     </div>
-                                    <div class="accordion-con select_event_photos">
+                                    <div class="accordion-con select_event_photos {{(isset($eventDetail['event_setting'])&&$eventDetail['event_setting']['event_photos']!="1")&&isset($eventDetail['event_type']) && $eventDetail['event_type'] == '0' ? "disabled_event_photos":""}}">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex">
                                                 <p><strong>Request event photos from guests</strong></p>
@@ -546,7 +552,12 @@
                                             <div class="toggle-button-cover">
                                                 <div class="button-cover">
                                                     <div class="button r" id="button-1">
-                                                        <input type="checkbox" id="request_photo" name="request_photo" class="checkbox notification_checkbox" {{(isset($eventDetail['event_setting']))?($eventDetail['event_setting']['request_event_photos_from_guests']=="1")?'checked':'' :'checked'}} />
+                                                        <input type="checkbox" id="request_photo" name="request_photo" class="checkbox notification_checkbox" {{ 
+                                                            (!isset($eventDetail['event_setting']['event_photos']) || $eventDetail['event_setting']['event_photos'] == "1") 
+                                                                ? "checked" 
+                                                                : "" 
+                                                        }}
+                                                         />
                                                         <div class="knobs"></div>
                                                         <div class="layer"></div>
                                                     </div>
