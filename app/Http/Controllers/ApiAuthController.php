@@ -91,7 +91,8 @@ class ApiAuthController extends Controller
                     'remember_token' =>  $randomString,
                     'register_type' => 'API Normal register',
                     'app_user' => '1',
-                    'coins' => config('app.default_coin', 30)
+                    'coins' => 0
+                    // 'coins' => config('app.default_coin', 30)
                 ]);
 
                 DB::commit();
@@ -105,15 +106,15 @@ class ApiAuthController extends Controller
                     'token' => $randomString
                 ];
 
-                $coin_transaction = new Coin_transactions();
-                $coin_transaction->user_id = $existUser->id;
-                $coin_transaction->status = '0';
-                $coin_transaction->type = 'credit';
-                $coin_transaction->coins = config('app.default_coin', 30);
-                $coin_transaction->current_balance = config('app.default_coin', 30);
-                $coin_transaction->description = 'Signup Bonus';
-                $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
-                $coin_transaction->save();
+                // $coin_transaction = new Coin_transactions();
+                // $coin_transaction->user_id = $existUser->id;
+                // $coin_transaction->status = '0';
+                // $coin_transaction->type = 'credit';
+                // $coin_transaction->coins = config('app.default_coin', 30);
+                // $coin_transaction->current_balance = config('app.default_coin', 30);
+                // $coin_transaction->description = 'Signup Bonus';
+                // $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
+                // $coin_transaction->save();
 
                 Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($input) {
                     $message->to($input['email']);
@@ -174,7 +175,8 @@ class ApiAuthController extends Controller
                 $checkUser->password_updated_date = date('Y-m-d');
                 $checkUser->remember_token =  $randomString;
                 $checkUser->register_type =  'API Normal register';
-                $checkUser->coins = config('app.default_coin', 30);
+                $checkUser->coins = 0;
+                // $checkUser->coins = config('app.default_coin', 30);
                 $checkUser->save();
             } else {
                 $checkUser = new User();
@@ -187,7 +189,8 @@ class ApiAuthController extends Controller
                 $checkUser->password_updated_date = date('Y-m-d');
                 $checkUser->remember_token =  $randomString;
                 $checkUser->register_type =  'API Normal register';
-                $checkUser->coins = config('app.default_coin', 30);
+                // $checkUser->coins = config('app.default_coin', 30);
+                $checkUser->coins = 0;
                 $checkUser->save();
 
                 // $usersignup =  User::create([
@@ -214,15 +217,15 @@ class ApiAuthController extends Controller
                 'token' => $randomString
             ];
 
-            $coin_transaction = new Coin_transactions();
-            $coin_transaction->user_id = $checkUser->id;
-            $coin_transaction->status = '0';
-            $coin_transaction->type = 'credit';
-            $coin_transaction->coins = config('app.default_coin', 30);
-            $coin_transaction->current_balance = config('app.default_coin', 30);
-            $coin_transaction->description = 'Signup Bonus';
-            $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
-            $coin_transaction->save();
+            // $coin_transaction = new Coin_transactions();
+            // $coin_transaction->user_id = $checkUser->id;
+            // $coin_transaction->status = '0';
+            // $coin_transaction->type = 'credit';
+            // $coin_transaction->coins = config('app.default_coin', 30);
+            // $coin_transaction->current_balance = config('app.default_coin', 30);
+            // $coin_transaction->description = 'Signup Bonus';
+            // $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
+            // $coin_transaction->save();
 
             Mail::send('emails.emailVerificationEmail', ['userData' => $userData], function ($message) use ($input) {
                 $message->to(strtolower($input['email']));
@@ -754,18 +757,17 @@ class ApiAuthController extends Controller
                 $verifyUser->status = '1';
                 $verifyUser->remember_token = NULL;
                 $verifyUser->save();
-                $checkContactSync=contact_sync::where('email',$verifyUser->email)->first();
-                if($checkContactSync){
-                    $checkContactSync->userId=$verifyUser->id;
+                $checkContactSync = contact_sync::where('email', $verifyUser->email)->first();
+                if ($checkContactSync) {
+                    $checkContactSync->userId = $verifyUser->id;
                     $checkContactSync->updated_at = now();
                     $checkContactSync->save();
-    
+
                     EventInvitedUser::where('sync_id', $checkContactSync->id)
-                    ->update(['user_id' => $verifyUser->id,'sync_id'=>null]);
-    
-                    EventPost::where('sync_id',$checkContactSync->id)
-                    ->update(['user_id'=>$verifyUser->id]);
-                
+                        ->update(['user_id' => $verifyUser->id, 'sync_id' => null]);
+
+                    EventPost::where('sync_id', $checkContactSync->id)
+                        ->update(['user_id' => $verifyUser->id]);
                 }
                 $message = "Email Verification Successful\nYou may now log into your Yesvite account here";
                 return view('emailVarification', compact('message', 'faild'));

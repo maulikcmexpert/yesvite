@@ -56,9 +56,9 @@ if ($("#isUserLoggedIn").val() === "1") {
     var final_initial =
         final_user_name != ""
             ? (
-                $("#cohostFname").val().charAt(0) +
-                $("#cohostLname").val().charAt(0)
-            ).toUpperCase()
+                  $("#cohostFname").val().charAt(0) +
+                  $("#cohostLname").val().charAt(0)
+              ).toUpperCase()
             : "";
     var create_event_phone_scroll = false;
     var create_event_yesvite_scroll = false;
@@ -66,12 +66,12 @@ if ($("#isUserLoggedIn").val() === "1") {
     var create_co_event_yesvite_scroll = false;
     var apiCalled = false;
     var base_url = $("#base_url").val();
-    var eventType=$('#eventType').val();
+    var eventType = $("#eventType").val();
 
-    if(eventType==""){
-        eventData.event_plan_type="1";
-    }else{
-        eventData.event_plan_type=eventType;
+    if (eventType == "") {
+        eventData.event_plan_type = "1";
+    } else {
+        eventData.event_plan_type = eventType;
     }
     if (final_profile_or_text == "1") {
         $(".guest-img .selected-co-host-image").show();
@@ -464,17 +464,12 @@ $(document).on("click", ".create-event-btn", function () {
     toggleSidebar("sidebar_create_event");
 });
 $(document).on("click", ".eventDetails_menu", function () {
-if ($("#isUserLoggedIn").val() === "0") {
+    if ($("#isUserLoggedIn").val() === "0") {
+        $(".li_event_details").trigger("click");
+        $(".step_1").addClass("d-none");
 
-
-    $(".li_event_details").trigger('click');
-    $(".step_1").addClass("d-none");
-
-    // $(".step_1").css("display","none");
-
-
-
-}
+        // $(".step_1").css("display","none");
+    }
 });
 // Delete Group functionality
 $(document).on("click", "#delete_group", function (e) {
@@ -1242,7 +1237,7 @@ $(document).ready(function () {
 //     });
 // }
 
-//only rsvp_date by 
+//only rsvp_date by
 function rsvp_by_date(start_time) {
     var adjustedStartTime = moment(start_time, "MM-DD-YYYY")
         .subtract(1, "days")
@@ -1269,7 +1264,7 @@ function rsvp_by_date(start_time) {
     });
 }
 
-//only rsvp_date by 
+//only rsvp_date by
 $(function () {
     var current_event_date = $("#event-date").val();
 
@@ -1500,7 +1495,7 @@ $(function () {
 // });
 //old data logic
 
-//new date logic 
+//new date logic
 function initializeDatePicker(selector, options, callback) {
     $(selector).daterangepicker(
         {
@@ -1587,7 +1582,7 @@ initializeDatePicker(
     }
 );
 
-//new date logic 
+//new date logic
 $(document).on("change", "#schedule", function () {
     var eventDate = $("#event-date").val();
     var startDate = $("#start-event-date").val();
@@ -1683,14 +1678,14 @@ function set_activity_html(selectedDates) {
         <div class="activity-schedule-inner new_event_detail_form">
             <form>
                 ${
-            // startDate.isSame(moment(sortedDates[0]), "day")
-            startDate
-                .startOf("day")
-                .isSame(
-                    moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
-                    "day"
-                )
-                ? `
+                    // startDate.isSame(moment(sortedDates[0]), "day")
+                    startDate
+                        .startOf("day")
+                        .isSame(
+                            moment(sortedDates[0], "MM-DD-YYYY").startOf("day"),
+                            "day"
+                        )
+                        ? `
                             <h4>Event Start</h4>
                             <div class="row">
                                 <div class="col-12 mb-4">
@@ -1705,8 +1700,8 @@ function set_activity_html(selectedDates) {
                                     </div>
                                 </div>
                             </div>`
-                : ""
-            }
+                        : ""
+                }
                 <div class="accordion" id="accordionExample">
                     <div class="accordion-item">
                         <div class="accordion-header">
@@ -1727,17 +1722,18 @@ function set_activity_html(selectedDates) {
                             class="accordion-collapse collapse"
                             data-bs-parent="#accordionExample">
                             <div class="accordion-body new_activity" id="${dateID}" data-id="${startDate.format(
-                "YYYY-MM-DD"
-            )}">
+            "YYYY-MM-DD"
+        )}">
                             </div>
                         </div>
                     </div>
                 </div>
-                ${startDate.isSame(
-                moment(sortedDates[sortedDates.length - 1]),
-                "day"
-            )
-                ? `
+                ${
+                    startDate.isSame(
+                        moment(sortedDates[sortedDates.length - 1]),
+                        "day"
+                    )
+                        ? `
                         <div class="ac-end-time" >
                         <input type="hidden" id="LastEndTime" value="${dateID}" />
                         <h4 class="mt-3 ">Event Ends</h4>
@@ -1752,8 +1748,8 @@ function set_activity_html(selectedDates) {
                                 </div>
                             </div>
                         `
-                : ""
-            }
+                        : ""
+                }
             </form>
         </div>
     </div>
@@ -2171,7 +2167,7 @@ $(document).on("change", 'input[name^="add_by_"]', function () {
             .prop("checked", false);
     }
 });
-  
+
 $(document).on("click", 'input[name="email_invite[]"]', function (e) {
     var inviteCount = parseInt($("#currentInviteCount").val());
 
@@ -2179,34 +2175,32 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
         e.preventDefault();
         return;
     }
-    // if ($(this).is(":checked") === false) { 
-      
+    // if ($(this).is(":checked") === false) {
+
     // }
-   
+
     $("#loader").css("display", "flex");
 
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
     var email = $(this).data("email");
     var is_contact = $(this).data("contact");
- 
-    var total_users_all= parseInt($('#get_all_total_users').val())
+
+    var total_users_all = parseInt($("#get_all_total_users").val());
 
     if (isChecked == true || isChecked == "true") {
-        if(eventData.event_plan_type=="0"&& total_users_all >= 500){
+        if (eventData.event_plan_type == "0" && total_users_all >= 500) {
             $(this).prop("checked", false);
-            toastr.error('Please select the Premium Plan for more invites')
+            toastr.error("Please select the Premium Plan for more invites");
             $("#loader").css("display", "none");
             return;
-        
-    }
+        }
         // $('input[name="email_invite[]"]').attr('disabled', true);
         // $(this).prop("disabled", true);
         var total_guest = $(".users-data.invited_user").length;
         var max_guest = $("#coins").val();
-        if(eventData.event_plan_type=="0"){
-            max_guest = 500
-           
+        if (eventData.event_plan_type == "0") {
+            max_guest = 500;
         }
 
         console.log({ max_guest });
@@ -2281,7 +2275,7 @@ $(document).on("click", 'input[name="email_invite[]"]', function (e) {
                 //         $('.user_choice').prop('disabled',true);
                 //     }
                 // }
-        
+
                 $("#loader").css("display", "none");
                 // }
             },
@@ -2326,34 +2320,31 @@ function guest_counter(total_guest, max_guest) {
     Alreadyguest = $(".users-data.invited_users").length;
     var total_guest = $(".users-data.invited_user").length;
 
-    console.log('Alreadyguest '+Alreadyguest);
-    console.log('total_guest '+total_guest);
-    console.log('max_guest '+max_guest);
-    
+    console.log("Alreadyguest " + Alreadyguest);
+    console.log("total_guest " + total_guest);
+    console.log("max_guest " + max_guest);
 
     eventData.Alreadyguest = Alreadyguest;
     $("#event_guest_count").text(total_guest + Alreadyguest + " Guests");
     $(".select_plan_credits").text(total_guest + Alreadyguest + " Credits");
     $(".invite-count").text(total_guest + Alreadyguest);
-    $('#get_all_total_users').val(total_guest + Alreadyguest);
+    $("#get_all_total_users").val(total_guest + Alreadyguest);
 
     var remainingCount = max_guest - (total_guest + Alreadyguest);
-    
+
     // if (isCopy == "" && isDraftEvent == "0") {
     //     remainingCount = max_guest - total_guest;
     // }
     // if(eventData.event_plan_type=="1"){
-        if (remainingCount <= 0) {
-            $(".invite-left_d").text("0 Avaliable");
-            $(".invite-left_d").addClass("left-minus");
-        } else {
-            $(".invite-left_d").text(remainingCount + " Avaliable");
+    if (remainingCount <= 0) {
+        $(".invite-left_d").text("0 Avaliable");
+        $(".invite-left_d").addClass("left-minus");
+    } else {
+        $(".invite-left_d").text(remainingCount + " Avaliable");
 
-            $(".invite-left_d").removeClass("left-minus");
-        }
-        $(".invite-left_d").text(
-            remainingCount + " Avaliable"
-        );
+        $(".invite-left_d").removeClass("left-minus");
+    }
+    $(".invite-left_d").text(remainingCount + " Avaliable");
 
     // }
 
@@ -2406,8 +2397,8 @@ function delete_invited_user(userId, is_contact = "0") {
 
             // var max_guest = 15;
             var max_guest = $("#coins").val();
-            if(eventData.event_plan_type=="0"){
-                max_guest = 500
+            if (eventData.event_plan_type == "0") {
+                max_guest = 500;
             }
             guest_counter(0, max_guest);
             // var remainingCount = max_guest - total_guest;
@@ -2438,24 +2429,22 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
     // }
     var inviteCount = parseInt($("#currentInviteCount").val());
 
-    
     var userId = $(this).val();
     var isChecked = $(this).is(":checked");
     var mobile = $(this).data("mobile");
     var is_contact = $(this).data("contact");
     if (isChecked == true || isChecked == "true") {
-        var total_users_all= parseInt($('#get_all_total_users').val())
-        if(eventData.event_plan_type=="0"&&total_users_all >= 500){
+        var total_users_all = parseInt($("#get_all_total_users").val());
+        if (eventData.event_plan_type == "0" && total_users_all >= 500) {
             $(this).prop("checked", false);
-            toastr.error('Please select the Premium Plan for more invites')
+            toastr.error("Please select the Premium Plan for more invites");
             $("#loader").css("display", "none");
             return;
-        
-    }
+        }
 
         var max_guest = $("#coins").val();
-        if(eventData.event_plan_type=="0"){
-            max_guest = 500
+        if (eventData.event_plan_type == "0") {
+            max_guest = 500;
         }
         var total_guest = $(".users-data.invited_user").length;
         console.log({ max_guest });
@@ -2582,8 +2571,8 @@ $(document).on("click", 'input[name="mobile[]"]', function (e) {
                 // $(".invite-count").text(total_guest + 0);
 
                 var max_guest = $("#coins").val();
-                if(eventData.event_plan_type=="0"){
-                    max_guest = 500
+                if (eventData.event_plan_type == "0") {
+                    max_guest = 500;
                 }
                 var remainingCount = max_guest - total_guest;
                 guest_counter(0, max_guest);
@@ -2804,10 +2793,9 @@ $(document).on("click", ".add_category_item_btn", function () {
             .css("color", "red")
             .text("Please select quantity.");
         return;
-    }else{
-        $('#item_quantity_error').text('');
+    } else {
+        $("#item_quantity_error").text("");
     }
-
 
     if ($("#self_bring").is(":checked")) {
         var self_bring = 1;
@@ -2937,14 +2925,14 @@ $("#saveSubItemButton").click(function () {
                 .find(".subItemList")
                 .append(
                     ' <div class="categoryItem" style="border:1px solid;border-radius:5px;"><p>Quantity: ' +
-                    quantity +
-                    '</p><li class="list-group-item" data-quantity="' +
-                    quantity +
-                    '" data-selfbring="' +
-                    selfbring +
-                    '">' +
-                    subItemName +
-                    ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
+                        quantity +
+                        '</p><li class="list-group-item" data-quantity="' +
+                        quantity +
+                        '" data-selfbring="' +
+                        selfbring +
+                        '">' +
+                        subItemName +
+                        ' <i type="button"class="fa-solid fa-trash delete-btn"></li></div>'
                 );
             $("#subItemName").val("");
             $("#subItemModal").modal("hide");
@@ -3351,7 +3339,7 @@ $(document).on("blur", 'input[name="activity-end-time[]"]', function (e) {
             newEndTime != "" &&
             newStartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-            convertTimeToMinutes(newStartTime)
+                convertTimeToMinutes(newStartTime)
         ) {
             // alert();
             // var timeParts = newStartTime.split(":");
@@ -3566,7 +3554,7 @@ $(document).on("blur", 'input[name="activity-start-time[]"]', function () {
             newEndTime != "" &&
             newstartTime != "" &&
             convertTimeToMinutes(newEndTime) <=
-            convertTimeToMinutes(newstartTime)
+                convertTimeToMinutes(newstartTime)
         ) {
             console.log(newEndTime);
             console.log(newstartTime);
@@ -3806,7 +3794,7 @@ $(document).on("click", "#save_activity_schedule", function () {
                     if (
                         previousEndTime &&
                         convertTo24Hour(previousEndTime) >
-                        convertTo24Hour(startTime) &&
+                            convertTo24Hour(startTime) &&
                         !showAlert
                     ) {
                         toastr.error("Please enter proper time");
@@ -4057,21 +4045,26 @@ $(document).on("click", "#close_createEvent", async function (e) {
 
     console.log("firstLetter1", firstLetter1);
 
-
-    if (["2", "3", "4"].includes(firstLetter1) || (firstLetter1 === "1" && event_name && start_time && start_event_date)) {
+    if (
+        ["2", "3", "4"].includes(firstLetter1) ||
+        (firstLetter1 === "1" && event_name && start_time && start_event_date)
+    ) {
         apiCalled = false;
         $("#draftModel").modal("show");
         return;
-    } console.log("firstLetter1", firstLetter1);
+    }
+    console.log("firstLetter1", firstLetter1);
 
     if (firstLetter1 === "1") {
         apiCalled = false;
         $("#designModel").modal("show");
         return;
-
-
-    }
-    else if (firstLetter1 === "1" && event_name && start_time && start_event_date) {
+    } else if (
+        firstLetter1 === "1" &&
+        event_name &&
+        start_time &&
+        start_event_date
+    ) {
         apiCalled = false;
         $("#draftModel").modal("show");
         return;
@@ -4087,7 +4080,6 @@ $(document).on("click", "#close_createEvent", async function (e) {
     console.log(11);
 
     var event_type = $("#event-type").val();
-
 
     var end_event_date = $("#end-event-date").val();
     var design = eventData.desgin_selected;
@@ -5119,7 +5111,6 @@ $(document).on("click", ".li_design .pick-card", async function (e) {
     e.preventDefault();
     $(".subcategory-section").show();
     li_design_click();
-
 });
 $(document).on("click", ".li_design .edit-design-sidebar", function (e) {
     // $("#close_createEvent").css("display", "block");
@@ -5589,7 +5580,7 @@ $(document).on("click", ".li_event_details", async function () {
 
         $("#edit-design-temp").hide();
 
-        $(".step_1").css("display","none");
+        $(".step_1").css("display", "none");
         $(".new_login_page").show();
         $(".new_login").show();
         $(".new-event-sidebar-wrp").hide();
@@ -5601,7 +5592,8 @@ $(document).on("click", ".li_event_details", async function () {
             const imageResponse = await uploadImage(capturedBlob);
 
             localStorage.setItem("final_upload_image", imageResponse.image);
-            var zoomIconPath = base_url + "assets/front/img/image-zoom-icon.png";
+            var zoomIconPath =
+                base_url + "assets/front/img/image-zoom-icon.png";
             if (capturedBlob) {
                 var slider = $(".create-account-slider.slider_login");
 
@@ -5627,8 +5619,7 @@ $(document).on("click", ".li_event_details", async function () {
                         </button>
                     </div>
                 `;
-                slider.append(newItem);
-
+                    slider.append(newItem);
 
                     $(".slider_img").each(function () {
                         var slide_image = $(this).attr("src");
@@ -5658,7 +5649,7 @@ $(document).on("click", ".li_event_details", async function () {
                             </svg>`,
                             `<svg width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.41016 16.9201L7.93016 10.4001C8.70016 9.63008 8.70016 8.37008 7.93016 7.60008L1.41016 1.08008" stroke="#64748B" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>`
+                            </svg>`,
                         ],
                         responsive: {
                             0: { items: 1 },
@@ -5668,12 +5659,18 @@ $(document).on("click", ".li_event_details", async function () {
                     });
 
                     // ✅ Handle nav display after initialization
-                    let totalSlides = $(".create-account-slider.slider_login .owl-item").length;
+                    let totalSlides = $(
+                        ".create-account-slider.slider_login .owl-item"
+                    ).length;
 
                     if (totalSlides <= 1) {
-                        $(".create-account-slider.slider_login .owl-nav").hide();
+                        $(
+                            ".create-account-slider.slider_login .owl-nav"
+                        ).hide();
                     } else {
-                        $(".create-account-slider.slider_login .owl-nav").show();
+                        $(
+                            ".create-account-slider.slider_login .owl-nav"
+                        ).show();
                     }
 
                     $("#loader").css("display", "none");
@@ -5931,8 +5928,8 @@ $(document).on(
             $(".invite-count").text(total_guest);
 
             var max_guest = $("#coins").val();
-            if(eventData.event_plan_type=="0"){
-                max_guest = 500
+            if (eventData.event_plan_type == "0") {
+                max_guest = 500;
             }
 
             var remainingCount = max_guest - total_guest;
@@ -5960,8 +5957,8 @@ $(document).on("change", "#YesviteUserAll input[name='mobile[]']", function () {
         $(".invite-count").text(total_guest);
 
         var max_guest = $("#coins").val();
-        if(eventData.event_plan_type=="0"){
-            max_guest = 500
+        if (eventData.event_plan_type == "0") {
+            max_guest = 500;
         }
 
         var remainingCount = max_guest - total_guest;
@@ -5982,7 +5979,6 @@ $(document).on("change", "#YesviteUserAll .user_choice", function () {
         $('.user_choice_group[data-id="' + groupId + '"] .user_choice')
             .not(this)
             .prop("checked", false);
-
     } else {
         var id = $(this).data("id");
         $("#" + id).remove();
@@ -6059,13 +6055,10 @@ $(document).on("click", "#delete_potluck_category_btn", function () {
 $(document).on("change", "#self_bring", function () {
     if ($(this).is(":checked")) {
         $("#self_bring_quantity_toggle").show();
-        $('#self_bring_qty').val(1);
-
-        
+        $("#self_bring_qty").val(1);
     } else {
         $("#self_bring_quantity_toggle").hide();
-        $('#self_bring_qty').val(0);
-
+        $("#self_bring_qty").val(0);
     }
 });
 
@@ -6102,17 +6095,17 @@ $(document).on("click", ".self_bring_quantity", function () {
 
     if (type == "plus") {
         // if (main_quantity > self_quantity) {
-            self_quantity++;
-            $("#self_bring_qty").val(self_quantity);
+        self_quantity++;
+        $("#self_bring_qty").val(self_quantity);
+        // var item_qty=$('#item_quantity').val();
+        if (main_quantity > self_quantity) {
             // var item_qty=$('#item_quantity').val();
-            if (main_quantity > self_quantity) {
-                // var item_qty=$('#item_quantity').val();
-                var final_qty=main_quantity;
-               $('#item_quantity').val(final_qty);
-                return;
-           }
+            var final_qty = main_quantity;
+            $("#item_quantity").val(final_qty);
+            return;
+        }
 
-            $('#item_quantity').val(self_quantity);
+        $("#item_quantity").val(self_quantity);
 
         // }
     } else {
@@ -6266,9 +6259,9 @@ function update_self_bring_bck(
             }
             $(
                 ".category-item-total-" +
-                categoryItemKey +
-                "-" +
-                categoryIndexKey
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
             ).text(quantity);
 
             if (type == "plus") {
@@ -6288,10 +6281,10 @@ function update_self_bring_bck(
             if (quantity == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6300,10 +6293,10 @@ function update_self_bring_bck(
 
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6322,10 +6315,10 @@ function update_self_bring_bck(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -6333,10 +6326,10 @@ function update_self_bring_bck(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -7060,9 +7053,7 @@ $(document).on("click", ".final_checkout", function () {
     if (eventData.desgin_selected) {
         $("#eventTempImage").attr(
             "src",
-            base_url +
-            "storage/event_images/" +
-            eventData.desgin_selected
+            base_url + "storage/event_images/" + eventData.desgin_selected
         );
     }
 
@@ -7083,10 +7074,11 @@ $(document).on("click", ".final_checkout", function () {
     const mainImage = `
             <div class="item">
                 <div class="setting-img">
-                    <img src="${base_url +
-        "storage/event_images/" +
-        eventData.desgin_selected
-        }" />
+                    <img src="${
+                        base_url +
+                        "storage/event_images/" +
+                        eventData.desgin_selected
+                    }" />
                 </div>
             </div>
         `;
@@ -7235,11 +7227,11 @@ $(document).on("click", ".final_checkout", function () {
 });
 
 $(document).on("click", ".final_create_event", function (e) {
-    var curr_aval_coins=$('#user_avaliable_coins').val()
+    var curr_aval_coins = $("#user_avaliable_coins").val();
 
-    if(eventData.event_plan_type=="1"){
-        if(curr_aval_coins==0||curr_aval_coins=="0"){
-            toastr.error('Insufficient coins.');
+    if (eventData.event_plan_type == "1") {
+        if (curr_aval_coins == 0 || curr_aval_coins == "0") {
+            toastr.error("Insufficient coins.");
             return;
         }
     }
@@ -7283,9 +7275,11 @@ $(document).on("click", ".final_create_event", function (e) {
                 window.location.href = "/login"; // Redirect to home page
                 return;
             }
-            if(response.exceed_limit=="1"){
-                toastr.error('Guest limit reached. Upgrade to a premium plan to add more guests.');
-                apiCalled=false;
+            if (response.exceed_limit == "1") {
+                toastr.error(
+                    "Guest limit reached. Upgrade to a premium plan to add more guests."
+                );
+                apiCalled = false;
                 $("#loader").css("display", "none");
                 return;
             }
@@ -7303,11 +7297,10 @@ $(document).on("click", ".final_create_event", function (e) {
             }
 
             $("#eventModal").modal("show");
-            if(eventData.event_plan_type=="0"){
-                $('.create_event_popup_coin').hide();
-            }else{
-                $('.create_event_popup_coin').show();
-
+            if (eventData.event_plan_type == "0") {
+                $(".create_event_popup_coin").hide();
+            } else {
+                $(".create_event_popup_coin").show();
             }
             $("#eventModal").on("hide.bs.modal", function (event) {
                 event.preventDefault(); // Prevents modal from closing
@@ -7499,7 +7492,7 @@ function displayRecords(
             "&search_user=" +
             search_name,
         cache: false,
-        beforeSend: function () { },
+        beforeSend: function () {},
         success: function (html) {
             if (html.status == 401 && html.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
@@ -7739,8 +7732,8 @@ $(document).on("click", ".invite_group_member", function () {
             console.log(response);
             $(".inivted_user_list").append(response.view);
             var max_guest = $("#coins").val();
-            if(eventData.event_plan_type=="0"){
-                max_guest = 500
+            if (eventData.event_plan_type == "0") {
+                max_guest = 500;
             }
             // var length = responsive_invite_user();
             // $(".user-list-responsive").html(response.responsive_view);
@@ -9045,7 +9038,7 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
             "&cohostId=" +
             cohostId,
         cache: false,
-        beforeSend: function () { },
+        beforeSend: function () {},
         success: function (html) {
             if (html.status == 401 && html.info == "logout") {
                 window.location.href = "/login"; // Redirect to home page
@@ -9061,9 +9054,8 @@ function displayPhoneContacts(type = "all", lim, off, search_name, scroll) {
                 create_event_phone_scroll = true;
             }
             if (currentInviteCount >= coins) {
-                if(eventData.event_plan_type=="1"){
+                if (eventData.event_plan_type == "1") {
                     $(".user_choice").prop("disabled", true);
-
                 }
             }
             if (html.view == "" && html.scroll == "true") {
@@ -9264,10 +9256,9 @@ $(document).on("change", ".slider_photo", async function (event) {
         // setTimeout(() => {
         //     updateAllPhotoSliders();
         // }, 500);
-
     }
 
-    setTimeout(async() => {
+    setTimeout(async () => {
         var imagePosition = 1;
         var existingIndex = imageSources.findIndex(
             (img) => img.image_position === imagePosition
@@ -9275,7 +9266,8 @@ $(document).on("change", ".slider_photo", async function (event) {
         if (existingIndex !== -1) {
             // Update the existing entry
             imageSources[existingIndex].src = $(".photo-slider-1").attr("src");
-            imageSources[existingIndex].image_name = $(".photo-slider-1").attr("data-image");
+            imageSources[existingIndex].image_name =
+                $(".photo-slider-1").attr("data-image");
         } else {
             // Add a new entry if it does not exist
             imageSources.push({
@@ -9287,7 +9279,7 @@ $(document).on("change", ".slider_photo", async function (event) {
         }
 
         // if(eventId==""){
-           await savePhotoSlider();
+        await savePhotoSlider();
         // }
         // if ($("#isUserLoggedIn").val() === "0") {
         //    await savePhotoSlider();
@@ -9318,9 +9310,8 @@ $(document).on("change", ".slider_photo_2", async function (event) {
         // setTimeout(() => {
         //     updateAllPhotoSliders();
         // }, 500);
-
     }
-    setTimeout(async() => {
+    setTimeout(async () => {
         var imagePosition2 = 2;
         var existingIndex2 = imageSources.findIndex(
             (img) => img.image_position === imagePosition2
@@ -9335,11 +9326,10 @@ $(document).on("change", ".slider_photo_2", async function (event) {
                 deleteId: $(".photo-slider-2").data("delete"),
                 image_position: $(".photo-slider-2").data("delete"),
                 image_name: $(".photo-slider-2").data("image"),
-
             });
         }
         // if(eventId==""){
-             await savePhotoSlider();
+        await savePhotoSlider();
         // }
         // if ($("#isUserLoggedIn").val() === "0") {
         //      await savePhotoSlider();
@@ -9348,7 +9338,6 @@ $(document).on("change", ".slider_photo_2", async function (event) {
         // await savePhotoSlider();
         getLengthofSliderImage();
     }, 500);
-
 });
 $(document).on("change", ".slider_photo_3", async function (event) {
     var file = event.target.files[0];
@@ -9362,9 +9351,8 @@ $(document).on("change", ".slider_photo_3", async function (event) {
         };
         reader.readAsDataURL(file);
         // updateAllPhotoSliders();
-
     }
-    setTimeout(async() => {
+    setTimeout(async () => {
         var imagePosition3 = 3;
         var existingIndex3 = imageSources.findIndex(
             (img) => img.image_position === imagePosition3
@@ -9382,7 +9370,7 @@ $(document).on("change", ".slider_photo_3", async function (event) {
             });
         }
         // if(eventId==""){
-             await savePhotoSlider();
+        await savePhotoSlider();
         // }
         // if ($("#isUserLoggedIn").val() === "0") {
         //      await savePhotoSlider();
@@ -9627,22 +9615,21 @@ function getLengthofSliderImage() {
 //     }
 // });
 
-
 async function savePhotoSlider() {
     // if (eventId != "") {
-        imageSources = [];
-        $(".slider_img").each(function () {
-            let src = $(this).attr("src");
-            let image_name = $(this).attr("data-image");
-            if (src !== "") {
-                imageSources.push({
-                    src: $(this).attr("src"),
-                    deleteId: $(this).data("delete"),
-                    image_position: $(this).data("delete"),
-                    image_name: $(this).data("image")
-                });
-            }
-        });
+    imageSources = [];
+    $(".slider_img").each(function () {
+        let src = $(this).attr("src");
+        let image_name = $(this).attr("data-image");
+        if (src !== "") {
+            imageSources.push({
+                src: $(this).attr("src"),
+                deleteId: $(this).data("delete"),
+                image_position: $(this).data("delete"),
+                image_name: $(this).data("image"),
+            });
+        }
+    });
     // }
 
     if (imageSources.length > 0) {
@@ -9650,58 +9637,57 @@ async function savePhotoSlider() {
         let event = $("#eventID").val();
 
         // try {
-            // await new Promise(resolve => setTimeout(() => {
+        // await new Promise(resolve => setTimeout(() => {
 
-           $.ajax({
-                url: base_url + "event/save_slider_img",
-                method: "POST",
-                data: {
-                    eventId: event,
-                    imageSources: imageSources,
-                    _token: $('meta[name="csrf-token"]').attr("content"),
-                },
-                success: function (response) {
-                    if (response.status == 401 && response.info == "logout") {
-                        window.location.href = "/login"; // Redirect to home page
-                        return;
-                    }
-                    var savedImages = response.images;
-                    var newImages = response.images;
-                    if ($("#isUserLoggedIn").val() === "0") {
-                        console.log(savedImages);
+        $.ajax({
+            url: base_url + "event/save_slider_img",
+            method: "POST",
+            data: {
+                eventId: event,
+                imageSources: imageSources,
+                _token: $('meta[name="csrf-token"]').attr("content"),
+            },
+            success: function (response) {
+                if (response.status == 401 && response.info == "logout") {
+                    window.location.href = "/login"; // Redirect to home page
+                    return;
+                }
+                var savedImages = response.images;
+                var newImages = response.images;
+                if ($("#isUserLoggedIn").val() === "0") {
+                    console.log(savedImages);
 
-                        // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
-                        // localStorage.removeItem("save-slider-image");
-                        // Append new images to the existing array
-                        // newImages.forEach(image => {
-                        //     savedImages.push(image);
-                        // });
+                    // let savedImages = JSON.parse(localStorage.getItem('save-slider-image')) || [];
+                    // localStorage.removeItem("save-slider-image");
+                    // Append new images to the existing array
+                    // newImages.forEach(image => {
+                    //     savedImages.push(image);
+                    // });
 
-                        // Update localStorage with the combined array
-                        localStorage.setItem(
-                            "save-slider-image",
-                            JSON.stringify(savedImages)
-                        );
-                        $("#loader").css("display", "none");
-                        toastr.success("Slider Image saved Successfully");
-                        return;
-                    }
-                    eventData.slider_images = []; // Empty the array
-                    eventData.slider_images = savedImages; // Assign new values
-
-                    // eventData.slider_images = savedImages;
-                    console.log(eventData);
-                    console.log(eventData.slider_images);
+                    // Update localStorage with the combined array
+                    localStorage.setItem(
+                        "save-slider-image",
+                        JSON.stringify(savedImages)
+                    );
                     $("#loader").css("display", "none");
                     toastr.success("Slider Image saved Successfully");
-                },
-                error: function (xhr, status, error) {
-                    $("#loader").css("display", "none");
-                    toastr.error(error);
-                },
+                    return;
+                }
+                eventData.slider_images = []; // Empty the array
+                eventData.slider_images = savedImages; // Assign new values
 
-            });
-            // resolve();
+                // eventData.slider_images = savedImages;
+                console.log(eventData);
+                console.log(eventData.slider_images);
+                $("#loader").css("display", "none");
+                toastr.success("Slider Image saved Successfully");
+            },
+            error: function (xhr, status, error) {
+                $("#loader").css("display", "none");
+                toastr.error(error);
+            },
+        });
+        // resolve();
         // }, 1500))
     }
 }
@@ -9764,7 +9750,9 @@ $(document).on("click", ".delete_silder", function (e) {
                     $(".photo-edit-delete-" + delete_id).hide();
                     toastr.success("Slider Image Deleted Successfully");
                     var eventDatacount = eventData.slider_images;
-                    $(".slider_image_count").text(eventDatacount.length + "/3 Photos");
+                    $(".slider_image_count").text(
+                        eventDatacount.length + "/3 Photos"
+                    );
 
                     $("#loader").css("display", "none");
                 },
@@ -9790,7 +9778,6 @@ $(document).on("click", ".delete_silder", function (e) {
     }, 500);
 });
 
-
 $(document).on("click", ".saveDesignOnly", async function (e) {
     console.log(eventData);
     // return;
@@ -9802,13 +9789,13 @@ $(document).on("click", ".saveDesignOnly", async function (e) {
     eventData.is_update_event = "1";
 
     // setTimeout(async() => {
-        await saveDesignData(true);
-        let save1 = savePage1Data(null, true);
-        let save2 = savePage3Data(null, true);
-        savePage4Data();
-        if (save1 == 8 && save2 == 8) {
-            updateEventData();
-        }
+    await saveDesignData(true);
+    let save1 = savePage1Data(null, true);
+    let save2 = savePage3Data(null, true);
+    savePage4Data();
+    if (save1 == 8 && save2 == 8) {
+        updateEventData();
+    }
 
     // }, 1000);
 });
@@ -9826,7 +9813,6 @@ $(document).on("click", ".saveDetailOnly", async function (e) {
             updateEventData();
         }
     }, 2000);
-
 });
 $(document).on("click", ".saveGuestOnly", async function (e) {
     var send_invites = $(this).attr("data-sendIvites");
@@ -9845,16 +9831,14 @@ $(document).on("click", ".saveGuestOnly", async function (e) {
 });
 
 function updateEventData() {
+    var curr_aval_coins = $("#user_avaliable_coins").val();
 
-    var curr_aval_coins=$('#user_avaliable_coins').val()
-
-    if(eventData.event_plan_type=="1"){
-        if(curr_aval_coins==0||curr_aval_coins=="0"){
-            toastr.error('Insufficient coins.');
+    if (eventData.event_plan_type == "1") {
+        if (curr_aval_coins == 0 || curr_aval_coins == "0") {
+            toastr.error("Insufficient coins.");
             return;
         }
     }
-
 
     if (apiCalled == true) {
         return;
@@ -9876,9 +9860,11 @@ function updateEventData() {
                 window.location.href = "/login"; // Redirect to home page
                 return;
             }
-            if(response.exceed_limit=="1"){
-                toastr.error('Guest limit reached. Upgrade to a premium plan to add more guests.');
-                apiCalled=false;
+            if (response.exceed_limit == "1") {
+                toastr.error(
+                    "Guest limit reached. Upgrade to a premium plan to add more guests."
+                );
+                apiCalled = false;
                 $("#loader").css("display", "none");
                 return;
             }
@@ -9906,13 +9892,11 @@ function updateEventData() {
                     // window.location.href = "profile";
                 }
 
-                
                 $("#eventModal").modal("show");
-                if(eventData.event_plan_type=="0"){
-                    $('.create_event_popup_coin').hide();
-                }else{
-                    $('.create_event_popup_coin').show();
-    
+                if (eventData.event_plan_type == "0") {
+                    $(".create_event_popup_coin").hide();
+                } else {
+                    $(".create_event_popup_coin").show();
                 }
                 $("#eventModal").on("hide.bs.modal", function (event) {
                     event.preventDefault(); // Prevents modal from closing
@@ -10073,9 +10057,7 @@ $(document).on("click", "#close_editEvent", async function (e) {
         apiCalled = false;
         $("#EditdraftModel").modal("show");
         return;
-    }
-
-    else if (
+    } else if (
         firstLetter1 == "2" ||
         firstLetter1 == "3" ||
         firstLetter1 == "4"
@@ -10772,9 +10754,9 @@ function update_self_bring(
             } else {
                 $("#h6-" + categoryItemKey + "-" + categoryIndexKey).text(
                     parseInt(innerUserQnt) +
-                    parseInt(quantity) +
-                    "/" +
-                    categoryItemQuantity
+                        parseInt(quantity) +
+                        "/" +
+                        categoryItemQuantity
                 );
             }
 
@@ -10800,9 +10782,9 @@ function update_self_bring(
 
             $(
                 ".category-item-total-" +
-                categoryItemKey +
-                "-" +
-                categoryIndexKey
+                    categoryItemKey +
+                    "-" +
+                    categoryIndexKey
             ).text(parseInt(innerUserQnt) + parseInt(quantity));
 
             if (type == "plus") {
@@ -10823,10 +10805,10 @@ function update_self_bring(
                 // if ((quantity+innerUserQnt) == categoryItemQuantity) {
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10835,10 +10817,10 @@ function update_self_bring(
 
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10857,10 +10839,10 @@ function update_self_bring(
             } else {
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10868,10 +10850,10 @@ function update_self_bring(
                     .removeClass("green-border");
                 $(
                     "#lumpia-collapseOne" +
-                    "-" +
-                    categoryItemKey +
-                    "-" +
-                    categoryIndexKey
+                        "-" +
+                        categoryItemKey +
+                        "-" +
+                        categoryIndexKey
                 )
                     .parent()
                     .parent()
@@ -10947,26 +10929,26 @@ function getcoins() {
     Alreadyguest = $(".users-data.invited_users").length;
     eventData.Alreadyguest = Alreadyguest;
     var max_guest = $("#coins").val();
-    if(eventData.event_plan_type=="0"){
-        max_guest = 500
+    if (eventData.event_plan_type == "0") {
+        max_guest = 500;
     }
 
     var AllCoins = max_guest - Alreadyguest;
 
-    Alreadyguest = $('.user_choice:checked').length;
+    Alreadyguest = $(".user_choice:checked").length;
 
-    if (eventData.event_plan_type != "" && eventId=="") {
-        Alreadyguest = $('.user_choice:checked').length;
+    if (eventData.event_plan_type != "" && eventId == "") {
+        Alreadyguest = $(".user_choice:checked").length;
         AllCoins = max_guest - Alreadyguest;
     }
-    
+
     // if (isCopy == "" && isDraftEvent == "0") {
     //     AllCoins = max_guest;
     // }
-    console.log("all coins "+AllCoins);
+    console.log("all coins " + AllCoins);
 
-    console.log("invite-left_d "+AllCoins);
-    
+    console.log("invite-left_d " + AllCoins);
+
     $(".invite-left_d").text(AllCoins + " Avaliable");
 
     if (AllCoins <= 0) {
@@ -11038,10 +11020,7 @@ if (final_step == "1" && isCohost == "1") {
 colorchange();
 
 $(document).on("click", ".previousImeg", async function (e) {
-
-console.log( $(
-    ".image-item:visible, .image-item-new:visible"
-).length);
+    console.log($(".image-item:visible, .image-item-new:visible").length);
 
     var design = eventData.desgin_selected;
     if (design == undefined || design == "") {
@@ -11060,9 +11039,7 @@ console.log( $(
 });
 
 function updateTotalCount() {
-    var visibleItems = $(
-        ".image-item:visible, .image-item-new:visible"
-    ).length;
+    var visibleItems = $(".image-item:visible, .image-item-new:visible").length;
     $(".total_design_count").text(visibleItems + " Items");
 }
 $(document).on("click", "#event_copy_link_btn", function (e) {
@@ -11195,8 +11172,9 @@ function generateProfileImage(firstname, lastname) {
     const secondInitial = lastname[0] ? lastname[0].toUpperCase() : "";
     const initials = `${firstInitial}${secondInitial}`;
     const fontColor = `fontcolor${firstInitial}`;
-    return `<h5 id="modal-initials" class="${fontColor} font_name">${initials || "NA"
-        }</h5>`;
+    return `<h5 id="modal-initials" class="${fontColor} font_name">${
+        initials || "NA"
+    }</h5>`;
 }
 
 $(".create_event_login_btn").on("click", function (e) {
@@ -11386,29 +11364,21 @@ $(".new-create-account-close-btn").on("click", function (e) {
 
     // // Clear the image src
 
-
-
-
     // Hide other related elements if needed
     // $(".new_login_page, .new_login").hide();
     // $(".new-event-sidebar-wrp").show();
 });
 
-
 $(".cancel-login").on("click", function (e) {
+    $(".login_img img").attr("src", "");
+    $(".new_login_page, .new_login").hide(); // Hide both elements
+    $(".step_2").show();
 
-    $(".login_img img").attr("src","");
-       $(".new_login_page, .new_login").hide(); // Hide both elements
-       $(".step_2").show();
+    $(".pick-card").addClass("active");
+    $(".edit-design-sidebar").removeClass("active");
 
-       $(".pick-card").addClass("active");
-       $(".edit-design-sidebar").removeClass("active");
-
-
-
-
-       $(".new-event-sidebar-wrp").show();
-   });
+    $(".new-event-sidebar-wrp").show();
+});
 
 async function handleLoginSuccess(response) {
     if (response.success) {
@@ -11441,7 +11411,7 @@ $(document).on("click", ".user_choice", function () {
         $("a.saveGuestOnly.isdisabled").removeAttr("aria-disabled");
         buttonText = ` Send Invites(${checkedCount})`;
     } else {
-    // alert(2);
+        // alert(2);
         $("a.saveGuestOnly.isdisabled").attr("aria-disabled", "true");
     }
 
@@ -11534,13 +11504,13 @@ if ($("#isUserLoggedIn").val() == "1" && pageRefresh === "true") {
 $(".show-moreless-btn").on("click", function () {
     $(".plan-inner-card-list").toggleClass("active");
     $(this).toggleClass("active");
- 
+
     const btnTextEl = $(this).find(".show-moreless-btn-text");
     const currentText = btnTextEl.text();
- 
+
     btnTextEl.text(currentText === "Show More" ? "Show Less" : "Show More");
-  });
- 
+});
+
 //   $('.select_plan_check').on('change', function () {
 //     $('.select_plan_check').not(this).prop('checked', false);
 
@@ -11548,7 +11518,7 @@ $(".show-moreless-btn").on("click", function () {
 //         $('.select_plan_btn').text('Continue Permium Plan');
 //         // $('.free_current_plan').hide();
 //         // $('.paid_current_plan').show();
-        
+
 //     } else {
 //         $('.select_plan_btn').text('Continue Free Plan');
 
@@ -11556,97 +11526,96 @@ $(".show-moreless-btn").on("click", function () {
 //         // $('.paid_current_plan').hide();
 //     }
 // });
-$('.select_plan_check').on('change', function () {
-    if (!$(this).prop('checked')) {
-        $(this).prop('checked', true); // keep it checked
+$(".select_plan_check").on("change", function () {
+    if (!$(this).prop("checked")) {
+        $(this).prop("checked", true); // keep it checked
         return;
     }
 
-    $('.select_plan_check').not(this).prop('checked', false);
+    $(".select_plan_check").not(this).prop("checked", false);
 
     if ($(this).val() == "1") {
-        $('.select_plan_btn').text('Continue Premium Plan');
+        $(".select_plan_btn").text("Continue Premium Plan");
     } else {
-        $('.select_plan_btn').text('Continue Free Plan');
+        $(".select_plan_btn").text("Continue Free Plan");
     }
 });
 
-$(document).on('click', '.select_event_photos', function () {
-    if($(this).hasClass('disabled_event_photos')){
-        $('#select_event_type').modal('show');
+$(document).on("click", ".select_event_photos", function () {
+    if ($(this).hasClass("disabled_event_photos")) {
+        $("#select_event_type").modal("show");
     }
 });
 
-$(document).on('click', '.select_plan_btn', function () {
-    var plan_value = $('.select_plan_check:checked').val();
-    var aval_coins=$('#user_avaliable_coins').val()
-    
-    if(plan_value=="1"){
-        $('.free_plan_status').addClass('d-none');
-        $('.sidebar-adsense').addClass('d-none');
-        $('.paid_plan_status').removeClass('d-none');
-        $('.select_event_photos').removeClass('disabled_event_photos');
-        // $('#eventPhotos').prop('checked',true);
-        // $('#request_photo').prop('checked',true);
+$(document).on("click", ".select_plan_btn", function () {
+    var plan_value = $(".select_plan_check:checked").val();
+    var aval_coins = $("#user_avaliable_coins").val();
+
+    if (plan_value == "1") {
+        $(".free_plan_status").addClass("d-none");
+        $(".sidebar-adsense").addClass("d-none");
+        $(".paid_plan_status").removeClass("d-none");
+        $(".select_event_photos").removeClass("disabled_event_photos");
+        $("#eventPhotos").prop("checked", true);
+        $("#request_photo").prop("checked", true);
         if ($("#eventPhotos").is(":checked")) {
             eventData.event_photos = "1";
         }
-    }else{
-        $('.free_plan_status').removeClass('d-none');
-        $('.paid_plan_status').addClass('d-none'); 
-        $('.sidebar-adsense').removeClass('d-none');
-        $('#eventPhotos').prop('checked',false);
-        $('#request_photo').prop('checked',false);
-        $('.select_event_photos').addClass('disabled_event_photos');
+    } else {
+        $(".free_plan_status").removeClass("d-none");
+        $(".paid_plan_status").addClass("d-none");
+        $(".sidebar-adsense").removeClass("d-none");
+        $("#eventPhotos").prop("checked", false);
+        $("#request_photo").prop("checked", false);
+        $(".select_event_photos").addClass("disabled_event_photos");
         eventData.event_photos = "0";
     }
-    
-    eventData.event_plan_type=plan_value;
-    getcoins()
-    if((aval_coins==0||aval_coins=="0")&& plan_value=="1"){
-        $('#select_event_type').modal('hide');
-        $('#buycreditsmodal').modal('show');
+
+    eventData.event_plan_type = plan_value;
+    getcoins();
+    if ((aval_coins == 0 || aval_coins == "0") && plan_value == "1") {
+        $("#select_event_type").modal("hide");
+        $("#buycreditsmodal").modal("show");
     }
 });
 
-$(document).on('click','.switch_plan',function(){
-    $('#buycreditsmodal').modal('hide');
-    $('#select_event_type').modal('show');
-    if(eventData.event_plan_type=="1"){
-        $('.paid_plan_chk').prop('checked',true)
-        $('.free_current_plan').hide();
-        $('.paid_current_plan').show();
-        $('.free_plan_chk').prop('checked',false)
-        $('.select_plan_btn').text('Continue Permium Plan')
-    }else{
-        $('.free_plan_chk').prop('checked',true)
-        $('.free_current_plan').show();
-        $('.paid_current_plan').hide();
-        $('.paid_plan_chk').prop('checked',false)
-        $('.select_plan_btn').text('Continue Free Plan')
+$(document).on("click", ".switch_plan", function () {
+    $("#buycreditsmodal").modal("hide");
+    $("#select_event_type").modal("show");
+    if (eventData.event_plan_type == "1") {
+        $(".paid_plan_chk").prop("checked", true);
+        $(".free_current_plan").hide();
+        $(".paid_current_plan").show();
+        $(".free_plan_chk").prop("checked", false);
+        $(".select_plan_btn").text("Continue Permium Plan");
+    } else {
+        $(".free_plan_chk").prop("checked", true);
+        $(".free_current_plan").show();
+        $(".paid_current_plan").hide();
+        $(".paid_plan_chk").prop("checked", false);
+        $(".select_plan_btn").text("Continue Free Plan");
     }
 });
 
-$(document).on('click','.openPlans',function(){
+$(document).on("click", ".openPlans", function () {
     // $('.free_plan_chk').prop('checked',false)
     // $('.select_plan_btn').text('Continue Permium Plan');
     // $('.paid_plan_chk').prop('checked',true)
     // $('.paid_current_plan').show();
     // $('.free_current_plan').hide();
     // $('#select_event_type').modal('show');
-    if(eventData.event_plan_type=="1"){
-        $('.paid_plan_chk').prop('checked',true)
-        $('.free_current_plan').hide();
-        $('.paid_current_plan').show();
-        $('.free_plan_chk').prop('checked',false)
-        $('.select_plan_btn').text('Continue Permium Plan')
-    }else{
-        $('.free_plan_chk').prop('checked',true)
-        $('.free_current_plan').show();
-        $('.paid_current_plan').hide();
-        $('.paid_plan_chk').prop('checked',false)
-        $('.select_plan_btn').text('Continue Free Plan')
+    if (eventData.event_plan_type == "1") {
+        $(".paid_plan_chk").prop("checked", true);
+        $(".free_current_plan").hide();
+        $(".paid_current_plan").show();
+        $(".free_plan_chk").prop("checked", false);
+        $(".select_plan_btn").text("Continue Permium Plan");
+    } else {
+        $(".free_plan_chk").prop("checked", true);
+        $(".free_current_plan").show();
+        $(".paid_current_plan").hide();
+        $(".paid_plan_chk").prop("checked", false);
+        $(".select_plan_btn").text("Continue Free Plan");
     }
-    $('#select_event_type').modal('show');
-})
-
+    $("#select_event_type").modal("show");
+});

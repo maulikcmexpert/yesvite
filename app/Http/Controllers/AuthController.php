@@ -123,12 +123,12 @@ class AuthController extends Controller
 
         if (RateLimiter::tooManyAttempts($key, 3)) {
             $seconds = RateLimiter::availableIn($key);
-            if($isLogin){
+            if ($isLogin) {
                 return response()->json([
                     'success' => false,
                     'message' => "Too many attempts. Please try again in {$seconds} seconds."
                 ]);
-            }else{
+            } else {
                 toastr("Too many attempts. Please try again in {$seconds} seconds.", 'error');
                 return redirect()->back()->withErrors(['rate_limit' => "Too many attempts. Please try again in {$seconds} seconds."]);
             }
@@ -180,12 +180,12 @@ class AuthController extends Controller
         }
 
 
-        if($isLogin){
+        if ($isLogin) {
             $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
                 'secret' => env('RECAPTCHA_SECRET_KEY'),
                 'response' => $request->input('g_recaptcha_response')
             ]);
-        }else{
+        } else {
             $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
                 'secret' => env('RECAPTCHA_SECRET_KEY'),
                 'response' => $request->input('g-recaptcha-response')
@@ -237,7 +237,8 @@ class AuthController extends Controller
             $storeUser->password_updated_date =  date('Y-m-d');
             $storeUser->remember_token =   $randomString;
             $storeUser->register_type =   'web normal register';
-            $storeUser->coins =  config('app.default_coin', 30);
+            // $storeUser->coins =  config('app.default_coin', 30);
+            $storeUser->coins = 0;
             $storeUser->save();
             DB::commit();
 
@@ -257,15 +258,15 @@ class AuthController extends Controller
 
             $userDetails = User::where('id', $storeUser->id)->first();
 
-            $coin_transaction = new Coin_transactions();
-            $coin_transaction->user_id = $storeUser->id;
-            $coin_transaction->status = '0';
-            $coin_transaction->type = 'credit';
-            $coin_transaction->coins = config('app.default_coin', 30);
-            $coin_transaction->current_balance = config('app.default_coin', 30);
-            $coin_transaction->description = 'Signup Bonus';
-            $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
-            $coin_transaction->save();
+            // $coin_transaction = new Coin_transactions();
+            // $coin_transaction->user_id = $storeUser->id;
+            // $coin_transaction->status = '0';
+            // $coin_transaction->type = 'credit';
+            // $coin_transaction->coins = config('app.default_coin', 30);
+            // $coin_transaction->current_balance = config('app.default_coin', 30);
+            // $coin_transaction->description = 'Signup Bonus';
+            // $coin_transaction->endDate = Carbon::now()->addYear()->toDateString();
+            // $coin_transaction->save();
 
             $userData = [
                 // 'username' => $userDetails->firstname . ' ' . $userDetails->lastname,
@@ -285,12 +286,11 @@ class AuthController extends Controller
                     'message' => 'register successful',
 
                 ]);
-            }else{
+            } else {
 
 
-                    return  Redirect::to('login')->with('msg', 'Account successfully created, please verify your email before you can log in');
-                }
-
+                return  Redirect::to('login')->with('msg', 'Account successfully created, please verify your email before you can log in');
+            }
         } catch (QueryException $e) {
             DB::Rollback();
 
@@ -306,7 +306,7 @@ class AuthController extends Controller
      */
     public function checkLogin(Request $request)
     {
-//   dd($request->all());
+        //   dd($request->all());
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required', 'min:6'],
@@ -320,7 +320,7 @@ class AuthController extends Controller
         $isLogin = $request->has('is_login');
         $remember = $request->has('remember'); // Check if "Remember Me" checkbox is checked
         $userData = User::where('email', $request->email)->first();
-        if(isset($userData)&&$userData->email_verified_at==null){
+        if (isset($userData) && $userData->email_verified_at == null) {
             $randomString = Str::random(30);
             $userData->remember_token = $randomString;
             $userData->save();
@@ -420,12 +420,10 @@ class AuthController extends Controller
                                     'message' => 'Login successful',
                                     'redirect' => route('home') // Redirect URL if needed
                                 ]);
-                            }else{
+                            } else {
 
                                 return redirect()->intended(route('home'));
                             }
-
-
                         }
                     } else {
                         return redirect()->back()->withErrors([
